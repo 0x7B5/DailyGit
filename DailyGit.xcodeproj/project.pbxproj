@@ -12,6 +12,7 @@
 		B87EA6582221EDC000CE8114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87EA6562221EDC000CE8114 /* Main.storyboard */; };
 		B87EA65A2221EDC200CE8114 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B87EA6592221EDC200CE8114 /* Assets.xcassets */; };
 		B87EA65D2221EDC200CE8114 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87EA65B2221EDC200CE8114 /* LaunchScreen.storyboard */; };
+		B87EA6652221EE0300CE8114 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87EA6642221EE0300CE8114 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		B87EA6592221EDC200CE8114 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B87EA65C2221EDC200CE8114 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B87EA65E2221EDC200CE8114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B87EA6642221EE0300CE8114 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,39 @@
 		B87EA6512221EDC000CE8114 /* DailyGit */ = {
 			isa = PBXGroup;
 			children = (
+				B87EA66622234EA400CE8114 /* View */,
+				B87EA66722234EAB00CE8114 /* Model */,
+				B87EA66822234EB100CE8114 /* Controller */,
 				B87EA6522221EDC000CE8114 /* AppDelegate.swift */,
-				B87EA6542221EDC000CE8114 /* ViewController.swift */,
 				B87EA6562221EDC000CE8114 /* Main.storyboard */,
 				B87EA6592221EDC200CE8114 /* Assets.xcassets */,
 				B87EA65B2221EDC200CE8114 /* LaunchScreen.storyboard */,
 				B87EA65E2221EDC200CE8114 /* Info.plist */,
+				B87EA6642221EE0300CE8114 /* Constants.swift */,
 			);
 			path = DailyGit;
+			sourceTree = "<group>";
+		};
+		B87EA66622234EA400CE8114 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B87EA66722234EAB00CE8114 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B87EA66822234EB100CE8114 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B87EA6542221EDC000CE8114 /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +164,7 @@
 			files = (
 				B87EA6552221EDC000CE8114 /* ViewController.swift in Sources */,
 				B87EA6532221EDC000CE8114 /* AppDelegate.swift in Sources */,
+				B87EA6652221EE0300CE8114 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
