@@ -22,15 +22,19 @@ public class MainView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initializeUI()
-    {
+    private func initializeUI() {
+        //UIViews
+        addSubview(topView)
+        addSubview(middleView)
+        addSubview(bottomView)
         
     }
     
-    public func createConstraints()
-    {
+    public func createConstraints() {
         
     }
+    
+    //TODO: Create Custom UIViews for these Views
     
     //SUBVIEWS
     public let topView: UIView = {
