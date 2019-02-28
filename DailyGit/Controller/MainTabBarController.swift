@@ -15,7 +15,11 @@ class MainTabBarController: UITabBarController {
         let mainVC = MainVC()
         //all the cool kids have no titles for their tab bars
         mainVC.tabBarItem.title = ""
-        //mainVC.tabBarItem.image = #imageLiter
+        mainVC.tabBarItem.image = UIImage(named: "settingsIcon")
+        
+        let settingsVC = SettingsVC()
+        settingsVC.tabBarItem.title = ""
+        settingsVC.tabBarItem.image = UIImage(named: "codeIcon")
     }
 
 
