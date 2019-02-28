@@ -37,12 +37,12 @@ public class MainView: UIView {
     //TODO: Create Custom UIViews for these Views
     
     //SUBVIEWS
-    public let topView: UIView = {
-        let coloredView = UIView()
-        coloredView.contentMode = UIView.ContentMode.scaleAspectFill
-        coloredView.clipsToBounds = true
-        coloredView.translatesAutoresizingMaskIntoConstraints = false
-        return coloredView
+    public let topView: ContributionsGraphView = {
+        let graphView = ContributionsGraphView()
+        graphView.contentMode = UIView.ContentMode.scaleAspectFill
+        graphView.clipsToBounds = true
+        graphView.translatesAutoresizingMaskIntoConstraints = false
+        return graphView
     }()
     
  

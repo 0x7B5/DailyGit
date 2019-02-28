@@ -15,6 +15,9 @@
 		B87EA6652221EE0300CE8114 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87EA6642221EE0300CE8114 /* Constants.swift */; };
 		B8B41CDF22283A20005E304A /* GitGraph.png in Resources */ = {isa = PBXBuildFile; fileRef = B8B41CDE22283A20005E304A /* GitGraph.png */; };
 		B8B41CE122283A34005E304A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE022283A34005E304A /* MainView.swift */; };
+		B8B41CE422286E6E005E304A /* ContributionsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */; };
+		B8B41CE622286E80005E304A /* StreakContributionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE522286E80005E304A /* StreakContributionsView.swift */; };
+		B8B41CE822286E8E005E304A /* DailyContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE722286E8E005E304A /* DailyContributionView.swift */; };
 		E3AF3AFDB9A56429936730F3 /* Pods_DailyGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A3A6F6A6AD99C7CACE238 /* Pods_DailyGit.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +34,9 @@
 		B87EA6642221EE0300CE8114 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B8B41CDE22283A20005E304A /* GitGraph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GitGraph.png; path = ../../../../../Screenshots/GitGraph.png; sourceTree = "<group>"; };
 		B8B41CE022283A34005E304A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionsGraphView.swift; sourceTree = "<group>"; };
+		B8B41CE522286E80005E304A /* StreakContributionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakContributionsView.swift; sourceTree = "<group>"; };
+		B8B41CE722286E8E005E304A /* DailyContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyContributionView.swift; sourceTree = "<group>"; };
 		D4785D0209F19D090C54C17B /* Pods-DailyGit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyGit.release.xcconfig"; path = "Target Support Files/Pods-DailyGit/Pods-DailyGit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +107,7 @@
 		B87EA66622234EA400CE8114 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B8B41CE222286E45005E304A /* SubViews */,
 				B8B41CE022283A34005E304A /* MainView.swift */,
 			);
 			path = View;
@@ -119,6 +126,16 @@
 				B87EA6542221EDC000CE8114 /* ViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		B8B41CE222286E45005E304A /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */,
+				B8B41CE522286E80005E304A /* StreakContributionsView.swift */,
+				B8B41CE722286E8E005E304A /* DailyContributionView.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,8 +265,11 @@
 			files = (
 				B87EA6552221EDC000CE8114 /* ViewController.swift in Sources */,
 				B8B41CE122283A34005E304A /* MainView.swift in Sources */,
+				B8B41CE622286E80005E304A /* StreakContributionsView.swift in Sources */,
+				B8B41CE422286E6E005E304A /* ContributionsGraphView.swift in Sources */,
 				B87EA6532221EDC000CE8114 /* AppDelegate.swift in Sources */,
 				B87EA6652221EE0300CE8114 /* Constants.swift in Sources */,
+				B8B41CE822286E8E005E304A /* DailyContributionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
