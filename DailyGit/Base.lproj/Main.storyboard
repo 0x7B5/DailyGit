@@ -64,7 +64,7 @@
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Screen Shot 2019-02-24 at 8.21.18 PM.png" translatesAutoresizingMaskIntoConstraints="NO" id="sYb-GN-lYc">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="GitGraph.png" translatesAutoresizingMaskIntoConstraints="NO" id="sYb-GN-lYc">
                                 <rect key="frame" x="10" y="83" width="365" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -112,6 +112,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Screen Shot 2019-02-24 at 8.21.18 PM.png" width="365" height="114"/>
+        <image name="GitGraph.png" width="365" height="114"/>
     </resources>
 </document>

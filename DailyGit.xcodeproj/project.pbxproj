@@ -13,7 +13,8 @@
 		B87EA65A2221EDC200CE8114 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B87EA6592221EDC200CE8114 /* Assets.xcassets */; };
 		B87EA65D2221EDC200CE8114 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87EA65B2221EDC200CE8114 /* LaunchScreen.storyboard */; };
 		B87EA6652221EE0300CE8114 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87EA6642221EE0300CE8114 /* Constants.swift */; };
-		B87EA66A22237AB200CE8114 /* Screen Shot 2019-02-24 at 8.21.18 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = B87EA66922237AB200CE8114 /* Screen Shot 2019-02-24 at 8.21.18 PM.png */; };
+		B8B41CDF22283A20005E304A /* GitGraph.png in Resources */ = {isa = PBXBuildFile; fileRef = B8B41CDE22283A20005E304A /* GitGraph.png */; };
+		B8B41CE122283A34005E304A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE022283A34005E304A /* MainView.swift */; };
 		E3AF3AFDB9A56429936730F3 /* Pods_DailyGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A3A6F6A6AD99C7CACE238 /* Pods_DailyGit.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +29,8 @@
 		B87EA65C2221EDC200CE8114 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B87EA65E2221EDC200CE8114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B87EA6642221EE0300CE8114 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B87EA66922237AB200CE8114 /* Screen Shot 2019-02-24 at 8.21.18 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Screen Shot 2019-02-24 at 8.21.18 PM.png"; path = "../../../../../../Desktop/Screen Shot 2019-02-24 at 8.21.18 PM.png"; sourceTree = "<group>"; };
+		B8B41CDE22283A20005E304A /* GitGraph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GitGraph.png; path = ../../../../../Screenshots/GitGraph.png; sourceTree = "<group>"; };
+		B8B41CE022283A34005E304A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D4785D0209F19D090C54C17B /* Pods-DailyGit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyGit.release.xcconfig"; path = "Target Support Files/Pods-DailyGit/Pods-DailyGit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,7 +90,7 @@
 				B87EA6522221EDC000CE8114 /* AppDelegate.swift */,
 				B87EA6562221EDC000CE8114 /* Main.storyboard */,
 				B87EA6592221EDC200CE8114 /* Assets.xcassets */,
-				B87EA66922237AB200CE8114 /* Screen Shot 2019-02-24 at 8.21.18 PM.png */,
+				B8B41CDE22283A20005E304A /* GitGraph.png */,
 				B87EA65B2221EDC200CE8114 /* LaunchScreen.storyboard */,
 				B87EA65E2221EDC200CE8114 /* Info.plist */,
 				B87EA6642221EE0300CE8114 /* Constants.swift */,
@@ -99,6 +101,7 @@
 		B87EA66622234EA400CE8114 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B8B41CE022283A34005E304A /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -179,7 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B87EA65D2221EDC200CE8114 /* LaunchScreen.storyboard in Resources */,
-				B87EA66A22237AB200CE8114 /* Screen Shot 2019-02-24 at 8.21.18 PM.png in Resources */,
+				B8B41CDF22283A20005E304A /* GitGraph.png in Resources */,
 				B87EA65A2221EDC200CE8114 /* Assets.xcassets in Resources */,
 				B87EA6582221EDC000CE8114 /* Main.storyboard in Resources */,
 			);
@@ -244,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B87EA6552221EDC000CE8114 /* ViewController.swift in Sources */,
+				B8B41CE122283A34005E304A /* MainView.swift in Sources */,
 				B87EA6532221EDC000CE8114 /* AppDelegate.swift in Sources */,
 				B87EA6652221EE0300CE8114 /* Constants.swift in Sources */,
 			);
