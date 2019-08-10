@@ -9,7 +9,15 @@
 import UIKit
 
 class SettingsVC: UIViewController {
+    
+    let mainView = SettingView()
+    
+    override func loadView() {
+        self.view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Settings"
     }
 }

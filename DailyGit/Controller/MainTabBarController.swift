@@ -20,6 +20,9 @@ class MainTabBarController: UITabBarController {
         let settingsVC = SettingsVC()
         settingsVC.tabBarItem.title = ""
         settingsVC.tabBarItem.image = UIImage(named: "codeIcon")
+        
+        let controllers = [mainVC, settingsVC]
+        self.viewControllers = controllers
     }
 
 

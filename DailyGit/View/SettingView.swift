@@ -1,15 +1,16 @@
 //
-//  MainView.swift
+//  SettingView.swift
 //  DailyGit
 //
-//  Created by Vlad Munteanu on 2/28/19.
+//  Created by Vlad Munteanu on 8/10/19.
 //  Copyright © 2019 Vlad Munteanu. All rights reserved.
 //
 
 import UIKit
 import SnapKit
 
-public class MainView: UIView {
+public class SettingView: UIView {
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = CGRect.zero
@@ -23,9 +24,9 @@ public class MainView: UIView {
     
     private func initializeUI() {
         //UIViews
-       // addSubview(topView)
+        // addSubview(topView)
         addSubview(middleView)
-       
+        
         
     }
     
@@ -49,11 +50,10 @@ public class MainView: UIView {
         return graphView
     }()
     
- 
+    
     public let middleView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         return view
     }()
-    
 }
