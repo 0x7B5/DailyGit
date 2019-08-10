@@ -7,6 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
-var darkMode = false
+public struct Constants {
+    static var darkMode = false
+    static let gitGreenColor = #colorLiteral(red: 0.1026554033, green: 0.3837691247, blue: 0.1535629034, alpha: 1)
+}
 
