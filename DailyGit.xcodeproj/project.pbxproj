@@ -88,12 +88,11 @@
 		B87EA6512221EDC000CE8114 /* DailyGit */ = {
 			isa = PBXGroup;
 			children = (
+				B87EA6522221EDC000CE8114 /* AppDelegate.swift */,
 				B87EA66622234EA400CE8114 /* View */,
 				B87EA66722234EAB00CE8114 /* Model */,
 				B87EA66822234EB100CE8114 /* Controller */,
-				B87EA6522221EDC000CE8114 /* AppDelegate.swift */,
-				B87EA6592221EDC200CE8114 /* Assets.xcassets */,
-				B87EA65B2221EDC200CE8114 /* LaunchScreen.storyboard */,
+				CC17DBAB22FF6F6500E34951 /* Supporting Files */,
 				B87EA65E2221EDC200CE8114 /* Info.plist */,
 				B87EA6642221EE0300CE8114 /* Constants.swift */,
 			);
@@ -133,6 +132,15 @@
 				B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		CC17DBAB22FF6F6500E34951 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B87EA6592221EDC200CE8114 /* Assets.xcassets */,
+				B87EA65B2221EDC200CE8114 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
