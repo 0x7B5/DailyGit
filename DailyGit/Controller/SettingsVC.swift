@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsVC: UIViewController {
     
-    let mainView = SettingView()
+    let mainView = SettingsView()
     
     override func loadView() {
         self.view = mainView

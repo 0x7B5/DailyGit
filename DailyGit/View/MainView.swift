@@ -13,6 +13,7 @@ public class MainView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = CGRect.zero
+        backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         initializeUI()
         createConstraints()
     }
