@@ -23,7 +23,7 @@ public class GithubDataManager {
         return true
     }
     
-    func getDailyCommits(username: String) {
+    func getDailyCommits(username: String) -> Int {
         
         let pageSource = getGithubSource(username: username)
         //print(pageSource)
@@ -35,22 +35,35 @@ public class GithubDataManager {
         " data-date="\(getFormattedDate())"/>
         """
         
-      guard
-          let leftSideRange = pageSource.range(of: leftSideString)
-        else {
-          print("couldn't find left range")
-          return
-        }
+        
         guard
-          let rightSideRange = pageSource.range(of: rightSideString)
-        else {
-          print("couldn't find right range")
-          return
+            let rightSideRange = pageSource.range(of: rightSideString)
+            else {
+                print("couldn't find right range")
+                return 0
         }
         
-
+        let rangeOfTheData = pageSource.index(rightSideRange.lowerBound, offsetBy: -26)..<rightSideRange.lowerBound
+        let subPageSource = pageSource[rangeOfTheData]
+        print(subPageSource)
         
-        print(valueWeWantToGrab) // prints the follower count: 19093
+        
+        guard
+            let leftSideRange = subPageSource.range(of: leftSideString)
+            else {
+                print("couldn't find left range")
+                return 0
+        }
+        
+        let finalRange = leftSideRange.upperBound..<subPageSource.endIndex
+        let commitsValueString = subPageSource[finalRange]
+        
+        print(commitsValueString) // prints the follower count: 19093
+        
+        let commitsValueInt = Int(commitsValueString) ?? 0
+        
+        return commitsValueInt
+        
         
     }
     
