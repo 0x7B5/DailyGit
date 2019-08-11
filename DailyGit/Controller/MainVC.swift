@@ -17,11 +17,8 @@ class MainVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Commits"
-        
-        self.navigationController?.navigationBar.barTintColor = Constants.navBarWhite
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
-        
+        setupNavController()
+
         let name = "vlad-munteanu"
         //print(GithubDataManager.shared.getGithubSource(username: name))
         
@@ -30,5 +27,10 @@ class MainVC: UIViewController {
         
     }
     
+    func setupNavController() {
+           self.title = "Commits"
+           self.navigationController?.navigationBar.barTintColor = Constants.navBarWhite
+           self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
+       }
     
 }
