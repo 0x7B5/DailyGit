@@ -2,10 +2,12 @@
 # platform :ios, '9.0'
 
 target 'DailyGit' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+# Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+use_frameworks!
 
-  # Pods for DailyGit
-  pod 'Firebase/Core'
-  pod 'SnapKit', '~> 4.0.0'
+# Pods for DailyGit
+pod 'SnapKit', '~> 5.0.0'
+pod 'Kanna', '~> 5.0.0'
+pod 'Alamofire', '~> 5.0.0-beta.5'
+
 end

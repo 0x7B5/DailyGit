@@ -17,6 +17,14 @@ class MainVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        //GithubDataManager.shared.getDailyCommits()
+        
+        let name = "vlad-munteanu"
+        //print(GithubDataManager.shared.getGithubSource(username: name))
+        
+        print(GithubDataManager.shared.getDailyCommits(username: name))
+        
+        
     }
     
     
