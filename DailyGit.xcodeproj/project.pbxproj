@@ -12,7 +12,7 @@
 		B87EA65A2221EDC200CE8114 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B87EA6592221EDC200CE8114 /* Assets.xcassets */; };
 		B87EA65D2221EDC200CE8114 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87EA65B2221EDC200CE8114 /* LaunchScreen.storyboard */; };
 		B87EA6652221EE0300CE8114 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87EA6642221EE0300CE8114 /* Constants.swift */; };
-		B8B41CE122283A34005E304A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE022283A34005E304A /* MainView.swift */; };
+		B8B41CE122283A34005E304A /* CommitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE022283A34005E304A /* CommitsView.swift */; };
 		B8B41CE422286E6E005E304A /* ContributionsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */; };
 		B8B41CEA2228737B005E304A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE92228737B005E304A /* MainVC.swift */; };
 		B8B41CEC22287388005E304A /* RootSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CEB22287388005E304A /* RootSettingVC.swift */; };
@@ -31,7 +31,7 @@
 		B87EA65C2221EDC200CE8114 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B87EA65E2221EDC200CE8114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B87EA6642221EE0300CE8114 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B8B41CE022283A34005E304A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		B8B41CE022283A34005E304A /* CommitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitsView.swift; sourceTree = "<group>"; };
 		B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionsGraphView.swift; sourceTree = "<group>"; };
 		B8B41CE92228737B005E304A /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		B8B41CEB22287388005E304A /* RootSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSettingVC.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 			children = (
 				CCF2E96B22FFE02D00F4E118 /* testing.storyboard */,
 				B8B41CE222286E45005E304A /* SubViews */,
-				B8B41CE022283A34005E304A /* MainView.swift */,
+				B8B41CE022283A34005E304A /* CommitsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -272,7 +272,7 @@
 				CC17DBAD22FF9D1500E34951 /* GithubDataManager.swift in Sources */,
 				B87EA6552221EDC000CE8114 /* MainTabBarController.swift in Sources */,
 				B8B41CEA2228737B005E304A /* MainVC.swift in Sources */,
-				B8B41CE122283A34005E304A /* MainView.swift in Sources */,
+				B8B41CE122283A34005E304A /* CommitsView.swift in Sources */,
 				B8B41CE422286E6E005E304A /* ContributionsGraphView.swift in Sources */,
 				B87EA6532221EDC000CE8114 /* AppDelegate.swift in Sources */,
 				B87EA6652221EE0300CE8114 /* Constants.swift in Sources */,

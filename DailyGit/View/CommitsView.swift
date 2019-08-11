@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-public class MainView: UIView {
+public class CommitsView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = CGRect.zero

@@ -10,7 +10,7 @@ import UIKit
 
 class MainVC: UIViewController {
     
-    let mainView = MainView()
+    let mainView = CommitsView()
     
     override func loadView() {
         self.view = mainView
