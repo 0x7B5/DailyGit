@@ -65,6 +65,8 @@ public class GithubDataManager {
         
         let commitsValueInt = Int(commitsValueString) ?? 0
         
+        UserDefaults.standard.set(commitsValueInt, forKey: "dailyCommits")
+        
         return commitsValueInt
         
         

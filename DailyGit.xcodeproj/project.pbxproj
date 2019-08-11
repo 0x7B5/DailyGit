@@ -17,6 +17,7 @@
 		B8B41CEA2228737B005E304A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE92228737B005E304A /* MainVC.swift */; };
 		B8B41CEC22287388005E304A /* RootSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CEB22287388005E304A /* RootSettingVC.swift */; };
 		CC17DBAD22FF9D1500E34951 /* GithubDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */; };
+		CCF2E96C22FFE02D00F4E118 /* testing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCF2E96B22FFE02D00F4E118 /* testing.storyboard */; };
 		E3AF3AFDB9A56429936730F3 /* Pods_DailyGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A3A6F6A6AD99C7CACE238 /* Pods_DailyGit.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		B8B41CE92228737B005E304A /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		B8B41CEB22287388005E304A /* RootSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSettingVC.swift; sourceTree = "<group>"; };
 		CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDataManager.swift; sourceTree = "<group>"; };
+		CCF2E96B22FFE02D00F4E118 /* testing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = testing.storyboard; sourceTree = "<group>"; };
 		D4785D0209F19D090C54C17B /* Pods-DailyGit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyGit.release.xcconfig"; path = "Target Support Files/Pods-DailyGit/Pods-DailyGit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 		B87EA66622234EA400CE8114 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CCF2E96B22FFE02D00F4E118 /* testing.storyboard */,
 				B8B41CE222286E45005E304A /* SubViews */,
 				B8B41CE022283A34005E304A /* MainView.swift */,
 			);
@@ -211,6 +214,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCF2E96C22FFE02D00F4E118 /* testing.storyboard in Resources */,
 				B87EA65D2221EDC200CE8114 /* LaunchScreen.storyboard in Resources */,
 				B87EA65A2221EDC200CE8114 /* Assets.xcassets in Resources */,
 			);
