@@ -24,12 +24,11 @@ class MainVC: UIViewController {
         
         print(GithubDataManager.shared.getDailyCommits(username: name))
         
-        
     }
     
     func setupNavController() {
            self.title = "Commits"
-           self.navigationController?.navigationBar.barTintColor = Constants.navBarWhite
+           self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
        }
     

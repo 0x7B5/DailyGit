@@ -12,6 +12,7 @@ import UIKit
 public struct Constants {
     static var darkMode = false
     static let gitGreenColor = #colorLiteral(red: 0.1026554033, green: 0.3837691247, blue: 0.1535629034, alpha: 1)
-    static let navBarWhite = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    static var navBarColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    static var tabBarColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 }
 

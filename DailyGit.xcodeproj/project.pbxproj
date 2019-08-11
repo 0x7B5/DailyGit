@@ -15,7 +15,7 @@
 		B8B41CE122283A34005E304A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE022283A34005E304A /* MainView.swift */; };
 		B8B41CE422286E6E005E304A /* ContributionsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */; };
 		B8B41CEA2228737B005E304A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE92228737B005E304A /* MainVC.swift */; };
-		B8B41CEC22287388005E304A /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CEB22287388005E304A /* SettingsVC.swift */; };
+		B8B41CEC22287388005E304A /* RootSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CEB22287388005E304A /* RootSettingVC.swift */; };
 		CC17DBAA22FF688C00E34951 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBA922FF688C00E34951 /* SettingsView.swift */; };
 		CC17DBAD22FF9D1500E34951 /* GithubDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */; };
 		E3AF3AFDB9A56429936730F3 /* Pods_DailyGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A3A6F6A6AD99C7CACE238 /* Pods_DailyGit.framework */; };
@@ -34,7 +34,7 @@
 		B8B41CE022283A34005E304A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionsGraphView.swift; sourceTree = "<group>"; };
 		B8B41CE92228737B005E304A /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
-		B8B41CEB22287388005E304A /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		B8B41CEB22287388005E304A /* RootSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSettingVC.swift; sourceTree = "<group>"; };
 		CC17DBA922FF688C00E34951 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDataManager.swift; sourceTree = "<group>"; };
 		D4785D0209F19D090C54C17B /* Pods-DailyGit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyGit.release.xcconfig"; path = "Target Support Files/Pods-DailyGit/Pods-DailyGit.release.xcconfig"; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 			children = (
 				B87EA6542221EDC000CE8114 /* MainTabBarController.swift */,
 				B8B41CE92228737B005E304A /* MainVC.swift */,
-				B8B41CEB22287388005E304A /* SettingsVC.swift */,
+				CCF2E96A22FFD2F100F4E118 /* Settings */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -144,6 +144,14 @@
 				B87EA65B2221EDC200CE8114 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CCF2E96A22FFD2F100F4E118 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B8B41CEB22287388005E304A /* RootSettingVC.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,7 +276,7 @@
 				B87EA6532221EDC000CE8114 /* AppDelegate.swift in Sources */,
 				CC17DBAA22FF688C00E34951 /* SettingsView.swift in Sources */,
 				B87EA6652221EE0300CE8114 /* Constants.swift in Sources */,
-				B8B41CEC22287388005E304A /* SettingsVC.swift in Sources */,
+				B8B41CEC22287388005E304A /* RootSettingVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

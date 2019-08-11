@@ -45,7 +45,7 @@ public class GithubDataManager {
         
         let rangeOfTheData = pageSource.index(rightSideRange.lowerBound, offsetBy: -26)..<rightSideRange.lowerBound
         let subPageSource = pageSource[rangeOfTheData]
-        print(subPageSource)
+       // print(subPageSource)
         
         
         guard

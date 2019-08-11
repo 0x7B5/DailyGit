@@ -17,13 +17,14 @@ class MainTabBarController: UITabBarController {
         mainVC.tabBarItem.title = "Commits"
         mainVC.tabBarItem.image = UIImage(named: "codeIcon")
         
-        let settingsVC = SettingsVC()
+        let settingsVC = RootSettingVC()
         settingsVC.tabBarItem.title = "Settings"
         settingsVC.tabBarItem.image = UIImage(named: "settingsIcon")
         
         let controllers = [mainVC, settingsVC]
         self.viewControllers = controllers.map{ UINavigationController.init(rootViewController: $0)}
         
+        UITabBar.appearance().barTintColor = Constants.tabBarColor
     }
 
 
