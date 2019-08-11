@@ -25,6 +25,10 @@ public class CommitsView: UIView {
     private func initializeUI() {
         //UIViews
        
+        for i in 0...7 {
+         weekCommitGraph.append(createGraphNodeView())
+        }
+        
        
         
     }
@@ -91,7 +95,14 @@ public class CommitsView: UIView {
         return label
     }()
     
+    var weekCommitGraph = [UIView]()
     
+    
+    
+    internal func createGraphNodeView() -> UIView {
+        let view = UIView()
+        return view
+    }
     
     let longestStreakCommitsLabel: UILabel = {
         let label = UILabel()
