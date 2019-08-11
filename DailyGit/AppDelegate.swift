@@ -18,7 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = Constants.gitGreenColor
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = MainTabBarController()
+        
+        if(UserDefaults.standard.object(forKey: "username") != nil) {
+            //LoggedIn
+            window?.rootViewController = MainTabBarController()
+        } else {
+            //Not Logged In
+            let navController = UINavigationController(rootViewController: OnboardingVC1())
+            window?.rootViewController = navController
+        }
+        
+        
         return true
     }
 

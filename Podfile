@@ -7,8 +7,7 @@ use_frameworks!
 
 # Pods for DailyGit
 pod 'SnapKit', '~> 5.0.0'
-pod 'Kanna', '~> 5.0.0'
-pod 'Alamofire', '~> 5.0.0-beta.5'
 pod 'QuickTableViewController'
+pod 'OnboardKit'
 
 end

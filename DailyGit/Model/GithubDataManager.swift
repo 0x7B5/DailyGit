@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 public class GithubDataManager {
     static let shared = GithubDataManager()
     
@@ -68,8 +67,6 @@ public class GithubDataManager {
         UserDefaults.standard.set(commitsValueInt, forKey: "dailyCommits")
         
         return commitsValueInt
-        
-        
     }
     
     func getFormattedDate() -> String {
@@ -77,8 +74,6 @@ public class GithubDataManager {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: date)
         
-        
-
         let year = String(components.year!)
         var month = String(components.month!)
         var day = String(components.day!)
