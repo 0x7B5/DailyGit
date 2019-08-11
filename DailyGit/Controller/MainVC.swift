@@ -23,7 +23,7 @@ class MainVC: UIViewController {
         //print(GithubDataManager.shared.getGithubSource(username: name))
         
         print(GithubDataManager.shared.getDailyCommits(username: name))
-        
+        print(GithubDataManager.shared.isValidUser(username: name))
     }
     
     func setupNavController() {

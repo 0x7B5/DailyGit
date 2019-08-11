@@ -15,11 +15,14 @@ public class GithubDataManager {
     private init() { }
     
     func isValidUser(username: String) -> Bool {
-        let myURLString = "https://github.com/\(username)"
-        guard let _ = URL(string: myURLString) else {
-            print("Error: \(myURLString) doesn't seem to be a valid URL")
+        let pageSource = getGithubSource(username: username)
+        //print(pageSource)
+        let notFoundError = "Not Found"
+        
+        if pageSource.contains(notFoundError) {
             return false
         }
+        
         return true
     }
     
