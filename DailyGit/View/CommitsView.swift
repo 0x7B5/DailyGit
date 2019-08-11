@@ -24,37 +24,80 @@ public class CommitsView: UIView {
     
     private func initializeUI() {
         //UIViews
-       // addSubview(topView)
-        addSubview(middleView)
+       
        
         
     }
     
     public func createConstraints() {
-        middleView.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.3)
-            $0.width.equalToSuperview()
-            $0.top.equalToSuperview()
-            
-        }
+//        middleView.snp.makeConstraints {
+//            $0.height.equalToSuperview().multipliedBy(0.3)
+//            $0.width.equalToSuperview()
+//            $0.top.equalToSuperview()
+//
+//        }
     }
-    
-    //TODO: Create Custom UIViews for these Views
-    
     //SUBVIEWS
-    public let topView: ContributionsGraphView = {
-        let graphView = ContributionsGraphView()
-        graphView.contentMode = UIView.ContentMode.scaleAspectFill
-        graphView.clipsToBounds = true
-        graphView.translatesAutoresizingMaskIntoConstraints = false
-        return graphView
-    }()
-    
- 
-    public let middleView: UIView = {
+    //TOPVIEW: PROFILE VIEW
+    let topView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         return view
     }()
+    
+    let profileImage: UIImageView = {
+        let view = UIImageView()
+        return view
+    }()
+    
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    let bioLabel: UILabel = {
+        let label = UILabel()
+            return label
+    }()
+    //TODAY VIEW
+    let todayLabel: UILabel = {
+        let label = UILabel()
+            return label
+    }()
+    
+    let dailyCommitsLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    //THIS WEEK VIEW
+    let weekLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    //CURRENT STREAK VIEW
+    let currentStreakLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    let currentStreakCommitsLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    //LONGEST STREAK VIEW
+    let longestStreakLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    
+    
+    let longestStreakCommitsLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    
     
 }
