@@ -23,12 +23,13 @@ class RootSettingVC: QuickTableViewController {
 //        titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
 //        title = " "
 //        navigationItem.titleView = titleLabel
-        
+        #warning("Add username to subtitle")
         tableContents = [
-            Section(title: "Default", rows: [
-                NavigationRow(text: "Use default cell types", detailText: .none, action: { [weak self] _ in
-                   // self?.navigationController?.pushViewController(ExampleViewController(), animated: true)
-                })
+            Section(title: "Username", rows: [
+                
+                NavigationRow(text: "Change Account", detailText: .subtitle("Current Username: vlad-munteanu"), action: { [weak self] _ in
+                    //self?.navigationController?.pushViewController(CustomizationViewController(), animated: true)
+                    })
             ]),
             
             Section(title: "Customization", rows: [
@@ -59,6 +60,18 @@ class RootSettingVC: QuickTableViewController {
             self?.present(alert, animated: true, completion: nil)
         }
     }
+    
+//    private func showDetail() -> (Row) -> Void {
+//      return { [weak self] in
+//        let detail = $0.text + ($0.detailText?.text ?? "")
+//        let controller = UIViewController()
+//        controller.view.backgroundColor = .white
+//        controller.title = detail
+//        self?.navigationController?.pushViewController(controller, animated: true)
+//
+//      }
+//    }
+
     
     func setupNavController() {
         self.title = "Settings"
