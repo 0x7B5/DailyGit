@@ -22,7 +22,8 @@ class MainTabBarController: UITabBarController {
         settingsVC.tabBarItem.image = UIImage(named: "settingsIcon")
         
         let controllers = [mainVC, settingsVC]
-        self.viewControllers = controllers
+        self.viewControllers = controllers.map{ UINavigationController.init(rootViewController: $0)}
+        
     }
 
 

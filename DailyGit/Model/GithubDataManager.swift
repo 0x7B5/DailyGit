@@ -58,7 +58,7 @@ public class GithubDataManager {
         let finalRange = leftSideRange.upperBound..<subPageSource.endIndex
         let commitsValueString = subPageSource[finalRange]
         
-        print(commitsValueString) // prints the follower count: 19093
+       // print(commitsValueString)
         
         let commitsValueInt = Int(commitsValueString) ?? 0
         

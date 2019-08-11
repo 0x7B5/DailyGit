@@ -17,7 +17,10 @@ class MainVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        //GithubDataManager.shared.getDailyCommits()
+        self.title = "Commits"
+        
+        self.navigationController?.navigationBar.barTintColor = Constants.navBarWhite
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
         
         let name = "vlad-munteanu"
         //print(GithubDataManager.shared.getGithubSource(username: name))
