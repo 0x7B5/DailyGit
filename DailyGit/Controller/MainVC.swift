@@ -28,7 +28,7 @@ class MainVC: UIViewController {
     
     func setupNavController() {
            self.title = "Commits"
-           self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
+           //self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
        }
     

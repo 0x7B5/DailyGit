@@ -76,7 +76,7 @@ class RootSettingVC: QuickTableViewController {
     
     func setupNavController() {
         self.title = "Settings"
-        self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
+        //self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
     }
 }

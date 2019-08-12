@@ -24,7 +24,7 @@ class MainTabBarController: UITabBarController {
         let controllers = [mainVC, settingsVC]
         self.viewControllers = controllers.map{ UINavigationController.init(rootViewController: $0)}
         
-        UITabBar.appearance().barTintColor = Constants.tabBarColor
+        //UITabBar.appearance().barTintColor = Constants.tabBarColor
     }
 
 
