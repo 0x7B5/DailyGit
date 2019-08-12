@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = MainTabBarController()
         } else {
             //Not Logged In
-            let navController = UINavigationController(rootViewController: OnboardingVC1())
+            let navController = UINavigationController(rootViewController: OnboardingVC())
             window?.rootViewController = navController
         }
         

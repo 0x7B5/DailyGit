@@ -23,8 +23,8 @@ public class OnboardingView: UIView {
     }
     
     private func initializeUI() {
-        //UIViews
-       
+       //UIViews
+       addSubview(enterUsernameLabel)
        
     }
     
@@ -33,14 +33,20 @@ public class OnboardingView: UIView {
     }
     
     //Next Button
-    let nextButton: UIButton = {
-        let button = UIButton()
-        return button
-    }()
+//    let nextButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("Next",for: .normal)
+//        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
+//
+//        return button
+//    }()
     
     //Enter Github Username
     let enterUsernameLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .headline)
+        label.text = "Enter GitHub Username"
+        
         return label
     }()
     

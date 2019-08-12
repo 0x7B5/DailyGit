@@ -9,23 +9,20 @@
 import Foundation
 import UIKit
 
-public class OnboardingVC1: UIViewController {
+public class OnboardingVC: UIViewController {
     
+    let onboardingView = OnboardingView()
+    public override func loadView() {
+        self.view = onboardingView
+    }
     public override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(goNext))
         print("We Out Here")
     }
     
-}
-
-public class OnboardingVC2: UIViewController {
-    public override func viewDidLoad() {
-        super.viewDidLoad()
+    @objc func goNext() {
+        
     }
-}
-
-public class OnboardingVC3: UIViewController {
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    
 }
