@@ -67,9 +67,14 @@ public class OnboardingView: UIView {
     //Textfield
     let usernameTextfield: UITextField = {
         let textfield = UITextField()
-        textfield.placeholder = "Username"
-        textfield.font = UIFont.systemFont(ofSize: 20)
-        textfield.borderStyle = UITextField.BorderStyle.roundedRect
+        let centeredParagraphStyle = NSMutableParagraphStyle()
+        centeredParagraphStyle.alignment = .center
+        let attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.paragraphStyle: centeredParagraphStyle])
+        textfield.attributedPlaceholder = attributedPlaceholder
+        textfield.font = UIFont.systemFont(ofSize: 45, weight: UIFont.Weight(rawValue: 1.0))
+        textfield.adjustsFontSizeToFitWidth = true
+        //textfield.borderStyle = UITextField.BorderStyle.roundedRect
+        textfield.textAlignment = .center
         textfield.autocorrectionType = UITextAutocorrectionType.no
         textfield.keyboardType = UIKeyboardType.default
         textfield.returnKeyType = UIReturnKeyType.done

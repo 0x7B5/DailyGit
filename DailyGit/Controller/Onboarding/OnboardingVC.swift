@@ -9,15 +9,18 @@
 import Foundation
 import UIKit
 
-public class OnboardingVC: UIViewController {
+class OnboardingVC: UIViewController, UITextFieldDelegate {
     
     let onboardingView = OnboardingView()
-    public override func loadView() {
+    unowned var usernameTF: UITextField { return onboardingView.usernameTextfield}
+    
+    override func loadView() {
         self.view = onboardingView
     }
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(goNext))
+        self.usernameTF.delegate = self
         print("We Out Here")
     }
     
@@ -25,9 +28,13 @@ public class OnboardingVC: UIViewController {
         view.endEditing(true)
     }
     
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override  func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
 }
