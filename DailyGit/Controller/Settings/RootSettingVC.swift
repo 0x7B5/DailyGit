@@ -27,9 +27,10 @@ class RootSettingVC: QuickTableViewController {
         tableContents = [
             Section(title: "Username", rows: [
                 
-                NavigationRow(text: "Change Account", detailText: .subtitle("Current Username: vlad-munteanu"), action: { [weak self] _ in
-                    //self?.navigationController?.pushViewController(CustomizationViewController(), animated: true)
-                    })
+                NavigationRow(text: "Change Account", detailText: .subtitle("Current Username: \(UserDefaults.standard.object(forKey: "username")!)"), action: { [weak self] _ in
+                    let navController = UINavigationController(rootViewController: OnboardingVC())
+                    self!.present(navController, animated: true, completion: nil)
+                })
             ]),
             
             Section(title: "Customization", rows: [
