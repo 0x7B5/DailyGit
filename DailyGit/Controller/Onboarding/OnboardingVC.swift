@@ -22,7 +22,12 @@ public class OnboardingVC: UIViewController {
     }
     
     @objc func goNext() {
-        
+        view.endEditing(true)
+    }
+    
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
     }
     
 }

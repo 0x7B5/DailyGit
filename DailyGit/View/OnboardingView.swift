@@ -25,7 +25,7 @@ public class OnboardingView: UIView {
     private func initializeUI() {
        //UIViews
        addSubview(enterUsernameLabel)
-       
+       addSubview(usernameTextfield)
     }
     
     public func createConstraints() {
@@ -34,6 +34,11 @@ public class OnboardingView: UIView {
             $0.centerX.equalToSuperview()
             //$0.height.equalToSuperview().multipliedBy(0.13)
             $0.centerY.equalToSuperview().multipliedBy(0.35)
+        }
+        usernameTextfield.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(0.9)
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().multipliedBy(0.55)
         }
     }
     
@@ -56,19 +61,32 @@ public class OnboardingView: UIView {
         label.text = "Enter GitHub Username"
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        //label.numberOfLines = 2
         return label
     }()
     
     //Textfield
     let usernameTextfield: UITextField = {
         let textfield = UITextField()
+        textfield.placeholder = "Username"
+        textfield.font = UIFont.systemFont(ofSize: 20)
+        textfield.borderStyle = UITextField.BorderStyle.roundedRect
+        textfield.autocorrectionType = UITextAutocorrectionType.no
+        textfield.keyboardType = UIKeyboardType.default
+        textfield.returnKeyType = UIReturnKeyType.done
+        textfield.clearButtonMode = UITextField.ViewMode.whileEditing
+        textfield.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         return textfield
     }()
     
     //Don't know username
     let dontKnowUsernameLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 50.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Don't know your username? Go to your GitHub profile and find it in the URL."
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
         return label
     }()
     
