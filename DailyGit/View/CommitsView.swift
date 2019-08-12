@@ -10,8 +10,16 @@ import UIKit
 import SnapKit
 
 public class CommitsView: UIView {
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
+    var topLayout: CGFloat
+    
+//    public override init(frame: CGRect) {
+//        super.init(frame: frame)
+//
+//    }
+    
+    init(topLayout: CGFloat) {
+        self.topLayout = topLayout
+        super.init(frame: CGRect.zero)
         self.frame = CGRect.zero
         backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         initializeUI()
@@ -24,7 +32,7 @@ public class CommitsView: UIView {
     
     private func initializeUI() {
         //UIViews
-       
+        addSubview(topView)
         for i in 0...7 {
          weekCommitGraph.append(createGraphNodeView())
         }
@@ -34,17 +42,17 @@ public class CommitsView: UIView {
     }
     
     public func createConstraints() {
-//        middleView.snp.makeConstraints {
-//            $0.height.equalToSuperview().multipliedBy(0.3)
-//            $0.width.equalToSuperview()
-//            $0.top.equalToSuperview()
-//
-//        }
+        topView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.height.equalToSuperview().multipliedBy(0.15)
+            $0.top.equalToSuperview().inset(topLayout)
+        }
     }
     //SUBVIEWS
     //TOPVIEW: PROFILE VIEW
     let topView: UIView = {
         let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return view
     }()
     

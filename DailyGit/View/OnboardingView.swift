@@ -68,7 +68,6 @@ public class OnboardingView: UIView {
         let label = UILabel()
         
         label.font = UIFont.systemFont(ofSize: 50.0)
-        
         label.adjustsFontSizeToFitWidth = true
         label.text = "Enter GitHub Username"
         label.textAlignment = .center
