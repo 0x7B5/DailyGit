@@ -13,11 +13,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    #warning("Debug purposes")
+    func resetDefaults() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UITabBar.appearance().tintColor = Constants.gitGreenColor
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
+        //resetDefaults()
         
         if(UserDefaults.standard.object(forKey: "username") != nil) {
             //LoggedIn
@@ -27,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let navController = UINavigationController(rootViewController: OnboardingVC())
             window?.rootViewController = navController
         }
+        
+        
         
         
         return true
