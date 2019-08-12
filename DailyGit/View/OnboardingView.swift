@@ -29,7 +29,12 @@ public class OnboardingView: UIView {
     }
     
     public func createConstraints() {
-        
+        enterUsernameLabel.snp.makeConstraints{
+            $0.width.equalToSuperview().multipliedBy(0.9)
+            $0.centerX.equalToSuperview()
+            //$0.height.equalToSuperview().multipliedBy(0.13)
+            $0.centerY.equalToSuperview().multipliedBy(0.35)
+        }
     }
     
     //Next Button
@@ -44,9 +49,14 @@ public class OnboardingView: UIView {
     //Enter Github Username
     let enterUsernameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .headline)
-        label.text = "Enter GitHub Username"
         
+        label.font = UIFont.systemFont(ofSize: 50.0)
+        
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Enter GitHub Username"
+        label.textAlignment = .center
+        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        //label.numberOfLines = 2
         return label
     }()
     
