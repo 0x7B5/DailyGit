@@ -20,6 +20,7 @@
 		CCF2E96C22FFE02D00F4E118 /* testing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCF2E96B22FFE02D00F4E118 /* testing.storyboard */; };
 		CCF2E96F2300D69B00F4E118 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF2E96E2300D69B00F4E118 /* OnboardingVC.swift */; };
 		CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF2E97123011F3500F4E118 /* OnboardingView.swift */; };
+		CCF2E9752302293200F4E118 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF2E9742302293200F4E118 /* UIImage+Extensions.swift */; };
 		E3AF3AFDB9A56429936730F3 /* Pods_DailyGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A3A6F6A6AD99C7CACE238 /* Pods_DailyGit.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		CCF2E96B22FFE02D00F4E118 /* testing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = testing.storyboard; sourceTree = "<group>"; };
 		CCF2E96E2300D69B00F4E118 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		CCF2E97123011F3500F4E118 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		CCF2E9742302293200F4E118 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		D4785D0209F19D090C54C17B /* Pods-DailyGit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyGit.release.xcconfig"; path = "Target Support Files/Pods-DailyGit/Pods-DailyGit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				B87EA6522221EDC000CE8114 /* AppDelegate.swift */,
+				CCF2E9732302291C00F4E118 /* Extensions */,
 				B87EA66622234EA400CE8114 /* View */,
 				B87EA66722234EAB00CE8114 /* Model */,
 				B87EA66822234EB100CE8114 /* Controller */,
@@ -166,6 +169,14 @@
 				CCF2E96E2300D69B00F4E118 /* OnboardingVC.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		CCF2E9732302291C00F4E118 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CCF2E9742302293200F4E118 /* UIImage+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,6 +298,7 @@
 				CCF2E96F2300D69B00F4E118 /* OnboardingVC.swift in Sources */,
 				B87EA6552221EDC000CE8114 /* MainTabBarController.swift in Sources */,
 				CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */,
+				CCF2E9752302293200F4E118 /* UIImage+Extensions.swift in Sources */,
 				B8B41CEA2228737B005E304A /* MainVC.swift in Sources */,
 				B8B41CE122283A34005E304A /* CommitsView.swift in Sources */,
 				B8B41CE422286E6E005E304A /* ContributionsGraphView.swift in Sources */,

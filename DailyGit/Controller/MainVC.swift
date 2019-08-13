@@ -10,6 +10,7 @@ import UIKit
 
 class MainVC: UIViewController {
     
+    #warning("Kind of hacky and potentially dangerous")
     lazy var mainView = CommitsView(topLayout: self.navigationController!.navigationBar.frame.height)
     
     override func loadView() {
@@ -24,7 +25,7 @@ class MainVC: UIViewController {
         
         print(GithubDataManager.shared.getDailyCommits(username: name))
         print(GithubDataManager.shared.isValidUser(username: name))
-        print(self.topLayoutGuide)
+       
     }
     
     func setupNavController() {

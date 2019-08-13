@@ -33,9 +33,12 @@ public class CommitsView: UIView {
     private func initializeUI() {
         //UIViews
         addSubview(topView)
+        topView.addSubview(profileImage)
+        
         for i in 0...7 {
          weekCommitGraph.append(createGraphNodeView())
         }
+        
         
        
         
@@ -46,6 +49,14 @@ public class CommitsView: UIView {
             $0.width.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.15)
             $0.top.equalToSuperview().inset(topLayout)
+        }
+        profileImage.snp.makeConstraints{
+            $0.width.equalToSuperview().multipliedBy(0.83)
+            $0.height.equalTo(profileImage.snp.width)
+            $0.left.equalToSuperview().multipliedBy(0.9)
+            $0.centerY.equalToSuperview()
+            
+            
         }
     }
     //SUBVIEWS
@@ -58,6 +69,10 @@ public class CommitsView: UIView {
     
     let profileImage: UIImageView = {
         let view = UIImageView()
+        view.layer.cornerRadius = view.frame.height/2
+        
+        //Provide default image
+        view.image = #imageLiteral(resourceName: "blankProfilePic")
         return view
     }()
     
