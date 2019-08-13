@@ -34,13 +34,11 @@ public class CommitsView: UIView {
         //UIViews
         //addSubview(topView)
         addSubview(profileImage)
+        addSubview(nameLabel)
         
         for i in 0...7 {
          weekCommitGraph.append(createGraphNodeView())
         }
-        
-        
-       
         
     }
     
@@ -55,7 +53,15 @@ public class CommitsView: UIView {
             $0.height.equalTo(profileImage.snp.width)
             $0.centerX.equalToSuperview().multipliedBy(0.28)
             #warning("This doesn't quite look right on larger devices")
-            $0.top.equalToSuperview().inset(topLayout+30)
+            //$0.top.equalToSuperview().inset(topLayout+30)
+            $0.centerY.equalToSuperview().multipliedBy(0.35)
+        }
+        nameLabel.snp.makeConstraints{
+            $0.width.equalToSuperview().multipliedBy(0.4)
+            $0.left.equalTo(profileImage.snp.right).offset(10)
+            $0.height.equalToSuperview().multipliedBy(0.045)
+            $0.centerY.equalToSuperview().multipliedBy(0.26)
+            
         }
         
     }
@@ -80,6 +86,11 @@ public class CommitsView: UIView {
     
     let nameLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 40.0, weight: .semibold)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Vlad Munteanu"
+        label.textAlignment = .left
+        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label
     }()
     
