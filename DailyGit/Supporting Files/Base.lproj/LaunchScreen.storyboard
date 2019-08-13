@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
@@ -13,26 +13,24 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gitLogo" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXN-Z7-fHD">
-                                <rect key="frame" x="79" y="275" width="256" height="256"/>
+                                <rect key="frame" x="59.5" y="205.5" width="256" height="256"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.17897364497184753" green="0.52604228258132935" blue="0.75779253244400024" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="vXN-Z7-fHD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="79" id="EsH-3K-2YD"/>
-                            <constraint firstItem="vXN-Z7-fHD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="231" id="WDK-DY-x6s"/>
-                            <constraint firstItem="vXN-Z7-fHD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bEM-Dv-6s3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vXN-Z7-fHD" secondAttribute="trailing" constant="79" id="dTE-Nj-4Rh"/>
+                            <constraint firstItem="vXN-Z7-fHD" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="aFx-UO-oMu"/>
+                            <constraint firstItem="vXN-Z7-fHD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="b4a-Dh-Tv5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="49.275362318840585" y="373.36956521739131"/>
+            <point key="canvasLocation" x="48.799999999999997" y="372.86356821589209"/>
         </scene>
     </scenes>
     <resources>
