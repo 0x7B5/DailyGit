@@ -51,9 +51,9 @@ public class CommitsView: UIView {
             $0.top.equalToSuperview().inset(topLayout)
         }
         profileImage.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.83)
+            $0.width.equalToSuperview().multipliedBy(0.13)
             $0.height.equalTo(profileImage.snp.width)
-            $0.left.equalToSuperview().multipliedBy(0.9)
+            $0.centerX.equalToSuperview().multipliedBy(0.2)
             $0.centerY.equalToSuperview()
             
             
