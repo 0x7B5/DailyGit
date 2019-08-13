@@ -32,8 +32,8 @@ public class CommitsView: UIView {
     
     private func initializeUI() {
         //UIViews
-        addSubview(topView)
-        topView.addSubview(profileImage)
+        //addSubview(topView)
+        addSubview(profileImage)
         
         for i in 0...7 {
          weekCommitGraph.append(createGraphNodeView())
@@ -45,19 +45,19 @@ public class CommitsView: UIView {
     }
     
     public func createConstraints() {
-        topView.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.15)
-            $0.top.equalToSuperview().inset(topLayout)
-        }
+//        topView.snp.makeConstraints {
+//            $0.width.equalToSuperview()
+//            $0.height.equalToSuperview().multipliedBy(0.15)
+//            $0.top.equalToSuperview().inset(topLayout)
+//        }
         profileImage.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.13)
+            $0.width.equalToSuperview().multipliedBy(0.24)
             $0.height.equalTo(profileImage.snp.width)
-            $0.centerX.equalToSuperview().multipliedBy(0.2)
-            $0.centerY.equalToSuperview()
-            
-            
+            $0.centerX.equalToSuperview().multipliedBy(0.28)
+            #warning("This doesn't quite look right on larger devices")
+            $0.top.equalToSuperview().inset(topLayout+30)
         }
+        
     }
     //SUBVIEWS
     //TOPVIEW: PROFILE VIEW
@@ -69,12 +69,14 @@ public class CommitsView: UIView {
     
     let profileImage: UIImageView = {
         let view = UIImageView()
-        view.layer.cornerRadius = view.frame.height/2
+        //view.layer.cornerRadius = view.frame.height/2
+        view.contentMode = .scaleAspectFit
         
         //Provide default image
-        view.image = #imageLiteral(resourceName: "blankProfilePic")
+        view.image = #imageLiteral(resourceName: "sampleIcon")
         return view
     }()
+    
     
     let nameLabel: UILabel = {
         let label = UILabel()
