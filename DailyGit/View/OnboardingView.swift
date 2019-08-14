@@ -108,6 +108,8 @@ public class OnboardingView: UIView {
         return label
     }()
     
+    
+    
     //GitHub profile pic
     let githubPhoto: UIImageView = {
         let photo = UIImageView()

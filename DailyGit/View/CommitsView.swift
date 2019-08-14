@@ -17,6 +17,7 @@ public class CommitsView: UIView {
 //
 //    }
     
+    #warning("Take out filler info.")
     init(topLayout: CGFloat) {
         self.topLayout = topLayout
         super.init(frame: CGRect.zero)
@@ -35,6 +36,7 @@ public class CommitsView: UIView {
         //addSubview(topView)
         addSubview(profileImage)
         addSubview(nameLabel)
+        addSubview(bioLabel)
         
         for i in 0...7 {
          weekCommitGraph.append(createGraphNodeView())
@@ -61,6 +63,12 @@ public class CommitsView: UIView {
             $0.left.equalTo(profileImage.snp.right).offset(10)
             $0.height.equalToSuperview().multipliedBy(0.045)
             $0.centerY.equalToSuperview().multipliedBy(0.26)
+        }
+        
+        bioLabel.snp.makeConstraints{
+            $0.width.equalToSuperview().multipliedBy(0.6)
+            $0.left.equalTo(profileImage.snp.right).offset(10)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(10)
             
         }
         
@@ -77,7 +85,6 @@ public class CommitsView: UIView {
         let view = UIImageView()
         //view.layer.cornerRadius = view.frame.height/2
         view.contentMode = .scaleAspectFit
-        
         //Provide default image
         view.image = #imageLiteral(resourceName: "sampleIcon")
         return view
@@ -95,8 +102,14 @@ public class CommitsView: UIView {
     }()
     
     let bioLabel: UILabel = {
-        let label = UILabel()
-            return label
+       let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "An ounce of prevention is worth a pound of cure."
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
+        return label
     }()
     //TODAY VIEW
     let todayLabel: UILabel = {
