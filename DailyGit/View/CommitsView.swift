@@ -38,6 +38,10 @@ public class CommitsView: UIView {
         addSubview(nameLabel)
         addSubview(bioLabel)
         
+        //Today
+        addSubview(todayLabel)
+        addSubview(dailyCommitsLabel)
+        
         for i in 0...7 {
          weekCommitGraph.append(createGraphNodeView())
         }
@@ -45,11 +49,6 @@ public class CommitsView: UIView {
     }
     
     public func createConstraints() {
-//        topView.snp.makeConstraints {
-//            $0.width.equalToSuperview()
-//            $0.height.equalToSuperview().multipliedBy(0.15)
-//            $0.top.equalToSuperview().inset(topLayout)
-//        }
         profileImage.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.24)
             $0.height.equalTo(profileImage.snp.width)
@@ -69,7 +68,15 @@ public class CommitsView: UIView {
             $0.width.equalToSuperview().multipliedBy(0.6)
             $0.left.equalTo(profileImage.snp.right).offset(10)
             $0.top.equalTo(nameLabel.snp.bottom).offset(10)
-            
+        }
+        
+        todayLabel.snp.makeConstraints {
+            $0.left.equalTo(profileImage.snp.left)
+            $0.centerY.equalToSuperview().multipliedBy(0.56)
+        }
+        dailyCommitsLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().multipliedBy(0.75)
         }
         
     }
@@ -114,13 +121,24 @@ public class CommitsView: UIView {
     //TODAY VIEW
     let todayLabel: UILabel = {
         let label = UILabel()
-            return label
+        label.font = UIFont.systemFont(ofSize: 25.0, weight: .semibold)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Today"
+        label.textAlignment = .left
+        label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
+        return label
     }()
     
     let dailyCommitsLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 55.0, weight: .bold)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "9"
+        label.textAlignment = .center
+        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label
     }()
+    
     //THIS WEEK VIEW
     let weekLabel: UILabel = {
         let label = UILabel()
