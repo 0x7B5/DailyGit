@@ -163,7 +163,12 @@ public class CommitsView: UIView {
     
     let dailyCommitsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 70.0, weight: .bold)
+        if Constants.isIpad == false {
+            label.font = UIFont.systemFont(ofSize: 60.0, weight: .bold)
+        } else {
+            label.font = UIFont.systemFont(ofSize: 70.0, weight: .bold)
+        }
+        
         label.adjustsFontSizeToFitWidth = true
         label.text = "9"
         label.textAlignment = .center
@@ -194,7 +199,11 @@ public class CommitsView: UIView {
     
     let currentStreakCommitsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
+        if Constants.isIpad == false {
+            label.font = UIFont.systemFont(ofSize: 40.0, weight: .bold)
+        } else {
+            label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
+        }
         label.adjustsFontSizeToFitWidth = true
         label.text = "8 days 🔥"
         label.textAlignment = .center
@@ -207,7 +216,11 @@ public class CommitsView: UIView {
     
     let longestStreakCommitsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 45.0, weight: .bold)
+       if Constants.isIpad == false {
+            label.font = UIFont.systemFont(ofSize: 40.0, weight: .bold)
+        } else {
+            label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
+        }
         label.adjustsFontSizeToFitWidth = true
         label.text = "11 days 🔥"
         label.textAlignment = .center
