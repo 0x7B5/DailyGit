@@ -42,6 +42,9 @@ public class CommitsView: UIView {
         addSubview(todayLabel)
         addSubview(dailyCommitsLabel)
         
+        //This Week
+        addSubview(weekLabel)
+        
         for i in 0...7 {
          weekCommitGraph.append(createGraphNodeView())
         }
@@ -77,6 +80,10 @@ public class CommitsView: UIView {
         dailyCommitsLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(0.75)
+        }
+        weekLabel.snp.makeConstraints {
+            $0.left.equalTo(profileImage.snp.left)
+            $0.centerY.equalToSuperview().multipliedBy(0.94)
         }
         
     }
@@ -119,15 +126,7 @@ public class CommitsView: UIView {
         return label
     }()
     //TODAY VIEW
-    let todayLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 25.0, weight: .semibold)
-        label.adjustsFontSizeToFitWidth = true
-        label.text = "Today"
-        label.textAlignment = .left
-        label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
-        return label
-    }()
+    lazy var todayLabel: UILabel = createTitleText(text: "Today")
     
     let dailyCommitsLabel: UILabel = {
         let label = UILabel()
@@ -140,10 +139,7 @@ public class CommitsView: UIView {
     }()
     
     //THIS WEEK VIEW
-    let weekLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
+    lazy var weekLabel: UILabel = createTitleText(text: "This Week")
     
     //CURRENT STREAK VIEW
     let currentStreakLabel: UILabel = {
@@ -165,6 +161,16 @@ public class CommitsView: UIView {
     var weekCommitGraph = [UIView]()
     
     
+    
+    internal func createTitleText(text: String) -> UILabel {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 25.0, weight: .semibold)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "\(text)"
+        label.textAlignment = .left
+        label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
+        return label
+    }
     
     internal func createGraphNodeView() -> UIView {
         let view = UIView()
