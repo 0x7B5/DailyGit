@@ -43,9 +43,11 @@ public class CommitsView: UIView {
         
         
         //Current Streak
-        
+        addSubview(currentStreakLabel)
+        addSubview(currentStreakCommitsLabel)
         //Longest Streak
-        
+        addSubview(longestStreakLabel)
+        addSubview(longestStreakCommitsLabel)
     }
     
     public func createConstraints() {
@@ -90,18 +92,29 @@ public class CommitsView: UIView {
             weekCommitGraph[i].snp.makeConstraints {
                 $0.width.equalToSuperview().multipliedBy(0.11)
                 $0.height.equalTo(weekCommitGraph[0].snp.width)
-//                if i == 0 {
-//                    $0.left.equalTo(profileImage.snp.left)
-//                } else {
-//                    $0.left.equalTo(weekCommitGraph[i-1].snp.right).offset(10)
-//                }
-                
-                
                 $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
                 $0.centerY.equalToSuperview().multipliedBy(1.08)
                 currentCenterXMulitplier += 0.2835
             }
-           
+        }
+        currentStreakLabel.snp.makeConstraints {
+            $0.left.equalTo(profileImage.snp.left)
+            $0.centerY.equalToSuperview().multipliedBy(1.22)
+        }
+        currentStreakCommitsLabel.snp.makeConstraints{
+            $0.width.equalToSuperview().multipliedBy(0.9)
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().multipliedBy(1.38)
+        }
+        
+        longestStreakLabel.snp.makeConstraints {
+            $0.left.equalTo(profileImage.snp.left)
+            $0.centerY.equalToSuperview().multipliedBy(1.54)
+        }
+        longestStreakCommitsLabel.snp.makeConstraints{
+            $0.width.equalToSuperview().multipliedBy(0.9)
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().multipliedBy(1.70)
         }
         
         
@@ -135,7 +148,7 @@ public class CommitsView: UIView {
     }()
     
     let bioLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20.0)
         label.adjustsFontSizeToFitWidth = true
         label.text = "An ounce of prevention is worth a pound of cure."
@@ -160,9 +173,6 @@ public class CommitsView: UIView {
     //THIS WEEK VIEW
     lazy var weekLabel: UILabel = createTitleText(text: "This Week")
     
-    //CURRENT STREAK VIEW
-    lazy var currentStreakLabel: UILabel = createTitleText(text: "Current Streak")
-    
     var weekCommitGraph = [UIView]()
     
     public func setupWeekGrass() {
@@ -172,41 +182,48 @@ public class CommitsView: UIView {
         }
     }
     
-    public func setupWeekGrassLocation() {
-        
-    }
-    
     internal func createGraphNodeView() -> UIView {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         return view
     }
     
+    //CURRENT STREAK VIEW
+    lazy var currentStreakLabel: UILabel = createTitleText(text: "Current Streak")
+    
     let currentStreakCommitsLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "8 days 🔥"
+        label.textAlignment = .center
+        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label
     }()
     
     //LONGEST STREAK VIEW
-    let longestStreakLabel: UILabel = {
+    lazy var longestStreakLabel: UILabel = createTitleText(text: "Longest Streak")
+    
+    let longestStreakCommitsLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 45.0, weight: .bold)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "11 days 🔥"
+        label.textAlignment = .center
+        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label
     }()
     
+    
     internal func createTitleText(text: String) -> UILabel {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 25.0, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 20.0, weight: .semibold)
         label.adjustsFontSizeToFitWidth = true
         label.text = "\(text)"
         label.textAlignment = .left
         label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
         return label
     }
-    
-    let longestStreakCommitsLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
     
     
     
