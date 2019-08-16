@@ -75,6 +75,7 @@ public class CommitsView: UIView {
             $0.centerY.equalToSuperview().multipliedBy(0.56)
         }
         dailyCommitsLabel.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(0.14)
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(0.75)
         }
@@ -148,7 +149,7 @@ public class CommitsView: UIView {
     
     let dailyCommitsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 55.0, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 70.0, weight: .bold)
         label.adjustsFontSizeToFitWidth = true
         label.text = "9"
         label.textAlignment = .center
