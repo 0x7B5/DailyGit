@@ -12,6 +12,12 @@ class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //check what device
+        if (self.view.frame.width >= 700 ) {
+            Constants.isIpad = true
+        }
+        
         let mainVC = MainVC()
         //all the cool kids have no titles for their tab bars
         mainVC.tabBarItem.title = "Commits"

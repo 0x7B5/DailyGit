@@ -20,6 +20,7 @@ public class CommitsView: UIView {
         backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         initializeUI()
         createConstraints()
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -79,11 +80,11 @@ public class CommitsView: UIView {
         dailyCommitsLabel.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.14)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.75)
+            $0.centerY.equalToSuperview().multipliedBy(0.72)
         }
         weekLabel.snp.makeConstraints {
             $0.left.equalTo(profileImage.snp.left)
-            $0.centerY.equalToSuperview().multipliedBy(0.94)
+            $0.centerY.equalToSuperview().multipliedBy(0.88)
         }
         
         //Week Commits View
@@ -93,7 +94,7 @@ public class CommitsView: UIView {
                 $0.width.equalToSuperview().multipliedBy(0.11)
                 $0.height.equalTo(weekCommitGraph[0].snp.width)
                 $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
-                $0.centerY.equalToSuperview().multipliedBy(1.08)
+                $0.centerY.equalToSuperview().multipliedBy(1.02)
                 currentCenterXMulitplier += 0.2835
             }
         }

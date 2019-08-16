@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         //resetDefaults()
         
+        
         if(UserDefaults.standard.object(forKey: "username") != nil) {
             //LoggedIn
             window?.rootViewController = MainTabBarController()

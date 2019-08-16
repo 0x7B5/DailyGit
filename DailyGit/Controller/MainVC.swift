@@ -10,22 +10,29 @@ import UIKit
 
 class MainVC: UIViewController {
     
+
+    
     #warning("Kind of hacky and potentially dangerous")
     lazy var mainView = CommitsView(topLayout: self.navigationController!.navigationBar.frame.height)
     
     override func loadView() {
+        
         self.view = mainView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavController()
-
+        
         let name = "vlad-munteanu"
         //print(GithubDataManager.shared.getGithubSource(username: name))
         
         print(GithubDataManager.shared.getDailyCommits(username: name))
         print(GithubDataManager.shared.isValidUser(username: name))
-       
+        
+        if Constants.isIpad == true {
+            print("iPad")
+        }
+        
     }
     
     func setupNavController() {
