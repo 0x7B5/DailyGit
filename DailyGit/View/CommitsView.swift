@@ -12,11 +12,6 @@ import SnapKit
 public class CommitsView: UIView {
     var topLayout: CGFloat
     
-//    public override init(frame: CGRect) {
-//        super.init(frame: frame)
-//
-//    }
-    
     #warning("Take out filler info.")
     init(topLayout: CGFloat) {
         self.topLayout = topLayout
@@ -44,10 +39,12 @@ public class CommitsView: UIView {
         
         //This Week
         addSubview(weekLabel)
+        setupWeekGrass()
         
-        for i in 0...7 {
-         weekCommitGraph.append(createGraphNodeView())
-        }
+        
+        //Current Streak
+        
+        //Longest Streak
         
     }
     
@@ -85,6 +82,27 @@ public class CommitsView: UIView {
             $0.left.equalTo(profileImage.snp.left)
             $0.centerY.equalToSuperview().multipliedBy(0.94)
         }
+        
+        //Week Commits View
+        var currentCenterXMulitplier = 0.15
+        for i in 0..<7 {
+            weekCommitGraph[i].snp.makeConstraints {
+                $0.width.equalToSuperview().multipliedBy(0.11)
+                $0.height.equalTo(weekCommitGraph[0].snp.width)
+//                if i == 0 {
+//                    $0.left.equalTo(profileImage.snp.left)
+//                } else {
+//                    $0.left.equalTo(weekCommitGraph[i-1].snp.right).offset(10)
+//                }
+                
+                
+                $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
+                $0.centerY.equalToSuperview().multipliedBy(1.08)
+                currentCenterXMulitplier += 0.2835
+            }
+           
+        }
+        
         
     }
     //SUBVIEWS
@@ -142,10 +160,26 @@ public class CommitsView: UIView {
     lazy var weekLabel: UILabel = createTitleText(text: "This Week")
     
     //CURRENT STREAK VIEW
-    let currentStreakLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
+    lazy var currentStreakLabel: UILabel = createTitleText(text: "Current Streak")
+    
+    var weekCommitGraph = [UIView]()
+    
+    public func setupWeekGrass() {
+        for i in 0..<7 {
+            weekCommitGraph.append(createGraphNodeView())
+            addSubview(weekCommitGraph[i])
+        }
+    }
+    
+    public func setupWeekGrassLocation() {
+        
+    }
+    
+    internal func createGraphNodeView() -> UIView {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        return view
+    }
     
     let currentStreakCommitsLabel: UILabel = {
         let label = UILabel()
@@ -158,10 +192,6 @@ public class CommitsView: UIView {
         return label
     }()
     
-    var weekCommitGraph = [UIView]()
-    
-    
-    
     internal func createTitleText(text: String) -> UILabel {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 25.0, weight: .semibold)
@@ -170,11 +200,6 @@ public class CommitsView: UIView {
         label.textAlignment = .left
         label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
         return label
-    }
-    
-    internal func createGraphNodeView() -> UIView {
-        let view = UIView()
-        return view
     }
     
     let longestStreakCommitsLabel: UILabel = {
