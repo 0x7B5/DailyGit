@@ -100,22 +100,22 @@ public class CommitsView: UIView {
         }
         currentStreakLabel.snp.makeConstraints {
             $0.left.equalTo(profileImage.snp.left)
-            $0.centerY.equalToSuperview().multipliedBy(1.22)
+            $0.centerY.equalToSuperview().multipliedBy(1.18)
         }
         currentStreakCommitsLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(1.38)
+            $0.centerY.equalToSuperview().multipliedBy(1.34)
         }
         
         longestStreakLabel.snp.makeConstraints {
             $0.left.equalTo(profileImage.snp.left)
-            $0.centerY.equalToSuperview().multipliedBy(1.54)
+            $0.centerY.equalToSuperview().multipliedBy(1.50)
         }
         longestStreakCommitsLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(1.70)
+            $0.centerY.equalToSuperview().multipliedBy(1.66)
         }
         
         
@@ -150,7 +150,12 @@ public class CommitsView: UIView {
     
     let bioLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20.0)
+        if Constants.isIpad == false {
+            label.font = UIFont.systemFont(ofSize: 20.0)
+        } else {
+            label.font = UIFont.systemFont(ofSize: 30.0)
+        }
+        
         label.adjustsFontSizeToFitWidth = true
         label.text = "An ounce of prevention is worth a pound of cure."
         label.numberOfLines = 0
@@ -200,9 +205,9 @@ public class CommitsView: UIView {
     let currentStreakCommitsLabel: UILabel = {
         let label = UILabel()
         if Constants.isIpad == false {
-            label.font = UIFont.systemFont(ofSize: 40.0, weight: .bold)
+            label.font = UIFont.systemFont(ofSize: 40.0, weight: .semibold)
         } else {
-            label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
+            label.font = UIFont.systemFont(ofSize: 50.0, weight: .semibold)
         }
         label.adjustsFontSizeToFitWidth = true
         label.text = "8 days 🔥"
@@ -217,9 +222,9 @@ public class CommitsView: UIView {
     let longestStreakCommitsLabel: UILabel = {
         let label = UILabel()
        if Constants.isIpad == false {
-            label.font = UIFont.systemFont(ofSize: 40.0, weight: .bold)
+            label.font = UIFont.systemFont(ofSize: 40.0, weight: .semibold)
         } else {
-            label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
+            label.font = UIFont.systemFont(ofSize: 50.0, weight: .semibold)
         }
         label.adjustsFontSizeToFitWidth = true
         label.text = "11 days 🔥"
