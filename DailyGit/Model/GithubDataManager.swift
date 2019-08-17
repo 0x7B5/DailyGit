@@ -98,6 +98,7 @@ public class GithubDataManager {
         var globalHTMLString = ""
         let semaphore = DispatchSemaphore(value: 0)
         
+        //starts paused
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else {
                 print("data was nil")
@@ -112,6 +113,8 @@ public class GithubDataManager {
             //print("global: \(globalHTMLString)")
             semaphore.signal()
         }
+        //this starts the task
+        
         task.resume()
         semaphore.wait()
         return globalHTMLString
