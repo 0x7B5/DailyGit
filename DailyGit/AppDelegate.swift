@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //resetDefaults()
         
         
-        if(UserDefaults.standard.object(forKey: "username") != nil) {
+        if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
             //LoggedIn
             window?.rootViewController = MainTabBarController()
         } else {

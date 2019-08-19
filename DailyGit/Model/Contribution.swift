@@ -8,7 +8,11 @@
 
 import Foundation
 
-struct Contribution: Decodable {
+struct ContributionList: Codable {
+    let contributions: [Contribution]
+}
+
+struct Contribution: Codable {
     let date: String
     let count: Int
     //hex color

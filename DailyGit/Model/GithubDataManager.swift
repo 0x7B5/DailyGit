@@ -15,64 +15,10 @@ public class GithubDataManager {
     
     private init() { }
     
-    func isValidUser(username: String, completion: () -> ()) -> Bool {
-        let pageSource = getGithubSource(username: username, completion: nil)
-        //print(pageSource)
-        let notFoundError = "Not Found"
-        
-        if pageSource.contains(notFoundError) {
-            completion()
-            return false
-        }
-        completion()
-        return true
-    }
     
-    func getDailyCommits(username: String, completion: () -> ()) -> Int {
+    func getDailyCommits(username: String) {
         
-        let pageSource = getGithubSource(username: username, completion: nil)
-        //print(pageSource)
-        let leftSideString = """
-        " data-count="
-        """
-        
-        let rightSideString = """
-        " data-date="\(getFormattedDate())"/>
-        """
-        
-        
-        guard
-            let rightSideRange = pageSource.range(of: rightSideString)
-            else {
-                print("couldn't find right range")
-                completion()
-                return 0
-        }
-        
-        let rangeOfTheData = pageSource.index(rightSideRange.lowerBound, offsetBy: -26)..<rightSideRange.lowerBound
-        let subPageSource = pageSource[rangeOfTheData]
-       // print(subPageSource)
-        
-        
-        guard
-            let leftSideRange = subPageSource.range(of: leftSideString)
-            else {
-                print("couldn't find left range")
-                completion()
-                return 0
-        }
-        
-        let finalRange = leftSideRange.upperBound..<subPageSource.endIndex
-        let commitsValueString = subPageSource[finalRange]
-        
-       // print(commitsValueString)
-        
-        let commitsValueInt = Int(commitsValueString) ?? 0
-        
-        UserDefaults.standard.set(commitsValueInt, forKey: "dailyCommits")
-        
-        completion()
-        return commitsValueInt
+       
     }
     
     func getFormattedDate() -> String {
@@ -93,52 +39,67 @@ public class GithubDataManager {
         }
         
         let currentDate = "\(year)-\(month)-\(day)"
-
+        
         print(currentDate)
         return currentDate
     }
     
-    func getGithubSource(username: String, completion: (() -> ())?) -> String {
-        
-        //https://github-contributions-api.now.sh/v1/vlad-munteanu
-        if var urlComponents = URLComponents(string: "https://github-contributions-api.now.sh/v1/") {
-            urlComponents.query = "\(username)"
-            
-            guard let url = urlComponents.url else {
-                return ""
-            }
-            
+    func setupGithubUser(username: String, completion: @escaping (User?) -> ())  {
+        //https://api.github.com/users/
+        if let url = URL(string: "https://api.github.com/users/\(username)") {
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
+                //also perhaps check response status 200 OK
+                guard let data = data else { return }
+                
+                do {
+                    // make sure this JSON is in the format we expect
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        // try to read out a string array
+                        // Is this a valid githubUsername?
+                        if (json["message"] as? String == "Not Found") {
+                            completion(nil)
+                        }
+                        
+                        if let name = json["name"] as? String, let myUsername = json["login"] as? String, let bio = json["bio"] as? String, let photourl = json["avatar_url"] as? String {
+                            self.setupContributions(username: myUsername, completion: {
+                                contributions, err in
+                                if contributions != nil {
+                                    let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl, contributions: contributions!)
+                                } else {
+                                    completion(nil)
+                                }
+                            })
+                        }
+                    }
+                } catch let jsonErr {
+                    print(jsonErr)
+                    completion(nil)
+                }
+            }.resume()
         }
-        
-        let baseUrl = "https://github.com/"
-        let url = URL(string: baseUrl + username)!
-        var globalHTMLString = ""
-        let semaphore = DispatchSemaphore(value: 0)
-        
-        //starts paused
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else {
-                print("data was nil")
-                return
-            }
-            guard let htmlString = String(data: data, encoding: .utf8) else {
-                print("couldn't cast data into String")
-                return
-            }
-            
-            globalHTMLString = htmlString
-            //print("global: \(globalHTMLString)")
-            semaphore.signal()
-        }
-        //this starts the task
-        //all tasks start in suspended state
-        task.resume()
-        semaphore.wait()
-        return globalHTMLString
     }
     
-    func getGithubCommits(username: String, completion: (() -> ())?) -> String {
-        
-        return ""
+    func setupContributions(username: String, completion: @escaping (ContributionList?, Error?) -> ())  {
+        let startingPoint = Date()
+        //https://api.github.com/users/
+        if let url = URL(string: "https://github-contributions-api.now.sh/v1/\(username)") {
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
+                //perhaps check err
+                //also perhaps check response status 200 OK
+                guard let data = data else { return }
+                
+                do {
+                    let contributions = try JSONDecoder().decode(ContributionList.self, from: data)
+                    completion(contributions, nil)
+                    print("\(startingPoint.timeIntervalSinceNow * -1) seconds elapsed")
+                    //print(user)
+                } catch let err {
+                    completion(nil, err)
+                    print(err)
+                }
+                
+            }.resume()
+        }
     }
+    
 }

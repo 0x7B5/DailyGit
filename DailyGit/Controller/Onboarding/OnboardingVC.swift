@@ -27,23 +27,19 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     @objc func goNext() {
         view.endEditing(true)
         if let username = usernameTF.text {
-            if GithubDataManager.shared.isValidUser(username: username, completion:  {
-                //animate 
-            }) {
-                UserDefaults.standard.set(username, forKey: "username")
-
-                  let vc =  MainTabBarController()
-                self.present(vc, animated: true, completion: nil)
-               
-                
-            } else {
-                let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
-
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                //alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-
-                self.present(alert, animated: true)
-            }
+            GithubDataManager.shared.setupGithubUser(username: username, completion: {
+                user in
+                //animate
+                if user == nil {
+                    let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alert, animated: true)
+                } else {
+                    UserDefaults.standard.set(user, forKey: "CurrentUser")
+                    let vc =  MainTabBarController()
+                    self.present(vc, animated: true, completion: nil)
+                }
+            })
             
         }
         usernameTF.text = ""
