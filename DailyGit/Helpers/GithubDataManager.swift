@@ -60,7 +60,23 @@ public class GithubDataManager {
                             completion(nil)
                         }
                         
-                        if let name = json["name"] as? String, let myUsername = json["login"] as? String, let bio = json["bio"] as? String, let photourl = json["avatar_url"] as? String {
+                        var bio = ""
+                        var name = ""
+                        
+                        if let temp = json["bio"] as? String {
+                            bio = temp
+                        }
+                        
+                        
+                        //let name = json["name"] as? String,
+                        if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String {
+                            
+                            if let tempName = json["name"] as? String {
+                                name = tempName
+                            } else {
+                                name = myUsername
+                            }
+                            
                             self.setupContributions(username: myUsername, completion: {
                                 contributions, err in
                                 if contributions != nil {

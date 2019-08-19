@@ -16,22 +16,22 @@ class MainVC: UIViewController {
     lazy var mainView = CommitsView(topLayout: self.navigationController!.navigationBar.frame.height)
     
     override func loadView() {
-        
         self.view = mainView
+        setupInfo()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavController()
-        
-        let name = "vlad-munteanu"
-        //print(GithubDataManager.shared.getGithubSource(username: name))
-        
-      
-        
         if Constants.isIpad == true {
             print("iPad")
         }
         
+    }
+    
+    func setupInfo() {
+        mainView.nameLabel.text = ReadUserInfoHelper.shared.readInfo(info: .name) as! String
+        mainView.bioLabel.text = ReadUserInfoHelper.shared.readInfo(info: .bio) as! String
+        //mainView.dailyCommitsLabel.text = ReadUserInfoHelper.shared.readInfo(info: .) as! String
     }
     
     func setupNavController() {

@@ -9,7 +9,7 @@
 import Foundation
 
 enum Userinfo {
-    case name, username, bio, photoUrl, contributions
+    case  name, username, bio, photoUrl, contributions
 }
 
 public class ReadUserInfoHelper {
@@ -20,7 +20,7 @@ public class ReadUserInfoHelper {
         if let savedPerson = defaults.object(forKey: "CurrentUser") as? Data {
             let decoder = JSONDecoder()
             if let loadedPerson = try? decoder.decode(User.self, from: savedPerson) {
-                print(loadedPerson.name)
+                //print(loadedPerson.name)
 
                 switch info {
                 case .name:

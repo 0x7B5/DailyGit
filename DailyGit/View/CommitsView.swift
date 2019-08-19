@@ -142,7 +142,7 @@ public class CommitsView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 40.0, weight: .semibold)
         label.adjustsFontSizeToFitWidth = true
-        label.text = "Vlad Munteanu"
+        label.text = ""
         label.textAlignment = .left
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label
@@ -157,7 +157,7 @@ public class CommitsView: UIView {
         }
         
         label.adjustsFontSizeToFitWidth = true
-        label.text = "An ounce of prevention is worth a pound of cure."
+        label.text = ""
         label.numberOfLines = 0
         label.textAlignment = .left
         label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
@@ -175,7 +175,7 @@ public class CommitsView: UIView {
         }
         
         label.adjustsFontSizeToFitWidth = true
-        label.text = "9"
+        label.text = "0"
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label
@@ -210,7 +210,7 @@ public class CommitsView: UIView {
             label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
         }
         label.adjustsFontSizeToFitWidth = true
-        label.text = "8 days 🔥"
+        label.text = "0 days 🔥"
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label
@@ -227,7 +227,7 @@ public class CommitsView: UIView {
             label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
         }
         label.adjustsFontSizeToFitWidth = true
-        label.text = "11 days 🔥"
+        label.text = "0 days 🔥"
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label
