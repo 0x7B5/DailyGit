@@ -20,6 +20,7 @@
 		CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81C230B15CB0051C151 /* Contribution.swift */; };
 		CCC3A81F230B16FC0051C151 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81E230B16FC0051C151 /* User.swift */; };
 		CCC3A821230B42050051C151 /* ReadUserInfoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A820230B42050051C151 /* ReadUserInfoHelper.swift */; };
+		CCC3A824230B483F0051C151 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A823230B483F0051C151 /* Reachability.swift */; };
 		CCF2E96C22FFE02D00F4E118 /* testing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCF2E96B22FFE02D00F4E118 /* testing.storyboard */; };
 		CCF2E96F2300D69B00F4E118 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF2E96E2300D69B00F4E118 /* OnboardingVC.swift */; };
 		CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF2E97123011F3500F4E118 /* OnboardingView.swift */; };
@@ -46,6 +47,7 @@
 		CCC3A81C230B15CB0051C151 /* Contribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contribution.swift; sourceTree = "<group>"; };
 		CCC3A81E230B16FC0051C151 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CCC3A820230B42050051C151 /* ReadUserInfoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadUserInfoHelper.swift; sourceTree = "<group>"; };
+		CCC3A823230B483F0051C151 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		CCF2E96B22FFE02D00F4E118 /* testing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = testing.storyboard; sourceTree = "<group>"; };
 		CCF2E96E2300D69B00F4E118 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		CCF2E97123011F3500F4E118 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */,
 				CCC3A820230B42050051C151 /* ReadUserInfoHelper.swift */,
+				CCC3A823230B483F0051C151 /* Reachability.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */,
 				CCF2E9752302293200F4E118 /* UIImage+Extensions.swift in Sources */,
 				CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */,
+				CCC3A824230B483F0051C151 /* Reachability.swift in Sources */,
 				B8B41CEA2228737B005E304A /* MainVC.swift in Sources */,
 				B8B41CE122283A34005E304A /* CommitsView.swift in Sources */,
 				B8B41CE422286E6E005E304A /* ContributionsGraphView.swift in Sources */,

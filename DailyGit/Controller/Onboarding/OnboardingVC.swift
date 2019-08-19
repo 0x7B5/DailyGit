@@ -21,43 +21,58 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(goNext))
         self.usernameTF.delegate = self
+        print("NO WIFI")
+        if !Reachability.isConnectedToNetwork(){
+            let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+        
         print("We Out Here")
     }
     
     @objc func goNext() {
         view.endEditing(true)
-        if let username = usernameTF.text {
-            GithubDataManager.shared.setupGithubUser(username: username, completion: {
-                user in
-                //animate
-                DispatchQueue.main.async { [weak self] in
-                    if user == nil {
-                        print("Not found")
-                        let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                        self!.present(alert, animated: true)
-                    } else {
-                        print("JSON ")
-                        let encoder = JSONEncoder()
-                        if let encoded = try? encoder.encode(user) {
-                            print("setting")
-                            let defaults = UserDefaults.standard
-                            defaults.set(encoded, forKey: "CurrentUser")
-                            let vc =  MainTabBarController()
-                            self!.present(vc, animated: true, completion: nil)
-                        } else {
-                            print("error")
-                            let alert = UIAlertController(title: "Error Occured", message: "Please try again.", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                            self!.present(alert, animated: true)
-                        }
-                    }
-                }
+        if Reachability.isConnectedToNetwork(){
+           if let username = usernameTF.text {
+               GithubDataManager.shared.setupGithubUser(username: username, completion: {
+                   user in
+                   //animate
+                   DispatchQueue.main.async { [weak self] in
+                       if user == nil {
+                           print("Not found")
+                           let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
+                           alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                           self!.present(alert, animated: true)
+                       } else {
+                           print("JSON ")
+                           let encoder = JSONEncoder()
+                           if let encoded = try? encoder.encode(user) {
+                               print("setting")
+                               let defaults = UserDefaults.standard
+                               defaults.set(encoded, forKey: "CurrentUser")
+                               let vc =  MainTabBarController()
+                               self!.present(vc, animated: true, completion: nil)
+                           } else {
+                               print("error")
+                               let alert = UIAlertController(title: "Error Occured", message: "Please try again.", preferredStyle: .alert)
+                               alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                               self!.present(alert, animated: true)
+                           }
+                       }
+                   }
+                   
                 
-                
-            })
+               })
             
+            }
+        }else{
+            print("NO WIFI")
+            let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true)
         }
+        
         usernameTF.text = ""
         
     }
