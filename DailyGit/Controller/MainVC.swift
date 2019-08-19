@@ -10,7 +10,7 @@ import UIKit
 
 class MainVC: UIViewController {
     
-
+    
     
     #warning("Kind of hacky and potentially dangerous")
     lazy var mainView = CommitsView(topLayout: self.navigationController!.navigationBar.frame.height)
@@ -35,9 +35,14 @@ class MainVC: UIViewController {
     }
     
     func setupNavController() {
-           self.title = "Commits"
-           //self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
-           self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
-       }
+        self.title = "Commits"
+        //self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refresh))
+    }
+    
+    @objc func refresh() {
+         mainView.dailyCommitsLabel.text = String(ReadUserInfoHelper.shared.getDailyCommits())
+    }
     
 }

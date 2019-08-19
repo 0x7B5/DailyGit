@@ -119,10 +119,21 @@ public class GithubDataManager {
         }
     }
     
-    func updateContributions() {
+    func updateInfo() {
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
-            //LoggedIn
-            
+            setupGithubUser(username: ReadUserInfoHelper.shared.readInfo(info: .username) as! String, completion: {
+                user in
+                
+                print("JSON ")
+                let encoder = JSONEncoder()
+                if let encoded = try? encoder.encode(user) {
+                    print("setting")
+                    let defaults = UserDefaults.standard
+                    defaults.set(encoded, forKey: "CurrentUser")
+                    defaults.synchronize()
+                }
+                
+            })
         }
     }
     
