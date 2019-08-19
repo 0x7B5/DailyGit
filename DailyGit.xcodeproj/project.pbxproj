@@ -17,6 +17,7 @@
 		B8B41CEA2228737B005E304A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE92228737B005E304A /* MainVC.swift */; };
 		B8B41CEC22287388005E304A /* RootSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CEB22287388005E304A /* RootSettingVC.swift */; };
 		CC17DBAD22FF9D1500E34951 /* GithubDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */; };
+		CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81C230B15CB0051C151 /* Contribution.swift */; };
 		CCF2E96C22FFE02D00F4E118 /* testing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCF2E96B22FFE02D00F4E118 /* testing.storyboard */; };
 		CCF2E96F2300D69B00F4E118 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF2E96E2300D69B00F4E118 /* OnboardingVC.swift */; };
 		CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF2E97123011F3500F4E118 /* OnboardingView.swift */; };
@@ -40,6 +41,7 @@
 		B8B41CEB22287388005E304A /* RootSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSettingVC.swift; sourceTree = "<group>"; };
 		CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDataManager.swift; sourceTree = "<group>"; };
 		CCC3A81B2308C2790051C151 /* DailyGit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyGit.entitlements; sourceTree = "<group>"; };
+		CCC3A81C230B15CB0051C151 /* Contribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contribution.swift; sourceTree = "<group>"; };
 		CCF2E96B22FFE02D00F4E118 /* testing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = testing.storyboard; sourceTree = "<group>"; };
 		CCF2E96E2300D69B00F4E118 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		CCF2E97123011F3500F4E118 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */,
+				CCC3A81C230B15CB0051C151 /* Contribution.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				B87EA6552221EDC000CE8114 /* MainTabBarController.swift in Sources */,
 				CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */,
 				CCF2E9752302293200F4E118 /* UIImage+Extensions.swift in Sources */,
+				CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */,
 				B8B41CEA2228737B005E304A /* MainVC.swift in Sources */,
 				B8B41CE122283A34005E304A /* CommitsView.swift in Sources */,
 				B8B41CE422286E6E005E304A /* ContributionsGraphView.swift in Sources */,
