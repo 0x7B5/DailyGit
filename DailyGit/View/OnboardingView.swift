@@ -80,8 +80,9 @@ public class OnboardingView: UIView {
         let textfield = UITextField()
         let centeredParagraphStyle = NSMutableParagraphStyle()
         centeredParagraphStyle.alignment = .center
-        let attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.paragraphStyle: centeredParagraphStyle, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)])
+        let attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.paragraphStyle: centeredParagraphStyle, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)])
         textfield.attributedPlaceholder = attributedPlaceholder
+        //textfield.placeholder = "Username"
         textfield.font = UIFont.systemFont(ofSize: 42, weight: UIFont.Weight(rawValue: 1.0))
         textfield.adjustsFontSizeToFitWidth = true
         //textfield.borderStyle = UITextField.BorderStyle.roundedRect

@@ -21,7 +21,6 @@ public class ReadUserInfoHelper {
             let decoder = JSONDecoder()
             if let loadedPerson = try? decoder.decode(User.self, from: savedPerson) {
                 print(loadedPerson.name)
-                return loadedPerson.name
 
                 switch info {
                 case .name:
