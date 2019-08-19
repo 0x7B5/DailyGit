@@ -13,21 +13,22 @@ public class GithubDataManager {
     
     private init() { }
     
-    func isValidUser(username: String) -> Bool {
-        let pageSource = getGithubSource(username: username)
+    func isValidUser(username: String, completion: () -> ()) -> Bool {
+        let pageSource = getGithubSource(username: username, completion: nil)
         //print(pageSource)
         let notFoundError = "Not Found"
         
         if pageSource.contains(notFoundError) {
+            completion()
             return false
         }
-        
+        completion()
         return true
     }
     
-    func getDailyCommits(username: String) -> Int {
+    func getDailyCommits(username: String, completion: () -> ()) -> Int {
         
-        let pageSource = getGithubSource(username: username)
+        let pageSource = getGithubSource(username: username, completion: nil)
         //print(pageSource)
         let leftSideString = """
         " data-count="
@@ -42,6 +43,7 @@ public class GithubDataManager {
             let rightSideRange = pageSource.range(of: rightSideString)
             else {
                 print("couldn't find right range")
+                completion()
                 return 0
         }
         
@@ -54,6 +56,7 @@ public class GithubDataManager {
             let leftSideRange = subPageSource.range(of: leftSideString)
             else {
                 print("couldn't find left range")
+                completion()
                 return 0
         }
         
@@ -66,6 +69,7 @@ public class GithubDataManager {
         
         UserDefaults.standard.set(commitsValueInt, forKey: "dailyCommits")
         
+        completion()
         return commitsValueInt
     }
     
@@ -92,7 +96,18 @@ public class GithubDataManager {
         return currentDate
     }
     
-    func getGithubSource(username: String) -> String {
+    func getGithubSource(username: String, completion: (() -> ())?) -> String {
+        
+        //https://github-contributions-api.now.sh/v1/vlad-munteanu
+        if var urlComponents = URLComponents(string: "https://github-contributions-api.now.sh/v1/") {
+            urlComponents.query = "\(username)"
+            
+            guard let url = urlComponents.url else {
+                return ""
+            }
+            
+        }
+        
         let baseUrl = "https://github.com/"
         let url = URL(string: baseUrl + username)!
         var globalHTMLString = ""
@@ -114,7 +129,7 @@ public class GithubDataManager {
             semaphore.signal()
         }
         //this starts the task
-        
+        //all tasks start in suspended state
         task.resume()
         semaphore.wait()
         return globalHTMLString

@@ -27,7 +27,9 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     @objc func goNext() {
         view.endEditing(true)
         if let username = usernameTF.text {
-            if GithubDataManager.shared.isValidUser(username: username) {
+            if GithubDataManager.shared.isValidUser(username: username, completion:  {
+                //animate 
+            }) {
                 UserDefaults.standard.set(username, forKey: "username")
 
                   let vc =  MainTabBarController()
