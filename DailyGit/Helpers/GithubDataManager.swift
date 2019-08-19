@@ -119,4 +119,13 @@ public class GithubDataManager {
         }
     }
     
+    func updateContributions() {
+        if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
+            //LoggedIn
+            
+        }
+    }
+    
+    
+    
 }

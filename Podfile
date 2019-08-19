@@ -8,6 +8,6 @@ use_frameworks!
 # Pods for DailyGit
 pod 'SnapKit', '~> 5.0.0'
 pod 'QuickTableViewController'
-pod 'OnboardKit'
+
 
 end
