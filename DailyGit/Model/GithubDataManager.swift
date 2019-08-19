@@ -11,6 +11,8 @@ import Foundation
 public class GithubDataManager {
     static let shared = GithubDataManager()
     
+    typealias JSONDictionary = [String: Any]
+    
     private init() { }
     
     func isValidUser(username: String, completion: () -> ()) -> Bool {
@@ -133,5 +135,10 @@ public class GithubDataManager {
         task.resume()
         semaphore.wait()
         return globalHTMLString
+    }
+    
+    func getGithubCommits(username: String, completion: (() -> ())?) -> String {
+        
+        return ""
     }
 }

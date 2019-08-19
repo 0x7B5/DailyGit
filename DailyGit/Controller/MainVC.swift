@@ -28,11 +28,11 @@ class MainVC: UIViewController {
         
         print(GithubDataManager.shared.getDailyCommits(username: name, completion: {
             print("Done")
-        })
+        }))
         
         print(GithubDataManager.shared.isValidUser(username: name, completion: {
             print("Done")
-        })
+        }))
         
         if Constants.isIpad == true {
             print("iPad")

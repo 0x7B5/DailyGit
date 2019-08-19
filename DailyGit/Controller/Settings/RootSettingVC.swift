@@ -45,11 +45,24 @@ class RootSettingVC: QuickTableViewController {
                 })
             ]),
             
-            Section(title: "In-App Purchases", rows: [
-                TapActionRow(text: "No Ads", action: showAlert()),
-            ], footer: "DailyGit will always be free to use. If you find it useful, please consider supporting the app by purchasing the No Ads IAP."),
+            Section(title: "RESET DEFAULTS", rows: [
+              
+                TapActionRow(text: "DEBUG DEBUG", action: { [weak self] _ in
+                    self?.resetDefaults()
+                })
+            ], footer: ""),
             
         ]
+    }
+    
+    #warning("Debug purposes")
+    func resetDefaults() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
+        }
+        fatalError()
     }
     
     func showAlert() -> (Row) -> Void {
