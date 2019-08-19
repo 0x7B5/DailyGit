@@ -14,6 +14,9 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     let onboardingView = OnboardingView()
     unowned var usernameTF: UITextField { return onboardingView.usernameTextfield}
     
+    unowned var activityIndicator: UIActivityIndicatorView { return onboardingView.activityIndicator}
+    
+    
     override func loadView() {
         self.view = onboardingView
     }
@@ -21,7 +24,6 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(goNext))
         self.usernameTF.delegate = self
-        print("NO WIFI")
         if !Reachability.isConnectedToNetwork(){
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -33,12 +35,15 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     
     @objc func goNext() {
         view.endEditing(true)
+        onboardingView.startLoading()
         if Reachability.isConnectedToNetwork(){
            if let username = usernameTF.text {
                GithubDataManager.shared.setupGithubUser(username: username, completion: {
                    user in
                    //animate
                    DispatchQueue.main.async { [weak self] in
+                    self!.onboardingView.stopLoading()
+                    print(user)
                        if user == nil {
                            print("Not found")
                            let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
@@ -67,13 +72,16 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
             
             }
         }else{
+            onboardingView.stopLoading()
             print("NO WIFI")
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
         
+        //onboardingView.stopLoading()
         usernameTF.text = ""
+        
         
     }
     
