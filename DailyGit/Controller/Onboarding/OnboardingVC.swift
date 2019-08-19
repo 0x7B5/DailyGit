@@ -30,15 +30,31 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
             GithubDataManager.shared.setupGithubUser(username: username, completion: {
                 user in
                 //animate
-                if user == nil {
-                    let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(alert, animated: true)
-                } else {
-                    UserDefaults.standard.set(user, forKey: "CurrentUser")
-                    let vc =  MainTabBarController()
-                    self.present(vc, animated: true, completion: nil)
+                DispatchQueue.main.async { [weak self] in
+                    if user == nil {
+                        print("Not found")
+                        let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                        self!.present(alert, animated: true)
+                    } else {
+                        print("JSON ")
+                        let encoder = JSONEncoder()
+                        if let encoded = try? encoder.encode(user) {
+                            print("setting")
+                            let defaults = UserDefaults.standard
+                            defaults.set(encoded, forKey: "CurrentUser")
+                            let vc =  MainTabBarController()
+                            self!.present(vc, animated: true, completion: nil)
+                        } else {
+                            print("error")
+                            let alert = UIAlertController(title: "Error Occured", message: "Please try again.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                            self!.present(alert, animated: true)
+                        }
+                    }
                 }
+                
+                
             })
             
         }

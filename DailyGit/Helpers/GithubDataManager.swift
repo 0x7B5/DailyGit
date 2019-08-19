@@ -65,6 +65,7 @@ public class GithubDataManager {
                                 contributions, err in
                                 if contributions != nil {
                                     let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl, contributions: contributions!)
+                                    completion(user)
                                 } else {
                                     completion(nil)
                                 }
