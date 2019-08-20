@@ -25,7 +25,8 @@ class MainVC: UIViewController {
         if Constants.isIpad == true {
             print("iPad")
         }
-        
+      CommitsStreakManager.shared.getCurrentStreak()
+        CommitsStreakManager.shared.getLongestStreak()
     }
     
     func setupInfo() {
@@ -43,7 +44,7 @@ class MainVC: UIViewController {
     
     func setupNavController() {
         self.title = "Commits"
-        //self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
+    //self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refresh))
     }
@@ -53,6 +54,7 @@ class MainVC: UIViewController {
        ReadUserInfoHelper.shared.getDailyCommits(completion: {
             commits in
             DispatchQueue.main.async { [weak self] in
+                print("Commits")
                 self!.mainView.dailyCommitsLabel.text = String(commits)
             }
         })

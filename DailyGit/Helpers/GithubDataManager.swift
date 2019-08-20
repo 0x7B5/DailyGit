@@ -15,12 +15,6 @@ public class GithubDataManager {
     
     private init() { }
     
-    
-    func getDailyCommits(username: String) {
-        
-       
-    }
-    
     func getFormattedDate() -> String {
         let date = Date()
         let calendar = Calendar.current
@@ -137,6 +131,8 @@ public class GithubDataManager {
             })
         }
     }
+    
+    
     
     
     

@@ -16,11 +16,19 @@ struct User: Codable {
     let photoUrl: String
     let contributions: ContributionList
     
+    let longestStreak: Int
+    let currentStreak: Int
+    
+    
+    #warning("We'll have to update this.")
+    
     init (name: String, username: String, bio: String, photoUrl: String, contributions: ContributionList) {
         self.name = name
         self.username = username
         self.bio = bio
         self.photoUrl = photoUrl
         self.contributions = contributions
+        self.longestStreak = 0
+        self.currentStreak = 0
     }
 }
