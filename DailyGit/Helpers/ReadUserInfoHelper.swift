@@ -39,18 +39,18 @@ public class ReadUserInfoHelper {
         return ""
     }
     
-    func getDailyCommits() -> Int {
-        GithubDataManager.shared.updateInfo()
-        //have to re-pull data from github
-        let date = GithubDataManager.shared.getFormattedDate()
-        let currentContributions = readInfo(info: .contributions) as? ContributionList
-        
-        for i in currentContributions!.contributions {
-            if i.date == date {
-                return i.count
+    func getDailyCommits(completion: @escaping (Int) -> ())  {
+        GithubDataManager.shared.updateInfo(completion: {
+            //have to re-pull data from github
+            let date = GithubDataManager.shared.getFormattedDate()
+            let currentContributions = self.readInfo(info: .contributions) as? ContributionList
+            
+            for i in currentContributions!.contributions {
+                if i.date == date {
+                    completion(i.count)
+                }
             }
-        }
-        return 0
+        })
     }
-
+    
 }

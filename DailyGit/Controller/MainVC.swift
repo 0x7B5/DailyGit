@@ -29,9 +29,16 @@ class MainVC: UIViewController {
     }
     
     func setupInfo() {
-        mainView.nameLabel.text = ReadUserInfoHelper.shared.readInfo(info: .name) as! String
+        mainView.nameLabel.text = (ReadUserInfoHelper.shared.readInfo(info: .name) as! String)
         mainView.bioLabel.text = ReadUserInfoHelper.shared.readInfo(info: .bio) as! String
-        mainView.dailyCommitsLabel.text = String(ReadUserInfoHelper.shared.getDailyCommits())
+        
+       ReadUserInfoHelper.shared.getDailyCommits(completion: {
+            commits in
+            DispatchQueue.main.async { [weak self] in
+                self!.mainView.dailyCommitsLabel.text = String(commits)
+            }
+        })
+        
     }
     
     func setupNavController() {
@@ -42,7 +49,13 @@ class MainVC: UIViewController {
     }
     
     @objc func refresh() {
-         mainView.dailyCommitsLabel.text = String(ReadUserInfoHelper.shared.getDailyCommits())
+        print("refresh")
+       ReadUserInfoHelper.shared.getDailyCommits(completion: {
+            commits in
+            DispatchQueue.main.async { [weak self] in
+                self!.mainView.dailyCommitsLabel.text = String(commits)
+            }
+        })
     }
     
 }

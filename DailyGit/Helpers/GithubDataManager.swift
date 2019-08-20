@@ -119,7 +119,7 @@ public class GithubDataManager {
         }
     }
     
-    func updateInfo() {
+    func updateInfo(completion: @escaping () -> ()) {
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
             setupGithubUser(username: ReadUserInfoHelper.shared.readInfo(info: .username) as! String, completion: {
                 user in
@@ -131,6 +131,7 @@ public class GithubDataManager {
                     let defaults = UserDefaults.standard
                     defaults.set(encoded, forKey: "CurrentUser")
                     defaults.synchronize()
+                    completion()
                 }
                 
             })
