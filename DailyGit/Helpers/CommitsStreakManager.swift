@@ -20,7 +20,6 @@ public class CommitsStreakManager {
         var countingYet = false
         
         for i in currentContributions!.contributions {
-            print(i)
             if countingYet {
                 if i.count > 0 {
                     counter += 1
@@ -45,11 +44,13 @@ public class CommitsStreakManager {
             print(i)
                 if i.count > 0 {
                     counter += 1
+                    //print(i.date + "\\\\\(i.count)")
                 } else {
                     if counter > maxStreaks {
                         maxStreaks = counter
                     }
                     counter = 0
+                    //print("---------------------------")
                 }
         }
         print("Longest Streak: ", maxStreaks)
