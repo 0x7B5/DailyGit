@@ -111,11 +111,15 @@ public class GithubDataManager {
 //
 //            }.resume()
 //        }
+        
+        #warning("Remove filler time code")
+        let startingPoint = Date()
+        
+        
     }
     
     
-    
-    func getDailyCommits(username: String, completion: () -> ()) -> Int {
+    func getCommitsForDate(username: String, completion: () -> ()) -> Int {
         
         let pageSource = getGithubSource(username: username, completion: nil)
         //print(pageSource)
@@ -163,21 +167,10 @@ public class GithubDataManager {
     }
     
     func getGithubSource(username: String, completion: (() -> ())?) -> String {
-        
-        //https://github-contributions-api.now.sh/v1/vlad-munteanu
-        if var urlComponents = URLComponents(string: "https://github-contributions-api.now.sh/v1/") {
-            urlComponents.query = "\(username)"
-            
-            guard let url = urlComponents.url else {
-                return ""
-            }
-            
-        }
-        
         let baseUrl = "https://github.com/"
         let url = URL(string: baseUrl + username)!
         var globalHTMLString = ""
-        let semaphore = DispatchSemaphore(value: 0)
+
         
         //starts paused
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -192,12 +185,10 @@ public class GithubDataManager {
             
             globalHTMLString = htmlString
             //print("global: \(globalHTMLString)")
-            semaphore.signal()
         }
         //this starts the task
         //all tasks start in suspended state
         task.resume()
-        semaphore.wait()
         return globalHTMLString
     }
     
