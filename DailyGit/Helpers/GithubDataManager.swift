@@ -116,12 +116,17 @@ public class GithubDataManager {
         let startingPoint = Date()
         
         
+        
+        
+        
     }
     
     
-    func getCommitsForDate(username: String, completion: () -> ()) -> Int {
+    func getCommitsForDate(username: String, completion: @escaping (Int?) -> ()) {
         
-        let pageSource = getGithubSource(username: username, completion: nil)
+        let pageSource = getGithubSource(username: username, completion: {
+            
+        })
         //print(pageSource)
         let leftSideString = """
         " data-count="
@@ -136,8 +141,7 @@ public class GithubDataManager {
             let rightSideRange = pageSource.range(of: rightSideString)
             else {
                 print("couldn't find right range")
-                completion()
-                return 0
+                completion(nil)
         }
         
         let rangeOfTheData = pageSource.index(rightSideRange.lowerBound, offsetBy: -26)..<rightSideRange.lowerBound
@@ -149,8 +153,8 @@ public class GithubDataManager {
             let leftSideRange = subPageSource.range(of: leftSideString)
             else {
                 print("couldn't find left range")
-                completion()
-                return 0
+                completion(nil)
+
         }
         
         let finalRange = leftSideRange.upperBound..<subPageSource.endIndex
@@ -162,16 +166,13 @@ public class GithubDataManager {
         
         UserDefaults.standard.set(commitsValueInt, forKey: "dailyCommits")
         
-        completion()
-        return commitsValueInt
+        completion(commitsValueInt)
     }
     
-    func getGithubSource(username: String, completion: (() -> ())?) -> String {
+    func getGithubSource(username: String, completion: @escaping (String?, Error?) -> ()) {
         let baseUrl = "https://github.com/"
         let url = URL(string: baseUrl + username)!
-        var globalHTMLString = ""
 
-        
         //starts paused
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else {
@@ -183,13 +184,15 @@ public class GithubDataManager {
                 return
             }
             
-            globalHTMLString = htmlString
-            //print("global: \(globalHTMLString)")
+            do {
+                completion(htmlString, nil)
+            } catch let err {
+                completion(nil, err)
+                print(err)
+            }
+          
         }
-        //this starts the task
-        //all tasks start in suspended state
         task.resume()
-        return globalHTMLString
     }
     
     func getGithubCommits(username: String, completion: (() -> ())?) -> String {
