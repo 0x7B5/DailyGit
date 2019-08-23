@@ -91,26 +91,26 @@ public class GithubDataManager {
     }
     
     func setupContributions(username: String, completion: @escaping (ContributionList?, Error?) -> ())  {
-//        let startingPoint = Date()
-//        //https://api.github.com/users/
-//        if let url = URL(string: "https://github-contributions-api.now.sh/v1/\(username)") {
-//            URLSession.shared.dataTask(with: url) { (data, response, err) in
-//                //perhaps check err
-//                //also perhaps check response status 200 OK
-//                guard let data = data else { return }
-//
-//                do {
-//                    let contributions = try JSONDecoder().decode(ContributionList.self, from: data)
-//                    completion(contributions, nil)
-//                    print("\(startingPoint.timeIntervalSinceNow * -1) seconds elapsed")
-//                    //print(user)
-//                } catch let err {
-//                    completion(nil, err)
-//                    print(err)
-//                }
-//
-//            }.resume()
-//        }
+        //        let startingPoint = Date()
+        //        //https://api.github.com/users/
+        //        if let url = URL(string: "https://github-contributions-api.now.sh/v1/\(username)") {
+        //            URLSession.shared.dataTask(with: url) { (data, response, err) in
+        //                //perhaps check err
+        //                //also perhaps check response status 200 OK
+        //                guard let data = data else { return }
+        //
+        //                do {
+        //                    let contributions = try JSONDecoder().decode(ContributionList.self, from: data)
+        //                    completion(contributions, nil)
+        //                    print("\(startingPoint.timeIntervalSinceNow * -1) seconds elapsed")
+        //                    //print(user)
+        //                } catch let err {
+        //                    completion(nil, err)
+        //                    print(err)
+        //                }
+        //
+        //            }.resume()
+        //        }
         
         #warning("Remove filler time code")
         let startingPoint = Date()
@@ -122,57 +122,57 @@ public class GithubDataManager {
     }
     
     
-    func getCommitsForDate(username: String, completion: @escaping (Int?) -> ()) {
+    func getCommitsForDate(username: String, date: String, completion: @escaping (Int?) -> ()) {
         
-        let pageSource = getGithubSource(username: username, completion: {
-            
+        self.getGithubSource(username: username, completion: {
+            source, err in
+            if let pageSource = source {
+                //print(pageSource)
+                let leftSideString = """
+                                  " data-count="
+                                  """
+                
+                let rightSideString = """
+                " data-date="\(date)"/>
+                """
+                
+                
+                guard
+                    let rightSideRange = pageSource.range(of: rightSideString)
+                    else {
+                        print("couldn't find right range")
+                        completion(nil)
+                        return
+                }
+                
+                let rangeOfTheData = pageSource.index(rightSideRange.lowerBound, offsetBy: -26)..<rightSideRange.lowerBound
+                let subPageSource = pageSource[rangeOfTheData]
+                // print(subPageSource)
+                
+                
+                guard
+                    let leftSideRange = subPageSource.range(of: leftSideString)
+                    else {
+                        print("couldn't find left range")
+                        completion(nil)
+                        return
+                }
+                
+                let finalRange = leftSideRange.upperBound..<subPageSource.endIndex
+                let commitsValueString = subPageSource[finalRange]
+                
+                // print(commitsValueString)
+                let commitsValueInt = Int(commitsValueString) ?? 0
+                UserDefaults.standard.set(commitsValueInt, forKey: "dailyCommits")
+                completion(commitsValueInt)
+            }
         })
-        //print(pageSource)
-        let leftSideString = """
-        " data-count="
-        """
-        
-        let rightSideString = """
-        " data-date="\(getFormattedDate())"/>
-        """
-        
-        
-        guard
-            let rightSideRange = pageSource.range(of: rightSideString)
-            else {
-                print("couldn't find right range")
-                completion(nil)
-        }
-        
-        let rangeOfTheData = pageSource.index(rightSideRange.lowerBound, offsetBy: -26)..<rightSideRange.lowerBound
-        let subPageSource = pageSource[rangeOfTheData]
-       // print(subPageSource)
-        
-        
-        guard
-            let leftSideRange = subPageSource.range(of: leftSideString)
-            else {
-                print("couldn't find left range")
-                completion(nil)
-
-        }
-        
-        let finalRange = leftSideRange.upperBound..<subPageSource.endIndex
-        let commitsValueString = subPageSource[finalRange]
-        
-       // print(commitsValueString)
-        
-        let commitsValueInt = Int(commitsValueString) ?? 0
-        
-        UserDefaults.standard.set(commitsValueInt, forKey: "dailyCommits")
-        
-        completion(commitsValueInt)
     }
     
     func getGithubSource(username: String, completion: @escaping (String?, Error?) -> ()) {
         let baseUrl = "https://github.com/"
         let url = URL(string: baseUrl + username)!
-
+        
         //starts paused
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else {
@@ -190,7 +190,7 @@ public class GithubDataManager {
                 completion(nil, err)
                 print(err)
             }
-          
+            
         }
         task.resume()
     }

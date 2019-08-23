@@ -31,7 +31,7 @@ class MainVC: UIViewController {
     
     func setupInfo() {
         mainView.nameLabel.text = (ReadUserInfoHelper.shared.readInfo(info: .name) as! String)
-        mainView.bioLabel.text = ReadUserInfoHelper.shared.readInfo(info: .bio) as! String
+        mainView.bioLabel.text = (ReadUserInfoHelper.shared.readInfo(info: .bio) as! String)
         
        ReadUserInfoHelper.shared.getDailyCommits(completion: {
             commits in
