@@ -38,6 +38,32 @@ public class GithubDataManager {
         return currentDate
     }
     
+    func isGithubUser(username: String, completion: @escaping (Bool) -> ()) {
+        if let url = URL(string: "https://api.github.com/users/\(username)") {
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
+                //also perhaps check response status 200 OK
+                guard let data = data else { return }
+                
+                do {
+                    // make sure this JSON is in the format we expect
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        // try to read out a string array
+                        // Is this a valid githubUsername?
+                        if (json["message"] as? String == "Not Found") {
+                            completion(false)
+                        } else {
+                            completion(true)
+                        }
+                    }
+                } catch let jsonErr {
+                    print(jsonErr)
+                    completion(false)
+                }
+            }.resume()
+        }
+        
+    }
+    
     func setupGithubUser(username: String, completion: @escaping (User?) -> ())  {
         //https://api.github.com/users/
         if let url = URL(string: "https://api.github.com/users/\(username)") {
