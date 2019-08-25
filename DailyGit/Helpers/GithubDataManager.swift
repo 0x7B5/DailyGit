@@ -196,29 +196,29 @@ public class GithubDataManager {
     }
     
     func getGithubSource(username: String, completion: @escaping (String?, Error?) -> ()) {
-        let baseUrl = "https://github.com/"
-        let url = URL(string: baseUrl + username)!
-        
-        //starts paused
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else {
-                print("data was nil")
-                return
-            }
-            guard let htmlString = String(data: data, encoding: .utf8) else {
-                print("couldn't cast data into String")
-                return
-            }
-            
-            do {
-                completion(htmlString, nil)
-            } catch let err {
-                completion(nil, err)
-                print(err)
-            }
-            
+        if let url = URL(string: "https://github.com/\(username)") {
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
+                guard let data = data else {
+                    completion(nil, err)
+                    return
+                }
+                
+                // This has to throw an error
+                do {
+                    guard let htmlString = String(data: data, encoding: .utf8) else {
+                        print("couldn't cast data into String")
+                        completion(nil, err)
+                        return
+                    }
+                    completion(htmlString, nil)
+                    
+                } catch let err {
+                    completion(nil, err)
+                }
+                
+                }.resume()
         }
-        task.resume()
+        
     }
     
     func getGithubCommits(username: String, completion: (() -> ())?) -> String {
