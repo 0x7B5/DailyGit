@@ -89,7 +89,7 @@ public class GithubDataManager {
                         
                         
                         //let name = json["name"] as? String,
-                        if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String {
+                        if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String, let creationDate = json["created_at"] as? String{
                             
                             if let tempName = json["name"] as? String {
                                 name = tempName
@@ -100,7 +100,8 @@ public class GithubDataManager {
                             self.setupContributions(username: myUsername, completion: {
                                 contributions, err in
                                 if contributions != nil {
-                                    let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl, contributions: contributions!)
+                                    let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!)
+                                    print(user)
                                     completion(user)
                                 } else {
                                     completion(nil)
@@ -188,9 +189,11 @@ public class GithubDataManager {
                 let commitsValueString = subPageSource[finalRange]
                 
                 // print(commitsValueString)
-                let commitsValueInt = Int(commitsValueString) ?? 0
-                UserDefaults.standard.set(commitsValueInt, forKey: "dailyCommits")
-                completion(commitsValueInt)
+                if let commitsValueInt = Int(commitsValueString) {
+                    completion(commitsValueInt)
+                } else {
+                    completion(nil)
+                }
             }
         })
     }

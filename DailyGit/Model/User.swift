@@ -18,11 +18,12 @@ struct User: Codable {
     
     let longestStreak: Int
     let currentStreak: Int
+    let dateCreated: String
     
     
     #warning("We'll have to update this.")
     
-    init (name: String, username: String, bio: String, photoUrl: String, contributions: ContributionList) {
+    init (name: String, username: String, bio: String, photoUrl: String, dateCreated: String, contributions: ContributionList) {
         self.name = name
         self.username = username
         self.bio = bio
@@ -30,5 +31,6 @@ struct User: Codable {
         self.contributions = contributions
         self.longestStreak = 0
         self.currentStreak = 0
+        self.dateCreated = dateCreated
     }
 }
