@@ -33,14 +33,15 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     
     @objc func goNext() {
         view.endEditing(true)
-       // onboardingView.startLoading()
+        #warning("There's something not working here because of networking or something I think")
+        onboardingView.startLoading()
         if Reachability.isConnectedToNetwork(){
             if let username = usernameTF.text {
                 GithubDataManager.shared.setupGithubUser(username: username, completion: {
                     user in
                     //animate
                     DispatchQueue.main.async { [weak self] in
-                      //  self!.onboardingView.stopLoading()
+                       self!.onboardingView.stopLoading()
                         print(user)
                         if user == nil {
                             print("Not found")
@@ -71,7 +72,7 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                 
             }
         }else{
-            //onboardingView.stopLoading()
+            onboardingView.stopLoading()
             print("NO WIFI")
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))

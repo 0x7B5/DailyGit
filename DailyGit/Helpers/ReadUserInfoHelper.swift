@@ -9,7 +9,7 @@
 import Foundation
 
 enum Userinfo {
-    case  name, username, bio, photoUrl, contributions
+    case  name, username, bio, photoUrl, contributions, dateCreated
 }
 
 public class ReadUserInfoHelper {
@@ -33,6 +33,8 @@ public class ReadUserInfoHelper {
                     return loadedPerson.photoUrl
                 case .contributions:
                     return loadedPerson.contributions
+                case .dateCreated:
+                    return loadedPerson.dateCreated
                 }
             }
         }

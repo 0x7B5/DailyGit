@@ -66,9 +66,12 @@ public class GithubDataManager {
     
     func setupGithubUser(username: String, completion: @escaping (User?) -> ())  {
         //https://api.github.com/users/
+        print("user user user")
+        
         if let url = URL(string: "https://api.github.com/users/\(username)") {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
                 //also perhaps check response status 200 OK
+                
                 guard let data = data else { return }
                 
                 do {
@@ -97,7 +100,8 @@ public class GithubDataManager {
                                 name = myUsername
                             }
                             
-                            self.setupContributions(username: myUsername, completion: {
+                            #warning("Fix setup contributions")
+                            self.setupContributions(startDay: creationDate, username: myUsername, completion: {
                                 contributions, err in
                                 if contributions != nil {
                                     let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!)
@@ -115,39 +119,45 @@ public class GithubDataManager {
                 }
             }.resume()
         }
-    }
-    
-    func setupContributions(username: String, completion: @escaping (ContributionList?, Error?) -> ())  {
-        //        let startingPoint = Date()
-        //        //https://api.github.com/users/
-        //        if let url = URL(string: "https://github-contributions-api.now.sh/v1/\(username)") {
-        //            URLSession.shared.dataTask(with: url) { (data, response, err) in
-        //                //perhaps check err
-        //                //also perhaps check response status 200 OK
-        //                guard let data = data else { return }
-        //
-        //                do {
-        //                    let contributions = try JSONDecoder().decode(ContributionList.self, from: data)
-        //                    completion(contributions, nil)
-        //                    print("\(startingPoint.timeIntervalSinceNow * -1) seconds elapsed")
-        //                    //print(user)
-        //                } catch let err {
-        //                    completion(nil, err)
-        //                    print(err)
-        //                }
-        //
-        //            }.resume()
-        //        }
-        
-        #warning("Remove filler time code")
-        let startingPoint = Date()
-        
-        
-        
-        
         
     }
     
+    func setupContributions(startDay: String ,username: String, completion: @escaping (ContributionList?, Error?) -> ())  {
+        
+        var startingPoint = stringToDate(date: startDay)
+        #warning("Need to fix current date")
+        let endDate = Date() //we'll need to change this eventually
+        
+        var contList = [Contribution]()
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        let calendar = Calendar.current
+        
+        
+        while startingPoint <= endDate {
+            getCommitsForDate(username: username, date: formatter.string(from: startingPoint), completion: {
+                commitsCount in
+                contList.append(Contribution(date: formatter.string(from: startingPoint), count: commitsCount ?? 0, color: "c6e48b", intensity: 1))
+                startingPoint = calendar.date(bySetting: .day, value: 1, of: startingPoint)!
+                print("done \(startingPoint)")
+            })
+        }
+        print(contList)
+        
+        completion(ContributionList(contributions: contList), nil)
+        
+    }
+    
+    func stringToDate(date: String) -> Date {
+        print(date)
+        #warning("somethig")
+        let dateFormatter = ISO8601DateFormatter()
+        let date = dateFormatter.date(from:date)!
+        
+        return date
+    }
     
     func getCommitsForDate(username: String, date: String, completion: @escaping (Int?) -> ()) {
         
