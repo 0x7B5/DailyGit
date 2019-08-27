@@ -17,5 +17,5 @@ struct Contribution: Codable {
     let count: Int
     //hex color
     let color: String
-    let intensity: Int
+    //let intensity: Int
 }

@@ -59,7 +59,7 @@ func getFormattedStringDate() -> String {
     
     let currentDate = "\(year)-\(month)-\(day)"
     
-    print(currentDate)
+    //print(currentDate)
     return currentDate
 }
 
@@ -71,7 +71,7 @@ func getCommitsForDate(username: String, date: String, completion: @escaping (In
             guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return }
             guard let elements = try? doc.select("[class=day]") else { return }
             for i in elements {
-                print(i)
+                //print(i)
             }
             
             //print(pageSource)
@@ -84,7 +84,7 @@ func getCommitsForDate(username: String, date: String, completion: @escaping (In
             " data-date="\(date)"/>
             """
             
-            print(rightSideString)
+            //print(rightSideString)
             
             guard
                 let rightSideRange = pageSource.range(of: rightSideString)
@@ -201,18 +201,24 @@ getCommitsForDate(username: "vlad-munteanu", date: "2019-08-27", completion: {
     
 })
 
-//getGithubSource(username: "vlad-munteanu", completion: {
-//    source, err in
-//    if let pageSource = source {
-//    }
-//})
-
-
-
-//setupContributions(startDay: "2018-04-12T14:47:49Z", username: "vlad-munteanu", completion: {
-//    print("done")
-//})
-
+getGithubSource(username: "vlad-munteanu", completion: {
+    source, err in
+    if let pageSource = source {
+        guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return }
+        guard let commitElements = try? doc.select("[class=day]") else { return }
+        
+//        for i in commitElements {
+//            print(try? i.attr("data-day"))
+//        }
+        for element: Element in commitElements.array() {
+            let date = try? element.attr("data-day")
+            print(date)
+            if date == nil {
+                continue
+            }
+        }
+    }
+})
 
 
 

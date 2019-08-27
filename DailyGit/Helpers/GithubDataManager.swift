@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftSoup
 
 public class GithubDataManager {
     static let shared = GithubDataManager()
@@ -102,7 +103,7 @@ public class GithubDataManager {
                             
                             #warning("Fix setup contributions")
                             self.setupContributions(startDay: creationDate, username: myUsername, completion: {
-                                contributions, err in
+                                contributions in
                                 if contributions != nil {
                                     let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!)
                                     print(user)
@@ -122,31 +123,77 @@ public class GithubDataManager {
         
     }
     
-    func setupContributions(startDay: String ,username: String, completion: @escaping (ContributionList?, Error?) -> ())  {
+    func setupContributions(startDay: String, username: String, completion: @escaping (ContributionList?) -> ())  {
         
-        var startingPoint = stringToDate(date: startDay)
-        #warning("Need to fix current date")
-        let endDate = Date() //we'll need to change this eventually
+//        var startingPoint = stringToDate(date: startDay)
+//        #warning("Need to fix current date")
+//        let endDate = Date() //we'll need to change this eventually
+//
+//        var contList = [Contribution]()
+//
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        formatter.locale = Locale(identifier: "en_US_POSIX")
+//        let calendar = Calendar.current
+//
+//
+//        let datesBetweenArray = Date.dates(from: startingPoint, to: Date())
+        
+//        getGithubSource(username: username, completion: {
+//            source, err in
+//            if let pageSource = source {
+//                for i in datesBetweenArray {
+//
+//                    let convertedDate = (formatter.string(from: i)).substring(to: 10)
+//                    guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return }
+//                    guard let elements = try? doc.select("[class=day]") else { return }
+//                    for i in elements {
+//                        print(i)
+//                    }
+//
+//                    self.getCommitsForDate(username: username, date: convertedDate, completion: {
+//                        commitsCount in
+//
+//                        if commitsCount == nil {
+//                            print("\(convertedDate) + nil :(")
+//                        } else {
+//                            print("\(convertedDate) + \(commitsCount)")
+//                        }
+//
+//                        contList.append(Contribution(date: formatter.string(from: startingPoint), count: commitsCount ?? 0, color: "c6e48b", intensity: 1))
+//                    })
+//                }
+//            }
+//        })
         
         var contList = [Contribution]()
+        getGithubSource(username: username, completion: {
+            source, err in
+            if let pageSource = source {
+                guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return
+                    completion(nil) }
+                guard let commitElements = try? doc.select("[class=day]") else { return
+                    completion(nil) }
+                
+                for i in commitElements {
+                    
+                    let date = try? i.attr("data-date")
+                    if date == nil {
+                        continue
+                    }
+                    
+                    let commitsCount = try? i.attr("data-count")
+                    let fillColor = try? i.attr("fill")
+                    
+                    contList.append(Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0"))
+                    print(contList.last)
+                    
+                }
+            }
+        })
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        let calendar = Calendar.current
-        
-        
-        while startingPoint <= endDate {
-            getCommitsForDate(username: username, date: formatter.string(from: startingPoint), completion: {
-                commitsCount in
-                contList.append(Contribution(date: formatter.string(from: startingPoint), count: commitsCount ?? 0, color: "c6e48b", intensity: 1))
-                startingPoint = calendar.date(bySetting: .day, value: 1, of: startingPoint)!
-                print("done \(startingPoint)")
-            })
-        }
-        print(contList)
-        
-        completion(ContributionList(contributions: contList), nil)
+        //print(contList)
+        completion(ContributionList(contributions: contList))
         
     }
     
@@ -215,7 +262,6 @@ public class GithubDataManager {
                     completion(nil, err)
                     return
                 }
-                
                 // This has to throw an error
                 do {
                     guard let htmlString = String(data: data, encoding: .utf8) else {
@@ -224,11 +270,9 @@ public class GithubDataManager {
                         return
                     }
                     completion(htmlString, nil)
-                    
                 } catch let err {
                     completion(nil, err)
                 }
-                
                 }.resume()
         }
         
