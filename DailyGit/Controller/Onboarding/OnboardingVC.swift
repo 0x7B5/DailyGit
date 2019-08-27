@@ -57,6 +57,7 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                                 defaults.set(encoded, forKey: "CurrentUser")
                                 defaults.synchronize()
                                 let vc =  MainTabBarController()
+                                vc.modalPresentationStyle = .fullScreen
                                 self!.present(vc, animated: true, completion: nil)
                             } else {
                                 print("error")

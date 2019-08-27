@@ -125,47 +125,6 @@ public class GithubDataManager {
     
     func setupContributions(startDay: String, username: String, completion: @escaping (ContributionList?) -> ())  {
         
-//        var startingPoint = stringToDate(date: startDay)
-//        #warning("Need to fix current date")
-//        let endDate = Date() //we'll need to change this eventually
-//
-//        var contList = [Contribution]()
-//
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd"
-//        formatter.locale = Locale(identifier: "en_US_POSIX")
-//        let calendar = Calendar.current
-//
-//
-//        let datesBetweenArray = Date.dates(from: startingPoint, to: Date())
-        
-//        getGithubSource(username: username, completion: {
-//            source, err in
-//            if let pageSource = source {
-//                for i in datesBetweenArray {
-//
-//                    let convertedDate = (formatter.string(from: i)).substring(to: 10)
-//                    guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return }
-//                    guard let elements = try? doc.select("[class=day]") else { return }
-//                    for i in elements {
-//                        print(i)
-//                    }
-//
-//                    self.getCommitsForDate(username: username, date: convertedDate, completion: {
-//                        commitsCount in
-//
-//                        if commitsCount == nil {
-//                            print("\(convertedDate) + nil :(")
-//                        } else {
-//                            print("\(convertedDate) + \(commitsCount)")
-//                        }
-//
-//                        contList.append(Contribution(date: formatter.string(from: startingPoint), count: commitsCount ?? 0, color: "c6e48b", intensity: 1))
-//                    })
-//                }
-//            }
-//        })
-        
         var contList = [Contribution]()
         getGithubSource(username: username, completion: {
             source, err in
@@ -185,7 +144,9 @@ public class GithubDataManager {
                     let commitsCount = try? i.attr("data-count")
                     let fillColor = try? i.attr("fill")
                     
-                    contList.append(Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0"))
+                    let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0"))
+                    
+                    contList.append(aContribution)
                     print(contList.last)
                     
                 }

@@ -50,6 +50,7 @@ public class ReadUserInfoHelper {
             for i in currentContributions!.contributions {
                 if i.date == date {
                     completion(i.count)
+                    print(i)
                 }
             }
         })
