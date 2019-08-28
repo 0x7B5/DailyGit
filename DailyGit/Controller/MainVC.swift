@@ -52,15 +52,19 @@ class MainVC: UIViewController {
     @objc func refresh() {
         print("refresh")
         if Reachability.shared.isConnectedToNetwork() {
-            
+            ReadUserInfoHelper.shared.getDailyCommits(completion: {
+                commits in
+                DispatchQueue.main.async { [weak self] in
+                    print("Commits")
+                    self!.mainView.dailyCommitsLabel.text = String(commits)
+                }
+            })
+        } else {
+            print("NO WIFI")
+            let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true)
         }
-       ReadUserInfoHelper.shared.getDailyCommits(completion: {
-            commits in
-            DispatchQueue.main.async { [weak self] in
-                print("Commits")
-                self!.mainView.dailyCommitsLabel.text = String(commits)
-            }
-        })
     }
     
 }
