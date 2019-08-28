@@ -24,7 +24,7 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(goNext))
         self.usernameTF.delegate = self
-        if !Reachability.isConnectedToNetwork(){
+        if !Reachability.shared.isConnectedToNetwork(){
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true)
@@ -35,7 +35,7 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
         #warning("There's something not working here because of networking or something I think")
         onboardingView.startLoading()
-        if Reachability.isConnectedToNetwork(){
+        if Reachability.shared.isConnectedToNetwork(){
             if let username = usernameTF.text {
                 GithubDataManager.shared.setupGithubUser(username: username, completion: {
                     user in

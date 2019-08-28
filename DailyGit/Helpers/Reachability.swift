@@ -9,6 +9,9 @@
 import SystemConfiguration
 
 public class Reachability {
+    
+    static let shared = Reachability()
+    private init() { }
 
     class func isConnectedToNetwork() -> Bool {
 

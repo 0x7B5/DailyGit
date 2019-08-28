@@ -51,6 +51,9 @@ class MainVC: UIViewController {
     
     @objc func refresh() {
         print("refresh")
+        if Reachability.shared.isConnectedToNetwork() {
+            
+        }
        ReadUserInfoHelper.shared.getDailyCommits(completion: {
             commits in
             DispatchQueue.main.async { [weak self] in
