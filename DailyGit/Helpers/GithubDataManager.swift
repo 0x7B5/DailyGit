@@ -16,29 +16,6 @@ public class GithubDataManager {
     
     private init() { }
     
-    func getFormattedDate() -> String {
-        let date = Date()
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: date)
-        
-        let year = String(components.year!)
-        var month = String(components.month!)
-        var day = String(components.day!)
-        
-        if components.month! < 10 {
-            month = "0" + String(components.month!)
-        }
-        
-        if components.day! < 10 {
-            day = "0" + String(components.month!)
-        }
-        
-        let currentDate = "\(year)-\(month)-\(day)"
-        
-        print(currentDate)
-        return currentDate
-    }
-    
     func isGithubUser(username: String, completion: @escaping (Bool) -> ()) {
         if let url = URL(string: "https://api.github.com/users/\(username)") {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
@@ -123,7 +100,14 @@ public class GithubDataManager {
         
     }
     
+    #warning("html parsing only shows commits from past year")
+    
     func setupContributions(startDay: String, username: String, completion: @escaping (ContributionList?) -> ())  {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: DateHelper.shared.stringToDate(date: startDay))
+        
+        let year = String(components.year!)
+        print(year)
         
         var contList = [Contribution]()
         getGithubSource(username: username, completion: {
@@ -135,8 +119,8 @@ public class GithubDataManager {
                     completion(nil) }
                 
                 for i in commitElements {
-                    
                     let date = try? i.attr("data-date")
+                    print("date + \(date)")
                     if date == nil {
                         continue
                     }
@@ -147,73 +131,17 @@ public class GithubDataManager {
                     let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0"))
                     
                     contList.append(aContribution)
-                    print(contList.last)
                     
+                    if let lastVar = contList.last {
+                         //print(lastVar)
+                    }
                 }
+                completion(ContributionList(contributions: contList))
             }
         })
         
-        //print(contList)
-        completion(ContributionList(contributions: contList))
+        //print(contList
         
-    }
-    
-    func stringToDate(date: String) -> Date {
-        print(date)
-        #warning("somethig")
-        let dateFormatter = ISO8601DateFormatter()
-        let date = dateFormatter.date(from:date)!
-        
-        return date
-    }
-    
-    func getCommitsForDate(username: String, date: String, completion: @escaping (Int?) -> ()) {
-        
-        self.getGithubSource(username: username, completion: {
-            source, err in
-            if let pageSource = source {
-                //print(pageSource)
-                let leftSideString = """
-                                  " data-count="
-                                  """
-                
-                let rightSideString = """
-                " data-date="\(date)"/>
-                """
-                
-                
-                guard
-                    let rightSideRange = pageSource.range(of: rightSideString)
-                    else {
-                        print("couldn't find right range")
-                        completion(nil)
-                        return
-                }
-                
-                let rangeOfTheData = pageSource.index(rightSideRange.lowerBound, offsetBy: -26)..<rightSideRange.lowerBound
-                let subPageSource = pageSource[rangeOfTheData]
-                // print(subPageSource)
-                
-                
-                guard
-                    let leftSideRange = subPageSource.range(of: leftSideString)
-                    else {
-                        print("couldn't find left range")
-                        completion(nil)
-                        return
-                }
-                
-                let finalRange = leftSideRange.upperBound..<subPageSource.endIndex
-                let commitsValueString = subPageSource[finalRange]
-                
-                // print(commitsValueString)
-                if let commitsValueInt = Int(commitsValueString) {
-                    completion(commitsValueInt)
-                } else {
-                    completion(nil)
-                }
-            }
-        })
     }
     
     func getGithubSource(username: String, completion: @escaping (String?, Error?) -> ()) {

@@ -157,68 +157,21 @@ func stringToDate(date: String) -> Date {
 
 func setupContributions(startDay: String, username: String, completion: () -> ()) {
     
-    var startingPoint = stringToDate(date: startDay)
-    #warning("Need to fix current date")
-    let endDate = Date() //we'll need to change this eventually
     
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    formatter.locale = Locale(identifier: "en_US_POSIX")
     let calendar = Calendar.current
+    let components = calendar.dateComponents([.year, .month, .day], from: stringToDate(date: startDay))
     
-    let datesBetweenArray = Date.dates(from: startingPoint, to: Date())
-    
-    
-    getGithubSource(username: username, completion: {
-        source, err in
-        if let pageSource = source {
-            for i in datesBetweenArray {
-                
-                let convertedDate = (formatter.string(from: i)).substring(to: 10)
-                getCommitsForDate(username: username, date: convertedDate, completion: {
-                    commitsCount in
-                    
-                    if commitsCount == nil {
-                        print("\(convertedDate) + nil :(")
-                    } else {
-                        print("\(convertedDate) + \(commitsCount)")
-                    }
-                    
-                })
-            }
-        }
-    })
-    
-    
-    
-    
-    
+    let year = String(components.year!)
+    print(year)
+
 }
 
-getCommitsForDate(username: "vlad-munteanu", date: "2019-08-27", completion: {
-    commitsCount in
+
+func randYear(startDay: String) {
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.year, .month, .day], from: stringToDate(date: startDay))
     
-    
-})
-
-getGithubSource(username: "vlad-munteanu", completion: {
-    source, err in
-    if let pageSource = source {
-        guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return }
-        guard let commitElements = try? doc.select("[class=day]") else { return }
-        
-//        for i in commitElements {
-//            print(try? i.attr("data-day"))
-//        }
-        for element: Element in commitElements.array() {
-            let date = try? element.attr("data-day")
-            print(date)
-            if date == nil {
-                continue
-            }
-        }
-    }
-})
-
-
+    let year = String(components.year!)
+    print(year)
+}
 

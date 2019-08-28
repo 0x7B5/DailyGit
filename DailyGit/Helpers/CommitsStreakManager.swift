@@ -14,7 +14,7 @@ public class CommitsStreakManager {
     
     func getCurrentStreak() {
         let currentContributions = ReadUserInfoHelper.shared.readInfo(info: .contributions) as? ContributionList
-        let date = GithubDataManager.shared.getFormattedDate()
+        let date = DateHelper.shared.getFormattedDate()
         
         var counter = 0
         var countingYet = false

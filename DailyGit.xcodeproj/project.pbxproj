@@ -17,6 +17,7 @@
 		B8B41CEA2228737B005E304A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE92228737B005E304A /* MainVC.swift */; };
 		B8B41CEC22287388005E304A /* RootSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CEB22287388005E304A /* RootSettingVC.swift */; };
 		CC17DBAD22FF9D1500E34951 /* GithubDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */; };
+		CCB5242A2317237F004FF84B /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB524292317237F004FF84B /* DateHelper.swift */; };
 		CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81C230B15CB0051C151 /* Contribution.swift */; };
 		CCC3A81F230B16FC0051C151 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81E230B16FC0051C151 /* User.swift */; };
 		CCC3A821230B42050051C151 /* ReadUserInfoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A820230B42050051C151 /* ReadUserInfoHelper.swift */; };
@@ -46,6 +47,7 @@
 		B8B41CE92228737B005E304A /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		B8B41CEB22287388005E304A /* RootSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSettingVC.swift; sourceTree = "<group>"; };
 		CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDataManager.swift; sourceTree = "<group>"; };
+		CCB524292317237F004FF84B /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		CCC3A81B2308C2790051C151 /* DailyGit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyGit.entitlements; sourceTree = "<group>"; };
 		CCC3A81C230B15CB0051C151 /* Contribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contribution.swift; sourceTree = "<group>"; };
 		CCC3A81E230B16FC0051C151 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				CCC3A820230B42050051C151 /* ReadUserInfoHelper.swift */,
 				CCC3A823230B483F0051C151 /* Reachability.swift */,
 				CCC3A825230B92470051C151 /* CommitsStreakManager.swift */,
+				CCB524292317237F004FF84B /* DateHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */,
 				CCC3A826230B92470051C151 /* CommitsStreakManager.swift in Sources */,
 				CCF2E9752302293200F4E118 /* UIImage+Extensions.swift in Sources */,
+				CCB5242A2317237F004FF84B /* DateHelper.swift in Sources */,
 				CCD5132C23158D0C00B000AA /* Date+Extensions.swift in Sources */,
 				CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */,
 				CCC3A824230B483F0051C151 /* Reachability.swift in Sources */,
