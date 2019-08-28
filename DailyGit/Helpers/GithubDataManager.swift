@@ -34,7 +34,6 @@ public class GithubDataManager {
                         }
                     }
                 } catch let jsonErr {
-                    print(jsonErr)
                     completion(false)
                 }
             }.resume()
@@ -44,7 +43,6 @@ public class GithubDataManager {
     
     func setupGithubUser(username: String, completion: @escaping (User?) -> ())  {
         //https://api.github.com/users/
-        print("user user user")
         
         if let url = URL(string: "https://api.github.com/users/\(username)") {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
@@ -92,7 +90,6 @@ public class GithubDataManager {
                         }
                     }
                 } catch let jsonErr {
-                    print(jsonErr)
                     completion(nil)
                 }
             }.resume()
@@ -103,11 +100,8 @@ public class GithubDataManager {
     #warning("html parsing only shows commits from past year")
     
     func setupContributions(startDay: String, username: String, completion: @escaping (ContributionList?) -> ())  {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: DateHelper.shared.stringToDate(date: startDay))
-        
-        let year = String(components.year!)
-        print(year)
+        var year = DateHelper.shared.getYear(myDate: startDay)
+        var currentYear = DateHelper.shared.getYear(myDate: Date())
         
         var contList = [Contribution]()
         getGithubSource(username: username, completion: {
@@ -118,9 +112,15 @@ public class GithubDataManager {
                 guard let commitElements = try? doc.select("[class=day]") else { return
                     completion(nil) }
                 
+                var counter = 0
+                var weeksCount =  0
                 for i in commitElements {
+                    
+                    if weeksCount%7 == 0 {
+                        counter += 1
+                    }
+                    
                     let date = try? i.attr("data-date")
-                    print("date + \(date)")
                     if date == nil {
                         continue
                     }
@@ -131,16 +131,12 @@ public class GithubDataManager {
                     let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0"))
                     
                     contList.append(aContribution)
-                    
-                    if let lastVar = contList.last {
-                         //print(lastVar)
-                    }
+                    weeksCount += 1
                 }
+                print("weeksCount \(weeksCount)")
                 completion(ContributionList(contributions: contList))
             }
         })
-        
-        //print(contList
         
     }
     
@@ -162,7 +158,7 @@ public class GithubDataManager {
                 } catch let err {
                     completion(nil, err)
                 }
-                }.resume()
+            }.resume()
         }
         
     }
@@ -177,10 +173,8 @@ public class GithubDataManager {
             setupGithubUser(username: ReadUserInfoHelper.shared.readInfo(info: .username) as! String, completion: {
                 user in
                 
-                print("JSON ")
                 let encoder = JSONEncoder()
                 if let encoded = try? encoder.encode(user) {
-                    print("setting")
                     let defaults = UserDefaults.standard
                     defaults.set(encoded, forKey: "CurrentUser")
                     defaults.synchronize()

@@ -44,15 +44,12 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                        self!.onboardingView.stopLoading()
                         print(user)
                         if user == nil {
-                            print("Not found")
                             let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                             self!.present(alert, animated: true)
                         } else {
-                            print("JSON ")
                             let encoder = JSONEncoder()
                             if let encoded = try? encoder.encode(user) {
-                                print("setting")
                                 let defaults = UserDefaults.standard
                                 defaults.set(encoded, forKey: "CurrentUser")
                                 defaults.synchronize()
@@ -60,7 +57,6 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                                 vc.modalPresentationStyle = .fullScreen
                                 self!.present(vc, animated: true, completion: nil)
                             } else {
-                                print("error")
                                 let alert = UIAlertController(title: "Error Occured", message: "Please try again.", preferredStyle: .alert)
                                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                                 self!.present(alert, animated: true)
@@ -74,7 +70,6 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
             }
         }else{
             onboardingView.stopLoading()
-            print("NO WIFI")
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true)

@@ -35,23 +35,32 @@ public class DateHelper {
         return currentDate
     }
     
-    func stringToDate(date: String) -> Date {
-        print(date)
-        #warning("somethig")
-        let dateFormatter = ISO8601DateFormatter()
-        let date = dateFormatter.date(from:date)!
+    func stringToDate(myDate: String) -> Date? {
         
-        return date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale.current
+        return dateFormatter.date(from: myDate)
+        
     }
+    
     
     func getYear(myDate: String) -> Int {
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: stringToDate(date: myDate))
-        
-        if let year = Int(String(components.year!)) {
-            return year
-        } else {
-            return 0
+        if let date = stringToDate(myDate: myDate){
+            let components = calendar.dateComponents([.year, .month, .day], from: date)
+            if let year = Int(String(components.year!)) {
+                return year
+            }
         }
+        return 0
+    }
+    
+    func getYear(myDate: Date) -> Int {
+         let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: myDate)
+        let year = Int(String(components.year!)) ?? 0
+        return year
     }
 }
