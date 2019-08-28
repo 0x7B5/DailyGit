@@ -8,7 +8,7 @@ func setupContributions(startDay: String, username: String, completion: () -> ()
     
     var year = getYear(myDate: startDay)
     
-    var currentYear = getYear(myDate: dateToString(date: Date()))
+    var currentYear = getYear(myDate: Date())
     
     //user created account this year
     if year == currentYear {
@@ -88,37 +88,64 @@ func getGithubSource(username: String, completion: @escaping (String?, Error?) -
     }
 }
 
+func getFormattedDate() -> String {
+    let date = Date()
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.year, .month, .day], from: date)
+    
+    let year = String(components.year!)
+    var month = String(components.month!)
+    var day = String(components.day!)
+    
+    if components.month! < 10 {
+        month = "0" + String(components.month!)
+    }
+    
+    if components.day! < 10 {
+        day = "0" + String(components.month!)
+    }
+    
+    let currentDate = "\(year)-\(month)-\(day)"
+    
+    print(currentDate)
+    return currentDate
+}
+
+func stringToDate(myDate: String) -> Date? {
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    dateFormatter.timeZone = TimeZone.current
+    dateFormatter.locale = Locale.current
+    return dateFormatter.date(from: myDate)
+    
+}
+
+
 func getYear(myDate: String) -> Int {
     let calendar = Calendar.current
-    let components = calendar.dateComponents([.year, .month, .day], from: stringToDate(date: myDate))
-    
-    if let year = Int(String(components.year!)) {
-        return year
-    } else {
-        return 0
+    if let date = stringToDate(myDate: myDate){
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        if let year = Int(String(components.year!)) {
+            return year
+        }
     }
+    return 0
 }
 
-func stringToDate(date: String) -> Date {
-    print(date)
-    let dateFormatter = ISO8601DateFormatter()
-    let date = dateFormatter.date(from:date)!
-    
-    return date
+func getYear(myDate: Date) -> Int {
+     let calendar = Calendar.current
+    let components = calendar.dateComponents([.year, .month, .day], from: myDate)
+    let year = Int(String(components.year!)) ?? 0
+    return year
 }
 
-func dateToString(date: Date) -> String {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    
-    let myString = formatter.string(from: date)
-    let yourDate = formatter.date(from: myString)
-    formatter.dateFormat = "dd-MMM-yyyy"
-    let myStringafd = formatter.string(from: yourDate!)
-    
-    print(myStringafd)
-    return myStringafd
-}
+
+print(Date())
+print(getFormattedDate())
+let dateRN = getFormattedDate()
+
+stringToDate(myDate: "2019-02-12")
 
 
 

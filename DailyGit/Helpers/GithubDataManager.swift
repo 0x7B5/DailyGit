@@ -101,7 +101,7 @@ public class GithubDataManager {
     
     func setupContributions(startDay: String, username: String, completion: @escaping (ContributionList?) -> ())  {
         var year = DateHelper.shared.getYear(myDate: startDay)
-        var currentYear = DateHelper.shared.getYear(myDate: Date())
+        var currentYear = DateHelper.shared.getYear(myDate: DateHelper.shared.getFormattedDate())
         
         var contList = [Contribution]()
         getGithubSource(username: username, completion: {

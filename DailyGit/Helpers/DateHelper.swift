@@ -36,13 +36,11 @@ public class DateHelper {
     }
     
     func stringToDate(myDate: String) -> Date? {
-        
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale.current
         return dateFormatter.date(from: myDate)
-        
     }
     
     
