@@ -33,7 +33,7 @@ public class GithubDataManager {
                             completion(true)
                         }
                     }
-                } catch let jsonErr {
+                } catch _ {
                     completion(false)
                 }
             }.resume()
@@ -89,7 +89,7 @@ public class GithubDataManager {
                             })
                         }
                     }
-                } catch let jsonErr {
+                } catch _ {
                     completion(nil)
                 }
             }.resume()
@@ -133,7 +133,7 @@ public class GithubDataManager {
                     contList.append(aContribution)
                     weeksCount += 1
                 }
-                print("weeksCount \(weeksCount)")
+                print("weeksCount \(counter)")
                 completion(ContributionList(contributions: contList))
             }
         })
@@ -155,7 +155,7 @@ public class GithubDataManager {
                         return
                     }
                     completion(htmlString, nil)
-                } catch let err {
+                } catch  {
                     completion(nil, err)
                 }
             }.resume()

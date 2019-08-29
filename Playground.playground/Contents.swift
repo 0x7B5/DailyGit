@@ -4,14 +4,14 @@ import SwiftSoup
 var str = "Hello, playground"
 
 func setupContributions(startDay: String, username: String, completion: () -> ()) {
-   
+    
     
     var year = getYear(myDate: startDay)
-    
-    var currentYear = getYear(myDate: Date())
+    var currentYear = getYear(myDate: getFormattedDate())
     
     //user created account this year
     if year == currentYear {
+        print("same")
         getGithubSource(username: username, completion: {
             source, err in
             if let pageSource = source {
@@ -38,14 +38,51 @@ func setupContributions(startDay: String, username: String, completion: () -> ()
         })
     } else {
         for i in year...currentYear {
-            
+            print(i)
+            getGithubSourceForYear(username: username, year: i, completion: {
+                source in
+                if let pageSource = source {
+                    guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return
+                    }
+                    guard let commitElements = try? doc.select("[class=day]") else { return
+                    }
+                    
+                    for i in commitElements {
+                        let date = try? i.attr("data-date")
+                        //print("date + \(date)")
+                        if date == nil {
+                            continue
+                        }
+                        
+//                        if getYear(myDate: date!) != year {
+//                           // continue
+//                        }
+                        
+
+                        let commitsCount = try? i.attr("data-count")
+                        let fillColor = try? i.attr("fill")
+                        
+                        print(date!)
+                        //print("Commits: \(commitsCount)")
+                        
+                        if Calendar.current.isDateInToday(stringToDate(myDate: date!)) {
+                            print("yuh yuh")
+                            break
+                        }
+                        
+                    }
+                }
+            })
         }
     }
     
 }
 
+//https://github.com/vlad-munteanu?tab=overview&from=2018-12-01&to=2018-12-31
+//Default website is fine for current year
+
 func getGithubSourceForYear(username: String, year: Int, completion: @escaping (String?) -> ()) {
-    if let url = URL(string: "https://github.com/\(username)") {
+    if let url = URL(string: "https://github.com/\(username)?tab=overview&from=\(year)-12-01&to=\(year)-12-31") {
         URLSession.shared.dataTask(with: url) { (data, response, err) in
             guard let data = data else {
                 completion(nil)
@@ -111,41 +148,41 @@ func getFormattedDate() -> String {
     return currentDate
 }
 
-func stringToDate(myDate: String) -> Date? {
+func stringToDate(myDate: String) -> Date {
     
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
-    dateFormatter.timeZone = TimeZone.current
-    dateFormatter.locale = Locale.current
-    return dateFormatter.date(from: myDate)
     
+    if dateFormatter.date(from: myDate) == nil {
+        return Date()
+    }
+    
+    return dateFormatter.date(from: myDate)!
 }
 
 
 func getYear(myDate: String) -> Int {
     let calendar = Calendar.current
-    if let date = stringToDate(myDate: myDate){
-        let components = calendar.dateComponents([.year, .month, .day], from: date)
-        if let year = Int(String(components.year!)) {
-            return year
-        }
+    let date = stringToDate(myDate: myDate)
+    let components = calendar.dateComponents([.year, .month, .day], from: date)
+    if let year = Int(String(components.year!)) {
+        return year
     }
+    
     return 0
 }
 
 func getYear(myDate: Date) -> Int {
-     let calendar = Calendar.current
+    let calendar = Calendar.current
     let components = calendar.dateComponents([.year, .month, .day], from: myDate)
     let year = Int(String(components.year!)) ?? 0
     return year
 }
 
+stringToDate(myDate: "2018-04-12")
 
-print(Date())
-print(getFormattedDate())
-let dateRN = getFormattedDate()
-
-stringToDate(myDate: "2019-02-12")
-
+setupContributions(startDay: "2018-04-12", username: "vlad-munteanu", completion: {
+    
+})
 
 

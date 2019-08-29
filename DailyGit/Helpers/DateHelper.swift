@@ -34,29 +34,33 @@ public class DateHelper {
         print(currentDate)
         return currentDate
     }
-    
-    func stringToDate(myDate: String) -> Date? {
+
+    func stringToDate(myDate: String) -> Date {
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale.current
-        return dateFormatter.date(from: myDate)
+        
+        if dateFormatter.date(from: myDate) == nil {
+            return Date()
+        }
+        
+        return dateFormatter.date(from: myDate)!
     }
-    
-    
+
+
     func getYear(myDate: String) -> Int {
         let calendar = Calendar.current
-        if let date = stringToDate(myDate: myDate){
-            let components = calendar.dateComponents([.year, .month, .day], from: date)
-            if let year = Int(String(components.year!)) {
-                return year
-            }
+        let date = stringToDate(myDate: myDate)
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        if let year = Int(String(components.year!)) {
+            return year
         }
+        
         return 0
     }
-    
+
     func getYear(myDate: Date) -> Int {
-         let calendar = Calendar.current
+        let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: myDate)
         let year = Int(String(components.year!)) ?? 0
         return year
