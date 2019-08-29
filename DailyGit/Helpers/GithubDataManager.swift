@@ -105,8 +105,10 @@ public class GithubDataManager {
         
         print("Start DAY: \(year)")
         var contList = [Contribution]()
+        let myGroup = DispatchGroup()
         
         for i in year...currentYear {
+            myGroup.enter()
             print(i)
             getGithubSourceForYear(username: username, year: i, completion: {
                 source in
@@ -128,15 +130,21 @@ public class GithubDataManager {
                         let fillColor = try? i.attr("fill")
                         
                         let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0"))
+                        print(aContribution)
                         contList.append(aContribution)
                         
                         print(date!)
                     }
                 }
+                myGroup.leave()
             })
             
-            print(contList)
-            completion(ContributionList(contributions: contList))
+           
+            myGroup.notify(queue: .main) {
+                print("DONE ")
+               print(contList)
+               completion(ContributionList(contributions: contList))
+            }
             
             
         }
