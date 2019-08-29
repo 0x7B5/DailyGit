@@ -100,44 +100,72 @@ public class GithubDataManager {
     #warning("html parsing only shows commits from past year")
     
     func setupContributions(startDay: String, username: String, completion: @escaping (ContributionList?) -> ())  {
-        var year = DateHelper.shared.getYear(myDate: startDay)
-        var currentYear = DateHelper.shared.getYear(myDate: DateHelper.shared.getFormattedDate())
+        let year = DateHelper.shared.getYear(myDate: startDay)
+        let currentYear = DateHelper.shared.getYear(myDate: DateHelper.shared.getFormattedDate())
         
         var contList = [Contribution]()
-        getGithubSource(username: username, completion: {
-            source, err in
-            if let pageSource = source {
-                guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return
-                    completion(nil) }
-                guard let commitElements = try? doc.select("[class=day]") else { return
-                    completion(nil) }
-                
-                var counter = 0
-                var weeksCount =  0
-                for i in commitElements {
-                    
-                    if weeksCount%7 == 0 {
-                        counter += 1
-                    }
-                    
-                    let date = try? i.attr("data-date")
-                    if date == nil {
-                        continue
-                    }
-                    
-                    let commitsCount = try? i.attr("data-count")
-                    let fillColor = try? i.attr("fill")
-                    
-                    let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0"))
-                    
-                    contList.append(aContribution)
-                    weeksCount += 1
-                }
-                print("weeksCount \(counter)")
-                completion(ContributionList(contributions: contList))
-            }
-        })
         
+        for i in year...currentYear {
+            print(i)
+            getGithubSourceForYear(username: username, year: i, completion: {
+                source in
+                if let pageSource = source {
+                    guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return
+                    }
+                    guard let commitElements = try? doc.select("[class=day]") else { return
+                    }
+                    
+                    for i in commitElements {
+                        let date = try? i.attr("data-date")
+                        //print("date + \(date)")
+                        if date == nil {
+                            continue
+                        }
+                        
+                        //                        if getYear(myDate: date!) != year {
+                        //                           // continue
+                        //                        }
+                        
+                        let commitsCount = try? i.attr("data-count")
+                        let fillColor = try? i.attr("fill")
+                        
+                        let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0"))
+                        contList.append(aContribution)
+                        
+                        print(date!)
+                        
+                        if Calendar.current.isDateInToday(DateHelper.shared.stringToDate(myDate: date!)) {
+                            print("yuh yuh")
+                            break
+                        }
+                    }
+                }
+            })
+        }
+        completion(ContributionList(contributions: contList))
+        
+    }
+    
+    func getGithubSourceForYear(username: String, year: Int, completion: @escaping (String?) -> ()) {
+        if let url = URL(string: "https://github.com/\(username)?tab=overview&from=\(year)-12-01&to=\(year)-12-31") {
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
+                guard let data = data else {
+                    completion(nil)
+                    return
+                }
+                // This has to throw an error
+                do {
+                    guard let htmlString = String(data: data, encoding: .utf8) else {
+                        print("couldn't cast data into String")
+                        completion(nil)
+                        return
+                    }
+                    completion(htmlString)
+                } catch let err {
+                    completion(nil)
+                }
+            }.resume()
+        }
     }
     
     func getGithubSource(username: String, completion: @escaping (String?, Error?) -> ()) {

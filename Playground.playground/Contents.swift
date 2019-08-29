@@ -31,7 +31,7 @@ func setupContributions(startDay: String, username: String, completion: () -> ()
                     let fillColor = try? i.attr("fill")
                     
                     print(date)
-                    print("Commits: \(commitsCount)")
+                    print("Commits: \(String(describing: commitsCount))")
                     print()
                 }
             }
@@ -186,3 +186,11 @@ setupContributions(startDay: "2018-04-12", username: "vlad-munteanu", completion
 })
 
 
+
+
+let dateFormatter = DateFormatter()
+
+dateFormatter.dateFormat = "2018-04-12T14:47:49Z"
+
+let updatedAtStr = "2018-04-12T14:47:49Z"
+let updatedAt = dateFormatter.date(from: updatedAtStr)
