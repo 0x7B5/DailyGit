@@ -103,6 +103,7 @@ public class GithubDataManager {
         let year = DateHelper.shared.getYear(myDate: startDay)
         let currentYear = DateHelper.shared.getYear(myDate: DateHelper.shared.getFormattedDate())
         
+        print("Start DAY: \(year)")
         var contList = [Contribution]()
         
         for i in year...currentYear {
@@ -110,6 +111,7 @@ public class GithubDataManager {
             getGithubSourceForYear(username: username, year: i, completion: {
                 source in
                 if let pageSource = source {
+                    //print(pageSource)
                     guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return
                     }
                     guard let commitElements = try? doc.select("[class=day]") else { return
@@ -117,15 +119,11 @@ public class GithubDataManager {
                     
                     for i in commitElements {
                         let date = try? i.attr("data-date")
-                        //print("date + \(date)")
+                       //print("date + \(date)")
                         if date == nil {
                             continue
                         }
-                        
-                        //                        if getYear(myDate: date!) != year {
-                        //                           // continue
-                        //                        }
-                        
+                    
                         let commitsCount = try? i.attr("data-count")
                         let fillColor = try? i.attr("fill")
                         
@@ -133,16 +131,16 @@ public class GithubDataManager {
                         contList.append(aContribution)
                         
                         print(date!)
-                        
-                        if Calendar.current.isDateInToday(DateHelper.shared.stringToDate(myDate: date!)) {
-                            print("yuh yuh")
-                            break
-                        }
                     }
                 }
             })
+            
+            print(contList)
+            completion(ContributionList(contributions: contList))
+            
+            
         }
-        completion(ContributionList(contributions: contList))
+        
         
     }
     
