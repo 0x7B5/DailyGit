@@ -89,9 +89,9 @@ public class GithubDataManager {
                                 
                                
                                 
-                                let myImage = UIImage(data: data)
+                                let myImage = UIImage(data: data)!.roundImage()
                                 
-                                self.saveImage(imageName: "ProfilePic", image: myImage!)
+                                self.saveImage(imageName: "ProfilePic", image: myImage)
                                 
                                 
                                 if let tempName = json["name"] as? String {
@@ -276,3 +276,5 @@ public class GithubDataManager {
     }
     
 }
+
+

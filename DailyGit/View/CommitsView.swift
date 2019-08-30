@@ -60,6 +60,8 @@ public class CommitsView: UIView {
             //$0.top.equalToSuperview().inset(topLayout+30)
             $0.centerY.equalToSuperview().multipliedBy(0.35)
         }
+       
+        
         nameLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.4)
             $0.left.equalTo(profileImage.snp.right).offset(10)
@@ -138,7 +140,6 @@ public class CommitsView: UIView {
        // view.image = #imageLiteral(resourceName: "sampleIcon")
         
         view.image = ReadUserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic")
-        
         
         return view
         
@@ -270,3 +271,4 @@ public class CommitsView: UIView {
     
     
 }
+

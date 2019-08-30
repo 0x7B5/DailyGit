@@ -17,6 +17,7 @@ class MainVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         setupInfo()
     }
     override func loadView() {
@@ -64,3 +65,5 @@ class MainVC: UIViewController {
     }
     
 }
+
+

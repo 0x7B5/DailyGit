@@ -9,14 +9,18 @@
 import Foundation
 import UIKit
 
-extension UIImage{
-    class func roundedRectImageFromImage(image:UIImage,imageSize:CGSize,cornerRadius:CGFloat)->UIImage{
-        UIGraphicsBeginImageContextWithOptions(imageSize,false,0.0)
-        let bounds=CGRect(origin: CGPoint.zero, size: imageSize)
+extension UIImage
+{
+    func roundImage() -> UIImage
+    {
+        let newImage = self.copy() as! UIImage
+        let cornerRadius = self.size.height/2
+        UIGraphicsBeginImageContextWithOptions(self.size, false, 1.0)
+        let bounds = CGRect(origin: CGPoint.zero, size: self.size)
         UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).addClip()
-        image.draw(in: bounds)
-        let finalImage=UIGraphicsGetImageFromCurrentImageContext()!
+        newImage.draw(in: bounds)
+        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return finalImage
+        return finalImage!
     }
 }
