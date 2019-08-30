@@ -39,20 +39,81 @@ public class ReadUserInfoHelper {
         return ""
     }
     
-    func getDailyCommits(completion: @escaping (Int) -> ())  {
+    func getDailyCommits(completion: @escaping () -> ())  {
         GithubDataManager.shared.updateInfo(completion: {
             //have to re-pull data from github
             let date = DateHelper.shared.getFormattedDate()
             let currentContributions = self.readInfo(info: .contributions) as? ContributionList
             
+            
             for i in currentContributions!.contributions {
                 if i.date == date {
-                    completion(i.count)
-                    print(i)
+                    self.defaults.set(i.count, forKey: "DailyCommits")
+                    self.defaults.synchronize()
+                    completion()
+                    //print(i)
                 }
             }
         })
     }
+    
+    func getCurrentStreak() {
+        let currentContributions = readInfo(info: .contributions) as? ContributionList
+        let date = DateHelper.shared.getFormattedDate()
+        
+        var counter = 0
+        var countingYet = false
+        
+        for i in currentContributions!.contributions {
+            if countingYet {
+                if i.count > 0 {
+                    //print(i)
+                    counter += 1
+                } else {
+                    break
+                }
+            } else if i.date == date {
+                countingYet = true
+            }
+        }
+        self.defaults.set(counter, forKey: "CurrentStreak")
+        self.defaults.synchronize()
+        print("CURRENT STREAK: \(counter)")
+    }
+    
+    func getLongestStreak() {
+        let currentContributions = readInfo(info: .contributions) as? ContributionList
+        
+        
+        var counter = 0
+        var maxStreaks = 0
+        
+        for i in currentContributions!.contributions {
+            //print(i)
+                if i.count > 0 {
+                    counter += 1
+                    //print(i.date + "\\\\\(i.count)")
+                } else {
+                    if counter > maxStreaks {
+                        maxStreaks = counter
+                    }
+                    counter = 0
+                    //print("---------------------------")
+                }
+        }
+        self.defaults.set(counter, forKey: "LongestStreak")
+        self.defaults.synchronize()
+        print("Longest Streak: ", maxStreaks)
+    }
+    
+    func refreshEverything() {
+        getDailyCommits {
+            self.getCurrentStreak()
+            self.getLongestStreak()
+        }
+    }
+    
+    
     
     
     

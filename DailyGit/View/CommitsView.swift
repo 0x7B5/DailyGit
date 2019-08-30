@@ -175,7 +175,13 @@ public class CommitsView: UIView {
         }
         
         label.adjustsFontSizeToFitWidth = true
-        label.text = "0"
+        
+        if (UserDefaults.standard.object(forKey: "DailyCommits") != nil) {
+             label.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
+        } else {
+             label.text = "0"
+        }
+    
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label
@@ -210,7 +216,12 @@ public class CommitsView: UIView {
             label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
         }
         label.adjustsFontSizeToFitWidth = true
-        label.text = "0 days 🔥"
+        if (UserDefaults.standard.object(forKey: "CurrentStreak") != nil) {
+             label.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
+        } else {
+             label.text = "0 days 🔥"
+        }
+        
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label
@@ -227,7 +238,11 @@ public class CommitsView: UIView {
             label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
         }
         label.adjustsFontSizeToFitWidth = true
-        label.text = "0 days 🔥"
+        if (UserDefaults.standard.object(forKey: "LongestStreak") != nil) {
+             label.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
+        } else {
+             label.text = "0 days 🔥"
+        }
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label

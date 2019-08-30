@@ -9,9 +9,6 @@
 import UIKit
 
 class MainVC: UIViewController {
-    
-    
-    
     #warning("Kind of hacky and potentially dangerous")
     lazy var mainView = CommitsView(topLayout: self.navigationController!.navigationBar.frame.height)
     
@@ -25,18 +22,18 @@ class MainVC: UIViewController {
         if Constants.isIpad == true {
             print("iPad")
         }
-      CommitsStreakManager.shared.getCurrentStreak()
-        CommitsStreakManager.shared.getLongestStreak()
+        ReadUserInfoHelper.shared.getCurrentStreak()
+        ReadUserInfoHelper.shared.getLongestStreak()
+        print("STREAKS")
     }
     
     func setupInfo() {
         mainView.nameLabel.text = (ReadUserInfoHelper.shared.readInfo(info: .name) as! String)
         mainView.bioLabel.text = (ReadUserInfoHelper.shared.readInfo(info: .bio) as! String)
         
-       ReadUserInfoHelper.shared.getDailyCommits(completion: {
-            commits in
+        ReadUserInfoHelper.shared.getDailyCommits(completion: {
             DispatchQueue.main.async { [weak self] in
-                self!.mainView.dailyCommitsLabel.text = String(commits)
+                self!.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
             }
         })
         
@@ -44,7 +41,7 @@ class MainVC: UIViewController {
     
     func setupNavController() {
         self.title = "Commits"
-    //self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
+        //self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refresh))
     }
@@ -53,9 +50,8 @@ class MainVC: UIViewController {
         print("refresh")
         if Reachability.shared.isConnectedToNetwork() {
             ReadUserInfoHelper.shared.getDailyCommits(completion: {
-                commits in
                 DispatchQueue.main.async { [weak self] in
-                    self!.mainView.dailyCommitsLabel.text = String(commits)
+                    self!.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
                 }
             })
         } else {

@@ -31,7 +31,7 @@ public class DateHelper {
         
         let currentDate = "\(year)-\(month)-\(day)"
         
-        print(currentDate)
+        //print(currentDate)
         return currentDate
     }
 

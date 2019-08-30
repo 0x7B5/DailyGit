@@ -81,7 +81,7 @@ public class GithubDataManager {
                                 contributions in
                                 if contributions != nil {
                                     let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!)
-                                    print(user)
+                                   // print(user)
                                     completion(user)
                                 } else {
                                     completion(nil)
@@ -103,13 +103,12 @@ public class GithubDataManager {
         let year = DateHelper.shared.getYear(myDate: startDay)
         let currentYear = DateHelper.shared.getYear(myDate: DateHelper.shared.getFormattedDate())
         
-        print("Start DAY: \(year)")
+        //print("Start DAY: \(year)")
         var contList = [Contribution]()
         let myGroup = DispatchGroup()
         
         for i in year...currentYear {
             myGroup.enter()
-            print(i)
             getGithubSourceForYear(username: username, year: i, completion: {
                 source in
                 if let pageSource = source {
@@ -130,10 +129,10 @@ public class GithubDataManager {
                         let fillColor = try? i.attr("fill")
                         
                         let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0"))
-                        print(aContribution)
+                       
                         contList.append(aContribution)
                         
-                        print(date!)
+                        //print(date!)
                     }
                 }
                 myGroup.leave()
@@ -141,8 +140,6 @@ public class GithubDataManager {
             
            
             myGroup.notify(queue: .main) {
-                print("DONE ")
-               print(contList)
                completion(ContributionList(contributions: contList))
             }
             
