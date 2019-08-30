@@ -12,9 +12,15 @@ class MainVC: UIViewController {
     #warning("Kind of hacky and potentially dangerous")
     lazy var mainView = CommitsView(topLayout: self.navigationController!.navigationBar.frame.height)
     
+    override func viewDidLayoutSubviews() {
+        self.mainView.bioLabel.sizeToFit()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+       setupInfo()
+    }
     override func loadView() {
         self.view = mainView
-        setupInfo()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +28,7 @@ class MainVC: UIViewController {
         if Constants.isIpad == true {
             print("iPad")
         }
-         updateInfo()
+        updateInfo()
     }
     
     func setupInfo() {
@@ -36,6 +42,7 @@ class MainVC: UIViewController {
         mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
         mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
         mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
+        self.viewDidLayoutSubviews()
     }
     
     func setupNavController() {

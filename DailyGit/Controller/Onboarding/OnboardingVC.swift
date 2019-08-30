@@ -48,6 +48,7 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                             self!.present(alert, animated: true)
                         } else {
+                            ReadUserInfoHelper.shared.resetDefaults()
                             let encoder = JSONEncoder()
                             if let encoded = try? encoder.encode(user) {
                                 let defaults = UserDefaults.standard

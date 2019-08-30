@@ -65,12 +65,9 @@ public class ReadUserInfoHelper {
         var countingYet = false
         
         for i in currentContributions!.contributions.reversed() {
-            //print(i)
             if countingYet {
                 if i.count > 0 {
-                    print(i.date)
                     counter += 1
-                    //print(i.date + "\\\\\(i.count)")
                 } else {
                     break
                 }
@@ -93,15 +90,12 @@ public class ReadUserInfoHelper {
     func getLongestStreak() {
         let currentContributions = readInfo(info: .contributions) as? ContributionList
         
-        
         var counter = 0
         var maxStreaks = 0
         
         for i in currentContributions!.contributions {
-            //print(i)
                 if i.count > 0 {
                     counter += 1
-                    //print(i.date + "\\\\\(i.count)")
                 } else {
                     if counter > maxStreaks {
                         maxStreaks = counter
@@ -119,6 +113,14 @@ public class ReadUserInfoHelper {
         getDailyCommits {
             self.getCurrentStreak()
             self.getLongestStreak()
+        }
+    }
+    
+    func resetDefaults() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
         }
     }
     

@@ -70,8 +70,10 @@ public class CommitsView: UIView {
         bioLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.6)
             $0.left.equalTo(profileImage.snp.right).offset(10)
-            $0.top.equalTo(nameLabel.snp.bottom).offset(10)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(6)
+            $0.height.equalTo(profileImage.snp.height).multipliedBy(1.2)
         }
+      //  bioLabel.sizeToFit()
         
         todayLabel.snp.makeConstraints {
             $0.left.equalTo(profileImage.snp.left)
