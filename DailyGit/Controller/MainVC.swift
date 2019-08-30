@@ -22,21 +22,20 @@ class MainVC: UIViewController {
         if Constants.isIpad == true {
             print("iPad")
         }
-        ReadUserInfoHelper.shared.getCurrentStreak()
-        ReadUserInfoHelper.shared.getLongestStreak()
-        print("STREAKS")
+         updateInfo()
     }
     
     func setupInfo() {
         mainView.nameLabel.text = (ReadUserInfoHelper.shared.readInfo(info: .name) as! String)
         mainView.bioLabel.text = (ReadUserInfoHelper.shared.readInfo(info: .bio) as! String)
-        
-        ReadUserInfoHelper.shared.getDailyCommits(completion: {
-            DispatchQueue.main.async { [weak self] in
-                self!.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
-            }
-        })
-        
+        updateInfo()
+    }
+    
+    func updateInfo() {
+        ReadUserInfoHelper.shared.refreshEverything()
+        mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
+        mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
+        mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
     }
     
     func setupNavController() {
@@ -49,11 +48,7 @@ class MainVC: UIViewController {
     @objc func refresh() {
         print("refresh")
         if Reachability.shared.isConnectedToNetwork() {
-            ReadUserInfoHelper.shared.getDailyCommits(completion: {
-                DispatchQueue.main.async { [weak self] in
-                    self!.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
-                }
-            })
+            updateInfo()
         } else {
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))

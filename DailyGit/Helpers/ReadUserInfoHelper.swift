@@ -64,18 +64,27 @@ public class ReadUserInfoHelper {
         var counter = 0
         var countingYet = false
         
-        for i in currentContributions!.contributions {
+        for i in currentContributions!.contributions.reversed() {
+            //print(i)
             if countingYet {
                 if i.count > 0 {
-                    //print(i)
+                    print(i.date)
                     counter += 1
+                    //print(i.date + "\\\\\(i.count)")
                 } else {
                     break
                 }
-            } else if i.date == date {
-                countingYet = true
             }
+            
+            if i.date == date {
+                countingYet = true
+                if i.count > 0 {
+                    counter += 1
+                }
+            }
+            
         }
+        
         self.defaults.set(counter, forKey: "CurrentStreak")
         self.defaults.synchronize()
         print("CURRENT STREAK: \(counter)")
@@ -101,7 +110,7 @@ public class ReadUserInfoHelper {
                     //print("---------------------------")
                 }
         }
-        self.defaults.set(counter, forKey: "LongestStreak")
+        self.defaults.set(maxStreaks, forKey: "LongestStreak")
         self.defaults.synchronize()
         print("Longest Streak: ", maxStreaks)
     }
