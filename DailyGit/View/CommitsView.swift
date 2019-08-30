@@ -51,6 +51,18 @@ public class CommitsView: UIView {
         addSubview(longestStreakCommitsLabel)
     }
     
+    func checkAllignmentForTitle() {
+        if ReadUserInfoHelper.shared.readInfo(info: .bio) as? String == "" {
+            nameLabel.textAlignment = .center
+            nameLabel.snp.makeConstraints{
+                $0.width.equalToSuperview().multipliedBy(0.4)
+                $0.centerX.equalToSuperview()
+                $0.height.equalToSuperview().multipliedBy(0.045)
+                $0.centerY.equalToSuperview().multipliedBy(0.34)
+            }
+        }
+    }
+    
     public func createConstraints() {
         profileImage.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.24)
@@ -60,14 +72,15 @@ public class CommitsView: UIView {
             //$0.top.equalToSuperview().inset(topLayout+30)
             $0.centerY.equalToSuperview().multipliedBy(0.35)
         }
-       
+        
         
         nameLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.4)
             $0.left.equalTo(profileImage.snp.right).offset(10)
             $0.height.equalToSuperview().multipliedBy(0.045)
-            $0.centerY.equalToSuperview().multipliedBy(0.26)
+            $0.centerY.equalToSuperview().multipliedBy(0.27)
         }
+        
         
         bioLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.6)
@@ -137,7 +150,7 @@ public class CommitsView: UIView {
         //view.layer.cornerRadius = view.frame.height/2
         view.contentMode = .scaleAspectFit
         //Provide default image
-       // view.image = #imageLiteral(resourceName: "sampleIcon")
+        // view.image = #imageLiteral(resourceName: "sampleIcon")
         
         view.image = ReadUserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic")
         
