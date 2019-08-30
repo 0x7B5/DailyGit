@@ -158,11 +158,12 @@ public class CommitsView: UIView {
             label.font = UIFont.systemFont(ofSize: 30.0)
         }
         
-        label.adjustsFontSizeToFitWidth = true
+        label.adjustsFontSizeToFitWidth = false
         label.text = ""
-        label.numberOfLines = 0
+        label.numberOfLines = 4
         label.textAlignment = .left
         label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     //TODAY VIEW

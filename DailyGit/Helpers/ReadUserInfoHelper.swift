@@ -109,10 +109,11 @@ public class ReadUserInfoHelper {
         print("Longest Streak: ", maxStreaks)
     }
     
-    func refreshEverything() {
+    func refreshEverything(completion: @escaping () -> ()) {
         getDailyCommits {
             self.getCurrentStreak()
             self.getLongestStreak()
+            completion()
         }
     }
     

@@ -17,7 +17,7 @@ class MainVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       setupInfo()
+        setupInfo()
     }
     override func loadView() {
         self.view = mainView
@@ -28,7 +28,6 @@ class MainVC: UIViewController {
         if Constants.isIpad == true {
             print("iPad")
         }
-        updateInfo()
     }
     
     func setupInfo() {
@@ -38,11 +37,12 @@ class MainVC: UIViewController {
     }
     
     func updateInfo() {
-        ReadUserInfoHelper.shared.refreshEverything()
-        mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
-        mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
-        mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
-        self.viewDidLayoutSubviews()
+        ReadUserInfoHelper.shared.refreshEverything(completion: {
+            self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
+            self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
+            self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
+        })
+        
     }
     
     func setupNavController() {
