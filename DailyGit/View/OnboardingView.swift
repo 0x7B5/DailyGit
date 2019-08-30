@@ -143,7 +143,7 @@ public class OnboardingView: UIView {
     //GitHub profile pic
     let githubPhoto: UIImageView = {
         let photo = UIImageView()
-        photo.image = #imageLiteral(resourceName: "Screen Shot 2019-08-11 at 7.24.39 PM")
+        photo.image = UIImage(named: "samplePage")
         photo.contentMode = .scaleAspectFit
         return photo
     }()

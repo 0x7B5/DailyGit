@@ -111,6 +111,7 @@ public class ReadUserInfoHelper {
     }
     
     func refreshEverything(completion: @escaping () -> ()) {
+        
         getDailyCommits {
             self.getCurrentStreak()
             self.getLongestStreak()
