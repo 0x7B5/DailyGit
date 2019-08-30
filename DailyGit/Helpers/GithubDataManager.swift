@@ -40,6 +40,10 @@ public class GithubDataManager {
         }
         
     }
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
     
     func setupGithubUser(username: String, completion: @escaping (User?) -> ())  {
         //https://api.github.com/users/
@@ -59,6 +63,14 @@ public class GithubDataManager {
                             completion(nil)
                         }
                         
+                        if (json["avatar-url"] as? String == "Not Found") {
+                            completion(nil)
+                        }
+                        
+                        let avatar_url = json["avatar-url"] as? String
+                        
+                        
+                        
                         var bio = ""
                         var name = ""
                         
@@ -70,25 +82,42 @@ public class GithubDataManager {
                         //let name = json["name"] as? String,
                         if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String, let creationDate = json["created_at"] as? String{
                             
-                            if let tempName = json["name"] as? String {
-                                name = tempName
-                            } else {
-                                name = myUsername
-                            }
-                            
-                            #warning("Fix setup contributions")
-                            self.setupContributions(startDay: creationDate, username: myUsername, completion: {
-                                contributions in
-                                if contributions != nil {
-                                    let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!)
-                                   // print(user)
-                                    completion(user)
+                            self.getData(from: URL(string: photourl)!) { data, response, error in
+                                guard let data = data, error == nil else { return }
+                                print(response?.suggestedFilename ?? url.lastPathComponent)
+                                print("Download Finished")
+                                
+                               
+                                
+                                let myImage = UIImage(data: data)
+                                
+                                self.saveImage(imageName: "ProfilePic", image: myImage!)
+                                
+                                
+                                if let tempName = json["name"] as? String {
+                                    name = tempName
                                 } else {
-                                    completion(nil)
+                                    name = myUsername
                                 }
-                            })
+                                
+                                #warning("Fix setup contributions")
+                                self.setupContributions(startDay: creationDate, username: myUsername, completion: {
+                                    contributions in
+                                    if contributions != nil {
+                                        let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!)
+                                        // print(user)
+                                        completion(user)
+                                    } else {
+                                        completion(nil)
+                                    }
+                                })
+                            }
                         }
+                        
                     }
+                    
+                    
+                    
                 } catch _ {
                     completion(nil)
                 }
@@ -120,16 +149,16 @@ public class GithubDataManager {
                     
                     for i in commitElements {
                         let date = try? i.attr("data-date")
-                       //print("date + \(date)")
+                        //print("date + \(date)")
                         if date == nil {
                             continue
                         }
-                    
+                        
                         let commitsCount = try? i.attr("data-count")
                         let fillColor = try? i.attr("fill")
                         
                         let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0"))
-                       
+                        
                         contList.append(aContribution)
                         
                         //print(date!)
@@ -138,9 +167,9 @@ public class GithubDataManager {
                 myGroup.leave()
             })
             
-           
+            
             myGroup.notify(queue: .main) {
-               completion(ContributionList(contributions: contList))
+                completion(ContributionList(contributions: contList))
             }
             
             
@@ -193,6 +222,36 @@ public class GithubDataManager {
         }
         
     }
+    
+   func saveImage(imageName: String, image: UIImage) {
+
+
+     guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+
+        let fileName = imageName
+        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+        guard let data = image.jpegData(compressionQuality: 1) else { return }
+
+        //Checks if file exists, removes it if so.
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                try FileManager.default.removeItem(atPath: fileURL.path)
+                print("Removed old image")
+            } catch let removeError {
+                print("couldn't remove file at path", removeError)
+            }
+
+        }
+
+        do {
+            try data.write(to: fileURL)
+        } catch let error {
+            print("error saving file with error", error)
+        }
+
+    }
+
+
     
     func getGithubCommits(username: String, completion: (() -> ())?) -> String {
         

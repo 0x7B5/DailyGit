@@ -73,7 +73,7 @@ public class CommitsView: UIView {
             $0.top.equalTo(nameLabel.snp.bottom).offset(6)
             $0.height.equalTo(profileImage.snp.height).multipliedBy(1.2)
         }
-      //  bioLabel.sizeToFit()
+        //  bioLabel.sizeToFit()
         
         todayLabel.snp.makeConstraints {
             $0.left.equalTo(profileImage.snp.left)
@@ -135,8 +135,13 @@ public class CommitsView: UIView {
         //view.layer.cornerRadius = view.frame.height/2
         view.contentMode = .scaleAspectFit
         //Provide default image
-        view.image = #imageLiteral(resourceName: "sampleIcon")
+       // view.image = #imageLiteral(resourceName: "sampleIcon")
+        
+        view.image = ReadUserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic")
+        
+        
         return view
+        
     }()
     
     
@@ -180,11 +185,11 @@ public class CommitsView: UIView {
         label.adjustsFontSizeToFitWidth = true
         
         if (UserDefaults.standard.object(forKey: "DailyCommits") != nil) {
-             label.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
+            label.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
         } else {
-             label.text = "0"
+            label.text = "0"
         }
-    
+        
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return label
@@ -220,9 +225,9 @@ public class CommitsView: UIView {
         }
         label.adjustsFontSizeToFitWidth = true
         if (UserDefaults.standard.object(forKey: "CurrentStreak") != nil) {
-             label.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
+            label.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
         } else {
-             label.text = "0 days 🔥"
+            label.text = "0 days 🔥"
         }
         
         label.textAlignment = .center
@@ -235,16 +240,16 @@ public class CommitsView: UIView {
     
     let longestStreakCommitsLabel: UILabel = {
         let label = UILabel()
-       if Constants.isIpad == false {
+        if Constants.isIpad == false {
             label.font = UIFont.systemFont(ofSize: 40.0, weight: .bold)
         } else {
             label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
         }
         label.adjustsFontSizeToFitWidth = true
         if (UserDefaults.standard.object(forKey: "LongestStreak") != nil) {
-             label.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
+            label.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
         } else {
-             label.text = "0 days 🔥"
+            label.text = "0 days 🔥"
         }
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
