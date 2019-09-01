@@ -38,7 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
             //LoggedIn
-            window?.rootViewController = MainTabBarController()
+            self.window?.rootViewController = MainTabBarController()
+            
         } else {
             //Not Logged In
             let navController = UINavigationController(rootViewController: OnboardingVC())
