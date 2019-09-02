@@ -63,6 +63,10 @@ public class CommitsView: UIView {
         }
     }
     
+    public func setupColorsForWeek(numbers: [Int]) {
+        #warning("implement")
+    }
+    
     public func createConstraints() {
         profileImage.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.24)
