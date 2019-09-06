@@ -21,16 +21,12 @@ struct User: Codable {
     let dateCreated: String
     lazy var currentWeek: ContributionList = {
         
-        
-        
         for i in contributions.contributions.reversed() {
-            
             
         }
         return contributions
         
     }()
-    
     
     #warning("We'll have to update this.")
     

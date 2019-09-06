@@ -35,9 +35,14 @@ public class DateHelper {
         return currentDate
     }
 
-    func stringToDate(myDate: String) -> Date {
+    func stringToDate(myDate: String, IsoFormat: Bool) -> Date {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        if IsoFormat {
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        } else {
+            formatter.dateFormat = "yyyy-MM-dd"
+        }
+        
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.locale = Locale(identifier: "en_US_POSIX")
         
@@ -48,11 +53,39 @@ public class DateHelper {
         }
         return Date()
     }
+    
+    func getDayOfWeek(fromDate date: Date) -> Int {
+        let cal = Calendar(identifier: .gregorian)
+        let dayOfWeek = cal.component(.weekday, from: date)
+        
+        if dayOfWeek != nil {
+            return dayOfWeek
+        }
+        return 0
+//        switch dayOfWeek {
+//         case 1:
+//            return "Sunday"
+//        case 2:
+//            return "Monday"
+//        case 3:
+//            return "Tuesday"
+//        case 4:
+//            return "Wednesday"
+//        case 5:
+//            return "Thursday"
+//        case 6:
+//            return "Friday"
+//        case 7:
+//            return "Saturday"
+//        default:
+//            return nil
+//        }
+    }
 
 
-    func getYear(myDate: String) -> Int {
+    func getYear(myDate: String, isIso: Bool) -> Int {
         let calendar = Calendar.current
-        let date = stringToDate(myDate: myDate)
+        let date = stringToDate(myDate: myDate, IsoFormat: isIso)
         let components = calendar.dateComponents([.year, .month, .day], from: date)
         if let year = Int(String(components.year!)) {
             return year

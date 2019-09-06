@@ -17,5 +17,6 @@ struct Contribution: Codable {
     let count: Int
     //hex color
     let color: String
+    let dayOfWeek: Int
     //let intensity: Int
 }

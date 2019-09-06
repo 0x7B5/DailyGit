@@ -105,7 +105,7 @@ public class GithubDataManager {
                                     contributions in
                                     if contributions != nil {
                                         let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!)
-                                        // print(user)
+                                        print(user)
                                         completion(user)
                                     } else {
                                         completion(nil)
@@ -129,8 +129,8 @@ public class GithubDataManager {
     #warning("html parsing only shows commits from past year")
     
     func setupContributions(startDay: String, username: String, completion: @escaping (ContributionList?) -> ())  {
-        let year = DateHelper.shared.getYear(myDate: startDay)
-        let currentYear = DateHelper.shared.getYear(myDate: DateHelper.shared.getFormattedDate())
+        let year = DateHelper.shared.getYear(myDate: startDay, isIso: true)
+        let currentYear = DateHelper.shared.getYear(myDate: DateHelper.shared.getFormattedDate(), isIso: false)
         
         //print("Start DAY: \(year)")
         var contList = [Contribution]()
@@ -157,7 +157,10 @@ public class GithubDataManager {
                         let commitsCount = try? i.attr("data-count")
                         let fillColor = try? i.attr("fill")
                         
-                        let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0"))
+                        print(DateHelper.shared.stringToDate(myDate: date!, IsoFormat: false))
+                        let currentDay = DateHelper.shared.getDayOfWeek(fromDate:  DateHelper.shared.stringToDate(myDate: date!, IsoFormat: false))
+                        
+                        let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0", dayOfWeek: currentDay ?? 0))
                         
                         contList.append(aContribution)
                         
