@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum ContributionColor {
+    case noCommits, lightCommits, mediumCommits, strongCommits
+}
+
 struct ContributionList: Codable {
     let contributions: [Contribution]
 }
