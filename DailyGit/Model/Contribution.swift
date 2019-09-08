@@ -8,8 +8,11 @@
 
 import Foundation
 
-enum ContributionColor {
-    case noCommits, lightCommits, mediumCommits, strongCommits
+enum ContributionColor: String {
+    case noCommits = "ebedf0"
+    case lightCommits = "c6e48b"
+    case mediumCommits = "7bc96f"
+    case strongCommits = "#239a3b"
 }
 
 struct ContributionList: Codable {
