@@ -13,6 +13,7 @@ enum ContributionColor: String {
     case lightCommits = "c6e48b"
     case mediumCommits = "7bc96f"
     case strongCommits = "239a3b"
+    case extraStrongCommits = "196127"
 }
 
 struct ContributionList: Codable {
