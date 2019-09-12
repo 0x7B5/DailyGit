@@ -19,3 +19,7 @@ let myStringafd = formatter.string(from: yourDate)
 print(myStringafd)
 
 
+let myDecimalNumber = 1.25
+
+
+

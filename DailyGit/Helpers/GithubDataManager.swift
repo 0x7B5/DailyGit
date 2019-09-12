@@ -157,7 +157,8 @@ public class GithubDataManager {
                         let commitsCount = try? i.attr("data-count")
                         let fillColor = try? i.attr("fill")
                         
-                        print(DateHelper.shared.stringToDate(myDate: date!, IsoFormat: false))
+                        
+                       // print(DateHelper.shared.stringToDate(myDate: date!, IsoFormat: false))
                         let currentDay = DateHelper.shared.getDayOfWeek(fromDate:  DateHelper.shared.stringToDate(myDate: date!, IsoFormat: false))
                         
                         let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0", dayOfWeek: currentDay ?? 0))
