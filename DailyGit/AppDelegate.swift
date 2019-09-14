@@ -152,7 +152,7 @@ extension AppDelegate {
                             content.title = "You're a beast!"
                             content.body = "\(commitsCount) contributions so far today."
                         default:
-                            content.title = "You're a beast!"
+                            content.title = "Keep it up!"
                             content.body = "\(commitsCount) contributions so far today."
                         }
                         
