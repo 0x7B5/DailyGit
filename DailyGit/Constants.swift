@@ -16,5 +16,8 @@ public struct Constants {
     static var tabBarColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
     static var isIpad = false
+    
+    #warning("This needs to be able to be changed by the user")
+    static var numberOfNotificationsPerDay = 24
 }
 

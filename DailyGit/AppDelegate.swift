@@ -27,8 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
             //LoggedIn
+            self.handleNotifications()
             self.window?.rootViewController = MainTabBarController()
-            
         } else {
             //Not Logged In
             let navController = UINavigationController(rootViewController: OnboardingVC())
@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             alertController.addAction(cancelAction)
             self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
         }
-    
+        
         #warning("Have to present our own custom alert first here")
         
         return true
@@ -92,7 +92,6 @@ extension AppDelegate {
     
     func handleNotifications() {
         let current = UNUserNotificationCenter.current()
-
         current.getNotificationSettings(completionHandler: { (settings) in
             if settings.authorizationStatus == .notDetermined {
                 // Notification permission has not been asked yet, go for it!
@@ -102,17 +101,80 @@ extension AppDelegate {
                 return
             } else if settings.authorizationStatus == .authorized {
                 // Notification permission was already granted
-                let content = UNMutableNotificationContent()
-                content.title = "Contributions Today"
-                content.body = "Body"
-                content.sound = UNNotificationSound.default
                 
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
                 
-                let request = UNNotificationRequest(identifier: "testIdentifier", content: content, trigger: trigger)
-                
-                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-                
+                if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
+                    
+                    ReadUserInfoHelper.shared.refreshEverything {
+                        //LoggedIn
+                        let content = UNMutableNotificationContent()
+                        content.sound = UNNotificationSound.default
+                        
+                        var trigger: UNTimeIntervalNotificationTrigger
+                        
+                        //var trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                        
+                        if Constants.numberOfNotificationsPerDay <= 24 && Constants.numberOfNotificationsPerDay != 0 {
+                            
+                            trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double((60*60*24)/(Constants.numberOfNotificationsPerDay)), repeats: true)
+                        } else {
+                            //set it once a day
+//                            var dateComponents = DateComponents()
+//                            dateComponents.hour = 10
+//                            dateComponents.minute = 00
+//
+//                            trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                            
+                             trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60*60*24, repeats: true)
+
+                        }
+                        
+                        
+                        let commitsCount = UserDefaults.standard.integer(forKey: "DailyCommits")
+                        
+                        switch commitsCount {
+                        case 0:
+                            content.title = "Work Harder"
+                            content.body = "No commits today, go code."
+                        case 1:
+                            content.title = "Keep it up!"
+                            content.body = "\(commitsCount) contribution so far today."
+                        case 2...3:
+                            content.title = "Keep it up!"
+                            content.body = "\(commitsCount) contributions so far today."
+                        case 4...9:
+                            content.title = "Good Job!"
+                            content.body = "\(commitsCount) contributions so far today."
+                        case 10...19:
+                            content.title = "You're killing it!"
+                            content.body = "\(commitsCount) contributions so far today."
+                        case 20...:
+                            content.title = "You're a beast!"
+                            content.body = "\(commitsCount) contributions so far today."
+                        default:
+                            content.title = "You're a beast!"
+                            content.body = "\(commitsCount) contributions so far today."
+                        }
+                        
+                        
+                        let uuidString = UUID().uuidString
+                        
+                        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
+                        
+                        
+                        
+                        // Schedule the request with the system.
+                        let notificationCenter = UNUserNotificationCenter.current()
+                        notificationCenter.add(request, withCompletionHandler: nil)
+                        
+                        notificationCenter.removeAllPendingNotificationRequests()
+                 
+                    }
+                    
+                    
+                } else {
+                    return
+                }
                 
                 
             }
