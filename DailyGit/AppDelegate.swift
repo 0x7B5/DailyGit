@@ -134,25 +134,25 @@ extension AppDelegate {
                         
                         switch commitsCount {
                         case 0:
-                            content.title = "Work Harder"
-                            content.body = "No commits today, go code."
+                            content.title = "Work Fucking Harder"
+                            content.body = "No commits today, go fucking code."
                         case 1:
-                            content.title = "Keep it up!"
-                            content.body = "\(commitsCount) contribution so far today."
+                            content.title = "Good Fucking Shit!"
+                            content.body = "\(commitsCount) fucking contribution so far today."
                         case 2...3:
                             content.title = "Keep it up!"
-                            content.body = "\(commitsCount) contributions so far today."
+                            content.body = "\(commitsCount) fucking contributions so far today."
                         case 4...9:
-                            content.title = "Good Job!"
-                            content.body = "\(commitsCount) contributions so far today."
+                            content.title = "Good fucking Job!"
+                            content.body = "\(commitsCount) fucking contributions so far today."
                         case 10...19:
-                            content.title = "You're killing it!"
-                            content.body = "\(commitsCount) contributions so far today."
+                            content.title = "You're fucking killing it!"
+                            content.body = "\(commitsCount) fucking contributions so far today."
                         case 20...:
-                            content.title = "You're a beast!"
-                            content.body = "\(commitsCount) contributions so far today."
+                            content.title = "You're a fucking beast!"
+                            content.body = "\(commitsCount) fucking contributions so far today."
                         default:
-                            content.title = "You're a beast!"
+                            content.title = "Default Case (idk why this is showing lol)!"
                             content.body = "\(commitsCount) contributions so far today."
                         }
                         
