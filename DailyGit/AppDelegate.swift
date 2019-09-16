@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  DailyGit
-//
-//  Created by Vlad Munteanu on 2/23/19.
-//  Copyright © 2019 Vlad Munteanu. All rights reserved.
-//
-
 import UIKit
 import UserNotifications
 
@@ -84,6 +76,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //Handles Notifcations
 
 extension AppDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("idk")
+        completionHandler()
+    }
+    
     func registerForPushNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             print("granted: \(granted)")
@@ -110,10 +112,13 @@ extension AppDelegate {
                         let content = UNMutableNotificationContent()
                         content.sound = UNNotificationSound.default
                         
-                        var trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5.0, repeats: false)
+                        var trigger: UNTimeIntervalNotificationTrigger
                         
                         
-                        let commitsCount = UserDefaults.standard.integer(forKey: "DailyCommits")
+                        #warning("Fix logic here, this repeats every hour from when app is installed, not from the exact hour time as it should")
+                        
+                        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0, repeats: true)
+                        
                         
                         switch commitsCount {
                         case 0:
@@ -139,18 +144,20 @@ extension AppDelegate {
                             content.body = "\(commitsCount) contributions so far today."
                         }
                         
-                        
                         let uuidString = UUID().uuidString
                         
                         let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
                         
                         
                         
+                        
                         // Schedule the request with the system.
                         let notificationCenter = UNUserNotificationCenter.current()
-                      //  notificationCenter.removeAllPendingNotificationRequests()
+                        notificationCenter.removeAllPendingNotificationRequests()
                         notificationCenter.add(request, withCompletionHandler: nil)
-                 
+                        
+                        //notificationCenter.removeAllPendingNotificationRequests()
+                        
                     }
                     
                     
@@ -163,3 +170,4 @@ extension AppDelegate {
         })
     }
 }
+
