@@ -110,24 +110,7 @@ extension AppDelegate {
                         let content = UNMutableNotificationContent()
                         content.sound = UNNotificationSound.default
                         
-                        var trigger: UNTimeIntervalNotificationTrigger
-                        
-                        //var trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-                        
-                        if Constants.numberOfNotificationsPerDay <= 24 && Constants.numberOfNotificationsPerDay != 0 {
-                            
-                            trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double((60*60*24)/(Constants.numberOfNotificationsPerDay)), repeats: true)
-                        } else {
-                            //set it once a day
-//                            var dateComponents = DateComponents()
-//                            dateComponents.hour = 10
-//                            dateComponents.minute = 00
-//
-//                            trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-                            
-                             trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60*60*24, repeats: true)
-
-                        }
+                        var trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5.0, repeats: false)
                         
                         
                         let commitsCount = UserDefaults.standard.integer(forKey: "DailyCommits")
@@ -165,9 +148,8 @@ extension AppDelegate {
                         
                         // Schedule the request with the system.
                         let notificationCenter = UNUserNotificationCenter.current()
+                      //  notificationCenter.removeAllPendingNotificationRequests()
                         notificationCenter.add(request, withCompletionHandler: nil)
-                        
-                        notificationCenter.removeAllPendingNotificationRequests()
                  
                     }
                     
