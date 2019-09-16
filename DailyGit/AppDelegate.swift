@@ -117,7 +117,7 @@ extension AppDelegate {
                         
                         #warning("Fix logic here, this repeats every hour from when app is installed, not from the exact hour time as it should")
                         
-                        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0*60.0, repeats: false)
+                        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0*60.0, repeats: true)
                         
                         
                         let commitsCount = UserDefaults.standard.integer(forKey: "DailyCommits")
