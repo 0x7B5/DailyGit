@@ -146,7 +146,7 @@ extension AppDelegate {
 
                         }
                         
-                        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0, repeats: true)
+                        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0*60.0, repeats: true)
                         
                         
                         let commitsCount = UserDefaults.standard.integer(forKey: "DailyCommits")
