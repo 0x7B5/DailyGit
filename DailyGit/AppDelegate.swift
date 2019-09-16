@@ -84,6 +84,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //Handles Notifcations
 
 extension AppDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("idk")
+        completionHandler()
+    }
+    
     func registerForPushNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             print("granted: \(granted)")
@@ -136,7 +146,7 @@ extension AppDelegate {
 
                         }
                         
-                        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0*60.0, repeats: true)
+                        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0, repeats: true)
                         
                         
                         let commitsCount = UserDefaults.standard.integer(forKey: "DailyCommits")
@@ -175,9 +185,10 @@ extension AppDelegate {
                         
                         // Schedule the request with the system.
                         let notificationCenter = UNUserNotificationCenter.current()
+                        notificationCenter.removeAllPendingNotificationRequests()
                         notificationCenter.add(request, withCompletionHandler: nil)
                         
-                        notificationCenter.removeAllPendingNotificationRequests()
+                        //notificationCenter.removeAllPendingNotificationRequests()
                  
                     }
                     
