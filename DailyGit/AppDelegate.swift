@@ -112,11 +112,18 @@ extension AppDelegate {
                         
                         var trigger: UNTimeIntervalNotificationTrigger
                         
-                        //var trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                        
+                        #warning("Fix logic here, this repeats every hour from when app is installed, not from the exact hour time as it should")
+                        // Right now this is
+                        // Just repeating every hour
+                      //  let  trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0, repeats: true)
                         
                         if Constants.numberOfNotificationsPerDay <= 24 && Constants.numberOfNotificationsPerDay != 0 {
                             
-                            trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double((60*60*24)/(Constants.numberOfNotificationsPerDay)), repeats: true)
+                          
+                           // trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0*60.0, repeats: true)
+                            
+                     
                         } else {
                             //set it once a day
 //                            var dateComponents = DateComponents()
@@ -125,9 +132,11 @@ extension AppDelegate {
 //
 //                            trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
                             
-                             trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60*60*24, repeats: true)
+                            //trigger = UNTimeIntervalNotificationTrigger(timeInterval: (60*60*24)/2.0, repeats: true)
 
                         }
+                        
+                        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0*60.0, repeats: true)
                         
                         
                         let commitsCount = UserDefaults.standard.integer(forKey: "DailyCommits")
@@ -160,6 +169,7 @@ extension AppDelegate {
                         let uuidString = UUID().uuidString
                         
                         let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
+                        
                         
                         
                         
