@@ -19,10 +19,36 @@ struct User: Codable {
     let longestStreak: Int
     let currentStreak: Int
     let dateCreated: String
+    
+    
+    /*
+     Contributions is organized with oldest date first
+     -------------------------------------------------
+     Reversed, newest date first
+     
+     */
+    
     lazy var currentWeek: ContributionList = {
+        var counting = false
+        var randContList = [Contribution]()
         
-        for i in contributions.contributions.reversed() {
-            
+        for (index, element) in contributions.contributions.reversed().enumerated() {
+            print(element)
+            if element.date == DateHelper.shared.getFormattedDate() {
+                //counting = true
+                print("dayOF THE WEEK \(element.dayOfWeek)")
+                let psedoIndex = contributions.contributions.count - index
+                if element.dayOfWeek == 0 {
+                    for x in 0...7 {
+                        randContList.append(contributions.contributions[psedoIndex + x])
+                        print()
+                    }
+                } else if element.dayOfWeek == 7 {
+                    for x in stride(from: 7, to: 0, by: -1) {
+                        randContList.append(contributions.contributions[psedoIndex + x])
+                    }
+                }
+            }
         }
         return contributions
         
@@ -39,8 +65,10 @@ struct User: Codable {
         self.longestStreak = 0
         self.currentStreak = 0
         self.dateCreated = dateCreated
+        #warning("Clean this up")
+        print(self.currentWeek)
     }
     
     
-  
+    
 }

@@ -23,3 +23,8 @@ let myDecimalNumber = 1.25
 
 
 
+//Group of elements
+//Find date, find dayOfWeek of day
+//If it is greater than 0, go backwards till 0
+//If it is 
+

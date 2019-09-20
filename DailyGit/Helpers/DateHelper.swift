@@ -59,7 +59,7 @@ public class DateHelper {
         let dayOfWeek = cal.component(.weekday, from: date)
         
         if dayOfWeek != nil {
-            return dayOfWeek
+            return dayOfWeek - 1
         }
         return 0
 
