@@ -52,7 +52,6 @@ public class ReadUserInfoHelper {
                     self.defaults.set(i.count, forKey: "DailyCommits")
                     self.defaults.synchronize()
                     completion()
-                    //print(i)
                 }
             }
         })
@@ -102,7 +101,6 @@ public class ReadUserInfoHelper {
                         maxStreaks = counter
                     }
                     counter = 0
-                    //print("---------------------------")
                 }
         }
         self.defaults.set(maxStreaks, forKey: "LongestStreak")

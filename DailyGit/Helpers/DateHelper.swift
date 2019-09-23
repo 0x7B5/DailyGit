@@ -30,8 +30,6 @@ public class DateHelper {
         }
         
         let currentDate = "\(year)-\(month)-\(day)"
-        
-        //print(currentDate)
         return currentDate
     }
 
@@ -88,19 +86,6 @@ public class DateHelper {
         
         var myDateArray = [String]()
         let currentDate = getFormattedDate()
-        
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd"
-//
-//
-//        let yourDate = Date()
-//        formatter.dateFormat = "dd-MMM-yyyy"
-//        let myStringafd = formatter.string(from: yourDate)
-//
-//        print(myStringafd)
-        
-        
-        
         
         return myDateArray
         

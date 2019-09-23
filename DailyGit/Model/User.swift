@@ -33,24 +33,35 @@ struct User: Codable {
         var randContList = [Contribution]()
         
         for (index, element) in contributions.contributions.reversed().enumerated() {
-            print(element)
             if element.date == DateHelper.shared.getFormattedDate() {
                 //counting = true
-                print("dayOF THE WEEK \(element.dayOfWeek)")
                 let psedoIndex = contributions.contributions.count - index
                 if element.dayOfWeek == 0 {
                     for x in 0...7 {
                         randContList.append(contributions.contributions[psedoIndex + x])
-                        print()
                     }
                 } else if element.dayOfWeek == 7 {
                     for x in stride(from: 7, to: 0, by: -1) {
                         randContList.append(contributions.contributions[psedoIndex + x])
                     }
+                } else {
+                    //after x
+                    for x in element.dayOfWeek...7 {
+                        randContList.insert(contributions.contributions[psedoIndex + x], at: x)
+                       // let psedoIndex = contributions.contributions.count - index
+                       // randContList.append(contributions.contributions[psedoIndex + x])
+                    }
+                    //before x
+                    for x in stride(from: element.dayOfWeek-1, to: 0, by: -1) {
+                        //randContList.append(contributions.contributions[psedoIndex + x])
+                        randContList.insert(contributions.contributions[psedoIndex + x], at: x)
+                    }
+                    
                 }
+                break
             }
         }
-        return contributions
+        return ContributionList(contributions: randContList)
         
     }()
     
@@ -66,7 +77,7 @@ struct User: Codable {
         self.currentStreak = 0
         self.dateCreated = dateCreated
         #warning("Clean this up")
-        print(self.currentWeek)
+        //print(self.currentWeek)
     }
     
     

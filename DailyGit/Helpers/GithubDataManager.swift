@@ -16,6 +16,14 @@ public class GithubDataManager {
     
     private init() { }
     
+    #warning("Fix this")
+//    private lazy var urlSession: URLSession = {
+//        let config = URLSessionConfiguration.background(withIdentifier: "dailyGitSession")
+//        config.isDiscretionary = true
+//        config.sessionSendsLaunchEvents = true
+//        return URLSession(configuration: config, delegate: self, delegateQueue: nil)
+//    }()
+    
     func isGithubUser(username: String, completion: @escaping (Bool) -> ()) {
         if let url = URL(string: "https://api.github.com/users/\(username)") {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
@@ -84,7 +92,6 @@ public class GithubDataManager {
                             
                             self.getData(from: URL(string: photourl)!) { data, response, error in
                                 guard let data = data, error == nil else { return }
-                                print(response?.suggestedFilename ?? url.lastPathComponent)
                                 print("Download Finished")
                                 
                                
@@ -132,7 +139,6 @@ public class GithubDataManager {
         let year = DateHelper.shared.getYear(myDate: startDay, isIso: true)
         let currentYear = DateHelper.shared.getYear(myDate: DateHelper.shared.getFormattedDate(), isIso: false)
         
-        //print("Start DAY: \(year)")
         var contList = [Contribution]()
         let myGroup = DispatchGroup()
         
@@ -141,7 +147,6 @@ public class GithubDataManager {
             getGithubSourceForYear(username: username, year: i, completion: {
                 source in
                 if let pageSource = source {
-                    //print(pageSource)
                     guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return
                     }
                     guard let commitElements = try? doc.select("[class=day]") else { return
@@ -149,7 +154,6 @@ public class GithubDataManager {
                     
                     for i in commitElements {
                         let date = try? i.attr("data-date")
-                        //print("date + \(date)")
                         if date == nil {
                             continue
                         }
@@ -157,15 +161,11 @@ public class GithubDataManager {
                         let commitsCount = try? i.attr("data-count")
                         let fillColor = try? i.attr("fill")
                         
-                        
-                       // print(DateHelper.shared.stringToDate(myDate: date!, IsoFormat: false))
                         let currentDay = DateHelper.shared.getDayOfWeek(fromDate:  DateHelper.shared.stringToDate(myDate: date!, IsoFormat: false))
                         
                         let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0", dayOfWeek: currentDay ?? 0))
                         
                         contList.append(aContribution)
-                        
-                        //print(date!)
                     }
                 }
                 myGroup.leave()
