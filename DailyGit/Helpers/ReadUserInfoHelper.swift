@@ -42,10 +42,8 @@ public class ReadUserInfoHelper {
     
     func getDailyCommits(completion: @escaping () -> ())  {
         GithubDataManager.shared.updateInfo(completion: {
-            //have to re-pull data from github
             let date = DateHelper.shared.getFormattedDate()
             let currentContributions = self.readInfo(info: .contributions) as? ContributionList
-            
             
             for i in currentContributions!.contributions {
                 if i.date == date {

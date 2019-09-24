@@ -14,6 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     var window: UIWindow?
     
+    func resetDefaults() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
+        }
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UITabBar.appearance().tintColor = Constants.gitGreenColor
@@ -70,9 +77,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
-            ReadUserInfoHelper.shared.refreshEverything(completion: {
+            #warning("Have to fix data flow")
+            //ReadUserInfoHelper.shared.refreshEverything(completion: {
                 
-            })
+           // })
         }
     }
     

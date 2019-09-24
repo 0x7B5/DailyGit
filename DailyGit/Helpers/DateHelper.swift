@@ -56,11 +56,7 @@ public class DateHelper {
         let cal = Calendar(identifier: .gregorian)
         let dayOfWeek = cal.component(.weekday, from: date)
         
-        if dayOfWeek != nil {
-            return dayOfWeek - 1
-        }
-        return 0
-
+        return dayOfWeek - 1
     }
 
 

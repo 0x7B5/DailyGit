@@ -33,30 +33,21 @@ struct User: Codable {
         var randContList = [Contribution]()
         
         for (index, element) in contributions.contributions.reversed().enumerated() {
-            if element.date == DateHelper.shared.getFormattedDate() {
+            if element.date == "2019-09-28" {
                 //counting = true
-                let psedoIndex = contributions.contributions.count - index
+                let psedoIndex = contributions.contributions.count - index-1
                 if element.dayOfWeek == 0 {
-                    for x in 0...7 {
+                    for x in 0...6 {
                         randContList.append(contributions.contributions[psedoIndex + x])
                     }
-                } else if element.dayOfWeek == 7 {
-                    for x in stride(from: 7, to: 0, by: -1) {
-                        randContList.append(contributions.contributions[psedoIndex + x])
+                } else if element.dayOfWeek == 6 {
+                    for x in stride(from: 6, to: -1, by: -1) {
+                        randContList.append(contributions.contributions[psedoIndex - x])
                     }
                 } else {
-                    //after x
-                    for x in element.dayOfWeek...7 {
-                        randContList.insert(contributions.contributions[psedoIndex + x], at: x)
-                       // let psedoIndex = contributions.contributions.count - index
-                       // randContList.append(contributions.contributions[psedoIndex + x])
+                    for x in 0...6 {
+                        randContList.append(contributions.contributions[psedoIndex - element.dayOfWeek + x])
                     }
-                    //before x
-                    for x in stride(from: element.dayOfWeek-1, to: 0, by: -1) {
-                        //randContList.append(contributions.contributions[psedoIndex + x])
-                        randContList.insert(contributions.contributions[psedoIndex + x], at: x)
-                    }
-                    
                 }
                 break
             }
@@ -77,7 +68,7 @@ struct User: Codable {
         self.currentStreak = 0
         self.dateCreated = dateCreated
         #warning("Clean this up")
-        //print(self.currentWeek)
+        print(self.currentWeek)
     }
     
     

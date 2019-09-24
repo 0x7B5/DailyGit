@@ -18,7 +18,6 @@ class MainVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         mainView.checkAllignmentForTitle()
-        //setupInfo()
     }
     override func loadView() {
         self.view = mainView
