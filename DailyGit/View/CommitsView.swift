@@ -68,9 +68,7 @@ public class CommitsView: UIView {
         for (index, element) in contributions.contributions.enumerated() {
             let myIndex = element.color.index(element.color.startIndex, offsetBy: 1)
             let mySubstring = element.color.suffix(from: myIndex)
-            print(mySubstring)
-            print(Int(mySubstring, radix: 16))
-            print(UIColor(rgb: (Int(mySubstring, radix: 16) ?? 0)))
+            
             let myColor = UIColor(rgb: (Int(mySubstring, radix: 16) ?? 0))
             
             weekCommitGraph[index].backgroundColor = myColor
@@ -79,8 +77,6 @@ public class CommitsView: UIView {
                 weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
             }
         }
-        
-        #warning("implement")
     }
     
     public func createConstraints() {
