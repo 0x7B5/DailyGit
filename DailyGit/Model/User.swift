@@ -33,7 +33,7 @@ struct User: Codable {
         var randContList = [Contribution]()
         
         for (index, element) in contributions.contributions.reversed().enumerated() {
-            if element.date == "2019-09-28" {
+            if element.date == DateHelper.shared.getFormattedDate() {
                 //counting = true
                 let psedoIndex = contributions.contributions.count - index-1
                 if element.dayOfWeek == 0 {
