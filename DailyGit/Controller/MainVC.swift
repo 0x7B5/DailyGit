@@ -42,9 +42,12 @@ class MainVC: UIViewController {
             self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
             self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
             self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
+            self.mainView.setupColorsForWeek(contributions: ReadUserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
         })
         
     }
+    
+    
     
     func setupNavController() {
         self.title = "Commits"

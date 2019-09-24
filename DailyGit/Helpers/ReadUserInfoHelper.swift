@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 enum Userinfo {
-    case  name, username, bio, photoUrl, contributions, dateCreated
+    case  name, username, bio, photoUrl, contributions, dateCreated, currentWeek
 }
 
 public class ReadUserInfoHelper {
@@ -20,7 +20,7 @@ public class ReadUserInfoHelper {
     func readInfo(info: Userinfo) -> Any {
         if let savedPerson = defaults.object(forKey: "CurrentUser") as? Data {
             let decoder = JSONDecoder()
-            if let loadedPerson = try? decoder.decode(User.self, from: savedPerson) {
+            if var loadedPerson = try? decoder.decode(User.self, from: savedPerson) {
                 switch info {
                 case .name:
                     return loadedPerson.name
@@ -34,6 +34,8 @@ public class ReadUserInfoHelper {
                     return loadedPerson.contributions
                 case .dateCreated:
                     return loadedPerson.dateCreated
+                case .currentWeek:
+                    return loadedPerson.currentWeek
                 }
             }
         }

@@ -63,7 +63,19 @@ public class CommitsView: UIView {
         }
     }
     
-    public func setupColorsForWeek(numbers: [Int]) {
+    func setupColorsForWeek(contributions: ContributionList) {
+        
+        for (index, element) in contributions.contributions.enumerated() {
+            let myIndex = element.color.index(element.color.startIndex, offsetBy: 1)
+            let mySubstring = element.color.suffix(from: myIndex)
+            print(mySubstring)
+            print(Int(mySubstring, radix: 16))
+            print(UIColor(rgb: (Int(mySubstring, radix: 16) ?? 0)))
+            let myColor = UIColor(rgb: (Int(mySubstring, radix: 16) ?? 0))
+            
+            weekCommitGraph[index].backgroundColor = myColor
+        }
+        
         #warning("implement")
     }
     
