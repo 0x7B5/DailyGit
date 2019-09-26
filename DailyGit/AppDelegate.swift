@@ -22,6 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
+    #warning("WHY IS THE CHECK IF USER EXIST NOT WORK")
+    
+    func userExist() -> Bool {
+        if (ReadUserInfoHelper.shared.readInfo(info: .username) != nil) {
+            return true
+        }
+        return false
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UITabBar.appearance().tintColor = Constants.gitGreenColor
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -32,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UNUserNotificationCenter.current().delegate = self
         
         
-        if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
+        if (userExist() == true) {
             //LoggedIn
             self.handleNotifications()
             self.window?.rootViewController = MainTabBarController()
@@ -209,4 +218,12 @@ extension AppDelegate {
             }
         })
     }
+}
+
+extension UserDefaults {
+
+    static func exists(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
+
 }

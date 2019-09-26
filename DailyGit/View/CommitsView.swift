@@ -73,7 +73,7 @@ public class CommitsView: UIView {
             
             weekCommitGraph[index].backgroundColor = myColor
             if element.date == DateHelper.shared.getFormattedDate() {
-                weekCommitGraph[index].layer.borderWidth = 0.5
+                weekCommitGraph[index].layer.borderWidth = 0.25
                 weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
             }
         }
@@ -150,8 +150,11 @@ public class CommitsView: UIView {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(1.66)
         }
-        
-        
+//        
+//        if ReadUserInfoHelper.shared.readInfo(info: .currentWeek) != nil {
+//            setupColorsForWeek(contributions: ReadUserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
+//        }
+ 
     }
     //SUBVIEWS
     //TOPVIEW: PROFILE VIEW
@@ -239,7 +242,7 @@ public class CommitsView: UIView {
     
     internal func createGraphNodeView() -> UIView {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        view.backgroundColor = UIColor(rgb: Int("ebedf0", radix: 16)!)
         return view
     }
     
