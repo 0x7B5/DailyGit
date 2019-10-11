@@ -9,6 +9,7 @@
 import UIKit
 
 class MainVC: UIViewController {
+    
     #warning("Kind of hacky and potentially dangerous")
     lazy var mainView = CommitsView(topLayout: self.navigationController!.navigationBar.frame.height)
     

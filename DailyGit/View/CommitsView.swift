@@ -150,10 +150,6 @@ public class CommitsView: UIView {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(1.66)
         }
-//        
-//        if ReadUserInfoHelper.shared.readInfo(info: .currentWeek) != nil {
-//            setupColorsForWeek(contributions: ReadUserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
-//        }
  
     }
     //SUBVIEWS
