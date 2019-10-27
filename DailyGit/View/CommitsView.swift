@@ -73,8 +73,8 @@ public class CommitsView: UIView {
             
             weekCommitGraph[index].backgroundColor = myColor
             if element.date == DateHelper.shared.getFormattedDate() {
-                weekCommitGraph[index].layer.borderWidth = 0.25
-                weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+                weekCommitGraph[index].layer.borderWidth = 0.5
+                weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             }
         }
     }
