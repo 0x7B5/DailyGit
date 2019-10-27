@@ -35,18 +35,11 @@ class RootSettingVC: QuickTableViewController {
                 })
             ]),
             
-            Section(title: "Customization", rows: [
-                NavigationRow(text: "Use custom cell types", detailText: .none, action: { [weak self] _ in
-                    //self?.navigationController?.pushViewController(CustomizationViewController(), animated: true)
-                })
+            Section(title: "Notifications", rows: [
+              SwitchRow(text: "Profane Notifications", switchValue: true, action: { _ in }),
             ]),
             
-            Section(title: "UIAppearance", rows: [
-                NavigationRow(text: "UILabel customization", detailText: .none, action: { [weak self] _ in
-                    //self?.navigationController?.pushViewController(AppearanceViewController(), animated: true)
-                })
-            ]),
-            
+           
             Section(title: "RESET DEFAULTS", rows: [
               
                 TapActionRow(text: "DEBUG DEBUG", action: { [weak self] _ in
