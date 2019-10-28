@@ -36,18 +36,24 @@ class RootSettingVC: QuickTableViewController {
             ]),
             
             Section(title: "Notifications", rows: [
-              SwitchRow(text: "Profane Notifications", switchValue: true, action: { _ in }),
+              SwitchRow(text: "Profane Notifications", switchValue: true, action: { [weak self] _ in
+                self?.changeNotificationsToProfane()
+              }),
             ]),
             
            
             Section(title: "RESET DEFAULTS", rows: [
-              
+
                 TapActionRow(text: "DEBUG DEBUG", action: { [weak self] _ in
                     self?.resetDefaults()
                 })
             ], footer: ""),
             
         ]
+    }
+    
+    func changeNotificationsToProfane() {
+        
     }
     
     #warning("Debug purposes")
