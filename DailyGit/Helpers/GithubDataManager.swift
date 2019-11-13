@@ -14,6 +14,8 @@ public class GithubDataManager {
     
     typealias JSONDictionary = [String: Any]
     
+    var blankCount = 0
+    
     private init() { }
     
     #warning("Fix this")
@@ -158,10 +160,20 @@ public class GithubDataManager {
                             continue
                         }
                         
+                        
+                        
                         let commitsCount = try? i.attr("data-count")
                         let fillColor = try? i.attr("fill")
                         
+//                        if DateHelper.shared.getYear(myDate: date) == 2019 {
+//                            if commitsCount > 0 {
+//                                blankCount += 1
+//                            }
+//                        }
+                        
+                        
                         let currentDay = DateHelper.shared.getDayOfWeek(fromDate:  DateHelper.shared.stringToDate(myDate: date!, IsoFormat: false))
+                        
                         
                         let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0", dayOfWeek: currentDay ?? 0))
                         
