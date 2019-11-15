@@ -150,7 +150,7 @@ public class CommitsView: UIView {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(1.66)
         }
- 
+        
     }
     //SUBVIEWS
     //TOPVIEW: PROFILE VIEW
@@ -162,11 +162,9 @@ public class CommitsView: UIView {
     
     let profileImage: UIImageView = {
         let view = UIImageView()
-        //view.layer.cornerRadius = view.frame.height/2
         view.contentMode = .scaleAspectFit
         //Provide default image
         // view.image = #imageLiteral(resourceName: "sampleIcon")
-        
         view.image = ReadUserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic")
         
         return view
@@ -295,7 +293,4 @@ public class CommitsView: UIView {
         label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
         return label
     }
-    
-    
-    
 }

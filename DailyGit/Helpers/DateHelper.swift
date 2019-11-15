@@ -77,13 +77,4 @@ public class DateHelper {
         let year = Int(String(components.year!)) ?? 0
         return year
     }
-    
-    func getDaysOfWeek() -> [String] {
-        
-        var myDateArray = [String]()
-        let currentDate = getFormattedDate()
-        
-        return myDateArray
-        
-    }
 }
