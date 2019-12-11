@@ -22,10 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-    #warning("WHY IS THE CHECK IF USER EXIST NOT WORK")
-    
     func userExist() -> Bool {
-        if (ReadUserInfoHelper.shared.readInfo(info: .username) != nil) {
+        if (ReadUserInfoHelper.shared.readInfo(info: .username) as? String != "") {
             return true
         }
         return false
