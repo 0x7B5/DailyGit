@@ -32,7 +32,7 @@ public class DateHelper {
         let currentDate = "\(year)-\(month)-\(day)"
         return currentDate
     }
-
+    
     func stringToDate(myDate: String, IsoFormat: Bool) -> Date {
         let formatter = DateFormatter()
         if IsoFormat {
@@ -58,8 +58,8 @@ public class DateHelper {
         
         return dayOfWeek - 1
     }
-
-
+    
+    
     func getYear(myDate: String, isIso: Bool) -> Int {
         let calendar = Calendar.current
         let date = stringToDate(myDate: myDate, IsoFormat: isIso)
@@ -70,11 +70,17 @@ public class DateHelper {
         
         return 0
     }
-
+    
     func getYear(myDate: Date) -> Int {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: myDate)
         let year = Int(String(components.year!)) ?? 0
         return year
     }
+    
+    func printTimestamp() {
+        print(Date())
+    }
 }
+
+

@@ -38,7 +38,10 @@ class MainVC: UIViewController {
         updateInfo()
     }
     
+    
     func updateInfo() {
+        #warning("Debug Purposes")
+        DateHelper.shared.printTimestamp()
         ReadUserInfoHelper.shared.refreshEverything(completion: {
             self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
             self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"

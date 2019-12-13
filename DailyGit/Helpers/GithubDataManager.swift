@@ -19,12 +19,6 @@ public class GithubDataManager {
     private init() { }
     
     #warning("Fix this")
-    //    private lazy var urlSession: URLSession = {
-    //        let config = URLSessionConfiguration.background(withIdentifier: "dailyGitSession")
-    //        config.isDiscretionary = true
-    //        config.sessionSendsLaunchEvents = true
-    //        return URLSession(configuration: config, delegate: self, delegateQueue: nil)
-    //    }()
     
     func isGithubUser(username: String, completion: @escaping (Bool) -> ()) {
         if let url = URL(string: "https://api.github.com/users/\(username)") {
