@@ -86,8 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
             #warning("Have to fix data flow")
             //ReadUserInfoHelper.shared.refreshEverything(completion: {
-                
-           // })
+            
+            // })
         }
     }
     
@@ -141,24 +141,24 @@ extension AppDelegate {
                         #warning("Fix logic here, this repeats every hour from when app is installed, not from the exact hour time as it should")
                         // Right now this is
                         // Just repeating every hour
-                      //  let  trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0, repeats: true)
+                        //  let  trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0, repeats: true)
                         
                         if Constants.numberOfNotificationsPerDay <= 24 && Constants.numberOfNotificationsPerDay != 0 {
                             
-                          
-                           // trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0*60.0, repeats: true)
                             
-                     
+                            // trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0*60.0, repeats: true)
+                            
+                            
                         } else {
                             //set it once a day
-//                            var dateComponents = DateComponents()
-//                            dateComponents.hour = 10
-//                            dateComponents.minute = 00
-//
-//                            trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                            //                            var dateComponents = DateComponents()
+                            //                            dateComponents.hour = 10
+                            //                            dateComponents.minute = 00
+                            //
+                            //                            trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
                             
                             //trigger = UNTimeIntervalNotificationTrigger(timeInterval: (60*60*24)/2.0, repeats: true)
-
+                            
                         }
                         
                         trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0*60.0, repeats: true)
@@ -166,29 +166,56 @@ extension AppDelegate {
                         
                         let commitsCount = UserDefaults.standard.integer(forKey: "DailyCommits")
                         
-                        switch commitsCount {
-                        case 0:
-                            content.title = "Work Harder"
-                            content.body = "No commits today, go code."
-                        case 1:
-                            content.title = "Keep it up!"
-                            content.body = "\(commitsCount) contribution so far today."
-                        case 2...3:
-                            content.title = "Keep it up!"
-                            content.body = "\(commitsCount) contributions so far today."
-                        case 4...9:
-                            content.title = "Good Job!"
-                            content.body = "\(commitsCount) contributions so far today."
-                        case 10...19:
-                            content.title = "You're killing it!"
-                            content.body = "\(commitsCount) contributions so far today."
-                        case 20...:
-                            content.title = "You're a beast!"
-                            content.body = "\(commitsCount) contributions so far today."
-                        default:
-                            content.title = "Keep it up!"
-                            content.body = "\(commitsCount) contributions so far today."
+                        if (Constants.profaneNotications) {
+                            switch commitsCount {
+                            case 0:
+                                content.title = "Work Fucking Harder"
+                                content.body = "No commits today, go fucking code."
+                            case 1:
+                                content.title = "Good Fucking Shit!"
+                                content.body = "\(commitsCount) fucking contribution so far today."
+                            case 2...3:
+                                content.title = "Keep it up!"
+                                content.body = "\(commitsCount) fucking contributions so far today."
+                            case 4...9:
+                                content.title = "Good fucking Job!"
+                                content.body = "\(commitsCount) fucking contributions so far today."
+                            case 10...19:
+                                content.title = "You're fucking killing it!"
+                                content.body = "\(commitsCount) fucking contributions so far today."
+                            case 20...:
+                                content.title = "You're a fucking beast!"
+                                content.body = "\(commitsCount) fucking contributions so far today."
+                            default:
+                                content.title = "Default Case (idk why this is showing lol)!"
+                                content.body = "\(commitsCount) contributions so far today."
+                            }
+                        } else {
+                            switch commitsCount {
+                            case 0:
+                                content.title = "Work Harder"
+                                content.body = "No commits today, go code."
+                            case 1:
+                                content.title = "Keep it up!"
+                                content.body = "\(commitsCount) contribution so far today."
+                            case 2...3:
+                                content.title = "Keep it up!"
+                                content.body = "\(commitsCount) contributions so far today."
+                            case 4...9:
+                                content.title = "Good Job!"
+                                content.body = "\(commitsCount) contributions so far today."
+                            case 10...19:
+                                content.title = "You're killing it!"
+                                content.body = "\(commitsCount) contributions so far today."
+                            case 20...:
+                                content.title = "You're a beast!"
+                                content.body = "\(commitsCount) contributions so far today."
+                            default:
+                                content.title = "Keep it up!"
+                                content.body = "\(commitsCount) contributions so far today."
+                            }
                         }
+                        
                         
                         
                         let uuidString = UUID().uuidString
@@ -204,7 +231,7 @@ extension AppDelegate {
                         notificationCenter.add(request, withCompletionHandler: nil)
                         
                         //notificationCenter.removeAllPendingNotificationRequests()
-                 
+                        
                     }
                     
                     
@@ -219,9 +246,9 @@ extension AppDelegate {
 }
 
 extension UserDefaults {
-
+    
     static func exists(key: String) -> Bool {
         return UserDefaults.standard.object(forKey: key) != nil
     }
-
+    
 }
