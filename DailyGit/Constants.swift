@@ -18,6 +18,8 @@ public struct Constants {
     
     static var isIpad = false
     
+    static var sessionID = "com.LesGarcons.DailyGit"
+    
     #warning("This needs to be able to be changed by the user")
     static var numberOfNotificationsPerDay = 24
 }

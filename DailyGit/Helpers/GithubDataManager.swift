@@ -12,9 +12,21 @@ import SwiftSoup
 public class GithubDataManager {
     static let shared = GithubDataManager()
     
+    private lazy var bgSession: URLSession = {
+        let config = URLSessionConfiguration.background(withIdentifier: Constants.sessionID)
+        config.isDiscretionary = true
+        config.sessionSendsLaunchEvents = true
+        return URLSession(configuration: config)
+    }()
+    
     typealias JSONDictionary = [String: Any]
     
+    let defaultSession = URLSession(configuration: .default)
+    var dataTask: URLSessionDataTask?
+    
     var blankCount = 0
+    var errorMessage = ""
+    typealias QueryResult = ([User]?, String) -> Void
     
     private init() { }
     
@@ -22,8 +34,7 @@ public class GithubDataManager {
     
     func isGithubUser(username: String, completion: @escaping (Bool) -> ()) {
         if let url = URL(string: "https://api.github.com/users/\(username)") {
-            URLSession.shared.dataTask(with: url) { (data, response, err) in
-                //also perhaps check response status 200 OK
+            bgSession.dataTask(with: url) { (data, response, err) in
                 guard let data = data else { return }
                 
                 do {
@@ -44,18 +55,17 @@ public class GithubDataManager {
         }
         
     }
+    
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+        bgSession.dataTask(with: url, completionHandler: completion).resume()
     }
     
     
     func setupGithubUser(username: String, completion: @escaping (User?) -> ())  {
         //https://api.github.com/users/
-        
         if let url = URL(string: "https://api.github.com/users/\(username)") {
-            URLSession.shared.dataTask(with: url) { (data, response, err) in
+            bgSession.dataTask(with: url) { (data, response, err) in
                 //also perhaps check response status 200 OK
-                
                 guard let data = data else { return }
                 
                 do {
@@ -108,7 +118,7 @@ public class GithubDataManager {
                                     contributions in
                                     if contributions != nil {
                                         let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!)
-                                        print(user)
+                                        print("Done it again \(user)")
                                         completion(user)
                                     } else {
                                         completion(nil)
@@ -118,9 +128,6 @@ public class GithubDataManager {
                         }
                         
                     }
-                    
-                    
-                    
                 } catch _ {
                     completion(nil)
                 }
@@ -159,12 +166,7 @@ public class GithubDataManager {
                         let commitsCount = try? i.attr("data-count")
                         let fillColor = try? i.attr("fill")
                         
-//                        if DateHelper.shared.getYear(myDate: date) == 2019 {
-//                            if commitsCount > 0 {
-//                                blankCount += 1
-//                            }
-//                        }
-                        
+                  
                         
                         let currentDay = DateHelper.shared.getDayOfWeek(fromDate:  DateHelper.shared.stringToDate(myDate: date!, IsoFormat: false))
                         
@@ -190,7 +192,7 @@ public class GithubDataManager {
     
     func getGithubSourceForYear(username: String, year: Int, completion: @escaping (String?) -> ()) {
         if let url = URL(string: "https://github.com/\(username)?tab=overview&from=\(year)-12-01&to=\(year)-12-31") {
-            URLSession.shared.dataTask(with: url) { (data, response, err) in
+            bgSession.dataTask(with: url) { (data, response, err) in
                 guard let data = data else {
                     completion(nil)
                     return
@@ -212,7 +214,7 @@ public class GithubDataManager {
     
     func getGithubSource(username: String, completion: @escaping (String?, Error?) -> ()) {
         if let url = URL(string: "https://github.com/\(username)") {
-            URLSession.shared.dataTask(with: url) { (data, response, err) in
+            bgSession.dataTask(with: url) { (data, response, err) in
                 guard let data = data else {
                     completion(nil, err)
                     return
@@ -261,12 +263,6 @@ public class GithubDataManager {
         
     }
     
-    
-    
-    func getGithubCommits(username: String, completion: (() -> ())?) -> String {
-        
-        return ""
-    }
     
     func updateInfo(completion: @escaping () -> ()) {
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {

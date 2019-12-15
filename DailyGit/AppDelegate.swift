@@ -41,8 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         if (userExist() == true) {
             //LoggedIn
-            self.handleNotifications()
             self.window?.rootViewController = MainTabBarController()
+            self.handleNotifications()
         } else {
             //Not Logged In
             let navController = UINavigationController(rootViewController: OnboardingVC())
@@ -116,6 +116,7 @@ extension AppDelegate {
     }
     
     func handleNotifications() {
+        print("We still outchea")
         let current = UNUserNotificationCenter.current()
         current.getNotificationSettings(completionHandler: { (settings) in
             if settings.authorizationStatus == .notDetermined {
