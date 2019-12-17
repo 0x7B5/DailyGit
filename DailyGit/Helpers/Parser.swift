@@ -43,7 +43,7 @@ class Parser {
                     } else {
                         name = myUsername
                     }
-                    return 
+                    return user 
                 }
                 
             }
