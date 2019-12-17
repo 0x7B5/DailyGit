@@ -12,12 +12,12 @@ import SwiftSoup
 public class GithubDataManager {
     static let shared = GithubDataManager()
     
-    private lazy var bgSession: URLSession = {
-        let config = URLSessionConfiguration.background(withIdentifier: Constants.sessionID)
-        config.isDiscretionary = true
-        config.sessionSendsLaunchEvents = true
-        return URLSession(configuration: config)
-    }()
+//    private lazy var URLSession.shared: URLSession = {
+//        let config = URLSessionConfiguration.background(withIdentifier: Constants.sessionID)
+//        config.isDiscretionary = true
+//        config.sessionSendsLaunchEvents = true
+//        return URLSession(configuration: config)
+//    }()
     
     typealias JSONDictionary = [String: Any]
     
@@ -34,7 +34,7 @@ public class GithubDataManager {
     
     func isGithubUser(username: String, completion: @escaping (Bool) -> ()) {
         if let url = URL(string: "https://api.github.com/users/\(username)") {
-            bgSession.dataTask(with: url) { (data, response, err) in
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
                 guard let data = data else { return }
                 
                 do {
@@ -57,14 +57,14 @@ public class GithubDataManager {
     }
     
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        bgSession.dataTask(with: url, completionHandler: completion).resume()
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
     
     func setupGithubUser(username: String, completion: @escaping (User?) -> ())  {
         //https://api.github.com/users/
         if let url = URL(string: "https://api.github.com/users/\(username)") {
-            bgSession.dataTask(with: url) { (data, response, err) in
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
                 //also perhaps check response status 200 OK
                 guard let data = data else { return }
                 
@@ -192,7 +192,7 @@ public class GithubDataManager {
     
     func getGithubSourceForYear(username: String, year: Int, completion: @escaping (String?) -> ()) {
         if let url = URL(string: "https://github.com/\(username)?tab=overview&from=\(year)-12-01&to=\(year)-12-31") {
-            bgSession.dataTask(with: url) { (data, response, err) in
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
                 guard let data = data else {
                     completion(nil)
                     return
@@ -214,7 +214,7 @@ public class GithubDataManager {
     
     func getGithubSource(username: String, completion: @escaping (String?, Error?) -> ()) {
         if let url = URL(string: "https://github.com/\(username)") {
-            bgSession.dataTask(with: url) { (data, response, err) in
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
                 guard let data = data else {
                     completion(nil, err)
                     return

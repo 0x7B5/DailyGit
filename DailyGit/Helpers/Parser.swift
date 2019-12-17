@@ -43,13 +43,17 @@ class Parser {
                     } else {
                         name = myUsername
                     }
+                    //let user = User(name: name, username: myUsername, bio: bio, photoUrl: "",dateCreated: creationDate, contributions: ContributionList())
+                    let user: User? = nil
                     return user 
                 }
                 
             }
         } catch _ {
+            #warning("Deal with error here")
             return nil
         }
+         return nil
     }
     
 }
