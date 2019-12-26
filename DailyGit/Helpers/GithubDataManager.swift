@@ -23,8 +23,6 @@ public class GithubDataManager {
     
     private init() { }
     
-    var userData: JSONDictionary? = nil
-    
     
     #warning("Fix this")
     
@@ -49,6 +47,7 @@ public class GithubDataManager {
         }
     }
     
+    
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
@@ -56,91 +55,76 @@ public class GithubDataManager {
     
     func setupGithubUser(username: String, completion: @escaping (User?) -> ())  {
         //https://api.github.com/users/
-        if userData == nil {
-            if let url = URL(string: "https://api.github.com/users/\(username)") {
-                URLSession.shared.dataTask(with: url) { (data, response, err) in
-                    guard let data = data else { return }
-                    do {
-                        // make sure this JSON is in the format we expect
-                        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                            self.userData = json
-                        }
-                        
-                    } catch _ {
-                        completion(nil)
-                    }
-                }.resume()
-            }
-        }
-        if let githubUserData = userData {
-            // try to read out a string array
-            // Is this a valid githubUsername?
-            if (githubUserData["message"] as? String == "Not Found") {
-                self.userData = nil
-                completion(nil)
-            }
-            
-            if (githubUserData["avatar-url"] as? String == "Not Found") {
-                self.userData = nil
-                completion(nil)
-            }
-            
-            let avatar_url = githubUserData["avatar-url"] as? String
-            
-            
-            
-            var bio = ""
-            var name = ""
-            
-            if let temp = githubUserData["bio"] as? String {
-                bio = temp
-            }
-            
-            print(bio)
-            //let name = json["name"] as? String,
-            if let myUsername = githubUserData["login"] as? String, let photourl = githubUserData["avatar_url"] as? String, let creationDate = githubUserData["created_at"] as? String{
+        if let url = URL(string: "https://api.github.com/users/\(username)") {
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
+                //also perhaps check response status 200 OK
+                guard let data = data else { return }
                 
-                self.getData(from: URL(string: photourl)!) { data, response, error in
-                    guard let data = data, error == nil else { return }
-                    print("Download Finished")
-                    
-                    
-                    
-                    let myImage = UIImage(data: data)!.roundImage()
-                    
-                    self.saveImage(imageName: "ProfilePic", image: myImage)
-                    
-                    
-                    if let tempName = githubUserData["name"] as? String {
-                        name = tempName
-                    } else {
-                        name = myUsername
-                    }
-                    
-                    #warning("Fix setup contributions")
-                    self.setupContributions(startDay: creationDate, username: myUsername, completion: {
-                        contributions in
-                        if contributions != nil {
-                            let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!)
-                            print("Done it again \(user)")
-                            self.userData = nil
-                            completion(user)
-                        } else {
-                            self.userData = nil
+                do {
+                    // make sure this JSON is in the format we expect
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        // try to read out a string array
+                        // Is this a valid githubUsername?
+                        if (json["message"] as? String == "Not Found") {
                             completion(nil)
                         }
-                    })
+                        
+                        if (json["avatar-url"] as? String == "Not Found") {
+                            completion(nil)
+                        }
+                        
+                        let avatar_url = json["avatar-url"] as? String
+                        
+                        
+                        
+                        var bio = ""
+                        var name = ""
+                        
+                        if let temp = json["bio"] as? String {
+                            bio = temp
+                        }
+                        
+                        
+                        //let name = json["name"] as? String,
+                        if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String, let creationDate = json["created_at"] as? String{
+                            print("Set up username")
+                            self.getData(from: URL(string: photourl)!) { data, response, error in
+                                guard let data = data, error == nil else { return }
+                                print("Download Finished")
+                                
+                                
+                                
+                                let myImage = UIImage(data: data)!.roundImage()
+                                
+                                self.saveImage(imageName: "ProfilePic", image: myImage)
+                                print("finished image")
+                                
+                                if let tempName = json["name"] as? String {
+                                    name = tempName
+                                } else {
+                                    name = myUsername
+                                }
+                                
+                                #warning("Fix setup contributions")
+                                self.setupContributions(startDay: creationDate, username: myUsername, completion: {
+                                    contributions in
+                                    if contributions != nil {
+                                        let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!)
+                                        print("Done it again \(user)")
+                                        completion(user)
+                                    } else {
+                                        completion(nil)
+                                    }
+                                })
+                            }
+                        }
+                        
+                    }
+                } catch _ {
+                    completion(nil)
                 }
-            } else {
-                self.userData = nil
-                completion(nil)
-            }
-            
-        } else {
-            completion(nil)
+            }.resume()
         }
-        
-        
         
     }
     

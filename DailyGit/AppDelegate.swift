@@ -41,8 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         if (userExist() == true) {
             //LoggedIn
+            
             self.window?.rootViewController = MainTabBarController()
             self.handleNotifications()
+            
+            
         } else {
             //Not Logged In
             let navController = UINavigationController(rootViewController: OnboardingVC())

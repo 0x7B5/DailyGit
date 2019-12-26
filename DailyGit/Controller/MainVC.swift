@@ -19,10 +19,10 @@ class MainVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         mainView.checkAllignmentForTitle()
+        setupInfo()
     }
     override func loadView() {
         self.view = mainView
-        setupInfo()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,15 +33,20 @@ class MainVC: UIViewController {
     }
     
     func setupInfo() {
+        ReadUserInfoHelper.shared.getCurrentStreak()
+        ReadUserInfoHelper.shared.getLongestStreak()
+        
         mainView.nameLabel.text = (ReadUserInfoHelper.shared.readInfo(info: .name) as! String)
         mainView.bioLabel.text = (ReadUserInfoHelper.shared.readInfo(info: .bio) as! String)
+        self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
+        self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
+        self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
+        self.mainView.setupColorsForWeek(contributions: ReadUserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
         updateInfo()
     }
     
     
     func updateInfo() {
-        #warning("Debug Purposes")
-        DateHelper.shared.printTimestamp()
         ReadUserInfoHelper.shared.refreshEverything(completion: {
             self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
             self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
