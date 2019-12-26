@@ -16,19 +16,19 @@ class RootSettingVC: QuickTableViewController {
         setupView()
         
     }
-     
+    
     
     func setupView() {
-//        let titleLabel = UILabel()
-//        titleLabel.text = "QuickTableViewController"
-//        titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
-//        title = " "
-//        navigationItem.titleView = titleLabel
+        //        let titleLabel = UILabel()
+        //        titleLabel.text = "QuickTableViewController"
+        //        titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        //        title = " "
+        //        navigationItem.titleView = titleLabel
         #warning("Add username to subtitle")
         tableContents = [
             Section(title: "Username", rows: [
                 
-        
+                
                 NavigationRow(text: "Change Account", detailText: .subtitle("Current Username: \(ReadUserInfoHelper.shared.readInfo(info: .username))"), action: { [weak self] _ in
                     let navController = UINavigationController(rootViewController: OnboardingVC())
                     self!.present(navController, animated: true, completion: nil)
@@ -36,18 +36,18 @@ class RootSettingVC: QuickTableViewController {
             ]),
             
             Section(title: "Notifications", rows: [
-              SwitchRow(text: "Profane Notifications", switchValue: true, action: { [weak self] _ in
-                self?.changeNotificationsToProfane()
-              }),
+                SwitchRow(text: "Profane Notifications", switchValue: true, action: { [weak self] _ in
+                    self?.changeNotificationsToProfane()
+                }),
             ]),
             
-           
-//            Section(title: "RESET DEFAULTS", rows: [
-//
-//                TapActionRow(text: "DEBUG DEBUG", action: { [weak self] _ in
-//                    self?.resetDefaults()
-//                })
-//            ], footer: ""),
+            
+            //            Section(title: "RESET DEFAULTS", rows: [
+            //
+            //                TapActionRow(text: "DEBUG DEBUG", action: { [weak self] _ in
+            //                    self?.resetDefaults()
+            //                })
+            //            ], footer: ""),
             
         ]
     }
@@ -77,21 +77,20 @@ class RootSettingVC: QuickTableViewController {
         }
     }
     
-//    private func showDetail() -> (Row) -> Void {
-//      return { [weak self] in
-//        let detail = $0.text + ($0.detailText?.text ?? "")
-//        let controller = UIViewController()
-//        controller.view.backgroundColor = .white
-//        controller.title = detail
-//        self?.navigationController?.pushViewController(controller, animated: true)
-//
-//      }
-//    }
-
+    //    private func showDetail() -> (Row) -> Void {
+    //      return { [weak self] in
+    //        let detail = $0.text + ($0.detailText?.text ?? "")
+    //        let controller = UIViewController()
+    //        controller.view.backgroundColor = .white
+    //        controller.title = detail
+    //        self?.navigationController?.pushViewController(controller, animated: true)
+    //
+    //      }
+    //    }
+    
     
     func setupNavController() {
         self.title = "Settings"
-        //self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
     }
 }

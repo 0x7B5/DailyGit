@@ -17,7 +17,7 @@ public class CommitsView: UIView {
         self.topLayout = topLayout
         super.init(frame: CGRect.zero)
         self.frame = CGRect.zero
-        backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        backgroundColor = Constants.mainBGColor
         initializeUI()
         createConstraints()
         
@@ -29,7 +29,6 @@ public class CommitsView: UIView {
     
     private func initializeUI() {
         //UIViews
-        //addSubview(topView)
         addSubview(profileImage)
         addSubview(nameLabel)
         addSubview(bioLabel)
@@ -74,7 +73,7 @@ public class CommitsView: UIView {
             weekCommitGraph[index].backgroundColor = myColor
             if element.date == DateHelper.shared.getFormattedDate() {
                 weekCommitGraph[index].layer.borderWidth = 0.5
-                weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0.9998916984, green: 1, blue: 0.9998809695, alpha: 0.7987007473)
             }
         }
     }
@@ -153,13 +152,6 @@ public class CommitsView: UIView {
         
     }
     //SUBVIEWS
-    //TOPVIEW: PROFILE VIEW
-    let topView: UIView = {
-        let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        return view
-    }()
-    
     let profileImage: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
@@ -178,7 +170,7 @@ public class CommitsView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.text = ""
         label.textAlignment = .left
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        label.textColor = Constants.subTitleColor
         return label
     }()
     
@@ -194,7 +186,8 @@ public class CommitsView: UIView {
         label.text = ""
         label.numberOfLines = 4
         label.textAlignment = .left
-        label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
+        //label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
+        label.textColor = Constants.titleColor
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
@@ -218,7 +211,7 @@ public class CommitsView: UIView {
         }
         
         label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        label.textColor = Constants.subTitleColor
         return label
     }()
     
@@ -258,7 +251,7 @@ public class CommitsView: UIView {
         }
         
         label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.9998916984, green: 1, blue: 0.9998809695, alpha: 1)
         return label
     }()
     
@@ -279,7 +272,7 @@ public class CommitsView: UIView {
             label.text = "0 days 🔥"
         }
         label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        label.textColor = Constants.subTitleColor
         return label
     }()
     
@@ -290,7 +283,7 @@ public class CommitsView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.text = "\(text)"
         label.textAlignment = .left
-        label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
+        label.textColor = Constants.titleColor
         return label
     }
 }

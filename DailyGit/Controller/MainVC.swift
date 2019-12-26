@@ -60,7 +60,6 @@ class MainVC: UIViewController {
     
     func setupNavController() {
         self.title = "Commits"
-        //self.navigationController?.navigationBar.barTintColor = Constants.navBarColor
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refresh))
     }

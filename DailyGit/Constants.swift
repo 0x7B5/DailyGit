@@ -10,10 +10,11 @@ import Foundation
 import UIKit
 
 public struct Constants {
-    static var darkMode = false
+    // Colors
     static let gitGreenColor = #colorLiteral(red: 0.1026554033, green: 0.3837691247, blue: 0.1535629034, alpha: 1)
-    static var navBarColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    static var tabBarColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    static let mainBGColor = UIColor(named: "mainBackgroundColor")
+    static let subTitleColor = UIColor(named: "subTitleTextColor")
+    static let titleColor = UIColor(named: "titleTextColor")
     static var profaneNotications = false
     
     static var isIpad = false

@@ -9,7 +9,7 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,10 +29,8 @@ class MainTabBarController: UITabBarController {
         
         let controllers = [mainVC, settingsVC]
         self.viewControllers = controllers.map{ UINavigationController.init(rootViewController: $0)}
-        
-        //UITabBar.appearance().barTintColor = Constants.tabBarColor
     }
-
-
+    
+    
 }
 
