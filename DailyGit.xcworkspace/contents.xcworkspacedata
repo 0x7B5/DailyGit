@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/noodlesoup/Documents/Coding/XCODE/Personal Projects 2019/DailyGit/Playground.playground">
+      location = "group:../MyPlayground.playground">
    </FileRef>
    <FileRef
       location = "group:DailyGit.xcodeproj">

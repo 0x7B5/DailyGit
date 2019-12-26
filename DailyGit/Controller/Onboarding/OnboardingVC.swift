@@ -38,49 +38,45 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
         onboardingView.startLoading()
         if Reachability.shared.isConnectedToNetwork(){
             if let username = usernameTF.text {
-                GithubDataManager.shared.setupGithubUser(username: username, completion: {
-                    user in
-                    //animate
+                GithubDataManager.shared.isGithubUser(username: username, completion: {
+                    userExists in
                     DispatchQueue.main.async { [weak self] in
-                       self!.onboardingView.stopLoading()
-                        print(user)
-                        if user == nil {
+                        self!.onboardingView.stopLoading()
+                        
+                        if (!userExists) {
                             let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                             self!.present(alert, animated: true)
                         } else {
-                            ReadUserInfoHelper.shared.resetDefaults()
-                            let encoder = JSONEncoder()
-                            if let encoded = try? encoder.encode(user) {
-                                let defaults = UserDefaults.standard
-                                defaults.set(encoded, forKey: "CurrentUser")
-                                defaults.synchronize()
-                                let vc =  MainTabBarController()
-                                vc.modalPresentationStyle = .fullScreen
-                                self!.present(vc, animated: true, completion: nil)
-                            } else {
-                                let alert = UIAlertController(title: "Error Occured", message: "Please try again.", preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                                self!.present(alert, animated: true)
-                            }
+                            GithubDataManager.shared.setupGithubUser(username: username, completion: {
+                                user in
+                                ReadUserInfoHelper.shared.resetDefaults()
+                                let encoder = JSONEncoder()
+                                if let encoded = try? encoder.encode(user) {
+                                    let defaults = UserDefaults.standard
+                                    defaults.set(encoded, forKey: "CurrentUser")
+                                    defaults.synchronize()
+                                    let vc =  MainTabBarController()
+                                    vc.modalPresentationStyle = .fullScreen
+                                    self!.present(vc, animated: true, completion: nil)
+                                } else {
+                                    let alert = UIAlertController(title: "Error Occured", message: "Please try again.", preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                                    self!.present(alert, animated: true)
+                                }
+                            })
                         }
                     }
-                    
-                    
                 })
-                
             }
-        }else{
+        } else {
             onboardingView.stopLoading()
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
-        
         //onboardingView.stopLoading()
         usernameTF.text = ""
-        
-        
     }
     
     

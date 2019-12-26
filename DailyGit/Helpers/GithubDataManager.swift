@@ -12,13 +12,6 @@ import SwiftSoup
 public class GithubDataManager {
     static let shared = GithubDataManager()
     
-    //    private lazy var URLSession.shared: URLSession = {
-    //        let config = URLSessionConfiguration.background(withIdentifier: Constants.sessionID)
-    //        config.isDiscretionary = true
-    //        config.sessionSendsLaunchEvents = true
-    //        return URLSession(configuration: config)
-    //    }()
-    
     typealias JSONDictionary = [String: Any]
     
     let defaultSession = URLSession(configuration: .default)
@@ -43,9 +36,6 @@ public class GithubDataManager {
                 do {
                     // make sure this JSON is in the format we expect
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                        self.userData = json
-                        // try to read out a string array
-                        // Is this a valid githubUsername?
                         if (json["message"] as? String == "Not Found") {
                             completion(false)
                         } else {
@@ -57,7 +47,6 @@ public class GithubDataManager {
                 }
             }.resume()
         }
-        
     }
     
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
@@ -81,7 +70,6 @@ public class GithubDataManager {
                         completion(nil)
                     }
                 }.resume()
-                
             }
         }
         if let githubUserData = userData {
