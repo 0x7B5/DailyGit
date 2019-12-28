@@ -13,7 +13,7 @@ public class OnboardingView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = CGRect.zero
-        backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        backgroundColor = Constants.mainBGColor
         initializeUI()
         createConstraints()
     }
@@ -54,15 +54,7 @@ public class OnboardingView: UIView {
         }
     }
     
-    //Next Button
-    //    let nextButton: UIButton = {
-    //        let button = UIButton()
-    //        button.setTitle("Next",for: .normal)
-    //        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
-    //
-    //        return button
-    //    }()
-    
+   
     //Enter Github Username
     let enterUsernameLabel: UILabel = {
         let label = UILabel()
@@ -71,7 +63,7 @@ public class OnboardingView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.text = "Enter GitHub Username"
         label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
+        label.textColor = Constants.titleColor
         return label
     }()
     
@@ -93,7 +85,7 @@ public class OnboardingView: UIView {
         textfield.clearButtonMode = UITextField.ViewMode.whileEditing
         textfield.autocapitalizationType = .none
         textfield.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
-        textfield.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        textfield.textColor = Constants.subTitleColor
         return textfield
     }()
     
@@ -134,7 +126,7 @@ public class OnboardingView: UIView {
         label.text = "Don't know your username? Go to your GitHub profile and find it in the URL."
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
+        label.textColor = Constants.titleColor
         return label
     }()
     

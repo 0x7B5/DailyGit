@@ -251,7 +251,7 @@ public class CommitsView: UIView {
         }
         
         label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 0.9998916984, green: 1, blue: 0.9998809695, alpha: 1)
+        label.textColor = Constants.subTitleColor
         return label
     }()
     

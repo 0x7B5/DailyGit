@@ -19,6 +19,15 @@
 		CC17DBAD22FF9D1500E34951 /* GithubDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */; };
 		CC45D5F423A4BC6D00DACF5D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45D5F323A4BC6D00DACF5D /* Parser.swift */; };
 		CC798C27233A94A300CBD8B0 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC798C26233A94A300CBD8B0 /* UIColor+Extensions.swift */; };
+		CC84116823B47B9000B655A6 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC84116623B47B9000B655A6 /* Interface.storyboard */; };
+		CC84116A23B47B9400B655A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC84116923B47B9400B655A6 /* Assets.xcassets */; };
+		CC84117123B47B9400B655A6 /* WatchDailyGit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CC84117023B47B9400B655A6 /* WatchDailyGit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CC84117623B47B9400B655A6 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84117523B47B9400B655A6 /* InterfaceController.swift */; };
+		CC84117823B47B9400B655A6 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84117723B47B9400B655A6 /* ExtensionDelegate.swift */; };
+		CC84117A23B47B9400B655A6 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84117923B47B9400B655A6 /* NotificationController.swift */; };
+		CC84117C23B47B9400B655A6 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84117B23B47B9400B655A6 /* ComplicationController.swift */; };
+		CC84117E23B47B9500B655A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC84117D23B47B9500B655A6 /* Assets.xcassets */; };
+		CC84118323B47B9500B655A6 /* WatchDailyGit.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CC84116423B47B9000B655A6 /* WatchDailyGit.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CCB5242A2317237F004FF84B /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB524292317237F004FF84B /* DateHelper.swift */; };
 		CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81C230B15CB0051C151 /* Contribution.swift */; };
 		CCC3A81F230B16FC0051C151 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81E230B16FC0051C151 /* User.swift */; };
@@ -32,6 +41,48 @@
 		CCF2E9752302293200F4E118 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF2E9742302293200F4E118 /* UIImage+Extensions.swift */; };
 		E3AF3AFDB9A56429936730F3 /* Pods_DailyGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A3A6F6A6AD99C7CACE238 /* Pods_DailyGit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CC84117223B47B9400B655A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B87EA6472221EDC000CE8114 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC84116F23B47B9400B655A6;
+			remoteInfo = "WatchDailyGit Extension";
+		};
+		CC84118123B47B9500B655A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B87EA6472221EDC000CE8114 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC84116323B47B9000B655A6;
+			remoteInfo = WatchDailyGit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CC84118423B47B9500B655A6 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				CC84118323B47B9500B655A6 /* WatchDailyGit.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC84118723B47B9500B655A6 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CC84117123B47B9400B655A6 /* WatchDailyGit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		115511AC256958835482543F /* Pods-DailyGit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyGit.debug.xcconfig"; path = "Target Support Files/Pods-DailyGit/Pods-DailyGit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -50,6 +101,18 @@
 		CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDataManager.swift; sourceTree = "<group>"; };
 		CC45D5F323A4BC6D00DACF5D /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		CC798C26233A94A300CBD8B0 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		CC84116423B47B9000B655A6 /* WatchDailyGit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchDailyGit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC84116723B47B9000B655A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		CC84116923B47B9400B655A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CC84116B23B47B9400B655A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC84117023B47B9400B655A6 /* WatchDailyGit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchDailyGit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC84117523B47B9400B655A6 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		CC84117723B47B9400B655A6 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		CC84117923B47B9400B655A6 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		CC84117B23B47B9400B655A6 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		CC84117D23B47B9500B655A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CC84117F23B47B9500B655A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC84118023B47B9500B655A6 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		CCB524292317237F004FF84B /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		CCC3A81B2308C2790051C151 /* DailyGit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyGit.entitlements; sourceTree = "<group>"; };
 		CCC3A81C230B15CB0051C151 /* Contribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contribution.swift; sourceTree = "<group>"; };
@@ -71,6 +134,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3AF3AFDB9A56429936730F3 /* Pods_DailyGit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC84116D23B47B9400B655A6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				B87EA6512221EDC000CE8114 /* DailyGit */,
+				CC84116523B47B9000B655A6 /* WatchDailyGit */,
+				CC84117423B47B9400B655A6 /* WatchDailyGit Extension */,
 				B87EA6502221EDC000CE8114 /* Products */,
 				82D3FC6301537216D72137DC /* Pods */,
 				905E79FED264E32068AAD13E /* Frameworks */,
@@ -108,6 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				B87EA64F2221EDC000CE8114 /* DailyGit.app */,
+				CC84116423B47B9000B655A6 /* WatchDailyGit.app */,
+				CC84117023B47B9400B655A6 /* WatchDailyGit Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,6 +251,30 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CC84116523B47B9000B655A6 /* WatchDailyGit */ = {
+			isa = PBXGroup;
+			children = (
+				CC84116623B47B9000B655A6 /* Interface.storyboard */,
+				CC84116923B47B9400B655A6 /* Assets.xcassets */,
+				CC84116B23B47B9400B655A6 /* Info.plist */,
+			);
+			path = WatchDailyGit;
+			sourceTree = "<group>";
+		};
+		CC84117423B47B9400B655A6 /* WatchDailyGit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CC84117523B47B9400B655A6 /* InterfaceController.swift */,
+				CC84117723B47B9400B655A6 /* ExtensionDelegate.swift */,
+				CC84117923B47B9400B655A6 /* NotificationController.swift */,
+				CC84117B23B47B9400B655A6 /* ComplicationController.swift */,
+				CC84117D23B47B9500B655A6 /* Assets.xcassets */,
+				CC84117F23B47B9500B655A6 /* Info.plist */,
+				CC84118023B47B9500B655A6 /* PushNotificationPayload.apns */,
+			);
+			path = "WatchDailyGit Extension";
+			sourceTree = "<group>";
+		};
 		CCC3A822230B480B0051C151 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,15 +326,51 @@
 				B87EA64C2221EDC000CE8114 /* Frameworks */,
 				B87EA64D2221EDC000CE8114 /* Resources */,
 				9665569F0BE1A0CC8D8B5155 /* [CP] Embed Pods Frameworks */,
+				CC84118423B47B9500B655A6 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CC84118223B47B9500B655A6 /* PBXTargetDependency */,
 			);
 			name = DailyGit;
 			productName = DailyGit;
 			productReference = B87EA64F2221EDC000CE8114 /* DailyGit.app */;
 			productType = "com.apple.product-type.application";
+		};
+		CC84116323B47B9000B655A6 /* WatchDailyGit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC84118B23B47B9500B655A6 /* Build configuration list for PBXNativeTarget "WatchDailyGit" */;
+			buildPhases = (
+				CC84116223B47B9000B655A6 /* Resources */,
+				CC84118723B47B9500B655A6 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CC84117323B47B9400B655A6 /* PBXTargetDependency */,
+			);
+			name = WatchDailyGit;
+			productName = WatchDailyGit;
+			productReference = CC84116423B47B9000B655A6 /* WatchDailyGit.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		CC84116F23B47B9400B655A6 /* WatchDailyGit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC84118A23B47B9500B655A6 /* Build configuration list for PBXNativeTarget "WatchDailyGit Extension" */;
+			buildPhases = (
+				CC84116C23B47B9400B655A6 /* Sources */,
+				CC84116D23B47B9400B655A6 /* Frameworks */,
+				CC84116E23B47B9400B655A6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WatchDailyGit Extension";
+			productName = "WatchDailyGit Extension";
+			productReference = CC84117023B47B9400B655A6 /* WatchDailyGit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -244,12 +378,18 @@
 		B87EA6472221EDC000CE8114 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Vlad Munteanu";
 				TargetAttributes = {
 					B87EA64E2221EDC000CE8114 = {
 						CreatedOnToolsVersion = 10.2;
+					};
+					CC84116323B47B9000B655A6 = {
+						CreatedOnToolsVersion = 11.3;
+					};
+					CC84116F23B47B9400B655A6 = {
+						CreatedOnToolsVersion = 11.3;
 					};
 				};
 			};
@@ -267,6 +407,8 @@
 			projectRoot = "";
 			targets = (
 				B87EA64E2221EDC000CE8114 /* DailyGit */,
+				CC84116323B47B9000B655A6 /* WatchDailyGit */,
+				CC84116F23B47B9400B655A6 /* WatchDailyGit Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -279,6 +421,23 @@
 				CCF2E96C22FFE02D00F4E118 /* testing.storyboard in Resources */,
 				B87EA65D2221EDC200CE8114 /* LaunchScreen.storyboard in Resources */,
 				B87EA65A2221EDC200CE8114 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC84116223B47B9000B655A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC84116A23B47B9400B655A6 /* Assets.xcassets in Resources */,
+				CC84116823B47B9000B655A6 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC84116E23B47B9400B655A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC84117E23B47B9500B655A6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,7 +513,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CC84116C23B47B9400B655A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC84117A23B47B9400B655A6 /* NotificationController.swift in Sources */,
+				CC84117C23B47B9400B655A6 /* ComplicationController.swift in Sources */,
+				CC84117823B47B9400B655A6 /* ExtensionDelegate.swift in Sources */,
+				CC84117623B47B9400B655A6 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CC84117323B47B9400B655A6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC84116F23B47B9400B655A6 /* WatchDailyGit Extension */;
+			targetProxy = CC84117223B47B9400B655A6 /* PBXContainerItemProxy */;
+		};
+		CC84118223B47B9500B655A6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC84116323B47B9000B655A6 /* WatchDailyGit */;
+			targetProxy = CC84118123B47B9500B655A6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B87EA65B2221EDC200CE8114 /* LaunchScreen.storyboard */ = {
@@ -363,6 +546,14 @@
 				B87EA65C2221EDC200CE8114 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		CC84116623B47B9000B655A6 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC84116723B47B9000B655A6 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -526,6 +717,88 @@
 			};
 			name = Release;
 		};
+		CC84118523B47B9500B655A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B8C8RXSHKT;
+				IBSC_MODULE = WatchDailyGit_Extension;
+				INFOPLIST_FILE = WatchDailyGit/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LesGarcons.DailyGit.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Debug;
+		};
+		CC84118623B47B9500B655A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B8C8RXSHKT;
+				IBSC_MODULE = WatchDailyGit_Extension;
+				INFOPLIST_FILE = WatchDailyGit/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LesGarcons.DailyGit.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Release;
+		};
+		CC84118823B47B9500B655A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B8C8RXSHKT;
+				INFOPLIST_FILE = "WatchDailyGit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.LesGarcons.DailyGit.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Debug;
+		};
+		CC84118923B47B9500B655A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B8C8RXSHKT;
+				INFOPLIST_FILE = "WatchDailyGit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.LesGarcons.DailyGit.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -543,6 +816,24 @@
 			buildConfigurations = (
 				B87EA6622221EDC200CE8114 /* Debug */,
 				B87EA6632221EDC200CE8114 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC84118A23B47B9500B655A6 /* Build configuration list for PBXNativeTarget "WatchDailyGit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC84118823B47B9500B655A6 /* Debug */,
+				CC84118923B47B9500B655A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC84118B23B47B9500B655A6 /* Build configuration list for PBXNativeTarget "WatchDailyGit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC84118523B47B9500B655A6 /* Debug */,
+				CC84118623B47B9500B655A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
