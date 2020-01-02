@@ -73,7 +73,7 @@ public class CommitsView: UIView {
             weekCommitGraph[index].backgroundColor = myColor
             if element.date == DateHelper.shared.getFormattedDate() {
                 weekCommitGraph[index].layer.borderWidth = 0.5
-                weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0.9998916984, green: 1, blue: 0.9998809695, alpha: 0.7987007473)
+                weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             }
         }
     }
@@ -158,7 +158,6 @@ public class CommitsView: UIView {
         //Provide default image
         // view.image = #imageLiteral(resourceName: "sampleIcon")
         view.image = ReadUserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic")
-        
         return view
         
     }()

@@ -132,7 +132,9 @@ public class GithubDataManager {
     
     func setupContributions(startDay: String, username: String, completion: @escaping (ContributionList?) -> ())  {
         let year = DateHelper.shared.getYear(myDate: startDay, isIso: true)
-        let currentYear = DateHelper.shared.getYear(myDate: DateHelper.shared.getFormattedDate(), isIso: false)
+        //let currentYear = DateHelper.shared.getYear(myDate: DateHelper.shared.getFormattedDate(), isIso: false)
+        
+        let currentYear = Calendar.current.component(.year, from: Date())
         
         var contList = [Contribution]()
         let myGroup = DispatchGroup()
