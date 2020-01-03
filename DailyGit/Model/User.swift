@@ -20,7 +20,6 @@ struct User: Codable {
     let currentStreak: Int
     let dateCreated: String
     
-    
     /*
      Contributions is organized with oldest date first
      -------------------------------------------------
@@ -33,6 +32,7 @@ struct User: Codable {
         var randContList = [Contribution]()
         
         for (index, element) in contributions.contributions.reversed().enumerated() {
+            
             if element.date == DateHelper.shared.getFormattedDate() {
                 //counting = true
                 let psedoIndex = contributions.contributions.count - index-1

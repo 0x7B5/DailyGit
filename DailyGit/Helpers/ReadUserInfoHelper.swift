@@ -94,14 +94,14 @@ public class ReadUserInfoHelper {
         var maxStreaks = 0
         
         for i in currentContributions!.contributions {
-                if i.count > 0 {
-                    counter += 1
-                } else {
-                    if counter > maxStreaks {
-                        maxStreaks = counter
-                    }
-                    counter = 0
+            if i.count > 0 {
+                counter += 1
+            } else {
+                if counter > maxStreaks {
+                    maxStreaks = counter
                 }
+                counter = 0
+            }
         }
         self.defaults.set(maxStreaks, forKey: "LongestStreak")
         self.defaults.synchronize()
@@ -125,21 +125,39 @@ public class ReadUserInfoHelper {
         }
     }
     
+    func getYearlyContributionsDates() -> Int{
+        
+        var yearCount = 0
+        
+        let currentContributions = readInfo(info: .contributions) as? ContributionList
+        for i in currentContributions!.contributions {
+            print(DateHelper.shared.getYear(myDate: i.date, isIso: true))
+            if (DateHelper.shared.getYear(myDate: i.date, isIso: true) == 2019) {
+                if i.count > 0 {
+                    yearCount += 1
+                }
+            }
+        }
+        
+        return yearCount
+        
+    }
+    
     
     func loadImageFromDiskWith(fileName: String) -> UIImage? {
-
-      let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
-
+        
+        let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        
         let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
         let paths = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
-
+        
         if let dirPath = paths.first {
             let imageUrl = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
             let image = UIImage(contentsOfFile: imageUrl.path)
             return image
-
+            
         }
-
+        
         return nil
     }
     
