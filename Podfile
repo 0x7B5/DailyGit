@@ -9,5 +9,6 @@ use_frameworks!
 pod 'SnapKit', '~> 5.0.0'
 pod 'QuickTableViewController'
 pod 'SwiftSoup'
+pod 'Firebase/Analytics'
 
 end
