@@ -20,11 +20,11 @@ class MainTabBarController: UITabBarController {
         
         let mainVC = MainVC()
         //all the cool kids have no titles for their tab bars
-        mainVC.tabBarItem.title = "Commits"
+        mainVC.tabBarItem.title = "Dashboard"
         mainVC.tabBarItem.image = UIImage(named: "codeIcon")
         
         let settingsVC = RootSettingVC()
-        settingsVC.tabBarItem.title = "Settings"
+        settingsVC.tabBarItem.title = "Search"
         settingsVC.tabBarItem.image = UIImage(named: "settingsIcon")
         
         let controllers = [mainVC, settingsVC]

@@ -135,7 +135,7 @@ extension AppDelegate {
                         
                         
                         
-                        
+                    
                         // Schedule the request with the system.
                         let notificationCenter = UNUserNotificationCenter.current()
                         notificationCenter.removeAllPendingNotificationRequests()
