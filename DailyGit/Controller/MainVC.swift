@@ -17,6 +17,7 @@ class MainVC: UIViewController {
         self.mainView.bioLabel.sizeToFit()
         self.mainView.profileImage.layer.cornerRadius = self.mainView.profileImage.frame.size.width/2
         self.mainView.profileImage.layer.masksToBounds = true
+        self.mainView.profileImage.layer.borderColor = UIColor.clear.cgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
