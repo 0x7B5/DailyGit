@@ -152,12 +152,18 @@ public class CommitsView: UIView {
         
     }
     //SUBVIEWS
-    let profileImage: UIImageView = {
+    public let profileImage: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
         //Provide default image
         // view.image = #imageLiteral(resourceName: "sampleIcon")
-        view.image = ReadUserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic")
+        let image = ReadUserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic")!
+        view.image = image
+        view.layer.borderWidth = 1.0
+        view.layer.masksToBounds = false
+        //imageView.layer.borderColor = UIColor.white.cgColor
+//        view.layer.cornerRadius = view.frame.size.width / 2
+//        view.clipsToBounds = true
         return view
         
     }()

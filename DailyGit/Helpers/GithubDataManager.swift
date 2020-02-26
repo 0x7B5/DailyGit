@@ -94,7 +94,9 @@ public class GithubDataManager {
                                 
                                 
                                 
-                                let myImage = UIImage(data: data)!.roundImage()
+                                #warning("ROUND ROUND")
+                                //let myImage = UIImage(data: data)!.roundImage()
+                                let myImage = UIImage(data: data)!
                                 
                                 self.saveImage(imageName: "ProfilePic", image: myImage)
                                 print("finished image")

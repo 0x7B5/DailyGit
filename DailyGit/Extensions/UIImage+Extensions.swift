@@ -15,6 +15,7 @@ extension UIImage
     {
         let newImage = self.copy() as! UIImage
         let cornerRadius = self.size.height/2
+        //UIColor.red.set()
         UIGraphicsBeginImageContextWithOptions(self.size, false, 1.0)
         let bounds = CGRect(origin: CGPoint.zero, size: self.size)
         UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius).addClip()
