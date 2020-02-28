@@ -21,3 +21,4 @@ struct Contribution: Codable {
     let dayOfWeek: Int
     //let intensity: Int
 }
+

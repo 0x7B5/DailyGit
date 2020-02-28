@@ -89,26 +89,15 @@ public class OnboardingView: UIView {
         return textfield
     }()
     
-    //Activity Indicator
-    let activityIndicator: UIActivityIndicatorView = {
-        let activityView = UIActivityIndicatorView(style: .whiteLarge)
-        activityView.color = Constants.gitGreenColor
-        return activityView
-    }()
     
     func startLoading() {
-        addSubview(activityIndicator)
+        
         usernameTextfield.removeFromSuperview()
-        activityIndicator.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.65)
-        }
-        activityIndicator.startAnimating()
+       
     }
     
     func stopLoading() {
-        activityIndicator.stopAnimating()
-        activityIndicator.removeFromSuperview()
+       
         addSubview(usernameTextfield)
         usernameTextfield.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.9)

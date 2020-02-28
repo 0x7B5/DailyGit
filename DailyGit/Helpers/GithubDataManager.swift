@@ -92,10 +92,6 @@ public class GithubDataManager {
                                 guard let data = data, error == nil else { return }
                                 print("Download Finished")
                                 
-                                
-                                
-                                #warning("ROUND ROUND")
-                                //let myImage = UIImage(data: data)!.roundImage()
                                 let myImage = UIImage(data: data)!
                                 
                                 self.saveImage(imageName: "ProfilePic", image: myImage)
@@ -176,6 +172,7 @@ public class GithubDataManager {
             })
             
             
+            #warning("Idek what this does")
             myGroup.notify(queue: .main) {
                 completion(ContributionList(contributions: contList))
             }

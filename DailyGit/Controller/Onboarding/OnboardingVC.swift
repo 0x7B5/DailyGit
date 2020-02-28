@@ -8,15 +8,13 @@
 
 import Foundation
 import UIKit
+import MBProgressHUD
 
 
 class OnboardingVC: UIViewController, UITextFieldDelegate {
     
     let onboardingView = OnboardingView()
     unowned var usernameTF: UITextField { return onboardingView.usernameTextfield}
-    
-    unowned var activityIndicator: UIActivityIndicatorView { return onboardingView.activityIndicator}
-    
     
     override func loadView() {
         self.view = onboardingView
@@ -35,47 +33,66 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     @objc func goNext() {
         view.endEditing(true)
         #warning("There's something not working here because of networking or something I think")
-        onboardingView.startLoading()
         if Reachability.shared.isConnectedToNetwork(){
+            let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
             if let username = usernameTF.text {
                 GithubDataManager.shared.isGithubUser(username: username, completion: {
                     userExists in
-                    DispatchQueue.main.async { [weak self] in
-                        self!.onboardingView.stopLoading()
-                        
-                        if (!userExists) {
+                    DispatchQueue.main.async { () -> Void in
+                        loadingNotification.mode = MBProgressHUDMode.indeterminate
+                        loadingNotification.label.text = "Checking if user exists"
+                    }
+                    if (!userExists) {
+                        DispatchQueue.main.async { [weak self] in
+                            loadingNotification.hide(animated: true)
+                            
                             let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                             self!.present(alert, animated: true)
-                        } else {
-                            GithubDataManager.shared.setupGithubUser(username: username, completion: {
-                                user in
-                                ReadUserInfoHelper.shared.resetDefaults()
-                                let encoder = JSONEncoder()
-                                if let encoded = try? encoder.encode(user) {
-                                    let defaults = UserDefaults.standard
-                                    defaults.set(encoded, forKey: "CurrentUser")
-                                    defaults.synchronize()
+                        }
+                        
+                    } else {
+                        
+                        DispatchQueue.main.async { () -> Void in
+                            loadingNotification.hide(animated: true)
+                        }
+                        GithubDataManager.shared.setupGithubUser(username: username, completion: {
+                            user in
+                            
+                            loadingNotification.mode = MBProgressHUDMode.indeterminate
+                            loadingNotification.label.text = "Pulling user's GitHub data"
+                            
+                            ReadUserInfoHelper.shared.resetDefaults()
+                            let encoder = JSONEncoder()
+                            if let encoded = try? encoder.encode(user) {
+                                let defaults = UserDefaults.standard
+                                defaults.set(encoded, forKey: "CurrentUser")
+                                defaults.synchronize()
+                                DispatchQueue.main.async { [weak self] in
                                     let vc =  MainTabBarController()
                                     vc.modalPresentationStyle = .fullScreen
-                                    self!.present(vc, animated: true, completion: nil)
-                                } else {
+                                    self!.present(vc, animated: true, completion: {
+                                        loadingNotification.hide(animated: true)
+                                    })
+                                }
+                            } else {
+                                DispatchQueue.main.async { [weak self] in
+                                    loadingNotification.hide(animated: true)
                                     let alert = UIAlertController(title: "Error Occured", message: "Please try again.", preferredStyle: .alert)
                                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                                     self!.present(alert, animated: true)
                                 }
-                            })
-                        }
+                            }
+                        })
+                        
                     }
                 })
             }
         } else {
-            onboardingView.stopLoading()
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
-        //onboardingView.stopLoading()
         usernameTF.text = ""
     }
     

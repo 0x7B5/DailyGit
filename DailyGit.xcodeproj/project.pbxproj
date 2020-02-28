@@ -39,7 +39,6 @@
 		CCF2E96C22FFE02D00F4E118 /* testing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCF2E96B22FFE02D00F4E118 /* testing.storyboard */; };
 		CCF2E96F2300D69B00F4E118 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF2E96E2300D69B00F4E118 /* OnboardingVC.swift */; };
 		CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF2E97123011F3500F4E118 /* OnboardingView.swift */; };
-		CCF2E9752302293200F4E118 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF2E9742302293200F4E118 /* UIImage+Extensions.swift */; };
 		E3AF3AFDB9A56429936730F3 /* Pods_DailyGit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A3A6F6A6AD99C7CACE238 /* Pods_DailyGit.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +101,7 @@
 		CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDataManager.swift; sourceTree = "<group>"; };
 		CC2F5CD72404E7F100220F99 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CC45D5F323A4BC6D00DACF5D /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		CC47B82A2408501300C4B312 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CC798C26233A94A300CBD8B0 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		CC84116423B47B9000B655A6 /* WatchDailyGit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchDailyGit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC84116723B47B9000B655A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -126,7 +126,6 @@
 		CCF2E96B22FFE02D00F4E118 /* testing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = testing.storyboard; sourceTree = "<group>"; };
 		CCF2E96E2300D69B00F4E118 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		CCF2E97123011F3500F4E118 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		CCF2E9742302293200F4E118 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		D4785D0209F19D090C54C17B /* Pods-DailyGit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyGit.release.xcconfig"; path = "Target Support Files/Pods-DailyGit/Pods-DailyGit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -176,6 +175,7 @@
 		B87EA6462221EDC000CE8114 = {
 			isa = PBXGroup;
 			children = (
+				CC47B82A2408501300C4B312 /* TestingPlayground.playground */,
 				B87EA6512221EDC000CE8114 /* DailyGit */,
 				CC84116523B47B9000B655A6 /* WatchDailyGit */,
 				CC84117423B47B9400B655A6 /* WatchDailyGit Extension */,
@@ -316,7 +316,6 @@
 		CCF2E9732302291C00F4E118 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CCF2E9742302293200F4E118 /* UIImage+Extensions.swift */,
 				CCD5132B23158D0C00B000AA /* Date+Extensions.swift */,
 				CCD5132D23158FE700B000AA /* String+Extensions.swift */,
 				CC798C26233A94A300CBD8B0 /* UIColor+Extensions.swift */,
@@ -509,7 +508,6 @@
 				CCD5132E23158FE700B000AA /* String+Extensions.swift in Sources */,
 				CCC3A821230B42050051C151 /* ReadUserInfoHelper.swift in Sources */,
 				CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */,
-				CCF2E9752302293200F4E118 /* UIImage+Extensions.swift in Sources */,
 				CCB5242A2317237F004FF84B /* DateHelper.swift in Sources */,
 				CCD5132C23158D0C00B000AA /* Date+Extensions.swift in Sources */,
 				CC798C27233A94A300CBD8B0 /* UIColor+Extensions.swift in Sources */,

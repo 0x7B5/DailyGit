@@ -10,5 +10,5 @@ pod 'SnapKit', '~> 5.0.0'
 pod 'QuickTableViewController'
 pod 'SwiftSoup'
 pod 'Firebase/Analytics'
-
+pod 'MBProgressHUD', '~> 1.2.0'
 end
