@@ -11,9 +11,84 @@ import UserNotifications
 import Firebase
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    let gcmMessageIDKey = "gcm.message_id"
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        UITabBar.appearance().tintColor = Constants.gitGreenColor
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        configureFirebase()
+        
+        if (userExist() == true) {
+            //LoggedIn
+            self.window?.rootViewController = MainTabBarController()
+        } else {
+            //Not Logged In
+            let navController = UINavigationController(rootViewController: OnboardingVC())
+            window?.rootViewController = navController
+            let alertController = UIAlertController(title: "Do you want to recieve alerts reminding you to code?", message: "Great! We can notify you.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) {
+                UIAlertAction in
+                NSLog("OK Pressed")
+                self.registerForPushNotifications(application)
+            }
+            let cancelAction = UIAlertAction(title: "No", style: UIAlertAction.Style.cancel) {
+                UIAlertAction in
+                NSLog("Cancel Pressed")
+            }
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+        }
+        
+        // [START receive_message]
+        func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+            // If you are receiving a notification message while your app is in the background,
+            // this callback will not be fired till the user taps on the notification launching the application.
+            // TODO: Handle data of notification
+            
+            if let messageID = userInfo[gcmMessageIDKey] {
+                print("Message ID: \(messageID)")
+            }
+            // Print full message.
+            print(userInfo)
+        }
+        
+        func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                         fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+            // If you are receiving a notification message while your app is in the background,
+            // this callback will not be fired till the user taps on the notification launching the application.
+            // TODO: Handle data of notification
+            if let messageID = userInfo[gcmMessageIDKey] {
+                print("Message ID: \(messageID)")
+            }
+            
+            // Print full message.
+            print(userInfo)
+            
+            completionHandler(UIBackgroundFetchResult.newData)
+        }
+        // [END receive_message]
+        func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+            print("Unable to register for remote notifications: \(error.localizedDescription)")
+        }
+        
+        // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
+        // If swizzling is disabled then this function must be implemented so that the APNs token can be paired to
+        // the FCM registration token.
+        func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+            print("APNs token retrieved: \(deviceToken)")
+            
+            // With swizzling disabled you must set the APNs token here.
+            // Messaging.messaging().apnsToken = deviceToken
+        }
+        
+        
+        return true
+    }
     
     func resetDefaults() {
         let defaults = UserDefaults.standard
@@ -26,135 +101,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userExist() -> Bool {
         return (ReadUserInfoHelper.shared.readInfo(info: .username) as? String != "")
     }
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UITabBar.appearance().tintColor = Constants.gitGreenColor
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
-        UNUserNotificationCenter.current().delegate = self
-        FirebaseApp.configure()
-        
-        
-        if (userExist() == true) {
-            //LoggedIn
-            self.window?.rootViewController = MainTabBarController()
-            self.handleNotifications()
-            
-        } else {
-            //Not Logged In
-            let navController = UINavigationController(rootViewController: OnboardingVC())
-            window?.rootViewController = navController
-            let alertController = UIAlertController(title: "Do you want to recieve daily alerts reminding you to commit?", message: "Great! We can notify you.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) {
-                UIAlertAction in
-                NSLog("OK Pressed")
-                self.registerForPushNotifications()
-            }
-            let cancelAction = UIAlertAction(title: "No", style: UIAlertAction.Style.cancel) {
-                UIAlertAction in
-                NSLog("Cancel Pressed")
-            }
-            alertController.addAction(okAction)
-            alertController.addAction(cancelAction)
-            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
-        }
-        
-        #warning("Have to present our own custom alert first here")
-        
-        return true
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-    }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-    }
-    
-    func applicationWillEnterForeground(_ application: UIApplication) {
-    }
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-    }
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-    }
 }
 
 //Handles Notifcations
 
-extension AppDelegate {
+extension AppDelegate: UNUserNotificationCenterDelegate {
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound])
+    
+    func registerForPushNotifications(_ application: UIApplication) {
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in })
+        application.registerForRemoteNotifications()
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("idk")
-        completionHandler()
-    }
-    
-    func registerForPushNotifications() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-            print("granted: \(granted)")
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
         }
+        
+        // Print full message.
+        print(userInfo)
+        
+        // Change this to your preferred presentation option
+        completionHandler([])
     }
     
-    func handleNotifications() {
-        print("We still outchea")
-        let current = UNUserNotificationCenter.current()
-        current.getNotificationSettings(completionHandler: { (settings) in
-            if settings.authorizationStatus == .notDetermined {
-                // Notification permission has not been asked yet, go for it!
-                self.registerForPushNotifications()
-            } else if settings.authorizationStatus == .denied {
-                // Notification permission was previously denied, go to settings & privacy to re-enable
-                return
-            } else if settings.authorizationStatus == .authorized {
-                // Notification permission was already granted
-                
-                
-                if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
-                    
-                    ReadUserInfoHelper.shared.refreshEverything {
-                        //LoggedIn
-                        let content = UNMutableNotificationContent()
-                        content.sound = UNNotificationSound.default
-                        
-                        var trigger: UNTimeIntervalNotificationTrigger
-                        
-                        
-                        #warning("Fix logic here, this repeats every hour from when app is installed, not from the exact hour time as it should")
-                        
-                        
-                        trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0*60.0, repeats: true)
-                        
-                        
-                        
-                        
-                        let uuidString = UUID().uuidString
-                        
-                        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
-                        
-                        
-                        
-                    
-                        // Schedule the request with the system.
-                        let notificationCenter = UNUserNotificationCenter.current()
-                        notificationCenter.removeAllPendingNotificationRequests()
-                        notificationCenter.add(request, withCompletionHandler: nil)
-                        
-                        //notificationCenter.removeAllPendingNotificationRequests()
-                        
-                    }
-                    
-                    
-                } else {
-                    return
-                }
-                
-                
-            }
-        })
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        completionHandler()
     }
 }
 
@@ -163,5 +157,33 @@ extension UserDefaults {
     static func exists(key: String) -> Bool {
         return UserDefaults.standard.object(forKey: key) != nil
     }
+    
+}
+
+// Handles Firebase
+
+extension AppDelegate: MessagingDelegate {
+    func configureFirebase() {
+        FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+    }
+    
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+        
+        let dataDict:[String: String] = ["token": fcmToken]
+        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+    // [END refresh_token]
+    // [START ios_10_data_message]
+    // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
+    // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Received data message: \(remoteMessage.appData)")
+    }
+    // [END ios_10_data_message]
     
 }
