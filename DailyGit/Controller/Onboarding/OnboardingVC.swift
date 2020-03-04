@@ -59,8 +59,8 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                         GithubDataManager.shared.setupGithubUser(username: username, completion: {
                             user in
                             
-                            loadingNotification.mode = MBProgressHUDMode.indeterminate
-                            loadingNotification.label.text = "Pulling user's GitHub data"
+//                            loadingNotification.mode = MBProgressHUDMode.indeterminate
+//                            loadingNotification.label.text = "Pulling user's GitHub data"
                             
                             ReadUserInfoHelper.shared.resetDefaults()
                             let encoder = JSONEncoder()

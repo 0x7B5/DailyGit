@@ -107,7 +107,7 @@ public class GithubDataManager {
                                 self.setupContributions(startDay: creationDate, username: myUsername, completion: {
                                     contributions in
                                     if contributions != nil {
-                                        let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!)
+                                        let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!, currentWeek: self.setupCurrentWeek(contributions!))
                                         print("Done it again \(user)")
                                         completion(user)
                                     } else {
@@ -124,6 +124,18 @@ public class GithubDataManager {
             }.resume()
         }
         
+    }
+    
+    func setupCurrentWeek(_ currentList: ContributionList) -> ContributionList {
+        var randContList = [Contribution?](repeating: nil, count: 6)
+        for element in currentList.contributions.reversed() {
+            randContList.insert(element, at: element.dayOfWeek)
+            if(element.dayOfWeek == 0) {
+                break
+            }
+        }
+        
+        return ContributionList(contributions: randContList.compactMap { $0 })
     }
     
     

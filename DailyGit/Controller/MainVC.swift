@@ -51,10 +51,13 @@ class MainVC: UIViewController {
     
     func updateInfo() {
         ReadUserInfoHelper.shared.refreshEverything(completion: {
-            self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
-            self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
-            self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
-            self.mainView.setupColorsForWeek(contributions: ReadUserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
+            DispatchQueue.main.async { () -> Void in
+                self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
+                self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
+                self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
+                self.mainView.setupColorsForWeek(contributions: ReadUserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
+            }
+            
         })
         
     }
