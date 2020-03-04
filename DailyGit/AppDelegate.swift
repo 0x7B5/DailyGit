@@ -8,6 +8,7 @@
 
 import UIKit
 import OneSignal
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
     
         initializeOneSignal(launchOptions)
+        setupNotifications()
         
         if (userExist() == true) {
             //LoggedIn
@@ -82,6 +84,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //Handles Notifcations
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
+    func setupNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+    }
+    
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("Background")
+        print(response.notification.request.content.userInfo)
+    }
+
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("Foreground")
+        print(notification.request.content.userInfo)
+    }
+    
+   
 }
 
 extension UserDefaults {

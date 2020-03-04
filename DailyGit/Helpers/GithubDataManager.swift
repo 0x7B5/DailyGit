@@ -126,59 +126,24 @@ public class GithubDataManager {
         
     }
     
-    #warning("html parsing only shows commits from past year")
     
     func setupContributions(startDay: String, username: String, completion: @escaping (ContributionList?) -> ())  {
-        let year = DateHelper.shared.getYear(myDate: startDay, isIso: true)
-        //let currentYear = DateHelper.shared.getYear(myDate: DateHelper.shared.getFormattedDate(), isIso: false)
         
-        let currentYear = Calendar.current.component(.year, from: Date())
-        
-        var contList = [Contribution]()
-        let myGroup = DispatchGroup()
-        
-        for i in year...currentYear {
-            myGroup.enter()
-            getGithubSourceForYear(username: username, year: i, completion: {
-                source in
-                if let pageSource = source {
-                    guard let doc: Document = try? SwiftSoup.parse(pageSource) else { return
-                    }
-                    guard let commitElements = try? doc.select("[class=day]") else { return
-                    }
+        //let myGroup = DispatchGroup()
+        if let url = URL(string: "https://glass-watch-269518.appspot.com/contributions/\(username)") {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data {
                     
-                    for i in commitElements {
-                        let date = try? i.attr("data-date")
-                        if date == nil {
-                            continue
-                        }
-                        
-                        
-                        
-                        let commitsCount = try? i.attr("data-count")
-                        let fillColor = try? i.attr("fill")
-                        
-                        
-                        
-                        let currentDay = DateHelper.shared.getDayOfWeek(fromDate:  DateHelper.shared.stringToDate(myDate: date!, IsoFormat: false))
-                        
-                        
-                        let aContribution: Contribution = (Contribution(date: date!, count: Int(commitsCount ?? "0")!, color: fillColor ?? "ebedf0", dayOfWeek: currentDay ?? 0))
-                        
-                        contList.append(aContribution)
-                    }
+                    let userList = try! JSONDecoder().decode(ContributionList.self, from: data)
+                    completion(userList)
+                    
+                    
+                } else {
+                    completion(nil)
                 }
-                myGroup.leave()
-            })
-            
-            
-            #warning("Idek what this does")
-            myGroup.notify(queue: .main) {
-                completion(ContributionList(contributions: contList))
-            }
-            
-            
+            }.resume()
         }
+        
         
         
     }
@@ -190,17 +155,15 @@ public class GithubDataManager {
                     completion(nil)
                     return
                 }
-                // This has to throw an error
-                do {
-                    guard let htmlString = String(data: data, encoding: .utf8) else {
-                        print("couldn't cast data into String")
-                        completion(nil)
-                        return
-                    }
-                    completion(htmlString)
-                } catch let err {
+                
+                
+                guard let htmlString = String(data: data, encoding: .utf8) else {
+                    print("couldn't cast data into String")
                     completion(nil)
+                    return
                 }
+                completion(htmlString)
+                
             }.resume()
         }
     }
@@ -212,17 +175,15 @@ public class GithubDataManager {
                     completion(nil, err)
                     return
                 }
-                // This has to throw an error
-                do {
-                    guard let htmlString = String(data: data, encoding: .utf8) else {
-                        print("couldn't cast data into String")
-                        completion(nil, err)
-                        return
-                    }
-                    completion(htmlString, nil)
-                } catch  {
+                
+                
+                guard let htmlString = String(data: data, encoding: .utf8) else {
+                    print("couldn't cast data into String")
                     completion(nil, err)
+                    return
                 }
+                completion(htmlString, nil)
+                
             }.resume()
         }
         
