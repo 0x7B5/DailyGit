@@ -2,12 +2,17 @@
 # platform :ios, '9.0'
 
 target 'DailyGit' do
-# Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-use_frameworks!
+    # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+    use_frameworks!
 
-# Pods for DailyGit
-pod 'SnapKit', '~> 5.0.0'
-pod 'QuickTableViewController'
-pod 'SwiftSoup'
-pod 'MBProgressHUD', '~> 1.2.0'
+    # Pods for DailyGit
+    pod 'SnapKit', '~> 5.0.0'
+    pod 'QuickTableViewController'
+    pod 'SwiftSoup'
+    pod 'MBProgressHUD', '~> 1.2.0'
+end
+
+target 'OneSignalNotificationServiceExtension' do
+    use_frameworks!
+    pod 'OneSignal', '>= 2.11.2', '< 3.0'
 end
