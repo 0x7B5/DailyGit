@@ -42,12 +42,12 @@ class RootSettingVC: QuickTableViewController {
             ]),
             
             
-            //            Section(title: "RESET DEFAULTS", rows: [
-            //
-            //                TapActionRow(text: "DEBUG DEBUG", action: { [weak self] _ in
-            //                    self?.resetDefaults()
-            //                })
-            //            ], footer: ""),
+                        Section(title: "RESET DEFAULTS", rows: [
+            
+                            TapActionRow(text: "DEBUG DEBUG", action: { [weak self] _ in
+                                self?.resetDefaults()
+                            })
+                        ], footer: ""),
             
         ]
     }
