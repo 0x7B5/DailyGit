@@ -116,7 +116,6 @@ public class GithubDataManager {
                                 })
                             }
                         }
-                        
                     }
                 } catch _ {
                     completion(nil)
@@ -134,30 +133,22 @@ public class GithubDataManager {
                 break
             }
         }
-        
         return ContributionList(contributions: randContList.compactMap { $0 })
     }
     
     
     func setupContributions(startDay: String, username: String, completion: @escaping (ContributionList?) -> ())  {
-        
         //let myGroup = DispatchGroup()
         if let url = URL(string: "https://glass-watch-269518.appspot.com/contributions/\(username)") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
-                    
                     let userList = try! JSONDecoder().decode(ContributionList.self, from: data)
                     completion(userList)
-                    
-                    
                 } else {
                     completion(nil)
                 }
             }.resume()
         }
-        
-        
-        
     }
     
     func getGithubSourceForYear(username: String, year: Int, completion: @escaping (String?) -> ()) {

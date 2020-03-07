@@ -21,7 +21,6 @@ if let url = URL(string: "http://127.0.0.1:5000/contributions/vlad-munteanu") {
         if let data = data {
             do {
                 let user = try! JSONDecoder().decode(ContributionList.self, from: data)
-               // print(user)
                 
                 for val in user.contributions {
                     print(val)
