@@ -14,23 +14,11 @@ public class DateHelper {
     
     func getFormattedDate() -> String {
         let date = Date()
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let result = formatter.string(from: date)
         
-        let year = String(components.year!)
-        var month = String(components.month!)
-        var day = String(components.day!)
-        
-        if components.month! < 10 {
-            month = "0" + String(components.month!)
-        }
-        
-        if components.day! < 10 {
-            day = "0" + String(components.month!)
-        }
-        
-        let currentDate = "\(year)-\(month)-\(day)"
-        return currentDate
+        return result
     }
     
     func stringToDate(myDate: String, IsoFormat: Bool) -> Date {
@@ -50,6 +38,14 @@ public class DateHelper {
             return date!
         }
         return Date()
+    }
+    
+    func stringToYear(myDate: String, IsoFormat: Bool) -> String {
+        let myDate = stringToDate(myDate: myDate, IsoFormat: IsoFormat)
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: myDate)
+        
+        return String(year)
     }
     
     func getDayOfWeek(fromDate date: Date) -> Int {

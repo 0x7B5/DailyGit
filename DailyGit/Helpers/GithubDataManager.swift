@@ -75,15 +75,12 @@ public class GithubDataManager {
                         
                         let avatar_url = json["avatar-url"] as? String
                         
-                        
-                        
                         var bio = ""
                         var name = ""
                         
                         if let temp = json["bio"] as? String {
                             bio = temp
                         }
-                        
                         
                         //let name = json["name"] as? String,
                         if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String, let creationDate = json["created_at"] as? String{
@@ -104,7 +101,7 @@ public class GithubDataManager {
                                 }
                                 
                                 #warning("Fix setup contributions")
-                                self.setupContributions(startDay: creationDate, username: myUsername, completion: {
+                                self.getAllContributions(startYear: DateHelper.shared.stringToYear(myDate: creationDate, IsoFormat: true), username: myUsername, completion: {
                                     contributions in
                                     if contributions != nil {
                                         let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!, currentWeek: self.setupCurrentWeek(contributions!))
@@ -122,7 +119,6 @@ public class GithubDataManager {
                 }
             }.resume()
         }
-        
     }
     
     func setupCurrentWeek(_ currentList: ContributionList) -> ContributionList {
@@ -137,9 +133,9 @@ public class GithubDataManager {
     }
     
     
-    func setupContributions(startDay: String, username: String, completion: @escaping (ContributionList?) -> ())  {
+    func getAllContributions(startYear: String, username: String, completion: @escaping (ContributionList?) -> ())  {
         //let myGroup = DispatchGroup()
-        if let url = URL(string: "https://glass-watch-269518.appspot.com/contributions/\(username)") {
+        if let url = URL(string: "https://vlad-munteanu.appspot.com/contributions/\(username)/\(startYear)") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
                     let userList = try! JSONDecoder().decode(ContributionList.self, from: data)
@@ -151,50 +147,122 @@ public class GithubDataManager {
         }
     }
     
-    func getGithubSourceForYear(username: String, year: Int, completion: @escaping (String?) -> ()) {
-        if let url = URL(string: "https://github.com/\(username)?tab=overview&from=\(year)-12-01&to=\(year)-12-31") {
-            URLSession.shared.dataTask(with: url) { (data, response, err) in
-                guard let data = data else {
+    
+    func getDailyCommits(username: String, completion: @escaping (Contribution?) -> ()) {
+        if let url = URL(string: "https://vlad-munteanu.appspot.com/dayCount/\(username)/\(DateHelper.shared.getFormattedDate())") {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data {
+                    let contribution = try! JSONDecoder().decode(Contribution.self, from: data)
+                    completion(contribution)
+                } else {
                     completion(nil)
-                    return
                 }
-                
-                
-                guard let htmlString = String(data: data, encoding: .utf8) else {
-                    print("couldn't cast data into String")
-                    completion(nil)
-                    return
-                }
-                completion(htmlString)
-                
             }.resume()
         }
     }
     
-    func getGithubSource(username: String, completion: @escaping (String?, Error?) -> ()) {
-        if let url = URL(string: "https://github.com/\(username)") {
-            URLSession.shared.dataTask(with: url) { (data, response, err) in
-                guard let data = data else {
-                    completion(nil, err)
-                    return
+    func getMonthlyCommits(username: String, completion: @escaping (ContributionList?) -> ()) {
+        if let url = URL(string: "https://vlad-munteanu.appspot.com/monthlyCount/\(username)/\(DateHelper.shared.getFormattedDate())") {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data {
+                    let userList = try! JSONDecoder().decode(ContributionList.self, from: data)
+                    completion(userList)
+                } else {
+                    completion(nil)
                 }
-                
-                
-                guard let htmlString = String(data: data, encoding: .utf8) else {
-                    print("couldn't cast data into String")
-                    completion(nil, err)
-                    return
-                }
-                completion(htmlString, nil)
-                
             }.resume()
         }
-        
     }
+    
+    func getWeeklyCommits(username: String, completion: @escaping (ContributionList?) -> ()) {
+        if let url = URL(string: "https://vlad-munteanu.appspot.com/weeklyCount/\(username)/\(DateHelper.shared.getFormattedDate())") {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data {
+                    let userList = try! JSONDecoder().decode(ContributionList.self, from: data)
+                    completion(userList)
+                } else {
+                    completion(nil)
+                }
+            }.resume()
+        }
+    }
+    
+    func refreshUserInfo(completion: @escaping () -> ()) {
+        if let url = URL(string: "https://api.github.com/users/\(ReadUserInfoHelper.shared.readInfo(info: .username))") {
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
+                guard let data = data else { return }
+                
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        if (json["message"] as? String == "Not Found") {
+                            completion()
+                        }
+                        
+                        if (json["avatar-url"] as? String == "Not Found") {
+                            completion()
+                        }
+                        
+                        let avatar_url = json["avatar-url"] as? String
+                        
+                        var bio = ""
+                        var name = ""
+                        
+                        if let temp = json["bio"] as? String {
+                            bio = temp
+                        }
+                        
+                        //let name = json["name"] as? String,
+                        if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String, let creationDate = json["created_at"] as? String{
+                            
+                            let defaults = UserDefaults.standard
+                            var photoChanged = false
+                            
+                            if var savedPerson = defaults.object(forKey: "CurrentUser") as? User {
+                                // Should probably use setters and getters here but quick fix
+                                savedPerson.name = name
+                                savedPerson.username = myUsername
+                                savedPerson.bio = bio
+                                
+                                if (photourl != savedPerson.photoUrl) {
+                                    savedPerson.photoUrl = photourl
+                                    photoChanged = true
+                                }
+                                
+                                savedPerson.dateCreated = creationDate
+                                defaults.set(savedPerson, forKey: "CurrentUser")
+                                defaults.synchronize()
+                            } else {
+                                completion()
+                            }
+                            
+                            if photoChanged {
+                                self.getData(from: URL(string: photourl)!) { data, response, error in
+                                    guard let data = data, error == nil else { return }
+                                    print("Download Finished")
+                                    
+                                    let myImage = UIImage(data: data)!
+                                    
+                                    self.saveImage(imageName: "ProfilePic", image: myImage)
+                                    print("finished image")
+                                    
+                                    if let tempName = json["name"] as? String {
+                                        name = tempName
+                                    } else {
+                                        name = myUsername
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch _ {
+                    completion()
+                }
+            }.resume()
+        }
+    }
+    
     
     func saveImage(imageName: String, image: UIImage) {
-        
-        
         guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         
         let fileName = imageName
@@ -217,7 +285,6 @@ public class GithubDataManager {
         } catch let error {
             print("error saving file with error", error)
         }
-        
     }
     
     

@@ -9,16 +9,16 @@
 import Foundation
 
 struct User: Codable {
-    let name: String
-    let username: String
-    let bio: String
+    var name: String
+    var username: String
+    var bio: String
     //gotta store that on user device
-    let photoUrl: String
-    let contributions: ContributionList
+    var photoUrl: String
+    var contributions: ContributionList
     
-    let longestStreak: Int
-    let currentStreak: Int
-    let dateCreated: String
+    var longestStreak: Int
+    var currentStreak: Int
+    var dateCreated: String
     
     
     var currentWeek: ContributionList
