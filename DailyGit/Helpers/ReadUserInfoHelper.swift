@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 enum Userinfo {
-    case  name, username, bio, photoUrl, contributions, yearCreated, dateCreated, currentWeek
+    case user, name, username, bio, photoUrl, contributions, yearCreated, dateCreated, currentWeek
 }
 
 public class ReadUserInfoHelper {
@@ -22,6 +22,8 @@ public class ReadUserInfoHelper {
             let decoder = JSONDecoder()
             if var loadedPerson = try? decoder.decode(User.self, from: savedPerson) {
                 switch info {
+                case .user:
+                    return loadedPerson
                 case .name:
                     return loadedPerson.name
                 case .username:
@@ -48,7 +50,7 @@ public class ReadUserInfoHelper {
         GithubDataManager.shared.updateInfo(completion: {
             let date = DateHelper.shared.getFormattedDate()
             let currentContributions = self.readInfo(info: .contributions) as? ContributionList
-            print(currentContributions)
+//            print(currentContributions)
             
             for i in currentContributions!.contributions {
                 if i.date == date {

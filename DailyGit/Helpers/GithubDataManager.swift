@@ -141,9 +141,6 @@ public class GithubDataManager {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
                     let userList = try! JSONDecoder().decode(ContributionList.self, from: data)
-                    print("hey hey hey")
-                    print(userList)
-                    print("ok done doen")
                     completion(userList)
                 } else {
                     completion(nil)
@@ -300,23 +297,36 @@ public class GithubDataManager {
                     //print(contributions)
                     print(contributions!.contributions.last ?? " ")
                     
-                    if var savedPerson = self.defaults.object(forKey: "CurrentUser") as? User {
-                        // Should probably use setters and getters here but quick fix
-                        if let myContributions = contributions {
-                            savedPerson.contributions = myContributions
-                        } else {
-                            completion()
-                        }
-                        self.defaults.set(savedPerson, forKey: "CurrentUser")
-                        self.defaults.synchronize()
+                    var savedPerson = ReadUserInfoHelper.shared.readInfo(info: .user) as! User
+                    // Should probably use setters and getters here but quick fix
+                    if let myContributions = contributions {
+                        savedPerson.contributions = myContributions
+                        print("saved person updarted")
                     } else {
                         completion()
                     }
+                    
+                    let encoder = JSONEncoder()
+                    
+                    if let encoded = try? encoder.encode(savedPerson) {
+                        let defaults = UserDefaults.standard
+                        defaults.set(encoded, forKey: "CurrentUser")
+                        defaults.synchronize()
+                        print("synced")
+                        completion()
+                    }
+                    
+                    completion()
+                    
+                    
+                    
                     
                     
                 })
             })
             
+        } else {
+            completion()
         }
     }
     
