@@ -136,10 +136,14 @@ public class GithubDataManager {
     
     func getAllContributions(startYear: Int, username: String, completion: @escaping (ContributionList?) -> ())  {
         //let myGroup = DispatchGroup()
-        if let url = URL(string: "https://vlad-munteanu.appspot.com/contributions/\(username)/\(startYear)") {
+        print(DateHelper.shared.getFormattedDate())
+        if let url = URL(string: "https://vlad-munteanu.appspot.com/contributions/\(username)/\(startYear)/\(DateHelper.shared.getFormattedDate())") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
                     let userList = try! JSONDecoder().decode(ContributionList.self, from: data)
+                    print("hey hey hey")
+                    print(userList)
+                    print("ok done doen")
                     completion(userList)
                 } else {
                     completion(nil)
@@ -288,22 +292,27 @@ public class GithubDataManager {
     
     func updateInfo(completion: @escaping () -> ()) {
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
+            #warning("We could probably run these functions asyncrously instead but idk")
             refreshUserInfo(completion: {
                 self.getAllContributions(startYear: ReadUserInfoHelper.shared.readInfo(info: .yearCreated) as! Int, username: ReadUserInfoHelper.shared.readInfo(info: .username) as! String, completion: {
                     contributions in
+                    print("We here here")
+                    //print(contributions)
+                    print(contributions!.contributions.last ?? " ")
                     
                     if var savedPerson = self.defaults.object(forKey: "CurrentUser") as? User {
+                        // Should probably use setters and getters here but quick fix
                         if let myContributions = contributions {
                             savedPerson.contributions = myContributions
-                            self.defaults.set(savedPerson, forKey: "CurrentUser")
-                            self.defaults.synchronize()
                         } else {
                             completion()
                         }
-                        
+                        self.defaults.set(savedPerson, forKey: "CurrentUser")
+                        self.defaults.synchronize()
                     } else {
                         completion()
                     }
+                    
                     
                 })
             })
@@ -312,5 +321,7 @@ public class GithubDataManager {
     }
     
 }
+
+
 
 

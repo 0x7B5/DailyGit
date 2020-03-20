@@ -48,6 +48,7 @@ public class ReadUserInfoHelper {
         GithubDataManager.shared.updateInfo(completion: {
             let date = DateHelper.shared.getFormattedDate()
             let currentContributions = self.readInfo(info: .contributions) as? ContributionList
+            print(currentContributions)
             
             for i in currentContributions!.contributions {
                 if i.date == date {
