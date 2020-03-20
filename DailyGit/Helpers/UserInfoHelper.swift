@@ -64,7 +64,12 @@ public class UserInfoHelper {
     
     func getCurrentStreak() {
         let currentContributions = readInfo(info: .contributions) as? ContributionList
-        let date = DateHelper.shared.getFormattedDate()
+        var date = DateHelper.shared.getFormattedDate()
+        
+        if currentContributions!.contributions.last!.count == 0 {
+            date = DateHelper.shared.getYesterdayDate()
+        }
+       
         
         var counter = 0
         var countingYet = false
