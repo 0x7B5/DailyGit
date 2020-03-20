@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 enum Userinfo {
-    case  name, username, bio, photoUrl, contributions, dateCreated, currentWeek
+    case  name, username, bio, photoUrl, contributions, yearCreated, dateCreated, currentWeek
 }
 
 public class ReadUserInfoHelper {
@@ -32,6 +32,8 @@ public class ReadUserInfoHelper {
                     return loadedPerson.photoUrl
                 case .contributions:
                     return loadedPerson.contributions
+                case .yearCreated:
+                    return loadedPerson.yearCreated
                 case .dateCreated:
                     return loadedPerson.dateCreated
                 case .currentWeek:

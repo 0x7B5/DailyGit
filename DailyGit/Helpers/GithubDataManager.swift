@@ -23,6 +23,8 @@ public class GithubDataManager {
     
     private init() { }
     
+    let defaults = UserDefaults.standard
+    
     
     #warning("Fix this")
     
@@ -73,8 +75,6 @@ public class GithubDataManager {
                             completion(nil)
                         }
                         
-                        let avatar_url = json["avatar-url"] as? String
-                        
                         var bio = ""
                         var name = ""
                         
@@ -100,11 +100,12 @@ public class GithubDataManager {
                                     name = myUsername
                                 }
                                 
+                                let creationYear = Int(DateHelper.shared.stringToYear(myDate: creationDate, IsoFormat: true))!
                                 #warning("Fix setup contributions")
-                                self.getAllContributions(startYear: DateHelper.shared.stringToYear(myDate: creationDate, IsoFormat: true), username: myUsername, completion: {
+                                self.getAllContributions(startYear: creationYear, username: myUsername, completion: {
                                     contributions in
                                     if contributions != nil {
-                                        let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, contributions: contributions!, currentWeek: self.setupCurrentWeek(contributions!))
+                                        let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, yearCreated: creationYear ,contributions: contributions!, currentWeek: self.setupCurrentWeek(contributions!))
                                         print("Done it again \(user)")
                                         completion(user)
                                     } else {
@@ -133,7 +134,7 @@ public class GithubDataManager {
     }
     
     
-    func getAllContributions(startYear: String, username: String, completion: @escaping (ContributionList?) -> ())  {
+    func getAllContributions(startYear: Int, username: String, completion: @escaping (ContributionList?) -> ())  {
         //let myGroup = DispatchGroup()
         if let url = URL(string: "https://vlad-munteanu.appspot.com/contributions/\(username)/\(startYear)") {
             URLSession.shared.dataTask(with: url) { data, response, error in
@@ -202,8 +203,6 @@ public class GithubDataManager {
                             completion()
                         }
                         
-                        let avatar_url = json["avatar-url"] as? String
-                        
                         var bio = ""
                         var name = ""
                         
@@ -214,10 +213,9 @@ public class GithubDataManager {
                         //let name = json["name"] as? String,
                         if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String, let creationDate = json["created_at"] as? String{
                             
-                            let defaults = UserDefaults.standard
                             var photoChanged = false
                             
-                            if var savedPerson = defaults.object(forKey: "CurrentUser") as? User {
+                            if var savedPerson = self.defaults.object(forKey: "CurrentUser") as? User {
                                 // Should probably use setters and getters here but quick fix
                                 savedPerson.name = name
                                 savedPerson.username = myUsername
@@ -229,8 +227,8 @@ public class GithubDataManager {
                                 }
                                 
                                 savedPerson.dateCreated = creationDate
-                                defaults.set(savedPerson, forKey: "CurrentUser")
-                                defaults.synchronize()
+                                self.defaults.set(savedPerson, forKey: "CurrentUser")
+                                self.defaults.synchronize()
                             } else {
                                 completion()
                             }
@@ -290,18 +288,26 @@ public class GithubDataManager {
     
     func updateInfo(completion: @escaping () -> ()) {
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
-            setupGithubUser(username: ReadUserInfoHelper.shared.readInfo(info: .username) as! String, completion: {
-                user in
-                
-                let encoder = JSONEncoder()
-                if let encoded = try? encoder.encode(user) {
-                    let defaults = UserDefaults.standard
-                    defaults.set(encoded, forKey: "CurrentUser")
-                    defaults.synchronize()
-                    completion()
-                }
-                
+            refreshUserInfo(completion: {
+                self.getAllContributions(startYear: ReadUserInfoHelper.shared.readInfo(info: .yearCreated) as! Int, username: ReadUserInfoHelper.shared.readInfo(info: .username) as! String, completion: {
+                    contributions in
+                    
+                    if var savedPerson = self.defaults.object(forKey: "CurrentUser") as? User {
+                        if let myContributions = contributions {
+                            savedPerson.contributions = myContributions
+                            self.defaults.set(savedPerson, forKey: "CurrentUser")
+                            self.defaults.synchronize()
+                        } else {
+                            completion()
+                        }
+                        
+                    } else {
+                        completion()
+                    }
+                    
+                })
             })
+            
         }
     }
     
