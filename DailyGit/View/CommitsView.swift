@@ -51,7 +51,7 @@ public class CommitsView: UIView {
     }
     
     func checkAllignmentForTitle() {
-        if ReadUserInfoHelper.shared.readInfo(info: .bio) as? String == "" {
+        if UserInfoHelper.shared.readInfo(info: .bio) as? String == "" {
             nameLabel.textAlignment = .center
             nameLabel.snp.makeConstraints{
                 $0.width.equalToSuperview().multipliedBy(0.4)
@@ -157,7 +157,7 @@ public class CommitsView: UIView {
         view.contentMode = .scaleAspectFit
         //Provide default image
         // view.image = #imageLiteral(resourceName: "sampleIcon")
-        let image = ReadUserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic")!
+        let image = UserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic")!
         view.image = image
         view.layer.borderWidth = 1.0
         view.layer.masksToBounds = false

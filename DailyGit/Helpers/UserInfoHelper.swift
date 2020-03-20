@@ -1,5 +1,5 @@
 //
-//  ReadUserInfoHelper.swift
+//  UserInfoHelper.swift
 //  DailyGit
 //
 //  Created by Vlad Munteanu on 8/19/19.
@@ -13,8 +13,8 @@ enum Userinfo {
     case user, name, username, bio, photoUrl, contributions, yearCreated, dateCreated, currentWeek
 }
 
-public class ReadUserInfoHelper {
-    static let shared = ReadUserInfoHelper()
+public class UserInfoHelper {
+    static let shared = UserInfoHelper()
     let defaults = UserDefaults.standard
     
     func readInfo(info: Userinfo) -> Any {
@@ -164,6 +164,18 @@ public class ReadUserInfoHelper {
         }
         
         return nil
+    }
+    
+    
+    func updateUserInDefaults(userToEncode: User) {
+        let encoder = JSONEncoder()
+        
+        if let encoded = try? encoder.encode(userToEncode) {
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: "CurrentUser")
+            defaults.synchronize()
+            print("User encoded and synced")
+        }
     }
     
     

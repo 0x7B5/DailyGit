@@ -190,7 +190,7 @@ public class GithubDataManager {
     }
     
     func refreshUserInfo(completion: @escaping () -> ()) {
-        if let url = URL(string: "https://api.github.com/users/\(ReadUserInfoHelper.shared.readInfo(info: .username))") {
+        if let url = URL(string: "https://api.github.com/users/\(UserInfoHelper.shared.readInfo(info: .username))") {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
                 guard let data = data else { return }
                 
@@ -228,8 +228,9 @@ public class GithubDataManager {
                                 }
                                 
                                 savedPerson.dateCreated = creationDate
-                                self.defaults.set(savedPerson, forKey: "CurrentUser")
-                                self.defaults.synchronize()
+                                UserInfoHelper.shared.updateUserInDefaults(userToEncode: savedPerson)
+                                
+                                
                             } else {
                                 completion()
                             }
@@ -291,13 +292,13 @@ public class GithubDataManager {
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
             #warning("We could probably run these functions asyncrously instead but idk")
             refreshUserInfo(completion: {
-                self.getAllContributions(startYear: ReadUserInfoHelper.shared.readInfo(info: .yearCreated) as! Int, username: ReadUserInfoHelper.shared.readInfo(info: .username) as! String, completion: {
+                self.getAllContributions(startYear: UserInfoHelper.shared.readInfo(info: .yearCreated) as! Int, username: UserInfoHelper.shared.readInfo(info: .username) as! String, completion: {
                     contributions in
                     print("We here here")
                     //print(contributions)
                     print(contributions!.contributions.last ?? " ")
                     
-                    var savedPerson = ReadUserInfoHelper.shared.readInfo(info: .user) as! User
+                    var savedPerson = UserInfoHelper.shared.readInfo(info: .user) as! User
                     // Should probably use setters and getters here but quick fix
                     if let myContributions = contributions {
                         savedPerson.contributions = myContributions
@@ -306,22 +307,9 @@ public class GithubDataManager {
                         completion()
                     }
                     
-                    let encoder = JSONEncoder()
                     
-                    if let encoded = try? encoder.encode(savedPerson) {
-                        let defaults = UserDefaults.standard
-                        defaults.set(encoded, forKey: "CurrentUser")
-                        defaults.synchronize()
-                        print("synced")
-                        completion()
-                    }
-                    
+                    UserInfoHelper.shared.updateUserInDefaults(userToEncode: savedPerson)
                     completion()
-                    
-                    
-                    
-                    
-                    
                 })
             })
             

@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func userExist() -> Bool {
-        return (ReadUserInfoHelper.shared.readInfo(info: .username) as? String != "")
+        return (UserInfoHelper.shared.readInfo(info: .username) as? String != "")
     }
     
     func initializeOneSignal(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {

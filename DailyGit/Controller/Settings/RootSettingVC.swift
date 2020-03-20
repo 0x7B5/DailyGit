@@ -29,7 +29,7 @@ class RootSettingVC: QuickTableViewController {
             Section(title: "Username", rows: [
                 
                 
-                NavigationRow(text: "Change Account", detailText: .subtitle("Current Username: \(ReadUserInfoHelper.shared.readInfo(info: .username))"), action: { [weak self] _ in
+                NavigationRow(text: "Change Account", detailText: .subtitle("Current Username: \(UserInfoHelper.shared.readInfo(info: .username))"), action: { [weak self] _ in
                     let navController = UINavigationController(rootViewController: OnboardingVC())
                     self!.present(navController, animated: true, completion: nil)
                 })

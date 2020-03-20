@@ -62,12 +62,10 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
 //                            loadingNotification.mode = MBProgressHUDMode.indeterminate
 //                            loadingNotification.label.text = "Pulling user's GitHub data"
                             
-                            ReadUserInfoHelper.shared.resetDefaults()
+                            UserInfoHelper.shared.resetDefaults()
                             let encoder = JSONEncoder()
                             if let encoded = try? encoder.encode(user) {
-                                let defaults = UserDefaults.standard
-                                defaults.set(encoded, forKey: "CurrentUser")
-                                defaults.synchronize()
+                                UserInfoHelper.shared.updateUserInDefaults(userToEncode: user!)
                                 DispatchQueue.main.async { [weak self] in
                                     let vc =  MainTabBarController()
                                     vc.modalPresentationStyle = .fullScreen

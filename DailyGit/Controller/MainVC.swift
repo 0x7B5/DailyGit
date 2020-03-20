@@ -36,26 +36,26 @@ class MainVC: UIViewController {
     }
     
     func setupInfo() {
-        ReadUserInfoHelper.shared.getCurrentStreak()
-        ReadUserInfoHelper.shared.getLongestStreak()
+        UserInfoHelper.shared.getCurrentStreak()
+        UserInfoHelper.shared.getLongestStreak()
         
-        mainView.nameLabel.text = (ReadUserInfoHelper.shared.readInfo(info: .name) as! String)
-        mainView.bioLabel.text = (ReadUserInfoHelper.shared.readInfo(info: .bio) as! String)
+        mainView.nameLabel.text = (UserInfoHelper.shared.readInfo(info: .name) as! String)
+        mainView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as! String)
         self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
         self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
         self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
-        self.mainView.setupColorsForWeek(contributions: ReadUserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
+        self.mainView.setupColorsForWeek(contributions: UserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
         updateInfo()
     }
     
     
     func updateInfo() {
-        ReadUserInfoHelper.shared.refreshEverything(completion: {
+        UserInfoHelper.shared.refreshEverything(completion: {
             DispatchQueue.main.async { () -> Void in
                 self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
                 self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
                 self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
-                self.mainView.setupColorsForWeek(contributions: ReadUserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
+                self.mainView.setupColorsForWeek(contributions: UserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
             }
             
         })
@@ -79,7 +79,7 @@ class MainVC: UIViewController {
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
-      //  print(ReadUserInfoHelper.shared.getYearlyContributionsDates())
+      //  print(UserInfoHelper.shared.getYearlyContributionsDates())
     }
     
 }
