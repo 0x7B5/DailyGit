@@ -23,5 +23,10 @@ public struct Constants {
     
     #warning("This needs to be able to be changed by the user")
     static var numberOfNotificationsPerDay = 24
+    
+    
+   static var darkMode = false 
+    
+    
 }
 

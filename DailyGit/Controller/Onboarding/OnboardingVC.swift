@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import MBProgressHUD
+import JGProgressHUD
 
 
 class OnboardingVC: UIViewController, UITextFieldDelegate {
@@ -34,51 +34,57 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
         #warning("There's something not working here because of networking or something I think")
         if Reachability.shared.isConnectedToNetwork(){
-            let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+            var loadingNotification = JGProgressHUD(style: .dark)
+            
+            if !(Constants.darkMode) {
+                loadingNotification = JGProgressHUD(style: .light)
+            }
+            
             if let username = usernameTF.text {
                 GithubDataManager.shared.isGithubUser(username: username, completion: {
                     userExists in
                     DispatchQueue.main.async { () -> Void in
-                        loadingNotification.mode = MBProgressHUDMode.indeterminate
-                        loadingNotification.label.text = "Checking if user exists"
+                        loadingNotification.textLabel.text = "Checking if user exists"
+                        loadingNotification.show(in: self.view)
                     }
                     if (!userExists) {
                         DispatchQueue.main.async { [weak self] in
-                            loadingNotification.hide(animated: true)
-                            
+                            loadingNotification.dismiss(afterDelay: 3.0)
                             let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                            self!.present(alert, animated: true)
+                            self!.present(alert, animated: true, completion: {
+                            })
                         }
                         
                     } else {
                         
+                        
                         DispatchQueue.main.async { () -> Void in
-                            loadingNotification.hide(animated: true)
+                            loadingNotification.textLabel.text = "Pulling user's GitHub data"
                         }
+                        
                         GithubDataManager.shared.setupGithubUser(username: username, completion: {
                             user in
-                            
-//                            loadingNotification.mode = MBProgressHUDMode.indeterminate
-//                            loadingNotification.label.text = "Pulling user's GitHub data"
-                            
+                            loadingNotification.dismiss(afterDelay: 3.0)
                             UserInfoHelper.shared.resetDefaults()
                             let encoder = JSONEncoder()
-                            if let encoded = try? encoder.encode(user) {
+                            if (try? encoder.encode(user)) != nil {
                                 UserInfoHelper.shared.updateUserInDefaults(userToEncode: user!)
                                 DispatchQueue.main.async { [weak self] in
                                     let vc =  MainTabBarController()
                                     vc.modalPresentationStyle = .fullScreen
                                     self!.present(vc, animated: true, completion: {
-                                        loadingNotification.hide(animated: true)
+                                       loadingNotification.dismiss(afterDelay: 3.0)
                                     })
                                 }
                             } else {
                                 DispatchQueue.main.async { [weak self] in
-                                    loadingNotification.hide(animated: true)
+                                    loadingNotification.dismiss(afterDelay: 3.0)
                                     let alert = UIAlertController(title: "Error Occured", message: "Please try again.", preferredStyle: .alert)
                                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                                    self!.present(alert, animated: true)
+                                    self!.present(alert, animated: true, completion: {
+                                      //  self.usernameTF.becomeFirstResponder()
+                                    })
                                 }
                             }
                         })
@@ -89,11 +95,33 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
         } else {
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            self.present(alert, animated: true, completion: {
+               // self.usernameTF.becomeFirstResponder()
+            })
         }
         usernameTF.text = ""
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        usernameTF.becomeFirstResponder()
+        
+        if #available(iOS 12.0, *) {
+            switch UIScreen.main.traitCollection.userInterfaceStyle {
+            case .light:
+                Constants.darkMode = false
+            case .dark:
+                Constants.darkMode = true
+            case .unspecified:
+                Constants.darkMode = true
+            @unknown default:
+                Constants.darkMode = true
+            }
+        } else {
+           Constants.darkMode = true
+        }
+        
+    }
     
     
     override  func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

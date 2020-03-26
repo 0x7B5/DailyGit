@@ -29,7 +29,6 @@
 		CC84117E23B47B9500B655A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC84117D23B47B9500B655A6 /* Assets.xcassets */; };
 		CC84118323B47B9500B655A6 /* WatchDailyGit.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CC84116423B47B9000B655A6 /* WatchDailyGit.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CCB5242A2317237F004FF84B /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB524292317237F004FF84B /* DateHelper.swift */; };
-		CCB745AB2424B104000E85F7 /* 2020-03-20 in Resources */ = {isa = PBXBuildFile; fileRef = CCB745AA2424B104000E85F7 /* 2020-03-20 */; };
 		CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81C230B15CB0051C151 /* Contribution.swift */; };
 		CCC3A81F230B16FC0051C151 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81E230B16FC0051C151 /* User.swift */; };
 		CCC3A821230B42050051C151 /* UserInfoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A820230B42050051C151 /* UserInfoHelper.swift */; };
@@ -136,7 +135,6 @@
 		CC84117F23B47B9500B655A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC84118023B47B9500B655A6 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		CCB524292317237F004FF84B /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
-		CCB745AA2424B104000E85F7 /* 2020-03-20 */ = {isa = PBXFileReference; lastKnownFileType = text; path = "2020-03-20"; sourceTree = "<group>"; };
 		CCC3A81B2308C2790051C151 /* DailyGit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyGit.entitlements; sourceTree = "<group>"; };
 		CCC3A81C230B15CB0051C151 /* Contribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contribution.swift; sourceTree = "<group>"; };
 		CCC3A81E230B16FC0051C151 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 		B87EA6512221EDC000CE8114 /* DailyGit */ = {
 			isa = PBXGroup;
 			children = (
-				CCB745A92424B0E8000E85F7 /* Thoughts */,
 				CCC3A81B2308C2790051C151 /* DailyGit.entitlements */,
 				B87EA6522221EDC000CE8114 /* AppDelegate.swift */,
 				CCF2E9732302291C00F4E118 /* Extensions */,
@@ -322,14 +319,6 @@
 				CC84118023B47B9500B655A6 /* PushNotificationPayload.apns */,
 			);
 			path = "WatchDailyGit Extension";
-			sourceTree = "<group>";
-		};
-		CCB745A92424B0E8000E85F7 /* Thoughts */ = {
-			isa = PBXGroup;
-			children = (
-				CCB745AA2424B104000E85F7 /* 2020-03-20 */,
-			);
-			path = Thoughts;
 			sourceTree = "<group>";
 		};
 		CCC3A822230B480B0051C151 /* Helpers */ = {
@@ -509,7 +498,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCF2E96C22FFE02D00F4E118 /* testing.storyboard in Resources */,
-				CCB745AB2424B104000E85F7 /* 2020-03-20 in Resources */,
 				B87EA65D2221EDC200CE8114 /* LaunchScreen.storyboard in Resources */,
 				B87EA65A2221EDC200CE8114 /* Assets.xcassets in Resources */,
 			);

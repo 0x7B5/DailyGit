@@ -9,7 +9,7 @@ target 'DailyGit' do
     pod 'SnapKit', '~> 5.0.0'
     pod 'QuickTableViewController'
     pod 'SwiftSoup'
-    pod 'MBProgressHUD', '~> 1.2.0'
+    pod 'JGProgressHUD'
 end
 
 target 'OneSignalNotificationServiceExtension' do
