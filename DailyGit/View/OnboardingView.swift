@@ -24,36 +24,49 @@ public class OnboardingView: UIView {
     
     private func initializeUI() {
         //UIViews
-        addSubview(enterUsernameLabel)
         addSubview(usernameTextfield)
-        addSubview(dontKnowUsernameLabel)
         addSubview(githubPhoto)
+        addSubview(bgView1)
+        addSubview(bgView2)
+        addSubview(bgView3)
     }
     
     public func createConstraints() {
-        enterUsernameLabel.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.centerX.equalToSuperview()
-            //$0.height.equalToSuperview().multipliedBy(0.13)
-            $0.centerY.equalToSuperview().multipliedBy(0.35)
-        }
         usernameTextfield.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(0.65)
         }
-        dontKnowUsernameLabel.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(1.0)
-        }
-        githubPhoto.snp.makeConstraints {
+        
+        bgView1.snp.makeConstraints {
             $0.width.equalToSuperview()
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(1.5)
+            $0.height.equalToSuperview().multipliedBy(0.47)
+            $0.centerY.equalToSuperview().multipliedBy(0.3)
         }
+        
+        bgView2.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.height.equalToSuperview().multipliedBy(0.47)
+            $0.centerY.equalToSuperview().multipliedBy(1.5)
+            $0.right.equalToSuperview().multipliedBy(1.7)
+        }
+        
+        
+        //0.8241469816
+        bgView3.snp.makeConstraints {
+            $0.width.equalTo(bgView2.snp.width).multipliedBy(0.73333)
+            $0.height.equalTo(bgView2.snp.height).multipliedBy(0.8241469816)
+            $0.centerY.equalToSuperview().multipliedBy(1.45)
+            $0.centerX.equalToSuperview().multipliedBy(0.05)
+        }
+        
+        bgView2.transform = CGAffineTransform(rotationAngle: 0.331613)
+        bgView3.transform = CGAffineTransform(rotationAngle: 0.331613)
     }
     
+    lazy var bgView1 = createViews()
+    lazy var bgView2 = createViews()
+    lazy var bgView3 = createViews()
    
     //Enter Github Username
     let enterUsernameLabel: UILabel = {
@@ -89,44 +102,20 @@ public class OnboardingView: UIView {
         return textfield
     }()
     
-    
-    func startLoading() {
-        
-        usernameTextfield.removeFromSuperview()
-       
-    }
-    
-    func stopLoading() {
-       
-        addSubview(usernameTextfield)
-        usernameTextfield.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.65)
-        }
-    }
-    
-    
-    //Don't know username
-    let dontKnowUsernameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 25.0)
-        label.adjustsFontSizeToFitWidth = true
-        label.text = "Don't know your username? Go to your GitHub profile and find it in the URL."
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.textColor = Constants.titleColor
-        return label
-    }()
-    
-    
-    
-    //GitHub profile pic
+    //GitHub logo pic
     let githubPhoto: UIImageView = {
         let photo = UIImageView()
-        photo.image = UIImage(named: "samplePage")
+        photo.image = UIImage(named: "gitLogo")
         photo.contentMode = .scaleAspectFit
         return photo
     }()
+    
+    
+    func createViews() -> UIView {
+        let view = UIView()
+        view.backgroundColor = Constants.blueColor
+        view.layer.cornerRadius = 40
+        return view
+    }
     
 }

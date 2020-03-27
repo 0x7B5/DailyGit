@@ -15,7 +15,7 @@ public struct Constants {
     static let mainBGColor = UIColor(named: "mainBackgroundColor")
     static let subTitleColor = UIColor(named: "subTitleTextColor")
     static let titleColor = UIColor(named: "titleTextColor")
-    
+    static let blueColor = #colorLiteral(red: 0, green: 0.5251492262, blue: 0.9089161754, alpha: 1)
     
     // Other stuff
     static var profaneNotications = false
