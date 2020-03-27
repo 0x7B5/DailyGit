@@ -40,17 +40,19 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                 loadingNotification = JGProgressHUD(style: .light)
             }
             
-            if let username = usernameTF.text {
+            if var username = usernameTF.text  {
+                username = username.replacingOccurrences(of: " ", with: "")
                 GithubDataManager.shared.isGithubUser(username: username, completion: {
                     userExists in
                     if (!userExists) {
                         DispatchQueue.main.async { [weak self] in
                             let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                            UIApplication.shared.endIgnoringInteractionEvents()
-                            self!.present(alert, animated: true, completion: {
+                            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {
+                                (alert: UIAlertAction!) in
                                 self!.usernameTF.becomeFirstResponder()
-                            })
+                            }))
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                            self!.present(alert, animated: true)
                         }
                         
                     } else {
@@ -91,11 +93,12 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
             }
         } else {
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            UIApplication.shared.endIgnoringInteractionEvents()
-            self.present(alert, animated: true, completion: {
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: {
+                (alert: UIAlertAction!) in
                 self.usernameTF.becomeFirstResponder()
-            })
+            }))
+            UIApplication.shared.endIgnoringInteractionEvents()
+            self.present(alert, animated: true)
             
         }
         usernameTF.text = ""
