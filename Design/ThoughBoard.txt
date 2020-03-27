@@ -1,0 +1,5 @@
+What needs to be displayed on main screen 
+- Commits for today 
+- Commits for yesterday 
+- Monthly commits 
+
