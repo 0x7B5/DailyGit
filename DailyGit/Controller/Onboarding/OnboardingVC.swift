@@ -45,16 +45,13 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                     userExists in
                     if (!userExists) {
                         DispatchQueue.main.async { [weak self] in
-                            loadingNotification.dismiss(afterDelay: 3.0)
                             let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                            self!.present(alert, animated: true, completion: {
-                            })
+                            self!.present(alert, animated: true)
                         }
                         
+                        
                     } else {
-                        
-                        
                         DispatchQueue.main.async { () -> Void in
                             loadingNotification.textLabel.text = "Pulling User Data"
                             loadingNotification.show(in: self.view)
@@ -62,26 +59,22 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                         
                         GithubDataManager.shared.setupGithubUser(username: username, completion: {
                             user in
-                            loadingNotification.dismiss(afterDelay: 3.0)
                             UserInfoHelper.shared.resetDefaults()
                             let encoder = JSONEncoder()
                             if (try? encoder.encode(user)) != nil {
                                 UserInfoHelper.shared.updateUserInDefaults(userToEncode: user!)
                                 DispatchQueue.main.async { [weak self] in
-                                    let vc =  MainTabBarController()
-                                    vc.modalPresentationStyle = .fullScreen
-                                    self!.present(vc, animated: true, completion: {
-                                       loadingNotification.dismiss(afterDelay: 3.0)
-                                    })
+                                    self!.presentLoadingAfter(loadingNotification, sucess: true, subtitleText: nil)
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                        let vc =  MainTabBarController()
+                                        vc.modalPresentationStyle = .fullScreen
+                                        self!.present(vc, animated: true)
+                                    }
                                 }
+                                
                             } else {
                                 DispatchQueue.main.async { [weak self] in
-                                    loadingNotification.dismiss(afterDelay: 3.0)
-                                    let alert = UIAlertController(title: "Error Occured", message: "Please try again.", preferredStyle: .alert)
-                                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                                    self!.present(alert, animated: true, completion: {
-                                      //  self.usernameTF.becomeFirstResponder()
-                                    })
+                                    self!.presentLoadingAfter(loadingNotification, sucess: false, subtitleText: "Please try again")
                                 }
                             }
                         })
@@ -92,11 +85,32 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
         } else {
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: {
-               // self.usernameTF.becomeFirstResponder()
-            })
+            self.present(alert, animated: true)
+            
         }
         usernameTF.text = ""
+        self.usernameTF.becomeFirstResponder()
+    }
+    
+    func presentLoadingAfter(_ hud: JGProgressHUD, sucess: Bool, subtitleText: String?) {
+       
+    
+        if sucess {
+            UIView.animate(withDuration: 0.1, animations: {
+                hud.textLabel.text = "Success"
+                hud.detailTextLabel.text = nil
+                hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+            })
+        } else {
+            UIView.animate(withDuration: 0.1, animations: {
+                hud.textLabel.text = "Error"
+                hud.detailTextLabel.text = subtitleText!
+                hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            })
+        }
+        
+        
+        hud.dismiss(afterDelay: 2.0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -115,7 +129,7 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                 Constants.darkMode = true
             }
         } else {
-           Constants.darkMode = true
+            Constants.darkMode = true
         }
         
     }
