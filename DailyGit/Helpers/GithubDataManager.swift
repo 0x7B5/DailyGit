@@ -296,6 +296,7 @@ public class GithubDataManager {
                     contributions in
                     print("We here here")
                     //print(contributions)
+                    #warning("This is giving us a lot of crashes idk why")
                     print(contributions!.contributions.last ?? " ")
                     
                     var savedPerson = UserInfoHelper.shared.readInfo(info: .user) as! User

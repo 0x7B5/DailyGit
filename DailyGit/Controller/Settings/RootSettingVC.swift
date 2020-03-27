@@ -31,6 +31,7 @@ class RootSettingVC: QuickTableViewController {
                 
                 NavigationRow(text: "Change Account", detailText: .subtitle("Current Username: \(UserInfoHelper.shared.readInfo(info: .username))"), action: { [weak self] _ in
                     let navController = UINavigationController(rootViewController: OnboardingVC())
+                    navController.modalPresentationStyle = .fullScreen
                     self!.present(navController, animated: true, completion: nil)
                 })
             ]),

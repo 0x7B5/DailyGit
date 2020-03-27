@@ -31,7 +31,7 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     }
     
     @objc func goNext() {
-        view.endEditing(true)
+        UIApplication.shared.beginIgnoringInteractionEvents()
         #warning("There's something not working here because of networking or something I think")
         if Reachability.shared.isConnectedToNetwork(){
             var loadingNotification = JGProgressHUD(style: .dark)
@@ -47,9 +47,11 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                         DispatchQueue.main.async { [weak self] in
                             let alert = UIAlertController(title: "Username not found", message: "Please try again.", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                            self!.present(alert, animated: true)
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                            self!.present(alert, animated: true, completion: {
+                                self!.usernameTF.becomeFirstResponder()
+                            })
                         }
-                        
                         
                     } else {
                         DispatchQueue.main.async { () -> Void in
@@ -65,16 +67,21 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                                 UserInfoHelper.shared.updateUserInDefaults(userToEncode: user!)
                                 DispatchQueue.main.async { [weak self] in
                                     self!.presentLoadingAfter(loadingNotification, sucess: true, subtitleText: nil)
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                         let vc =  MainTabBarController()
                                         vc.modalPresentationStyle = .fullScreen
                                         self!.present(vc, animated: true)
+                                        UIApplication.shared.endIgnoringInteractionEvents()
                                     }
                                 }
-                                
                             } else {
                                 DispatchQueue.main.async { [weak self] in
                                     self!.presentLoadingAfter(loadingNotification, sucess: false, subtitleText: "Please try again")
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        UIApplication.shared.endIgnoringInteractionEvents()
+                                        self!.usernameTF.becomeFirstResponder()
+                                    }
                                 }
                             }
                         })
@@ -85,11 +92,13 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
         } else {
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            UIApplication.shared.endIgnoringInteractionEvents()
+            self.present(alert, animated: true, completion: {
+                self.usernameTF.becomeFirstResponder()
+            })
             
         }
         usernameTF.text = ""
-        self.usernameTF.becomeFirstResponder()
     }
     
     func presentLoadingAfter(_ hud: JGProgressHUD, sucess: Bool, subtitleText: String?) {
@@ -135,7 +144,7 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     }
     
     
-    override  func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
