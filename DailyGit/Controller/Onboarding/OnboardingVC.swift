@@ -43,10 +43,6 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
             if let username = usernameTF.text {
                 GithubDataManager.shared.isGithubUser(username: username, completion: {
                     userExists in
-                    DispatchQueue.main.async { () -> Void in
-                        loadingNotification.textLabel.text = "Checking if user exists"
-                        loadingNotification.show(in: self.view)
-                    }
                     if (!userExists) {
                         DispatchQueue.main.async { [weak self] in
                             loadingNotification.dismiss(afterDelay: 3.0)
@@ -60,7 +56,8 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                         
                         
                         DispatchQueue.main.async { () -> Void in
-                            loadingNotification.textLabel.text = "Pulling user's GitHub data"
+                            loadingNotification.textLabel.text = "Pulling User Data"
+                            loadingNotification.show(in: self.view)
                         }
                         
                         GithubDataManager.shared.setupGithubUser(username: username, completion: {

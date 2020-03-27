@@ -140,7 +140,7 @@ public class GithubDataManager {
         if let url = URL(string: "https://vlad-munteanu.appspot.com/contributions/\(username)/\(startYear)/\(DateHelper.shared.getFormattedDate())") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
-                    let userList = try! JSONDecoder().decode(ContributionList.self, from: data)
+                    let userList = try? JSONDecoder().decode(ContributionList.self, from: data)
                     completion(userList)
                 } else {
                     completion(nil)

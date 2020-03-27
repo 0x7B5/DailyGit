@@ -13,13 +13,28 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if #available(iOS 12.0, *) {
+            switch UIScreen.main.traitCollection.userInterfaceStyle {
+            case .light:
+                Constants.darkMode = false
+            case .dark:
+                Constants.darkMode = true
+            case .unspecified:
+                Constants.darkMode = true
+            @unknown default:
+                Constants.darkMode = true
+            }
+        } else {
+           Constants.darkMode = true
+        }
+        
         //check what device
         if (self.view.frame.width >= 700 ) {
             Constants.isIpad = true
         }
         
         let mainVC = MainVC()
-        //all the cool kids have no titles for their tab bars
+    
         mainVC.tabBarItem.title = "Dashboard"
         mainVC.tabBarItem.image = UIImage(named: "codeIcon")
         
