@@ -15,6 +15,9 @@ public struct Constants {
     static let mainBGColor = UIColor(named: "mainBackgroundColor")
     static let subTitleColor = UIColor(named: "subTitleTextColor")
     static let titleColor = UIColor(named: "titleTextColor")
+    
+    
+    // Other stuff
     static var profaneNotications = false
     
     static var isIpad = false

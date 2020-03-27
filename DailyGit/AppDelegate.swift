@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = MainTabBarController()
         } else {
             //Not Logged In
-            let navController = UINavigationController(rootViewController: OnboardingVC())
+            let navController = OnboardingVC()
             window?.rootViewController = navController
             let alertController = UIAlertController(title: "Do you want to recieve alerts reminding you to code?", message: "Great! We can notify you.", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) {

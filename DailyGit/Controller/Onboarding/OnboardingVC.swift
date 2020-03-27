@@ -21,7 +21,6 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(goNext))
         self.usernameTF.delegate = self
         if !Reachability.shared.isConnectedToNetwork(){
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
