@@ -28,11 +28,6 @@ class MainTabBarController: UITabBarController {
            Constants.darkMode = true
         }
         
-        //check what device
-        if (self.view.frame.width >= 700 ) {
-            Constants.isIpad = true
-        }
-        
         let mainVC = MainVC()
     
         mainVC.tabBarItem.title = "Dashboard"

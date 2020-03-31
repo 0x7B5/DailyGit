@@ -74,14 +74,23 @@ public class OnboardingView: UIView {
             $0.top.equalToSuperview().inset(60)
         }
         
-        #warning("GET KEYBOARD HEIGHT https://stackoverflow.com/questions/31774006/how-to-get-height-of-keyboard")
-        // Get
-        loginView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.885)
-            $0.height.equalTo(loginView.snp.width).multipliedBy(0.74)
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.85)
+        
+        if (Constants.isIpad) {
+            loginView.snp.makeConstraints {
+                $0.width.equalToSuperview().multipliedBy(0.60)
+                $0.height.equalTo(loginView.snp.width).multipliedBy(0.74)
+                $0.centerX.equalToSuperview()
+                $0.centerY.equalToSuperview().multipliedBy(0.85)
+            }
+        } else {
+            loginView.snp.makeConstraints {
+                $0.width.equalToSuperview().multipliedBy(0.885)
+                $0.height.equalTo(loginView.snp.width).multipliedBy(0.74)
+                $0.centerX.equalToSuperview()
+                $0.centerY.equalToSuperview().multipliedBy(0.85)
+            }
         }
+        
         loginView.layer.shadowColor = UIColor.black.cgColor
         loginView.layer.shadowOpacity = 0.2
         loginView.layer.shadowOffset = .zero
@@ -162,7 +171,7 @@ public class OnboardingView: UIView {
         let button = UIButton()
         button.setTitle("Next", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-         
+        
         button.backgroundColor = Constants.blueColor
         button.layer.cornerRadius = 8
         return button
@@ -175,7 +184,7 @@ public class OnboardingView: UIView {
         photo.contentMode = .scaleAspectFit
         return photo
     }()
-   
+    
     func createViews(color: UIColor) -> UIView {
         let view = UIView()
         view.backgroundColor = color

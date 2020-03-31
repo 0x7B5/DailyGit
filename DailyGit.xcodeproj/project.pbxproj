@@ -18,6 +18,7 @@
 		B8B41CEA2228737B005E304A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE92228737B005E304A /* MainVC.swift */; };
 		B8B41CEC22287388005E304A /* RootSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CEB22287388005E304A /* RootSettingVC.swift */; };
 		CC17DBAD22FF9D1500E34951 /* GithubDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */; };
+		CC5C43D52433E2D300446308 /* UIFont+UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D42433E2D300446308 /* UIFont+UILabel+Extensions.swift */; };
 		CC798C27233A94A300CBD8B0 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC798C26233A94A300CBD8B0 /* UIColor+Extensions.swift */; };
 		CC84116823B47B9000B655A6 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC84116623B47B9000B655A6 /* Interface.storyboard */; };
 		CC84116A23B47B9400B655A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC84116923B47B9400B655A6 /* Assets.xcassets */; };
@@ -122,6 +123,7 @@
 		B8B41CEB22287388005E304A /* RootSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSettingVC.swift; sourceTree = "<group>"; };
 		CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDataManager.swift; sourceTree = "<group>"; };
 		CC47B82A2408501300C4B312 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		CC5C43D42433E2D300446308 /* UIFont+UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		CC798C26233A94A300CBD8B0 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		CC84116423B47B9000B655A6 /* WatchDailyGit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchDailyGit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC84116723B47B9000B655A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				CCD5132D23158FE700B000AA /* String+Extensions.swift */,
 				CC798C26233A94A300CBD8B0 /* UIColor+Extensions.swift */,
 				CC9E1DD3242E352D00E7E283 /* Textfield+Extensions.swift */,
+				CC5C43D42433E2D300446308 /* UIFont+UILabel+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				CCD5132E23158FE700B000AA /* String+Extensions.swift in Sources */,
 				CCC3A821230B42050051C151 /* UserInfoHelper.swift in Sources */,
 				CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */,
+				CC5C43D52433E2D300446308 /* UIFont+UILabel+Extensions.swift in Sources */,
 				CCB5242A2317237F004FF84B /* DateHelper.swift in Sources */,
 				CC9E1DD4242E352D00E7E283 /* Textfield+Extensions.swift in Sources */,
 				CCD5132C23158D0C00B000AA /* Date+Extensions.swift in Sources */,
