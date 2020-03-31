@@ -16,25 +16,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gitLogo" translatesAutoresizingMaskIntoConstraints="NO" id="PL8-qF-QsV">
-                                <rect key="frame" x="124" y="129" width="127" height="256"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gitLogo" translatesAutoresizingMaskIntoConstraints="NO" id="PL8-qF-QsV">
+                                <rect key="frame" x="125" y="150" width="125" height="182"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.06273914874" green="0.45435976979999998" blue="0.90733027460000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="PL8-qF-QsV" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ZBB-Tv-YAW"/>
-                            <constraint firstItem="PL8-qF-QsV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="124" id="gJB-w4-4NG"/>
-                            <constraint firstItem="PL8-qF-QsV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="85" id="rur-hu-eHq"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="47.4609375" y="369.39970717423131"/>
+            <point key="canvasLocation" x="43.125" y="367.6056338028169"/>
         </scene>
     </scenes>
     <resources>
-        <image name="gitLogo" width="256" height="256"/>
+        <image name="gitLogo" width="512" height="452"/>
     </resources>
 </document>

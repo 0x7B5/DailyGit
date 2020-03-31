@@ -29,7 +29,8 @@ public class OnboardingView: UIView {
         addSubview(bgView1)
         addSubview(bgView2)
         addSubview(bgView3)
-        addSubview(githubPhoto)
+        addSubview(githubLogoView)
+        githubLogoView.addSubview(githubPhoto)
         addSubview(loginView)
         loginView.addSubview(usernameTextfield)
         loginView.addSubview(enterUsernameLabel)
@@ -68,24 +69,56 @@ public class OnboardingView: UIView {
         #warning("Fix ME")
         //Put this in its own view for sizing purposes
         #warning("BLURRY")
-        githubPhoto.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.677)
-            $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(60)
+        
+        
+        githubLogoView.snp.makeConstraints{
+            $0.top.equalToSuperview()
+            $0.width.equalToSuperview()
+            $0.height.equalTo(bgView1.snp.height).multipliedBy(0.5)
         }
+        
+        if UIDevice.current.hasNotch {
+            githubPhoto.snp.makeConstraints {
+                $0.width.equalToSuperview().multipliedBy(0.15)
+                $0.height.equalTo(githubPhoto.snp.width)
+                $0.centerX.equalToSuperview()
+                $0.centerY.equalToSuperview().multipliedBy(1.08)
+            }
+        } else {
+            if (Constants.isIpad) {
+                githubPhoto.snp.makeConstraints {
+                    $0.width.equalToSuperview().multipliedBy(0.08)
+                    $0.height.equalTo(githubPhoto.snp.width)
+                    $0.centerX.equalToSuperview()
+                    $0.centerY.equalToSuperview().multipliedBy(0.8)
+                }
+                githubLogoView.snp.updateConstraints{
+                    $0.top.equalToSuperview().offset(30)
+                }
+            } else {
+                githubPhoto.snp.makeConstraints {
+                    $0.width.equalToSuperview().multipliedBy(0.18)
+                    $0.height.equalTo(githubPhoto.snp.width)
+                    $0.centerX.equalToSuperview()
+                    $0.centerY.equalToSuperview().multipliedBy(0.8)
+                }
+            }
+        }
+        
+        setupGitLogos()
         
         
         if (Constants.isIpad) {
             loginView.snp.makeConstraints {
                 $0.width.equalToSuperview().multipliedBy(0.60)
-                $0.height.equalTo(loginView.snp.width).multipliedBy(0.74)
+                $0.height.equalTo(loginView.snp.width).multipliedBy(0.54)
                 $0.centerX.equalToSuperview()
                 $0.centerY.equalToSuperview().multipliedBy(0.85)
             }
         } else {
             loginView.snp.makeConstraints {
                 $0.width.equalToSuperview().multipliedBy(0.885)
-                $0.height.equalTo(loginView.snp.width).multipliedBy(0.74)
+                $0.height.equalTo(loginView.snp.width).multipliedBy(0.65)
                 $0.centerX.equalToSuperview()
                 $0.centerY.equalToSuperview().multipliedBy(0.85)
             }
@@ -112,8 +145,8 @@ public class OnboardingView: UIView {
         nextButton.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(24)
-            $0.height.equalToSuperview().multipliedBy(0.18)
+            $0.bottom.equalToSuperview().inset(15)
+            $0.height.equalToSuperview().multipliedBy(0.22)
         }
         
         nextButton.layer.shadowColor = UIColor.black.cgColor
@@ -137,8 +170,8 @@ public class OnboardingView: UIView {
     let enterUsernameLabel: UILabel = {
         let label = UILabel()
         
-        label.font = UIFont.systemFont(ofSize: 30.0, weight: UIFont.Weight.regular)
-        label.adjustsFontSizeToFitWidth = true
+        label.font =  UIFont.preferredFont(forTextStyle: .title1)
+        label.adjustsFontForContentSizeCategory = true
         label.text = "GitHub Username"
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -153,14 +186,15 @@ public class OnboardingView: UIView {
         let attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.paragraphStyle: centeredParagraphStyle, NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)])
         textfield.attributedPlaceholder = attributedPlaceholder
         //textfield.placeholder = "Username"
-        textfield.font = UIFont.systemFont(ofSize: 30.0, weight: UIFont.Weight.thin)
-        textfield.adjustsFontSizeToFitWidth = true
-        //textfield.borderStyle = UITextField.BorderStyle.roundedRect
+        textfield.font = UIFont.preferredFont(forTextStyle: .title2)
+        textfield.adjustsFontForContentSizeCategory = true
+
+        
         textfield.textAlignment = .left
         textfield.autocorrectionType = UITextAutocorrectionType.no
         textfield.keyboardType = UIKeyboardType.default
         textfield.returnKeyType = UIReturnKeyType.done
-        textfield.clearButtonMode = UITextField.ViewMode.never
+        textfield.clearButtonMode = UITextField.ViewMode.whileEditing
         textfield.autocapitalizationType = .none
         textfield.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         textfield.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
@@ -178,12 +212,61 @@ public class OnboardingView: UIView {
     }()
     
     //GitHub logo pic
+    
+    let githubLogoView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Constants.blueColor
+        return view
+    }()
+    
+    
     let githubPhoto: UIImageView = {
         let photo = UIImageView()
-        photo.image = UIImage(named: "onboardGit")
+        photo.image = UIImage(named: "gitLogoSmall")
         photo.contentMode = .scaleAspectFit
         return photo
     }()
+    
+    func setupGitLogos() {
+        var views = [UIView]()
+        let colors = [#colorLiteral(red: 0.9998916984, green: 1, blue: 0.9998809695, alpha: 1),#colorLiteral(red: 0.7622682452, green: 0.8838019967, blue: 0.5061864853, alpha: 1),#colorLiteral(red: 0.4688351154, green: 0.7742896676, blue: 0.3937434554, alpha: 1),#colorLiteral(red: 0.1892609, green: 0.5697621107, blue: 0.1936196685, alpha: 1),#colorLiteral(red: 0.1181769744, green: 0.3007073998, blue: 0.1162960008, alpha: 1)]
+        var currentCenterXMulitplier = 0.4
+        
+        if (Constants.isIpad) {
+            currentCenterXMulitplier = 0.7
+        }
+        
+        for i in 0...4 {
+            let view = UIView()
+            view.backgroundColor = colors[i]
+            views.append(view)
+            githubLogoView.addSubview(views[i])
+            
+            views[i].snp.makeConstraints {
+                if (Constants.isIpad) {
+                    $0.top.equalTo(githubPhoto.snp.bottom).offset(10)
+                    $0.width.equalToSuperview().multipliedBy(0.05)
+                    $0.height.equalTo(views[i].snp.width)
+                    $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
+                    currentCenterXMulitplier += 0.15
+                } else {
+                    $0.top.equalTo(githubPhoto.snp.bottom).offset(10)
+                    $0.width.equalToSuperview().multipliedBy(0.1)
+                    $0.height.equalTo(views[i].snp.width)
+                    $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
+                    currentCenterXMulitplier += 0.30
+                }
+                
+                
+            }
+            
+            views[i].layer.shadowColor = UIColor.black.cgColor
+            views[i].layer.shadowOpacity = 0.2
+            views[i].layer.shadowOffset = .zero
+            views[i].layer.shadowRadius = 10
+        }
+        
+    }
     
     func createViews(color: UIColor) -> UIView {
         let view = UIView()
