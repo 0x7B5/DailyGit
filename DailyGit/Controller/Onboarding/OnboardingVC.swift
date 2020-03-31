@@ -9,12 +9,18 @@
 import Foundation
 import UIKit
 import JGProgressHUD
-
+import SnapKit
 
 class OnboardingVC: UIViewController, UITextFieldDelegate {
     
+    var keyboardShownIntially = false
+    var currentKeyboardHeight: CGFloat = 291.0
     let onboardingView = OnboardingView()
     unowned var usernameTF: UITextField { return onboardingView.usernameTextfield}
+    
+    unowned var nextButton: UIButton { return onboardingView.nextButton}
+    unowned var githubPhoto: UIImageView { return onboardingView.githubPhoto}
+    unowned var loginView: UIView { return onboardingView.loginView }
     
     override func loadView() {
         self.view = onboardingView
@@ -22,6 +28,7 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.usernameTF.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         if !Reachability.shared.isConnectedToNetwork(){
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -33,11 +40,7 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
         UIApplication.shared.beginIgnoringInteractionEvents()
         #warning("There's something not working here because of networking or something I think")
         if Reachability.shared.isConnectedToNetwork(){
-            var loadingNotification = JGProgressHUD(style: .dark)
-            
-            if !(Constants.darkMode) {
-                loadingNotification = JGProgressHUD(style: .light)
-            }
+            let loadingNotification = JGProgressHUD(style: .light)
             
             if var username = usernameTF.text  {
                 username = username.replacingOccurrences(of: " ", with: "")
@@ -104,8 +107,6 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     }
     
     func presentLoadingAfter(_ hud: JGProgressHUD, sucess: Bool, subtitleText: String?) {
-       
-    
         if sucess {
             UIView.animate(withDuration: 0.1, animations: {
                 hud.textLabel.text = "Success"
@@ -127,24 +128,57 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         usernameTF.becomeFirstResponder()
-        
-        if #available(iOS 12.0, *) {
-            switch UIScreen.main.traitCollection.userInterfaceStyle {
-            case .light:
-                Constants.darkMode = false
-            case .dark:
-                Constants.darkMode = true
-            case .unspecified:
-                Constants.darkMode = true
-            @unknown default:
-                Constants.darkMode = true
-            }
-        } else {
-            Constants.darkMode = true
-        }
-        
     }
     
+    /*  UIKeyboardWillShowNotification. */
+    @objc internal func keyboardWillShow(_ notification : Notification?) -> Void {
+        
+        var _kbSize:CGSize!
+        
+        if let info = notification?.userInfo {
+            
+            let frameEndUserInfoKey = UIResponder.keyboardFrameEndUserInfoKey
+            
+            //  Getting UIKeyboardSize.
+            if let kbFrame = info[frameEndUserInfoKey] as? CGRect {
+                
+                let screenSize = UIScreen.main.bounds
+                
+                //Calculating actual keyboard displayed size, keyboard frame may be different when hardware keyboard is attached (Bug ID: #469) (Bug ID: #381)
+                let intersectRect = kbFrame.intersection(screenSize)
+                
+                if intersectRect.isNull {
+                    _kbSize = CGSize(width: screenSize.size.width, height: 0)
+                } else {
+                    _kbSize = intersectRect.size
+                }
+                
+                if (keyboardShownIntially) {
+                    if currentKeyboardHeight != _kbSize.height {
+                        updateViewHeightConstraints(height: currentKeyboardHeight-_kbSize.height)
+                        currentKeyboardHeight = _kbSize.height
+                    }
+                } else {
+                    keyboardShownIntially = true
+                }
+                
+            }
+        }
+    }
+    
+    func updateViewHeightConstraints(height: CGFloat) {
+        loginView.snp.updateConstraints {
+            $0.centerY.equalToSuperview().multipliedBy(0.85).offset((height/8))
+        }
+        //        githubPhoto.snp.updateConstraints {
+        //            $0.centerY.equalToSuperview().multipliedBy(0.85).offset(height)
+        //        }
+        self.view.layoutIfNeeded()
+        //        UIView.animate(withDuration: 0.2) {
+        //            self.view.layoutIfNeeded()
+        //        }
+        
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)

@@ -64,18 +64,21 @@ public class OnboardingView: UIView {
         bgView2.transform = CGAffineTransform(rotationAngle: 0.331613)
         bgView3.transform = CGAffineTransform(rotationAngle: 0.331613)
         
+        
+        #warning("Fix ME")
+        //Put this in its own view for sizing purposes
         #warning("BLURRY")
         githubPhoto.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.6373333333)
+            $0.width.equalToSuperview().multipliedBy(0.677)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalTo(bgView1.snp.centerY).multipliedBy(1.08)
+            $0.top.equalToSuperview().inset(60)
         }
         
         #warning("GET KEYBOARD HEIGHT https://stackoverflow.com/questions/31774006/how-to-get-height-of-keyboard")
         // Get
         loginView.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.885)
-            $0.height.equalTo(loginView.snp.width).multipliedBy(0.77)
+            $0.height.equalTo(loginView.snp.width).multipliedBy(0.74)
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(0.85)
         }
@@ -172,8 +175,7 @@ public class OnboardingView: UIView {
         photo.contentMode = .scaleAspectFit
         return photo
     }()
-    
-    
+   
     func createViews(color: UIColor) -> UIView {
         let view = UIView()
         view.backgroundColor = color
