@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "github-6.png",
+      "filename" : "github@2.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "github-5.png",
+      "filename" : "github@3.pdf",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "github-4.png",
+      "filename" : "github.pdf",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -19,14 +19,16 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     unowned var usernameTF: UITextField { return onboardingView.usernameTextfield}
     
     unowned var nextButton: UIButton { return onboardingView.nextButton}
+    unowned var loginView: UIView { return onboardingView.loginView}
     unowned var githubPhoto: UIImageView { return onboardingView.githubPhoto}
-    unowned var loginView: UIView { return onboardingView.loginView }
     
     override func loadView() {
         self.view = onboardingView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.nextButton.addTarget(self, action: #selector(goNext), for: UIControl.Event.touchUpInside)
         self.usernameTF.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         if !Reachability.shared.isConnectedToNetwork(){
@@ -60,7 +62,12 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                     } else {
                         DispatchQueue.main.async { () -> Void in
                             loadingNotification.textLabel.text = "Pulling User Data"
-                            loadingNotification.show(in: self.view)
+                            
+                            for view in self.loginView.subviews as [UIView] {
+                                view.isHidden = true
+                            }
+                            self.loginView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+                            loadingNotification.show(in: self.loginView)
                         }
                         
                         GithubDataManager.shared.setupGithubUser(username: username, completion: {
@@ -83,6 +90,11 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                                     self!.presentLoadingAfter(loadingNotification, sucess: false, subtitleText: "Please try again")
                                     
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        for view in self!.loginView.subviews as [UIView] {
+                                            view.isHidden = false
+                                        }
+                                        self!.loginView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                                        
                                         UIApplication.shared.endIgnoringInteractionEvents()
                                         self!.usernameTF.becomeFirstResponder()
                                     }
@@ -170,13 +182,8 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
         loginView.snp.updateConstraints {
             $0.centerY.equalToSuperview().multipliedBy(0.85).offset((height/8))
         }
-        //        githubPhoto.snp.updateConstraints {
-        //            $0.centerY.equalToSuperview().multipliedBy(0.85).offset(height)
-        //        }
+        
         self.view.layoutIfNeeded()
-        //        UIView.animate(withDuration: 0.2) {
-        //            self.view.layoutIfNeeded()
-        //        }
         
     }
     

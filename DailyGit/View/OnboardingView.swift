@@ -35,7 +35,6 @@ public class OnboardingView: UIView {
         loginView.addSubview(usernameTextfield)
         loginView.addSubview(enterUsernameLabel)
         loginView.addSubview(nextButton)
-        
     }
     
     public func createConstraints() {
@@ -97,13 +96,14 @@ public class OnboardingView: UIView {
                 }
             } else {
                 githubPhoto.snp.makeConstraints {
-                    $0.width.equalToSuperview().multipliedBy(0.18)
+                    $0.width.equalToSuperview().multipliedBy(0.15)
                     $0.height.equalTo(githubPhoto.snp.width)
                     $0.centerX.equalToSuperview()
                     $0.centerY.equalToSuperview().multipliedBy(0.8)
                 }
             }
         }
+        
         
         setupGitLogos()
         
@@ -201,8 +201,8 @@ public class OnboardingView: UIView {
         return textfield
     }()
     
-    let nextButton: UIButton = {
-        let button = UIButton()
+    let nextButton: myButton = {
+        let button = myButton()
         button.setTitle("Next", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         
