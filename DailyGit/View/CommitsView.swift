@@ -10,17 +10,16 @@ import UIKit
 import SnapKit
 
 public class CommitsView: UIView {
-    var topLayout: CGFloat
+    // topLayout: CGFloat
     
     #warning("Take out filler info.")
-    init(topLayout: CGFloat) {
-        self.topLayout = topLayout
+    init() {
+        //  self.topLayout = topLayout
         super.init(frame: CGRect.zero)
         self.frame = CGRect.zero
-        backgroundColor = Constants.mainBGColor
+        backgroundColor = Constants.whiteColor
         initializeUI()
         createConstraints()
-        
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -29,9 +28,11 @@ public class CommitsView: UIView {
     
     private func initializeUI() {
         //UIViews
-        addSubview(profileImage)
-        addSubview(nameLabel)
-        addSubview(bioLabel)
+        
+        addSubview(topView)
+        topView.addSubview(profileImage)
+        topView.addSubview(nameLabel)
+        topView.addSubview(bioLabel)
         
         //Today
         addSubview(todayLabel)
@@ -52,13 +53,13 @@ public class CommitsView: UIView {
     
     func checkAllignmentForTitle() {
         if UserInfoHelper.shared.readInfo(info: .bio) as? String == "" {
-            nameLabel.textAlignment = .center
-            nameLabel.snp.makeConstraints{
-                $0.width.equalToSuperview().multipliedBy(0.4)
-                $0.centerX.equalToSuperview()
-                $0.height.equalToSuperview().multipliedBy(0.045)
-                $0.centerY.equalToSuperview().multipliedBy(0.34)
-            }
+//            nameLabel.textAlignment = .center
+//            nameLabel.snp.makeConstraints{
+//                $0.width.equalToSuperview().multipliedBy(0.4)
+//                $0.centerX.equalToSuperview()
+//                $0.height.equalToSuperview().multipliedBy(0.045)
+//                $0.centerY.equalToSuperview().multipliedBy(0.34)
+//            }
         }
     }
     
@@ -79,23 +80,28 @@ public class CommitsView: UIView {
     }
     
     public func createConstraints() {
+        
+        
+        topView.snp.makeConstraints{
+            $0.width.equalToSuperview()
+            $0.height.equalToSuperview().multipliedBy(0.24)
+            $0.centerX.equalToSuperview()
+        }
+        
         profileImage.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.24)
+            $0.width.equalToSuperview().multipliedBy(0.16)
             $0.height.equalTo(profileImage.snp.width)
-            $0.centerX.equalToSuperview().multipliedBy(0.28)
+            $0.right.equalToSuperview().inset(20)
             #warning("This doesn't quite look right on larger devices")
             //$0.top.equalToSuperview().inset(topLayout+30)
-            $0.centerY.equalToSuperview().multipliedBy(0.35)
+            $0.centerY.equalToSuperview().multipliedBy(1.2)
         }
-        
         
         nameLabel.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.4)
-            $0.left.equalTo(profileImage.snp.right).offset(10)
-            $0.height.equalToSuperview().multipliedBy(0.045)
-            $0.centerY.equalToSuperview().multipliedBy(0.27)
+            $0.width.equalToSuperview().multipliedBy(0.5)
+            $0.left.equalToSuperview().inset(20)
+            $0.centerY.equalToSuperview().multipliedBy(1.0)
         }
-        
         
         bioLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.6)
@@ -151,7 +157,14 @@ public class CommitsView: UIView {
         }
         
     }
+    
     //SUBVIEWS
+    public let topView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Constants.blueColor
+        return view
+    }()
+    
     public let profileImage: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
@@ -161,9 +174,10 @@ public class CommitsView: UIView {
         view.image = image
         view.layer.borderWidth = 1.0
         view.layer.masksToBounds = false
+        view.tag = 0
         //imageView.layer.borderColor = UIColor.white.cgColor
-//        view.layer.cornerRadius = view.frame.size.width / 2
-//        view.clipsToBounds = true
+        //        view.layer.cornerRadius = view.frame.size.width / 2
+        //        view.clipsToBounds = true
         return view
         
     }()
@@ -171,11 +185,14 @@ public class CommitsView: UIView {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 40.0, weight: .semibold)
-        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.preferredFont(forTextStyle: .largeTitle).bold()
+        label.adjustsFontForContentSizeCategory = true
+//        label.adjustsFontSizeToFitWidth = true
+        
         label.text = ""
         label.textAlignment = .left
-        label.textColor = Constants.subTitleColor
+        label.tag = 1
+        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         return label
     }()
     
@@ -186,6 +203,7 @@ public class CommitsView: UIView {
         } else {
             label.font = UIFont.systemFont(ofSize: 30.0)
         }
+        label.tag = 2
         
         label.adjustsFontSizeToFitWidth = false
         label.text = ""
@@ -196,6 +214,7 @@ public class CommitsView: UIView {
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
+    
     //TODAY VIEW
     lazy var todayLabel: UILabel = createTitleText(text: "Today")
     

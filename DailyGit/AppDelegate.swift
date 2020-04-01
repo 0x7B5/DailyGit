@@ -37,7 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (userExist() == true) {
             //LoggedIn
-            self.window?.rootViewController = MainTabBarController()
+            UINavigationBar.appearance().backgroundColor = Constants.whiteColor
+            UINavigationBar.appearance().isTranslucent = false
+            let navigationController = UINavigationController(rootViewController: MainVC())
+            self.window?.rootViewController = navigationController
         } else {
             //Not Logged In
             let navController = OnboardingVC()

@@ -15,13 +15,12 @@ public struct Constants {
     static let mainBGColor = UIColor(named: "mainBackgroundColor")
     static let subTitleColor = UIColor(named: "subTitleTextColor")
     static let titleColor = UIColor(named: "titleTextColor")
-    static let blueColor = #colorLiteral(red: 0, green: 0.5251492262, blue: 0.9089161754, alpha: 1)
+    static let blueColor = #colorLiteral(red: 0.1098039216, green: 0.4666666667, blue: 0.8941176471, alpha: 1)
+    static let whiteColor = #colorLiteral(red: 0.9685223699, green: 0.9686879516, blue: 0.9685119987, alpha: 1)
     
     // Other stuff
     static var profaneNotications = false
-    
     static var isIpad = false
-    
     static var sessionID = "com.LesGarcons.DailyGit"
     
     #warning("This needs to be able to be changed by the user")

@@ -11,13 +11,26 @@ import UIKit
 class MainVC: UIViewController {
     
     #warning("Kind of hacky and potentially dangerous")
-    lazy var mainView = CommitsView(topLayout: self.navigationController!.navigationBar.frame.height)
+    //lazy var mainView = CommitsView(topLayout: self.navigationController!.navigationBar.frame.height)
+    lazy var mainView = CommitsView()
     
     override func viewDidLayoutSubviews() {
-        self.mainView.bioLabel.sizeToFit()
-        self.mainView.profileImage.layer.cornerRadius = self.mainView.profileImage.frame.size.width/2
-        self.mainView.profileImage.layer.masksToBounds = true
-        self.mainView.profileImage.layer.borderColor = UIColor.clear.cgColor
+        
+        #warning("Fix not rounded profile picture")
+        self.mainView.topView.subviews[0].layer.cornerRadius = self.mainView.topView.subviews[0].frame.size.width/2
+        self.mainView.topView.subviews[0].layer.masksToBounds = true
+        self.mainView.topView.subviews[0].layer.borderColor = UIColor.clear.cgColor
+        
+        
+        for view in self.mainView.topView.subviews as [UIView] {
+            if view.tag == 0 {
+//                view.layer.cornerRadius = view.frame.size.width/2
+//                view.layer.masksToBounds = true
+//                view.layer.borderColor = UIColor.clear.cgColor
+            } else if view.tag == 2 {
+                view.sizeToFit()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +52,7 @@ class MainVC: UIViewController {
         UserInfoHelper.shared.getCurrentStreak()
         UserInfoHelper.shared.getLongestStreak()
         
-        mainView.nameLabel.text = (UserInfoHelper.shared.readInfo(info: .name) as! String)
+        mainView.nameLabel.text = ((UserInfoHelper.shared.readInfo(info: .name) as! String).substring(to: 15))
         mainView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as! String)
         self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
         self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
