@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad) {
             Constants.isIpad = true
         }
+
         
         #warning("Remove in Productions")
         do {

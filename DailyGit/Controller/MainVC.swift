@@ -13,15 +13,17 @@ class MainVC: UIViewController {
     #warning("Kind of hacky and potentially dangerous")
     //lazy var mainView = CommitsView(topLayout: self.navigationController!.navigationBar.frame.height)
     lazy var mainView = CommitsView()
+    unowned var topView: UIView { return mainView.topView}
     
     override func viewDidLayoutSubviews() {
         
         #warning("Fix not rounded profile picture")
-        self.mainView.topView.subviews[0].layer.cornerRadius = self.mainView.topView.subviews[0].frame.size.width/2
-        self.mainView.topView.subviews[0].layer.masksToBounds = true
-        self.mainView.topView.subviews[0].layer.borderColor = UIColor.clear.cgColor
+//        profileImage.layer.cornerRadius = profileImage.frame.size.width/2
+//        profileImage.layer.masksToBounds = true
+//        profileImage.layer.borderColor = UIColor.clear.cgColor
         
         
+//        topView.profileImage.makeRounded()
         for view in self.mainView.topView.subviews as [UIView] {
             if view.tag == 0 {
 //                view.layer.cornerRadius = view.frame.size.width/2
@@ -52,7 +54,13 @@ class MainVC: UIViewController {
         UserInfoHelper.shared.getCurrentStreak()
         UserInfoHelper.shared.getLongestStreak()
         
-        mainView.nameLabel.text = ((UserInfoHelper.shared.readInfo(info: .name) as! String).substring(to: 15))
+        var name = (UserInfoHelper.shared.readInfo(info: .name) as! String)
+        if name.count > 15 {
+            mainView.nameLabel.text = name.substring(to: 15)
+        } else {
+            mainView.nameLabel.text = name
+        }
+        
         mainView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as! String)
         self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
         self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"

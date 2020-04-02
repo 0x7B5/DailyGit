@@ -35,6 +35,7 @@ public class CommitsView: UIView {
         topView.addSubview(bioLabel)
         
         //Today
+        addSubview(todayView)
         addSubview(todayLabel)
         addSubview(dailyCommitsLabel)
         
@@ -49,17 +50,20 @@ public class CommitsView: UIView {
         //Longest Streak
         addSubview(longestStreakLabel)
         addSubview(longestStreakCommitsLabel)
+        
+        //Bottom
+        addSubview(lastUpdatedLabel)
     }
     
     func checkAllignmentForTitle() {
         if UserInfoHelper.shared.readInfo(info: .bio) as? String == "" {
-//            nameLabel.textAlignment = .center
-//            nameLabel.snp.makeConstraints{
-//                $0.width.equalToSuperview().multipliedBy(0.4)
-//                $0.centerX.equalToSuperview()
-//                $0.height.equalToSuperview().multipliedBy(0.045)
-//                $0.centerY.equalToSuperview().multipliedBy(0.34)
-//            }
+            //            nameLabel.textAlignment = .center
+            //            nameLabel.snp.makeConstraints{
+            //                $0.width.equalToSuperview().multipliedBy(0.4)
+            //                $0.centerX.equalToSuperview()
+            //                $0.height.equalToSuperview().multipliedBy(0.045)
+            //                $0.centerY.equalToSuperview().multipliedBy(0.34)
+            //            }
         }
     }
     
@@ -82,34 +86,48 @@ public class CommitsView: UIView {
     public func createConstraints() {
         
         
+        // TOP VIEW
         topView.snp.makeConstraints{
+            $0.top.equalToSuperview()
             $0.width.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.24)
+            $0.height.equalToSuperview().multipliedBy(0.25)
             $0.centerX.equalToSuperview()
         }
         
         profileImage.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.16)
             $0.height.equalTo(profileImage.snp.width)
-            $0.right.equalToSuperview().inset(20)
+            $0.right.equalToSuperview().inset(14)
             #warning("This doesn't quite look right on larger devices")
-            //$0.top.equalToSuperview().inset(topLayout+30)
-            $0.centerY.equalToSuperview().multipliedBy(1.2)
+            $0.centerY.equalToSuperview().multipliedBy(0.6)
         }
         
+        
         nameLabel.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.5)
-            $0.left.equalToSuperview().inset(20)
-            $0.centerY.equalToSuperview().multipliedBy(1.0)
+            $0.width.equalToSuperview().multipliedBy(0.7)
+            $0.left.equalToSuperview().inset(14)
+            $0.centerY.equalToSuperview().multipliedBy(0.5)
         }
         
         bioLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.6)
-            $0.left.equalTo(profileImage.snp.right).offset(10)
-            $0.top.equalTo(nameLabel.snp.bottom).offset(6)
-            $0.height.equalTo(profileImage.snp.height).multipliedBy(1.2)
+            $0.left.equalTo(nameLabel.snp.left).inset(3)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(-1)
+//            $0.height.equalTo(profileImage.snp.height).multipliedBy(1.2)
         }
         //  bioLabel.sizeToFit()
+        
+        
+        //TODAY VIEW
+        
+        todayView.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(0.92)
+            $0.height.equalToSuperview().multipliedBy(0.17)
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalTo(topView.snp.bottom).multipliedBy(1.05)
+        }
+        
+        addShadowToView(view: todayView)
         
         todayLabel.snp.makeConstraints {
             $0.left.equalTo(profileImage.snp.left)
@@ -156,6 +174,12 @@ public class CommitsView: UIView {
             $0.centerY.equalToSuperview().multipliedBy(1.66)
         }
         
+        lastUpdatedLabel.snp.makeConstraints{
+            $0.width.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(5)
+        }
+        
     }
     
     //SUBVIEWS
@@ -187,8 +211,7 @@ public class CommitsView: UIView {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle).bold()
         label.adjustsFontForContentSizeCategory = true
-//        label.adjustsFontSizeToFitWidth = true
-        
+
         label.text = ""
         label.textAlignment = .left
         label.tag = 1
@@ -198,24 +221,23 @@ public class CommitsView: UIView {
     
     let bioLabel: UILabel = {
         let label = UILabel()
-        if Constants.isIpad == false {
-            label.font = UIFont.systemFont(ofSize: 20.0)
-        } else {
-            label.font = UIFont.systemFont(ofSize: 30.0)
-        }
-        label.tag = 2
         
-        label.adjustsFontSizeToFitWidth = false
+        #warning("Change this to light text for aestheic, we might have to opt out of using preferredFont for this")
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.adjustsFontForContentSizeCategory = true
+        
+        label.tag = 2
         label.text = ""
         label.numberOfLines = 4
         label.textAlignment = .left
-        //label.textColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.6)
-        label.textColor = Constants.titleColor
+        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
     //TODAY VIEW
+    let todayView = CurvedView()
+    
     lazy var todayLabel: UILabel = createTitleText(text: "Today")
     
     let dailyCommitsLabel: UILabel = {
@@ -301,6 +323,19 @@ public class CommitsView: UIView {
     }()
     
     
+    //BOTTOM VIEW
+    #warning("Remove filler info")
+    let lastUpdatedLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .footnote)
+        label.text = "Updated today at 2:19 AM"
+        label.adjustsFontForContentSizeCategory = true
+        label.textAlignment = .center
+        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+        return label
+        
+    }()
+    
     internal func createTitleText(text: String) -> UILabel {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20.0, weight: .semibold)
@@ -310,4 +345,13 @@ public class CommitsView: UIView {
         label.textColor = Constants.titleColor
         return label
     }
+    
+    internal func addShadowToView(view: UIView) {
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = .zero
+        view.layer.shadowRadius = 10
+    }
+    
+    
 }
