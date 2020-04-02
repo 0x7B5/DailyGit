@@ -31,6 +31,10 @@ public class GithubDataManager {
     func isGithubUser(username: String, completion: @escaping (Bool) -> ()) {
         if let url = URL(string: "https://api.github.com/users/\(username)") {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
+                if err != nil {
+                    print(err)
+                    completion(false)
+                }
                 guard let data = data else { return }
                 
                 do {
@@ -60,6 +64,10 @@ public class GithubDataManager {
         if let url = URL(string: "https://api.github.com/users/\(username)") {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
                 //also perhaps check response status 200 OK
+                if err != nil {
+                    print(err)
+                    completion(nil)
+                }
                 guard let data = data else { return }
                 
                 do {
@@ -153,6 +161,10 @@ public class GithubDataManager {
     func getDailyCommits(username: String, completion: @escaping (Contribution?) -> ()) {
         if let url = URL(string: "https://vlad-munteanu.appspot.com/dayCount/\(username)/\(DateHelper.shared.getFormattedDate())") {
             URLSession.shared.dataTask(with: url) { data, response, error in
+                if error != nil {
+                    print(error)
+                    completion(nil)
+                }
                 if let data = data {
                     let contribution = try! JSONDecoder().decode(Contribution.self, from: data)
                     completion(contribution)
@@ -166,6 +178,11 @@ public class GithubDataManager {
     func getMonthlyCommits(username: String, completion: @escaping (ContributionList?) -> ()) {
         if let url = URL(string: "https://vlad-munteanu.appspot.com/monthlyCount/\(username)/\(DateHelper.shared.getFormattedDate())") {
             URLSession.shared.dataTask(with: url) { data, response, error in
+                if error != nil {
+                    print(error)
+                    completion(nil)
+                }
+                
                 if let data = data {
                     let userList = try! JSONDecoder().decode(ContributionList.self, from: data)
                     completion(userList)
@@ -179,6 +196,11 @@ public class GithubDataManager {
     func getWeeklyCommits(username: String, completion: @escaping (ContributionList?) -> ()) {
         if let url = URL(string: "https://vlad-munteanu.appspot.com/weeklyCount/\(username)/\(DateHelper.shared.getFormattedDate())") {
             URLSession.shared.dataTask(with: url) { data, response, error in
+                if error != nil {
+                    print(error)
+                    completion(nil)
+                }
+                
                 if let data = data {
                     let userList = try! JSONDecoder().decode(ContributionList.self, from: data)
                     completion(userList)
@@ -192,6 +214,11 @@ public class GithubDataManager {
     func refreshUserInfo(completion: @escaping () -> ()) {
         if let url = URL(string: "https://api.github.com/users/\(UserInfoHelper.shared.readInfo(info: .username))") {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
+                if err != nil {
+                    print(err)
+                    completion()
+                }
+                
                 guard let data = data else { return }
                 
                 do {

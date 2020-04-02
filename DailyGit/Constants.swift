@@ -13,7 +13,7 @@ public struct Constants {
     // Colors
     static let gitGreenColor = #colorLiteral(red: 0.1026554033, green: 0.3837691247, blue: 0.1535629034, alpha: 1)
     static let mainBGColor = UIColor(named: "mainBackgroundColor")
-    static let subTitleColor = UIColor(named: "subTitleTextColor")
+    static let subTitleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.599609375)
     static let titleColor = UIColor(named: "titleTextColor")
     static let blueColor = #colorLiteral(red: 0.1098039216, green: 0.4666666667, blue: 0.8941176471, alpha: 1)
     static let whiteColor = #colorLiteral(red: 0.9685223699, green: 0.9686879516, blue: 0.9685119987, alpha: 1)

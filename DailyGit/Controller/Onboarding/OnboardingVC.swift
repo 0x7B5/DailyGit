@@ -74,12 +74,12 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                             user in
                             UserInfoHelper.shared.resetDefaults()
                             let encoder = JSONEncoder()
-                            if (try? encoder.encode(user)) != nil {
+                            if user != nil {
                                 UserInfoHelper.shared.updateUserInDefaults(userToEncode: user!)
                                 DispatchQueue.main.async { [weak self] in
                                     self!.presentLoadingAfter(loadingNotification, sucess: true, subtitleText: nil)
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                        let vc =  MainTabBarController()
+                                        let vc =  UINavigationController(rootViewController: MainVC())
                                         vc.modalPresentationStyle = .fullScreen
                                         self!.present(vc, animated: true)
                                         UIApplication.shared.endIgnoringInteractionEvents()
@@ -92,6 +92,10 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                         for view in self!.loginView.subviews as [UIView] {
                                             view.isHidden = false
+                                            
+                                            if ((view as? UITextField) != nil) {
+                                                view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+                                            }
                                         }
                                         self!.loginView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                                         

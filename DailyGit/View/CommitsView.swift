@@ -27,61 +27,34 @@ public class CommitsView: UIView {
     }
     
     private func initializeUI() {
-        //UIViews
-        
+        // Top View
         addSubview(topView)
         topView.addSubview(profileImage)
         topView.addSubview(nameLabel)
         topView.addSubview(bioLabel)
         
-        //Today
+        // Today
         addSubview(todayView)
-        addSubview(todayLabel)
         addSubview(dailyCommitsLabel)
         
-        //This Week
+        // This Week
         addSubview(weekLabel)
-        setupWeekGrass()
+        addSubview(weekView)
         
+        // setupWeekGrass()
         
-        //Current Streak
-        addSubview(currentStreakLabel)
-        addSubview(currentStreakCommitsLabel)
-        //Longest Streak
-        addSubview(longestStreakLabel)
-        addSubview(longestStreakCommitsLabel)
+        // Last Week
+        addSubview(lastWeekLabel)
+        addSubview(lastWeekView)
+        
+        // Statistics
+        addSubview(stasticsLabel)
+        addSubview(statView)
         
         //Bottom
         addSubview(lastUpdatedLabel)
     }
     
-    func checkAllignmentForTitle() {
-        if UserInfoHelper.shared.readInfo(info: .bio) as? String == "" {
-            //            nameLabel.textAlignment = .center
-            //            nameLabel.snp.makeConstraints{
-            //                $0.width.equalToSuperview().multipliedBy(0.4)
-            //                $0.centerX.equalToSuperview()
-            //                $0.height.equalToSuperview().multipliedBy(0.045)
-            //                $0.centerY.equalToSuperview().multipliedBy(0.34)
-            //            }
-        }
-    }
-    
-    func setupColorsForWeek(contributions: ContributionList) {
-        
-        for (index, element) in contributions.contributions.enumerated() {
-            let myIndex = element.color.index(element.color.startIndex, offsetBy: 1)
-            let mySubstring = element.color.suffix(from: myIndex)
-            
-            let myColor = UIColor(rgb: (Int(mySubstring, radix: 16) ?? 0))
-            
-            weekCommitGraph[index].backgroundColor = myColor
-            if element.date == DateHelper.shared.getFormattedDate() {
-                weekCommitGraph[index].layer.borderWidth = 0.5
-                weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            }
-        }
-    }
     
     public func createConstraints() {
         
@@ -113,7 +86,7 @@ public class CommitsView: UIView {
             $0.width.equalToSuperview().multipliedBy(0.6)
             $0.left.equalTo(nameLabel.snp.left).inset(3)
             $0.top.equalTo(nameLabel.snp.bottom).offset(-1)
-//            $0.height.equalTo(profileImage.snp.height).multipliedBy(1.2)
+            //            $0.height.equalTo(profileImage.snp.height).multipliedBy(1.2)
         }
         //  bioLabel.sizeToFit()
         
@@ -124,61 +97,86 @@ public class CommitsView: UIView {
             $0.width.equalToSuperview().multipliedBy(0.92)
             $0.height.equalToSuperview().multipliedBy(0.17)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalTo(topView.snp.bottom).multipliedBy(1.05)
+            $0.centerY.equalTo(topView.snp.bottom).multipliedBy(0.98)
         }
         
         addShadowToView(view: todayView)
         
-        todayLabel.snp.makeConstraints {
-            $0.left.equalTo(profileImage.snp.left)
-            $0.centerY.equalToSuperview().multipliedBy(0.56)
-        }
-        dailyCommitsLabel.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.14)
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.72)
-        }
+        // CURRENT WEEK
         weekLabel.snp.makeConstraints {
-            $0.left.equalTo(profileImage.snp.left)
-            $0.centerY.equalToSuperview().multipliedBy(0.88)
+            $0.left.equalTo(nameLabel.snp.left)
+            $0.top.equalTo(todayView.snp.bottom).offset(15)
         }
         
-        //Week Commits View
-        var currentCenterXMulitplier = 0.15
-        for i in 0..<7 {
-            weekCommitGraph[i].snp.makeConstraints {
-                $0.width.equalToSuperview().multipliedBy(0.11)
-                $0.height.equalTo(weekCommitGraph[0].snp.width)
-                $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
-                $0.centerY.equalToSuperview().multipliedBy(1.02)
-                currentCenterXMulitplier += 0.2835
-            }
-        }
-        currentStreakLabel.snp.makeConstraints {
-            $0.left.equalTo(profileImage.snp.left)
-            $0.centerY.equalToSuperview().multipliedBy(1.18)
-        }
-        currentStreakCommitsLabel.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.9)
+        weekView.snp.makeConstraints {
+            $0.width.equalTo(todayView.snp.width)
+            $0.height.equalToSuperview().multipliedBy(0.09)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(1.34)
+            $0.top.equalTo(weekLabel.snp.bottom).offset(10)
         }
         
-        longestStreakLabel.snp.makeConstraints {
-            $0.left.equalTo(profileImage.snp.left)
-            $0.centerY.equalToSuperview().multipliedBy(1.50)
+        addShadowToView(view: weekView)
+        
+        // LAST WEEK
+        lastWeekLabel.snp.makeConstraints {
+            $0.left.equalTo(nameLabel.snp.left)
+            $0.top.equalTo(weekView.snp.bottom).offset(20)
         }
-        longestStreakCommitsLabel.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.9)
+        
+        lastWeekView.snp.makeConstraints {
+            $0.width.equalTo(todayView.snp.width)
+            $0.height.equalTo(weekView.snp.height)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(1.66)
+            $0.top.equalTo(lastWeekLabel.snp.bottom).offset(10)
         }
+        addShadowToView(view: lastWeekView)
         
+        // LAST UPDATED LABEL
         lastUpdatedLabel.snp.makeConstraints{
             $0.width.equalToSuperview()
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(5)
+            
+            if UIDevice.current.hasNotch {
+                $0.bottom.equalToSuperview().inset(20)
+            } else {
+                $0.bottom.equalToSuperview().inset(10)
+            }
         }
+        
+        // STATISTICS
+        stasticsLabel.snp.makeConstraints {
+            $0.left.equalTo(nameLabel.snp.left)
+            $0.top.equalTo(lastWeekView.snp.bottom).offset(20)
+        }
+        
+        statView.snp.makeConstraints {
+            $0.width.equalTo(todayView.snp.width)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(stasticsLabel.snp.bottom).offset(10)
+//            $0.bottom.equalTo(lastUpdatedLabel.snp.top).offset(-10)
+            $0.height.equalTo(todayView.snp.height).multipliedBy(1.25)
+        }
+        
+        
+        // DAILY AVERAGE
+               
+        // WEEKLY AVERAGE
+               
+        // MONTHLY AVERAGE
+        
+        //Week Commits View
+        
+        //        var currentCenterXMulitplier = 0.15
+        //        for i in 0..<7 {
+        //            weekCommitGraph[i].snp.makeConstraints {
+        //                $0.width.equalToSuperview().multipliedBy(0.11)
+        //                $0.height.equalTo(weekCommitGraph[0].snp.width)
+        //                $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
+        //                $0.centerY.equalToSuperview().multipliedBy(1.02)
+        //                currentCenterXMulitplier += 0.2835
+        //            }
+        //        }
+        
         
     }
     
@@ -211,7 +209,7 @@ public class CommitsView: UIView {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle).bold()
         label.adjustsFontForContentSizeCategory = true
-
+        
         label.text = ""
         label.textAlignment = .left
         label.tag = 1
@@ -238,8 +236,6 @@ public class CommitsView: UIView {
     //TODAY VIEW
     let todayView = CurvedView()
     
-    lazy var todayLabel: UILabel = createTitleText(text: "Today")
-    
     let dailyCommitsLabel: UILabel = {
         let label = UILabel()
         if Constants.isIpad == false {
@@ -263,6 +259,7 @@ public class CommitsView: UIView {
     
     //THIS WEEK VIEW
     lazy var weekLabel: UILabel = createTitleText(text: "This Week")
+    let weekView = CurvedView()
     
     var weekCommitGraph = [UIView]()
     
@@ -279,48 +276,26 @@ public class CommitsView: UIView {
         return view
     }
     
-    //CURRENT STREAK VIEW
-    lazy var currentStreakLabel: UILabel = createTitleText(text: "Current Streak")
-    
-    let currentStreakCommitsLabel: UILabel = {
-        let label = UILabel()
-        if Constants.isIpad == false {
-            label.font = UIFont.systemFont(ofSize: 40.0, weight: .bold)
-        } else {
-            label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
-        }
-        label.adjustsFontSizeToFitWidth = true
-        if (UserDefaults.standard.object(forKey: "CurrentStreak") != nil) {
-            label.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
-        } else {
-            label.text = "0 days 🔥"
-        }
-        
-        label.textAlignment = .center
-        label.textColor = Constants.subTitleColor
-        return label
+    // LAST WEEK VIEW
+    lazy var lastWeekLabel: UILabel = createTitleText(text: "Last Week")
+    let lastWeekView = CurvedView()
+   
+    // STATISTICS
+    lazy var stasticsLabel: UILabel = createTitleText(text: "Statistics")
+    let statView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        return view
     }()
+    // DAILY AVERAGE
+    let dailyAvgView = CurvedView()
+           
+    // WEEKLY AVERAGE
+    let weeklyAvgView = CurvedView()
+           
+    // MONTHLY AVERAGE
+    let monthlyAvgView = CurvedView()
     
-    //LONGEST STREAK VIEW
-    lazy var longestStreakLabel: UILabel = createTitleText(text: "Longest Streak")
-    
-    let longestStreakCommitsLabel: UILabel = {
-        let label = UILabel()
-        if Constants.isIpad == false {
-            label.font = UIFont.systemFont(ofSize: 40.0, weight: .bold)
-        } else {
-            label.font = UIFont.systemFont(ofSize: 50.0, weight: .bold)
-        }
-        label.adjustsFontSizeToFitWidth = true
-        if (UserDefaults.standard.object(forKey: "LongestStreak") != nil) {
-            label.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
-        } else {
-            label.text = "0 days 🔥"
-        }
-        label.textAlignment = .center
-        label.textColor = Constants.subTitleColor
-        return label
-    }()
     
     
     //BOTTOM VIEW
@@ -338,20 +313,47 @@ public class CommitsView: UIView {
     
     internal func createTitleText(text: String) -> UILabel {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20.0, weight: .semibold)
-        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.adjustsFontForContentSizeCategory = true
         label.text = "\(text)"
         label.textAlignment = .left
-        label.textColor = Constants.titleColor
+        label.textColor = Constants.subTitleColor
         return label
     }
     
     internal func addShadowToView(view: UIView) {
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOpacity = 0.25
         view.layer.shadowOffset = .zero
-        view.layer.shadowRadius = 10
+        view.layer.shadowRadius = 2
     }
     
     
+    func setupColorsForWeek(contributions: ContributionList) {
+        
+        for (index, element) in contributions.contributions.enumerated() {
+            let myIndex = element.color.index(element.color.startIndex, offsetBy: 1)
+            let mySubstring = element.color.suffix(from: myIndex)
+            
+            let myColor = UIColor(rgb: (Int(mySubstring, radix: 16) ?? 0))
+            
+            weekCommitGraph[index].backgroundColor = myColor
+            if element.date == DateHelper.shared.getFormattedDate() {
+                weekCommitGraph[index].layer.borderWidth = 0.5
+                weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            }
+        }
+    }
+    
+    func checkAllignmentForTitle() {
+        if UserInfoHelper.shared.readInfo(info: .bio) as? String == "" {
+            //            nameLabel.textAlignment = .center
+            //            nameLabel.snp.makeConstraints{
+            //                $0.width.equalToSuperview().multipliedBy(0.4)
+            //                $0.centerX.equalToSuperview()
+            //                $0.height.equalToSuperview().multipliedBy(0.045)
+            //                $0.centerY.equalToSuperview().multipliedBy(0.34)
+            //            }
+        }
+    }
 }

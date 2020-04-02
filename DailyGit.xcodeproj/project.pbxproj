@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7F08C288C8835AA15ADD5597 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4700EEC7991F8F4538A2931 /* Pods_OneSignalNotificationServiceExtension.framework */; };
 		B87EA6532221EDC000CE8114 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87EA6522221EDC000CE8114 /* AppDelegate.swift */; };
-		B87EA6552221EDC000CE8114 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87EA6542221EDC000CE8114 /* MainTabBarController.swift */; };
 		B87EA65A2221EDC200CE8114 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B87EA6592221EDC200CE8114 /* Assets.xcassets */; };
 		B87EA65D2221EDC200CE8114 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87EA65B2221EDC200CE8114 /* LaunchScreen.storyboard */; };
 		B87EA6652221EE0300CE8114 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87EA6642221EE0300CE8114 /* Constants.swift */; };
@@ -115,7 +114,6 @@
 		8A9C694B9CF2C8E2565358F9 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		B87EA64F2221EDC000CE8114 /* DailyGit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyGit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B87EA6522221EDC000CE8114 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B87EA6542221EDC000CE8114 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B87EA6592221EDC200CE8114 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B87EA65C2221EDC200CE8114 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B87EA65E2221EDC200CE8114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -282,7 +280,6 @@
 			isa = PBXGroup;
 			children = (
 				CCF2E96D2300D5B900F4E118 /* Onboarding */,
-				B87EA6542221EDC000CE8114 /* MainTabBarController.swift */,
 				B8B41CE92228737B005E304A /* MainVC.swift */,
 				CCF2E96A22FFD2F100F4E118 /* Settings */,
 			);
@@ -616,7 +613,6 @@
 				CC17DBAD22FF9D1500E34951 /* GithubDataManager.swift in Sources */,
 				CCF2E96F2300D69B00F4E118 /* OnboardingVC.swift in Sources */,
 				CC7DF5852435B42600D24326 /* CurvedView.swift in Sources */,
-				B87EA6552221EDC000CE8114 /* MainTabBarController.swift in Sources */,
 				CCD5132E23158FE700B000AA /* String+Extensions.swift in Sources */,
 				CCC3A821230B42050051C151 /* UserInfoHelper.swift in Sources */,
 				CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */,
