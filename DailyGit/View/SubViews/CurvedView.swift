@@ -24,8 +24,8 @@ public class CurvedView: UIView {
     }
     
     func addBehavior() {
-        backgroundColor = Constants.whiteColor
-        self.layer.cornerRadius = 15
+        backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        self.layer.cornerRadius = 10
     }
     
 }

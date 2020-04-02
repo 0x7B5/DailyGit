@@ -94,7 +94,7 @@ public class CommitsView: UIView {
         //TODAY VIEW
         
         todayView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.92)
+            $0.width.equalToSuperview().multipliedBy(0.95)
             $0.height.equalToSuperview().multipliedBy(0.17)
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(topView.snp.bottom).multipliedBy(0.98)
@@ -112,7 +112,7 @@ public class CommitsView: UIView {
             $0.width.equalTo(todayView.snp.width)
             $0.height.equalToSuperview().multipliedBy(0.09)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(weekLabel.snp.bottom).offset(10)
+            $0.top.equalTo(weekLabel.snp.bottom).offset(3)
         }
         
         addShadowToView(view: weekView)
@@ -127,7 +127,7 @@ public class CommitsView: UIView {
             $0.width.equalTo(todayView.snp.width)
             $0.height.equalTo(weekView.snp.height)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(lastWeekLabel.snp.bottom).offset(10)
+            $0.top.equalTo(lastWeekLabel.snp.bottom).offset(3)
         }
         addShadowToView(view: lastWeekView)
         
@@ -152,7 +152,7 @@ public class CommitsView: UIView {
         statView.snp.makeConstraints {
             $0.width.equalTo(todayView.snp.width)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(stasticsLabel.snp.bottom).offset(10)
+            $0.top.equalTo(stasticsLabel.snp.bottom).offset(3)
 //            $0.bottom.equalTo(lastUpdatedLabel.snp.top).offset(-10)
             $0.height.equalTo(todayView.snp.height).multipliedBy(1.25)
         }
@@ -323,9 +323,9 @@ public class CommitsView: UIView {
     
     internal func addShadowToView(view: UIView) {
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.25
+        view.layer.shadowOpacity = 0.05
         view.layer.shadowOffset = .zero
-        view.layer.shadowRadius = 2
+        view.layer.shadowRadius = 1
     }
     
     
