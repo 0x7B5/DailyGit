@@ -7,19 +7,14 @@
 //
 
 import Foundation
-import SwiftSoup
+import UIKit
 
 public class GithubDataManager {
     static let shared = GithubDataManager()
-    
-    typealias JSONDictionary = [String: Any]
+
     
     let defaultSession = URLSession(configuration: .default)
     var dataTask: URLSessionDataTask?
-    
-    var blankCount = 0
-    var errorMessage = ""
-    typealias QueryResult = ([User]?, String) -> Void
     
     private init() { }
     

@@ -2,4 +2,3 @@ ${PODS_ROOT}/Target Support Files/Pods-DailyGit/Pods-DailyGit-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/QuickTableViewController/QuickTableViewController.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
-${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework
