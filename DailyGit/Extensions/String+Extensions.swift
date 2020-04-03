@@ -8,24 +8,42 @@
 
 import Foundation
 
-extension String {
-    func index(from: Int) -> Index {
-        return self.index(startIndex, offsetBy: from)
-    }
+public extension String {
+  subscript(value: Int) -> Character {
+    self[index(at: value)]
+  }
+}
 
-    func substring(from: Int) -> String {
-        let fromIndex = index(from: from)
-        return substring(from: fromIndex)
-    }
+public extension String {
+  subscript(value: NSRange) -> Substring {
+    self[value.lowerBound..<value.upperBound]
+  }
+}
 
-    func substring(to: Int) -> String {
-        let toIndex = index(from: to)
-        return substring(to: toIndex)
-    }
+public extension String {
+  subscript(value: CountableClosedRange<Int>) -> Substring {
+    self[index(at: value.lowerBound)...index(at: value.upperBound)]
+  }
 
-    func substring(with r: Range<Int>) -> String {
-        let startIndex = index(from: r.lowerBound)
-        let endIndex = index(from: r.upperBound)
-        return substring(with: startIndex..<endIndex)
-    }
+  subscript(value: CountableRange<Int>) -> Substring {
+    self[index(at: value.lowerBound)..<index(at: value.upperBound)]
+  }
+
+  subscript(value: PartialRangeUpTo<Int>) -> Substring {
+    self[..<index(at: value.upperBound)]
+  }
+
+  subscript(value: PartialRangeThrough<Int>) -> Substring {
+    self[...index(at: value.upperBound)]
+  }
+
+  subscript(value: PartialRangeFrom<Int>) -> Substring {
+    self[index(at: value.lowerBound)...]
+  }
+}
+
+private extension String {
+  func index(at offset: Int) -> String.Index {
+    index(startIndex, offsetBy: offset)
+  }
 }

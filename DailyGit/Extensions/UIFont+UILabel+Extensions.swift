@@ -48,7 +48,7 @@ extension UILabel {
     /// Uses the pre-set font to dynamically determine the proper sizing
     func fitTextToBounds() {
         guard let text = text, let currentFont = font else { return }
-    
+        
         let bestFittingFont = UIFont.bestFittingFont(for: text, in: bounds, fontDescriptor: currentFont.fontDescriptor, additionalAttributes: basicStringAttributes)
         font = bestFittingFont
     }
@@ -70,13 +70,13 @@ extension UIFont {
         let descriptor = fontDescriptor.withSymbolicTraits(traits)
         return UIFont(descriptor: descriptor!, size: 0) //size 0 means keep the size as it is
     }
-
+    
     func bold() -> UIFont {
         return withTraits(traits: .traitBold)
     }
     
     
-
+    
     func italic() -> UIFont {
         return withTraits(traits: .traitItalic)
     }

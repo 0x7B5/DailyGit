@@ -35,7 +35,6 @@ public class CommitsView: UIView {
         
         // Today
         addSubview(todayView)
-        addSubview(dailyCommitsLabel)
         
         // This Week
         addSubview(weekLabel)
@@ -50,6 +49,10 @@ public class CommitsView: UIView {
         // Statistics
         addSubview(stasticsLabel)
         addSubview(statView)
+        statView.addSubview(dailyAvgView)
+        statView.addSubview(weeklyAvgView)
+        statView.addSubview(monthlyAvgView)
+        
         
         //Bottom
         addSubview(lastUpdatedLabel)
@@ -59,6 +62,7 @@ public class CommitsView: UIView {
     public func createConstraints() {
         
         
+        #warning("Change offset between views for iPhone 8 and Se")
         // TOP VIEW
         topView.snp.makeConstraints{
             $0.top.equalToSuperview()
@@ -153,16 +157,32 @@ public class CommitsView: UIView {
             $0.width.equalTo(todayView.snp.width)
             $0.centerX.equalToSuperview()
             $0.top.equalTo(stasticsLabel.snp.bottom).offset(3)
-//            $0.bottom.equalTo(lastUpdatedLabel.snp.top).offset(-10)
             $0.height.equalTo(todayView.snp.height).multipliedBy(1.25)
         }
-        
-        
+
         // DAILY AVERAGE
+        dailyAvgView.snp.makeConstraints {
+            $0.height.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.31)
+        }
+        addShadowToView(view: dailyAvgView)
                
         // WEEKLY AVERAGE
+        weeklyAvgView.snp.makeConstraints {
+            $0.height.equalTo(dailyAvgView.snp.height)
+            $0.width.equalTo(dailyAvgView.snp.width)
+            $0.centerX.equalToSuperview()
+        }
+        addShadowToView(view: weeklyAvgView)
                
         // MONTHLY AVERAGE
+        monthlyAvgView.snp.makeConstraints {
+            $0.height.equalTo(dailyAvgView.snp.height)
+            $0.width.equalTo(dailyAvgView.snp.width)
+            $0.right.equalToSuperview()
+        }
+        addShadowToView(view: monthlyAvgView)
         
         //Week Commits View
         
@@ -234,28 +254,7 @@ public class CommitsView: UIView {
     }()
     
     //TODAY VIEW
-    let todayView = CurvedView()
-    
-    let dailyCommitsLabel: UILabel = {
-        let label = UILabel()
-        if Constants.isIpad == false {
-            label.font = UIFont.systemFont(ofSize: 60.0, weight: .bold)
-        } else {
-            label.font = UIFont.systemFont(ofSize: 70.0, weight: .bold)
-        }
-        
-        label.adjustsFontSizeToFitWidth = true
-        
-        if (UserDefaults.standard.object(forKey: "DailyCommits") != nil) {
-            label.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
-        } else {
-            label.text = "0"
-        }
-        
-        label.textAlignment = .center
-        label.textColor = Constants.subTitleColor
-        return label
-    }()
+    let todayView = TodaySubView()
     
     //THIS WEEK VIEW
     lazy var weekLabel: UILabel = createTitleText(text: "This Week")
@@ -284,7 +283,7 @@ public class CommitsView: UIView {
     lazy var stasticsLabel: UILabel = createTitleText(text: "Statistics")
     let statView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         return view
     }()
     // DAILY AVERAGE
@@ -323,9 +322,9 @@ public class CommitsView: UIView {
     
     internal func addShadowToView(view: UIView) {
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.05
+        view.layer.shadowOpacity = 0.1
         view.layer.shadowOffset = .zero
-        view.layer.shadowRadius = 1
+        view.layer.shadowRadius = 2
     }
     
     

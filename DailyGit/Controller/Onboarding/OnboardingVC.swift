@@ -73,7 +73,6 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
                         GithubDataManager.shared.setupGithubUser(username: username, completion: {
                             user in
                             UserInfoHelper.shared.resetDefaults()
-                            let encoder = JSONEncoder()
                             if user != nil {
                                 UserInfoHelper.shared.updateUserInDefaults(userToEncode: user!)
                                 DispatchQueue.main.async { [weak self] in

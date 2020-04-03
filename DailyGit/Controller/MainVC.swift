@@ -44,6 +44,7 @@ class MainVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+       // mainView.todayView.yesterdayCommits.adjustsFontSizeToFitWidth = true
         setupNavController()
         if Constants.isIpad == true {
             print("iPad")
@@ -54,9 +55,10 @@ class MainVC: UIViewController {
         UserInfoHelper.shared.getCurrentStreak()
         UserInfoHelper.shared.getLongestStreak()
         
-        var name = (UserInfoHelper.shared.readInfo(info: .name) as! String)
+        let name = (UserInfoHelper.shared.readInfo(info: .name) as! String)
         if name.count > 15 {
-            mainView.nameLabel.text = name.substring(to: 15)
+            let nameSubString = String(name[...15])
+            mainView.nameLabel.text = nameSubString
         } else {
             mainView.nameLabel.text = name
         }

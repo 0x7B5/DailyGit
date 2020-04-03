@@ -32,7 +32,7 @@ public class GithubDataManager {
         if let url = URL(string: "https://api.github.com/users/\(username)") {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
                 if err != nil {
-                    print(err)
+                    print(err ?? "Error")
                     completion(false)
                 }
                 guard let data = data else { return }
@@ -65,7 +65,7 @@ public class GithubDataManager {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
                 //also perhaps check response status 200 OK
                 if err != nil {
-                    print(err)
+                    print(err ?? "Error")
                     completion(nil)
                 }
                 guard let data = data else { return }
@@ -162,7 +162,7 @@ public class GithubDataManager {
         if let url = URL(string: "https://vlad-munteanu.appspot.com/dayCount/\(username)/\(DateHelper.shared.getFormattedDate())") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if error != nil {
-                    print(error)
+                    print(error ?? "Error")
                     completion(nil)
                 }
                 if let data = data {
@@ -179,7 +179,7 @@ public class GithubDataManager {
         if let url = URL(string: "https://vlad-munteanu.appspot.com/monthlyCount/\(username)/\(DateHelper.shared.getFormattedDate())") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if error != nil {
-                    print(error)
+                    print(error ?? "")
                     completion(nil)
                 }
                 
@@ -197,7 +197,7 @@ public class GithubDataManager {
         if let url = URL(string: "https://vlad-munteanu.appspot.com/weeklyCount/\(username)/\(DateHelper.shared.getFormattedDate())") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if error != nil {
-                    print(error)
+                    print(error ?? "")
                     completion(nil)
                 }
                 
@@ -215,7 +215,7 @@ public class GithubDataManager {
         if let url = URL(string: "https://api.github.com/users/\(UserInfoHelper.shared.readInfo(info: .username))") {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
                 if err != nil {
-                    print(err)
+                    print(err ?? "")
                     completion()
                 }
                 

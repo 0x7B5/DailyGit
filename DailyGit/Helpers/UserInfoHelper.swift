@@ -20,7 +20,7 @@ public class UserInfoHelper {
     func readInfo(info: Userinfo) -> Any {
         if let savedPerson = defaults.object(forKey: "CurrentUser") as? Data {
             let decoder = JSONDecoder()
-            if var loadedPerson = try? decoder.decode(User.self, from: savedPerson) {
+            if let loadedPerson = try? decoder.decode(User.self, from: savedPerson) {
                 switch info {
                 case .user:
                     return loadedPerson
