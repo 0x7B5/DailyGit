@@ -43,6 +43,5 @@ public class Reachability {
         let ret = (isReachable && !needsConnection)
         
         return ret
-        
     }
 }

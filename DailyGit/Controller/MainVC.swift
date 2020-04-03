@@ -44,7 +44,6 @@ class MainVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-       // mainView.todayView.yesterdayCommits.adjustsFontSizeToFitWidth = true
         setupNavController()
         if Constants.isIpad == true {
             print("iPad")
@@ -58,12 +57,12 @@ class MainVC: UIViewController {
         let name = (UserInfoHelper.shared.readInfo(info: .name) as! String)
         if name.count > 15 {
             let nameSubString = String(name[...15])
-            mainView.nameLabel.text = nameSubString
+            mainView.topView.nameLabel.text = nameSubString
         } else {
-            mainView.nameLabel.text = name
+            mainView.topView.nameLabel.text = name
         }
         
-        mainView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as! String)
+        mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as! String)
         //self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
         //self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
         //self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
