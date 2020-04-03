@@ -10,29 +10,11 @@ import UIKit
 
 class MainVC: UIViewController {
     
-    #warning("Kind of hacky and potentially dangerous")
-    //lazy var mainView = CommitsView(topLayout: self.navigationController!.navigationBar.frame.height)
     lazy var mainView = CommitsView()
     unowned var topView: UIView { return mainView.topView}
     
     override func viewDidLayoutSubviews() {
-        
-        #warning("Fix not rounded profile picture")
-//        profileImage.layer.cornerRadius = profileImage.frame.size.width/2
-//        profileImage.layer.masksToBounds = true
-//        profileImage.layer.borderColor = UIColor.clear.cgColor
-        
-        
-//        topView.profileImage.makeRounded()
-        for view in self.mainView.topView.subviews as [UIView] {
-            if view.tag == 0 {
-//                view.layer.cornerRadius = view.frame.size.width/2
-//                view.layer.masksToBounds = true
-//                view.layer.borderColor = UIColor.clear.cgColor
-            } else if view.tag == 2 {
-                view.sizeToFit()
-            }
-        }
+        mainView.topView.profileImage.makeRounded(frameSize: self.mainView.topView.frame.width)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +36,7 @@ class MainVC: UIViewController {
         UserInfoHelper.shared.getCurrentStreak()
         UserInfoHelper.shared.getLongestStreak()
         
-        let name = (UserInfoHelper.shared.readInfo(info: .name) as! String)
+        let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
         if name.count > 15 {
             let nameSubString = String(name[...15])
             mainView.topView.nameLabel.text = nameSubString
@@ -62,7 +44,7 @@ class MainVC: UIViewController {
             mainView.topView.nameLabel.text = name
         }
         
-        mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as! String)
+        mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
         //self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
         //self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
         //self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
@@ -76,9 +58,9 @@ class MainVC: UIViewController {
             DispatchQueue.main.async { () -> Void in
                 #warning("Check why this is updating ui when setupInfo already does")
                 //self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
-               // self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
-               // self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
-               // self.mainView.setupColorsForWeek(contributions: UserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
+                // self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
+                // self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
+                // self.mainView.setupColorsForWeek(contributions: UserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
             }
             
         })
@@ -102,7 +84,7 @@ class MainVC: UIViewController {
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
-      //  print(UserInfoHelper.shared.getYearlyContributionsDates())
+        //  print(UserInfoHelper.shared.getYearlyContributionsDates())
     }
     
 }

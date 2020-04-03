@@ -72,12 +72,12 @@ public class CommitsView: UIView {
         
         todayView.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.95)
-            $0.height.equalToSuperview().multipliedBy(0.17)
+            $0.height.equalToSuperview().multipliedBy(0.15)
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(topView.snp.bottom).multipliedBy(0.98)
         }
         
-        addShadowToView(view: todayView)
+        todayView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
         // CURRENT WEEK
         weekLabel.snp.makeConstraints {
@@ -92,7 +92,7 @@ public class CommitsView: UIView {
             $0.top.equalTo(weekLabel.snp.bottom).offset(3)
         }
         
-        addShadowToView(view: weekView)
+        weekView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
         // LAST WEEK
         lastWeekLabel.snp.makeConstraints {
@@ -106,7 +106,7 @@ public class CommitsView: UIView {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(lastWeekLabel.snp.bottom).offset(3)
         }
-        addShadowToView(view: lastWeekView)
+        lastWeekView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
         // LAST UPDATED LABEL
         lastUpdatedLabel.snp.makeConstraints{
@@ -139,7 +139,7 @@ public class CommitsView: UIView {
             $0.left.equalToSuperview()
             $0.width.equalToSuperview().multipliedBy(0.31)
         }
-        addShadowToView(view: dailyAvgView)
+        dailyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
                
         // WEEKLY AVERAGE
         weeklyAvgView.snp.makeConstraints {
@@ -147,7 +147,7 @@ public class CommitsView: UIView {
             $0.width.equalTo(dailyAvgView.snp.width)
             $0.centerX.equalToSuperview()
         }
-        addShadowToView(view: weeklyAvgView)
+        weeklyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
                
         // MONTHLY AVERAGE
         monthlyAvgView.snp.makeConstraints {
@@ -155,7 +155,7 @@ public class CommitsView: UIView {
             $0.width.equalTo(dailyAvgView.snp.width)
             $0.right.equalToSuperview()
         }
-        addShadowToView(view: monthlyAvgView)
+        monthlyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
         //Week Commits View
         
@@ -242,14 +242,6 @@ public class CommitsView: UIView {
         label.textColor = Constants.subTitleColor
         return label
     }
-    
-    internal func addShadowToView(view: UIView) {
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowOffset = .zero
-        view.layer.shadowRadius = 2
-    }
-    
     
     func setupColorsForWeek(contributions: ContributionList) {
         

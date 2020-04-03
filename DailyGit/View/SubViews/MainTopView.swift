@@ -38,13 +38,13 @@ public class MainTopView: UIView {
     
     public func createConstraints() {
         profileImage.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.16)
+            $0.width.equalToSuperview().multipliedBy(Constants.profileImageWidth)
             $0.height.equalTo(profileImage.snp.width)
             $0.right.equalToSuperview().inset(14)
             #warning("This doesn't quite look right on larger devices")
             $0.centerY.equalToSuperview().multipliedBy(0.5)
         }
-        
+
         
         nameLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.7)
@@ -69,12 +69,9 @@ public class MainTopView: UIView {
         // view.image = #imageLiteral(resourceName: "sampleIcon")
         let image = UserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic")!
         view.image = image
-        view.layer.borderWidth = 1.0
         view.layer.masksToBounds = false
+        view.clipsToBounds = false
         view.tag = 0
-        //imageView.layer.borderColor = UIColor.white.cgColor
-        //        view.layer.cornerRadius = view.frame.size.width / 2
-        //        view.clipsToBounds = true
         return view
         
     }()

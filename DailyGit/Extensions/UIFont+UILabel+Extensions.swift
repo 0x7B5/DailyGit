@@ -35,8 +35,15 @@ extension UIFont {
     static func scaledFont(textStyle: UIFont.TextStyle, weight: UIFont.Weight) -> UIFont {
 
         let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: textStyle)
-
-        let customFont = UIFont.systemFont(ofSize: fontDescriptor.pointSize, weight: weight)
+        
+        var scaler: CGFloat = 1.0
+        if textStyle == .subheadline {
+            scaler = 4.0
+        } else if textStyle == .headline {
+            scaler = 0.95
+        }
+        
+        let customFont = UIFont.systemFont(ofSize: fontDescriptor.pointSize * scaler, weight: weight)
 
         return UIFontMetrics.default.scaledFont(for: customFont)
     }
