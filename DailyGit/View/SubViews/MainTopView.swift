@@ -41,13 +41,12 @@ public class MainTopView: UIView {
             $0.width.equalToSuperview().multipliedBy(Constants.profileImageWidth)
             $0.height.equalTo(profileImage.snp.width)
             $0.right.equalToSuperview().inset(14)
-            #warning("This doesn't quite look right on larger devices")
-            $0.centerY.equalToSuperview().multipliedBy(0.5)
+            $0.centerY.lessThanOrEqualToSuperview().multipliedBy(0.5)
         }
 
         
         nameLabel.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.7)
+            $0.width.equalToSuperview().multipliedBy(0.5)
             $0.left.equalToSuperview().inset(14)
             $0.centerY.equalToSuperview().multipliedBy(0.4)
         }
@@ -84,6 +83,8 @@ public class MainTopView: UIView {
         label.textAlignment = .left
         label.tag = 1
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
         return label
     }()
     

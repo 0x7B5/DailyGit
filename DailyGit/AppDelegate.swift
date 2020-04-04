@@ -20,7 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad) {
             Constants.isIpad = true
         }
-
+        
+        //resetDefaults()
+       
+        UINavigationBar.appearance().barTintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        UINavigationBar.appearance().isTranslucent = false
         
         #warning("Remove in Productions")
         do {
@@ -38,9 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (userExist() == true) {
             //LoggedIn
-            UINavigationBar.appearance().barTintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            
-            UINavigationBar.appearance().isTranslucent = false
             let navigationController = UINavigationController(rootViewController: MainVC())
             self.window?.rootViewController = navigationController
         } else {

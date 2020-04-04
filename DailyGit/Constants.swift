@@ -26,7 +26,19 @@ public struct Constants {
     #warning("This needs to be able to be changed by the user")
     static var numberOfNotificationsPerDay = 24
     
-    static var profileImageWidth: CGFloat = 0.2
+    static var profileImageWidth: CGFloat = 0.18
+    
+    static var screenWidth: CGFloat {
+        get {
+            return UIScreen.main.bounds.size.width
+        }
+    }
+    
+    static var screenHeight: CGFloat {
+        get {
+            return UIScreen.main.bounds.size.height
+        }
+    }
     
 
     

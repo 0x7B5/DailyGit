@@ -50,14 +50,29 @@ public class CommitsView: UIView {
         statView.addSubview(weeklyAvgView)
         statView.addSubview(monthlyAvgView)
         
-        
         //Bottom
         addSubview(lastUpdatedLabel)
     }
     
     
     public func createConstraints() {
+        var spacingConstant = 20
+        var todayViewSpacingConstant = 0.98
         
+        var weekLabelSpacingConstant = 15
+        var weekViewHeightConstant = 0.12
+        
+        print(Constants.screenHeight)
+        if Constants.screenHeight < 700 {
+            spacingConstant = 10
+            todayViewSpacingConstant = 0.9
+            weekViewHeightConstant = 0.10
+            
+            if Constants.screenHeight < 600 {
+                spacingConstant = 8
+                weekLabelSpacingConstant = 10
+            }
+        }
         
         #warning("Change offset between views for iPhone 8 and Se")
         // TOP VIEW
@@ -67,14 +82,14 @@ public class CommitsView: UIView {
             $0.height.equalToSuperview().multipliedBy(0.25)
             $0.centerX.equalToSuperview()
         }
-
+        
         //TODAY VIEW
         
         todayView.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.95)
             $0.height.equalToSuperview().multipliedBy(0.15)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalTo(topView.snp.bottom).multipliedBy(0.98)
+            $0.centerY.equalTo(topView.snp.bottom).multipliedBy(todayViewSpacingConstant)
         }
         
         todayView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
@@ -82,12 +97,12 @@ public class CommitsView: UIView {
         // CURRENT WEEK
         weekLabel.snp.makeConstraints {
             $0.left.equalTo(topView.nameLabel.snp.left)
-            $0.top.equalTo(todayView.snp.bottom).offset(15)
+            $0.top.equalTo(todayView.snp.bottom).offset(weekLabelSpacingConstant)
         }
         
         weekView.snp.makeConstraints {
             $0.width.equalTo(todayView.snp.width)
-            $0.height.equalToSuperview().multipliedBy(0.09)
+            $0.height.equalToSuperview().multipliedBy(weekViewHeightConstant)
             $0.centerX.equalToSuperview()
             $0.top.equalTo(weekLabel.snp.bottom).offset(3)
         }
@@ -97,7 +112,7 @@ public class CommitsView: UIView {
         // LAST WEEK
         lastWeekLabel.snp.makeConstraints {
             $0.left.equalTo(topView.nameLabel.snp.left)
-            $0.top.equalTo(weekView.snp.bottom).offset(20)
+            $0.top.equalTo(weekView.snp.bottom).offset(spacingConstant)
         }
         
         lastWeekView.snp.makeConstraints {
@@ -114,7 +129,7 @@ public class CommitsView: UIView {
             $0.centerX.equalToSuperview()
             
             if UIDevice.current.hasNotch {
-                $0.bottom.equalToSuperview().inset(20)
+                $0.bottom.equalToSuperview().inset(spacingConstant)
             } else {
                 $0.bottom.equalToSuperview().inset(10)
             }
@@ -123,53 +138,35 @@ public class CommitsView: UIView {
         // STATISTICS
         stasticsLabel.snp.makeConstraints {
             $0.left.equalTo(topView.nameLabel.snp.left)
-            $0.top.equalTo(lastWeekView.snp.bottom).offset(20)
+            $0.top.equalTo(lastWeekView.snp.bottom).offset(spacingConstant)
         }
+        makeStatisticsView()
         
-        statView.snp.makeConstraints {
-            $0.width.equalTo(todayView.snp.width)
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(stasticsLabel.snp.bottom).offset(3)
-            $0.height.equalTo(todayView.snp.height).multipliedBy(1.25)
-        }
-
         // DAILY AVERAGE
         dailyAvgView.snp.makeConstraints {
             $0.height.equalToSuperview()
             $0.left.equalToSuperview()
             $0.width.equalToSuperview().multipliedBy(0.31)
         }
-        dailyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
-               
+        
         // WEEKLY AVERAGE
         weeklyAvgView.snp.makeConstraints {
             $0.height.equalTo(dailyAvgView.snp.height)
             $0.width.equalTo(dailyAvgView.snp.width)
             $0.centerX.equalToSuperview()
         }
-        weeklyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
-               
+        
         // MONTHLY AVERAGE
         monthlyAvgView.snp.makeConstraints {
             $0.height.equalTo(dailyAvgView.snp.height)
             $0.width.equalTo(dailyAvgView.snp.width)
             $0.right.equalToSuperview()
         }
+        
+        
+        dailyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
+        weeklyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         monthlyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
-        
-        //Week Commits View
-        
-        //        var currentCenterXMulitplier = 0.15
-        //        for i in 0..<7 {
-        //            weekCommitGraph[i].snp.makeConstraints {
-        //                $0.width.equalToSuperview().multipliedBy(0.11)
-        //                $0.height.equalTo(weekCommitGraph[0].snp.width)
-        //                $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
-        //                $0.centerY.equalToSuperview().multipliedBy(1.02)
-        //                currentCenterXMulitplier += 0.2835
-        //            }
-        //        }
-        
         
     }
     
@@ -201,7 +198,7 @@ public class CommitsView: UIView {
     // LAST WEEK VIEW
     lazy var lastWeekLabel: UILabel = createTitleText(text: "Last Week")
     let lastWeekView = CurvedView()
-   
+    
     // STATISTICS
     lazy var stasticsLabel: UILabel = createTitleText(text: "Statistics")
     let statView: UIView = {
@@ -211,10 +208,10 @@ public class CommitsView: UIView {
     }()
     // DAILY AVERAGE
     let dailyAvgView = CurvedView()
-           
+    
     // WEEKLY AVERAGE
     let weeklyAvgView = CurvedView()
-           
+    
     // MONTHLY AVERAGE
     let monthlyAvgView = CurvedView()
     
@@ -239,6 +236,8 @@ public class CommitsView: UIView {
         label.adjustsFontForContentSizeCategory = true
         label.text = "\(text)"
         label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
         label.textColor = Constants.subTitleColor
         return label
     }
@@ -268,6 +267,24 @@ public class CommitsView: UIView {
             //                $0.height.equalToSuperview().multipliedBy(0.045)
             //                $0.centerY.equalToSuperview().multipliedBy(0.34)
             //            }
+        }
+    }
+    
+    func makeStatisticsView() {
+        if Constants.screenHeight < 700 {
+            statView.snp.makeConstraints {
+                $0.width.equalTo(todayView.snp.width)
+                $0.centerX.equalToSuperview()
+                $0.top.equalTo(stasticsLabel.snp.bottom).offset(3)
+                $0.bottom.equalTo(lastUpdatedLabel.snp.top).offset(-6)
+            }
+        } else {
+            statView.snp.makeConstraints {
+                $0.width.equalTo(todayView.snp.width)
+                $0.centerX.equalToSuperview()
+                $0.top.equalTo(stasticsLabel.snp.bottom).offset(3)
+                $0.height.equalTo(todayView.snp.height).multipliedBy(1.25)
+            }
         }
     }
 }

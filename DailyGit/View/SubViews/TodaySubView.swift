@@ -51,11 +51,14 @@ public class TodaySubView: CurvedView {
     }
     
     public func createConstraints() {
+        
         yesterdayCommits.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.33333)
             $0.left.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.7)
+            $0.height.equalToSuperview().multipliedBy(0.6)
+             $0.centerY.equalToSuperview().multipliedBy(0.8)
         }
+        
         yesterdayLabel.snp.makeConstraints{
             $0.width.equalTo(yesterdayCommits.snp.width)
             $0.left.equalToSuperview()
@@ -63,7 +66,7 @@ public class TodaySubView: CurvedView {
         }
         
         firstDivider.snp.makeConstraints {
-            $0.top.equalTo(yesterdayCommits.snp.top).offset(10)
+            $0.top.equalTo(yesterdayCommits.snp.top).offset(5)
             $0.bottom.equalTo(yesterdayLabel.snp.bottom).inset(3)
             $0.left.equalTo(yesterdayLabel.snp.right)
             $0.width.equalToSuperview().multipliedBy(0.0007)
@@ -72,7 +75,8 @@ public class TodaySubView: CurvedView {
         todayCommits.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.33333)
             $0.left.equalTo(firstDivider.snp.right)
-            $0.centerY.equalToSuperview().multipliedBy(0.7)
+            $0.height.equalTo(yesterdayCommits.snp.height)
+             $0.centerY.equalToSuperview().multipliedBy(0.8)
         }
         todayLabel.snp.makeConstraints{
             $0.width.equalTo(todayCommits.snp.width)
@@ -81,7 +85,7 @@ public class TodaySubView: CurvedView {
         }
         
         secondDivider.snp.makeConstraints {
-            $0.top.equalTo(yesterdayCommits.snp.top).inset(10)
+            $0.top.equalTo(yesterdayCommits.snp.top).inset(5)
             $0.bottom.equalTo(yesterdayLabel.snp.bottom).inset(3)
             $0.left.equalTo(todayLabel.snp.right)
             $0.width.equalToSuperview().multipliedBy(0.0007)
@@ -90,7 +94,8 @@ public class TodaySubView: CurvedView {
         currentStreak.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.33333)
             $0.left.equalTo(secondDivider.snp.right)
-            $0.centerY.equalToSuperview().multipliedBy(0.7)
+            $0.height.equalTo(yesterdayCommits.snp.height)
+            $0.centerY.equalToSuperview().multipliedBy(0.8)
         }
         currentStreakLabel.snp.makeConstraints{
             $0.width.equalTo(currentStreak.snp.width)
