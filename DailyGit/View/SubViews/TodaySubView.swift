@@ -30,12 +30,11 @@ public class TodaySubView: CurvedView {
     
     func setupView() {
         initializeUI()
+        setNumberLabels()
         createConstraints()
-        setupLabelDefaults()
     }
     
     private func initializeUI() {
-        setupLabelDefaults()
         addSubview(yesterdayCommits)
         addSubview(yesterdayLabel)
         
@@ -154,9 +153,10 @@ public class TodaySubView: CurvedView {
         return label
     }
     
-    func setupLabelDefaults() {
+    func setNumberLabels() {
         if let todayContribution = UserInfoHelper.shared.readInfo(info: .today) as? Contribution {
             todayCommits.text = String(todayContribution.count)
+            print("todayCommits change \(todayContribution.count)")
             todayCommits.textColor = todayContribution.color.getColor()
         }
         

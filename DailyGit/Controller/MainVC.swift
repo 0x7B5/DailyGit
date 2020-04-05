@@ -44,8 +44,7 @@ class MainVC: UIViewController {
                 }
                 
                 self.mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
-                self.mainView.todayView.setupLabelDefaults()
-                self.mainView.todayView.setupLabelDefaults()
+                self.mainView.todayView.setNumberLabels()
             }
             
         })
