@@ -44,11 +44,11 @@ class MainVC: UIViewController {
             mainView.topView.nameLabel.text = name
         }
         
+        #warning("UPDATE THIE TO UPDATE TODAY VIEW")
+        
         mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
-        //self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
-        //self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
-        //self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
-        //self.mainView.setupColorsForWeek(contributions: UserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
+        mainView.todayView.setupLabelDefaults()
+        
         updateInfo()
     }
     
@@ -57,10 +57,7 @@ class MainVC: UIViewController {
         UserInfoHelper.shared.refreshEverything(completion: {
             DispatchQueue.main.async { () -> Void in
                 #warning("Check why this is updating ui when setupInfo already does")
-                //self.mainView.dailyCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
-                // self.mainView.currentStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "CurrentStreak")) + " days 🔥"
-                // self.mainView.longestStreakCommitsLabel.text = String(UserDefaults.standard.integer(forKey: "LongestStreak")) + " days 🔥"
-                // self.mainView.setupColorsForWeek(contributions: UserInfoHelper.shared.readInfo(info: .currentWeek) as! ContributionList)
+                self.mainView.todayView.setupLabelDefaults()
             }
             
         })
