@@ -16,8 +16,55 @@ struct User: Codable {
     var photoUrl: String
     var contributions: ContributionList
     
-    var longestStreak: Int
-    var currentStreak: Int
+    var longestStreak: Int {
+        get {
+            var counter = 0
+            var maxStreaks = 0
+            
+            for i in contributions.contributions {
+                if i.count > 0 {
+                    counter += 1
+                } else {
+                    if counter > maxStreaks {
+                        maxStreaks = counter
+                    }
+                    counter = 0
+                }
+            }
+            return counter
+        }
+    }
+    var currentStreak: Int {
+        get {
+            var date = DateHelper.shared.getFormattedDate()
+            
+            if contributions.contributions.last!.count == 0 {
+                date = DateHelper.shared.getYesterdayDate()
+            }
+            
+            
+            var counter = 0
+            var countingYet = false
+            
+            for i in contributions.contributions.reversed() {
+                if countingYet {
+                    if i.count > 0 {
+                        counter += 1
+                    } else {
+                        break
+                    }
+                }
+                
+                if i.date == date {
+                    countingYet = true
+                    if i.count > 0 {
+                        counter += 1
+                    }
+                }
+            }
+            return counter
+        }
+    }
     var dateCreated: String
     var yearCreated: Int
     
@@ -32,13 +79,9 @@ struct User: Codable {
         self.bio = bio
         self.photoUrl = photoUrl
         self.contributions = contributions
-        self.longestStreak = 0
-        self.currentStreak = 0
         self.dateCreated = dateCreated
         self.yearCreated = yearCreated
         self.currentWeek = currentWeek
     }
-    
-    
     
 }

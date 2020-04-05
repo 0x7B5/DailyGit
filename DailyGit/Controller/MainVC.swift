@@ -19,7 +19,7 @@ class MainVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         mainView.checkAllignmentForTitle()
-        setupInfo()
+        updateInfo()
     }
     override func loadView() {
         self.view = mainView
@@ -32,31 +32,19 @@ class MainVC: UIViewController {
         }
     }
     
-    func setupInfo() {
-        UserInfoHelper.shared.getCurrentStreak()
-        UserInfoHelper.shared.getLongestStreak()
-        
-        let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
-        if name.count > 15 {
-            let nameSubString = String(name[...15])
-            mainView.topView.nameLabel.text = nameSubString
-        } else {
-            mainView.topView.nameLabel.text = name
-        }
-        
-        #warning("UPDATE THIE TO UPDATE TODAY VIEW")
-        
-        mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
-        mainView.todayView.setupLabelDefaults()
-        
-        updateInfo()
-    }
-    
-    
     func updateInfo() {
         UserInfoHelper.shared.refreshEverything(completion: {
             DispatchQueue.main.async { () -> Void in
-                #warning("Check why this is updating ui when setupInfo already does")
+                let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
+                if name.count > 15 {
+                    let nameSubString = String(name[...15])
+                    self.mainView.topView.nameLabel.text = nameSubString
+                } else {
+                    self.mainView.topView.nameLabel.text = name
+                }
+                
+                self.mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
+                self.mainView.todayView.setupLabelDefaults()
                 self.mainView.todayView.setupLabelDefaults()
             }
             

@@ -61,87 +61,11 @@ public class UserInfoHelper {
         return ""
     }
     
-    func getDailyCommits(completion: @escaping () -> ())  {
-        GithubDataManager.shared.updateInfo(completion: {
-            let date = DateHelper.shared.getFormattedDate()
-            if let currentContributions = self.readInfo(info: .contributions) as? ContributionList {
-                for i in currentContributions.contributions {
-                    if i.date == date {
-                        self.defaults.set(i.count, forKey: "DailyCommits")
-                        self.defaults.synchronize()
-                        completion()
-                    }
-                }
-            }
-            completion()
-        })
-    }
-    
-    func getCurrentStreak() {
-        if let currentContributions = self.readInfo(info: .contributions) as? ContributionList {
-            var date = DateHelper.shared.getFormattedDate()
-            
-            if currentContributions.contributions.last!.count == 0 {
-                date = DateHelper.shared.getYesterdayDate()
-            }
-            
-            
-            var counter = 0
-            var countingYet = false
-            
-            for i in currentContributions.contributions.reversed() {
-                if countingYet {
-                    if i.count > 0 {
-                        counter += 1
-                    } else {
-                        break
-                    }
-                }
-                
-                if i.date == date {
-                    countingYet = true
-                    if i.count > 0 {
-                        counter += 1
-                    }
-                }
-                
-            }
-            
-            self.defaults.set(counter, forKey: "CurrentStreak")
-            self.defaults.synchronize()
-            print("CURRENT STREAK: \(counter)")
-        }
-    }
-    
-    #warning("Only have to run this again if currentStreak is longer than longestStreak, shouldn't have to run this everytime we refresh")
-    func getLongestStreak() {
-        if let currentContributions = readInfo(info: .contributions) as? ContributionList {
-            var counter = 0
-            var maxStreaks = 0
-            
-            for i in currentContributions.contributions {
-                if i.count > 0 {
-                    counter += 1
-                } else {
-                    if counter > maxStreaks {
-                        maxStreaks = counter
-                    }
-                    counter = 0
-                }
-            }
-            self.defaults.set(maxStreaks, forKey: "LongestStreak")
-            self.defaults.synchronize()
-            print("Longest Streak: ", maxStreaks)
-        }
-    }
     
     func refreshEverything(completion: @escaping () -> ()) {
-        
-        getDailyCommits {
-            self.getCurrentStreak()
-            self.getLongestStreak()
+        GithubDataManager.shared.updateInfo(completion: {
             completion()
-        }
+        })
     }
     
     func resetDefaults() {
@@ -153,7 +77,6 @@ public class UserInfoHelper {
     }
     
     func getYearlyContributionsDates() -> Int{
-        
         var yearCount = 0
         
         if let currentContributions = readInfo(info: .contributions) as? ContributionList {
@@ -166,10 +89,7 @@ public class UserInfoHelper {
                 }
             }
         }
-        
-        
         return yearCount
-        
     }
     
     
@@ -193,7 +113,6 @@ public class UserInfoHelper {
     
     func updateUserInDefaults(userToEncode: User) {
         let encoder = JSONEncoder()
-        
         if let encoded = try? encoder.encode(userToEncode) {
             let defaults = UserDefaults.standard
             defaults.set(encoded, forKey: "CurrentUser")

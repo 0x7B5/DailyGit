@@ -155,10 +155,6 @@ public class TodaySubView: CurvedView {
     }
     
     func setupLabelDefaults() {
-//        if (UserDefaults.standard.object(forKey: "DailyCommits") != nil) {
-//            todayCommits.text = String(UserDefaults.standard.integer(forKey: "DailyCommits"))
-//        }
-        
         if let todayContribution = UserInfoHelper.shared.readInfo(info: .today) as? Contribution {
             todayCommits.text = String(todayContribution.count)
             todayCommits.textColor = todayContribution.color.getColor()
