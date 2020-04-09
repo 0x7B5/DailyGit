@@ -14,7 +14,7 @@ public class AutoUpdater {
     func startTimer() {
         let queue = DispatchQueue(label: "com.domain.app.timer")  // you can also use `DispatchQueue.main`, if you want
         timer = DispatchSource.makeTimerSource(queue: queue)
-        timer!.schedule(deadline: .now(), repeating: .seconds(60))
+        timer!.schedule(deadline: .now(), repeating: .seconds(Constants.refreshRatePerSecond))
         timer!.setEventHandler { [weak self] in
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil)
         }

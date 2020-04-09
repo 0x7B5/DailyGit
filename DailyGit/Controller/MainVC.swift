@@ -34,21 +34,24 @@ class MainVC: UIViewController {
     func updateInfo() {
         UserInfoHelper.shared.refreshEverything(completion: {
             DispatchQueue.main.async { () -> Void in
-                print("Updated UI")
-                let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
-                if name.count > 15 {
-                    let nameSubString = String(name[...15])
-                    self.mainView.topView.nameLabel.text = nameSubString
-                } else {
-                    self.mainView.topView.nameLabel.text = name
-                }
-                
-                self.mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
-                self.mainView.todayView.setNumberLabels()
-                self.mainView.setLastUpdatedLabel()
+                self.updateUI()
             }
         })
         
+    }
+    
+    func updateUI() {
+        let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
+        if name.count > 15 {
+            let nameSubString = String(name[...15])
+            self.mainView.topView.nameLabel.text = nameSubString
+        } else {
+            self.mainView.topView.nameLabel.text = name
+        }
+        
+        self.mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
+        self.mainView.todayView.setNumberLabels()
+        self.mainView.setLastUpdatedLabel()
     }
     
     @objc func autoRefresher(notification: NSNotification) {

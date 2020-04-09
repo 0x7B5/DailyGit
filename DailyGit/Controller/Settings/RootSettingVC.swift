@@ -17,7 +17,7 @@ class RootSettingVC: QuickTableViewController {
         
     }
     
-    
+    #warning("low energy mode!!!!!!!!")
     func setupView() {
         //        let titleLabel = UILabel()
         //        titleLabel.text = "QuickTableViewController"
@@ -35,6 +35,7 @@ class RootSettingVC: QuickTableViewController {
                     self!.present(navController, animated: true, completion: nil)
                 })
             ]),
+            
             
             Section(title: "Notifications", rows: [
                 SwitchRow(text: "Profane Notifications", switchValue: true, action: { [weak self] _ in

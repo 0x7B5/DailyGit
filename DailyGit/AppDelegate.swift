@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        //AutoUpdater.shared.stopTimer()()
+        AutoUpdater.shared.stopTimer()
     }
     
     func resetDefaults() {

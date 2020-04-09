@@ -13,7 +13,12 @@ enum Userinfo {
     case user, name, username, bio, photoUrl, contributions, yearCreated, dateCreated, currentWeek, today, yesterday, longestStreak, currentStreak, updateTime, userUpdateTime
 }
 
+enum refreshState {
+    case alreadyRefreshing, goodToRefresh
+}
+
 public class UserInfoHelper {
+    var currentState: refreshState = .goodToRefresh
     static let shared = UserInfoHelper()
     let defaults = UserDefaults.standard
     
@@ -68,10 +73,15 @@ public class UserInfoHelper {
     
     func refreshEverything(completion: @escaping () -> ()) {
         if Reachability.shared.isConnectedToNetwork() {
-            GithubDataManager.shared.updateInfo(completion: {
-                completion()
-            })
+            if currentState == .goodToRefresh {
+                currentState = .alreadyRefreshing
+                GithubDataManager.shared.updateInfo(completion: {
+                    self.currentState = .goodToRefresh
+                    completion()
+                })
+            }
         }
+        currentState = .goodToRefresh
         completion()
     }
     
@@ -125,6 +135,7 @@ public class UserInfoHelper {
             defaults.set(encoded, forKey: "CurrentUser")
             defaults.synchronize()
             print("User encoded and synced")
+            print("")
         }
     }
     
