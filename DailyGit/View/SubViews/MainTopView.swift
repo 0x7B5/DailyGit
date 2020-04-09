@@ -79,7 +79,15 @@ public class MainTopView: UIView {
         let label = UILabel()
         label.font = UIFont.scaledFont(textStyle: .largeTitle, weight: .bold)
         label.adjustsFontForContentSizeCategory = true
-        label.text = ""
+        
+        let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
+        if name.count > 15 {
+            let nameSubString = String(name[...15])
+            label.text = nameSubString
+        } else {
+            label.text = name
+        }
+        
         label.textAlignment = .left
         label.tag = 1
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -95,7 +103,7 @@ public class MainTopView: UIView {
         label.font = UIFont.scaledFont(textStyle: .title3, weight: .light)
         label.adjustsFontForContentSizeCategory = true
         label.tag = 2
-        label.text = ""
+        label.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
         label.numberOfLines = 4
         label.textAlignment = .left
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)

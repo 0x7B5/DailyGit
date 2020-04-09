@@ -131,6 +131,13 @@ public class DateHelper {
         }
         return true
     }
+    
+    func timeElapsedInSecondsWhenRunningCode(operation: ()->()) -> Double {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        operation()
+        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+        return Double(timeElapsed)
+    }
 
 }
 

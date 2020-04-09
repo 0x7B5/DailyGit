@@ -19,7 +19,9 @@ class MainVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         mainView.checkAllignmentForTitle()
-        updateInfo()
+        if Reachability.shared.isConnectedToNetwork() {
+            updateInfo()
+        }
     }
     override func loadView() {
         self.view = mainView
@@ -62,7 +64,14 @@ class MainVC: UIViewController {
     @objc func refresh() {
         print("refresh")
         if Reachability.shared.isConnectedToNetwork() {
+//            let methodStart = Date()
+//            UserInfoHelper.shared.refreshEverything(completion: {
+//                let methodFinish = Date()
+//                let executionTime = methodFinish.timeIntervalSince(methodStart)
+//                print("Execution time: \(executionTime)")
+//            })
             updateInfo()
+            print("")
         } else {
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
