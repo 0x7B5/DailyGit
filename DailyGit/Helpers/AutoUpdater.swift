@@ -12,7 +12,7 @@ public class AutoUpdater {
     var timer: DispatchSourceTimer?
     
     func startTimer() {
-        let queue = DispatchQueue(label: "com.domain.app.timer")  // you can also use `DispatchQueue.main`, if you want
+        let queue = DispatchQueue(label: "com.DailyGit.timer")  // you can also use `DispatchQueue.main`, if you want
         timer = DispatchSource.makeTimerSource(queue: queue)
         timer!.schedule(deadline: .now(), repeating: .seconds(Constants.refreshRatePerSecond))
         timer!.setEventHandler { [weak self] in
@@ -24,6 +24,7 @@ public class AutoUpdater {
     func stopTimer() {
         timer?.cancel()
         timer = nil
+        print("Timmer Stopped")
     }
     
     deinit {

@@ -42,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if (userExist() == true) {
             //LoggedIn
+            UserInfoHelper.shared.refreshEverything {
+            }
             AutoUpdater.shared.startTimer()
             
             let navigationController = UINavigationController(rootViewController: MainVC())
@@ -71,6 +73,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         AutoUpdater.shared.stopTimer()
     }
+    
+    func applicationDidFinishLaunching(_ application: UIApplication) {
+        AutoUpdater.shared.stopTimer()
+    }
+    
     
     func resetDefaults() {
         let defaults = UserDefaults.standard
