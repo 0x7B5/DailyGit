@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 enum Userinfo {
-    case user, name, username, bio, photoUrl, contributions, yearCreated, dateCreated, currentWeek, today, yesterday, longestStreak, currentStreak, updateTime, userUpdateTime
+    case user, name, username, bio, photoUrl, contributions, yearCreated, dateCreated, currentWeek, lastWeek, today, yesterday, longestStreak, currentStreak, updateTime, userUpdateTime
 }
 
 enum refreshState {
@@ -45,6 +45,8 @@ public class UserInfoHelper {
                     return loadedPerson.dateCreated
                 case .currentWeek:
                     return loadedPerson.currentWeek
+                case .lastWeek:
+                    return loadedPerson.lastWeek
                 case .today:
                     if let today = loadedPerson.contributions.contributions.last {
                         return today

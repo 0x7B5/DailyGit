@@ -10,9 +10,7 @@ import UIKit
 import SnapKit
 
 public class CommitsView: UIView {
-    // topLayout: CGFloat
     
-    #warning("Take out filler info.")
     init() {
         //  self.topLayout = topLayout
         super.init(frame: CGRect.zero)
@@ -61,7 +59,7 @@ public class CommitsView: UIView {
         var todayViewSpacingConstant = 0.98
         
         var weekLabelSpacingConstant = 15
-        var weekViewHeightConstant = 0.12
+        var weekViewHeightConstant = 0.08
         
         if Constants.screenHeight < 700 {
             spacingConstant = 10
@@ -178,25 +176,11 @@ public class CommitsView: UIView {
     
     //THIS WEEK VIEW
     lazy var weekLabel: UILabel = createTitleText(text: "This Week")
-    let weekView = WeeklySubView()
-    
-    
-//    public func setupWeekGrass() {
-//        for i in 0..<7 {
-//            weekCommitGraph.append(createGraphNodeView())
-//            addSubview(weekCommitGraph[i])
-//        }
-//    }
-    
-    internal func createGraphNodeView() -> UIView {
-        let view = UIView()
-        view.backgroundColor = UIColor(rgb: Int("ebedf0", radix: 16)!)
-        return view
-    }
+    let weekView = WeeklySubView(week: .currentWeek)
     
     // LAST WEEK VIEW
     lazy var lastWeekLabel: UILabel = createTitleText(text: "Last Week")
-    let lastWeekView = WeeklySubView()
+    let lastWeekView = WeeklySubView(week: .lastWeek)
     
     // STATISTICS
     lazy var stasticsLabel: UILabel = createTitleText(text: "Statistics")
@@ -237,34 +221,6 @@ public class CommitsView: UIView {
         label.minimumScaleFactor = 0.2
         label.textColor = Constants.subTitleColor
         return label
-    }
-    
-    func setupColorsForWeek(contributions: ContributionList) {
-        
-        for (index, element) in contributions.contributions.enumerated() {
-            let myIndex = element.color.index(element.color.startIndex, offsetBy: 1)
-            let mySubstring = element.color.suffix(from: myIndex)
-            
-            let myColor = UIColor(rgb: (Int(mySubstring, radix: 16) ?? 0))
-            
-//            weekCommitGraph[index].backgroundColor = myColor
-//            if element.date == DateHelper.shared.getFormattedDate() {
-//                weekCommitGraph[index].layer.borderWidth = 0.5
-//                weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//            }
-        }
-    }
-    
-    func checkAllignmentForTitle() {
-        if UserInfoHelper.shared.readInfo(info: .bio) as? String == "" {
-            //            nameLabel.textAlignment = .center
-            //            nameLabel.snp.makeConstraints{
-            //                $0.width.equalToSuperview().multipliedBy(0.4)
-            //                $0.centerX.equalToSuperview()
-            //                $0.height.equalToSuperview().multipliedBy(0.045)
-            //                $0.centerY.equalToSuperview().multipliedBy(0.34)
-            //            }
-        }
     }
     
     func makeStatisticsView() {

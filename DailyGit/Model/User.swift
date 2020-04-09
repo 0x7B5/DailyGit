@@ -17,6 +17,21 @@ struct User: Codable {
     var contributions: ContributionList
     var updateTime: Date
     var userUpdateTime: Date
+    var lastWeek: ContributionList {
+        get {
+            #warning("This has to be fixed")
+            var randContList = [Contribution?](repeating: nil, count: 6)
+            let offset = currentWeek.contributions.count
+            for element in contributions.contributions.reversed()[offset...] {
+                randContList.insert(element, at: element.dayOfWeek)
+                if(element.dayOfWeek == 0) {
+                    break
+                }
+            }
+            print(randContList)
+            return ContributionList(contributions: randContList.compactMap { $0 })
+        }
+    }
     
     var longestStreak: Int {
         get {

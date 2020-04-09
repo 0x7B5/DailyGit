@@ -320,6 +320,7 @@ public class GithubDataManager {
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
             refreshUserInfo(completion: {
                 if let yearCreated = UserInfoHelper.shared.readInfo(info: .yearCreated) as? Int, let username = UserInfoHelper.shared.readInfo(info: .username) as? String {
+                  
                     self.getAllContributions(startYear: yearCreated, username: username, completion: {
                         contributions in
                         
@@ -328,6 +329,7 @@ public class GithubDataManager {
                             if let myContributions = contributions {
                                 savedPerson.contributions = myContributions
                                 savedPerson.updateTime = Date()
+                                savedPerson.currentWeek = self.setupCurrentWeek(myContributions)
                                 print("Saved person updated")
                             } else {
                                 completion()

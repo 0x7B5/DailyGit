@@ -43,7 +43,7 @@ public class MainTopView: UIView {
             $0.right.equalToSuperview().inset(14)
             $0.centerY.lessThanOrEqualToSuperview().multipliedBy(0.5)
         }
-
+        
         
         nameLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.5)
@@ -55,7 +55,6 @@ public class MainTopView: UIView {
             $0.width.equalToSuperview().multipliedBy(0.6)
             $0.left.equalTo(nameLabel.snp.left).inset(3)
             $0.top.equalTo(nameLabel.snp.bottom).offset(-1)
-            //            $0.height.equalTo(profileImage.snp.height).multipliedBy(1.2)
         }
         //  bioLabel.sizeToFit()
         
@@ -110,5 +109,17 @@ public class MainTopView: UIView {
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
+    
+    func checkAllignmentForTitle() {
+        if UserInfoHelper.shared.readInfo(info: .bio) as? String == "" {
+            //            nameLabel.textAlignment = .center
+            //            nameLabel.snp.makeConstraints{
+            //                $0.width.equalToSuperview().multipliedBy(0.4)
+            //                $0.centerX.equalToSuperview()
+            //                $0.height.equalToSuperview().multipliedBy(0.045)
+            //                $0.centerY.equalToSuperview().multipliedBy(0.34)
+            //            }
+        }
+    }
     
 }

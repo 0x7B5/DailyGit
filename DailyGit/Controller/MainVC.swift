@@ -18,7 +18,7 @@ class MainVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        mainView.checkAllignmentForTitle()
+//        mainView.checkAllignmentForTitle()
     }
     override func loadView() {
         self.view = mainView
@@ -32,9 +32,12 @@ class MainVC: UIViewController {
     }
     
     func updateInfo() {
+        let methodStart = Date()
         UserInfoHelper.shared.refreshEverything(completion: {
             DispatchQueue.main.async { () -> Void in
-                print("1")
+                let methodFinish = Date()
+                let executionTime = methodFinish.timeIntervalSince(methodStart)
+              //  print("Execution time: \(executionTime)")
                 self.updateUI()
             }
         })
@@ -53,6 +56,8 @@ class MainVC: UIViewController {
         self.mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
         self.mainView.todayView.setNumberLabels()
         self.mainView.setLastUpdatedLabel()
+        self.mainView.lastWeekView.setupColorsForWeek()
+        self.mainView.weekView.setupColorsForWeek()
     }
     
     @objc func autoRefresher(notification: NSNotification) {
