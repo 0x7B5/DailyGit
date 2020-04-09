@@ -20,9 +20,6 @@ public class GithubDataManager {
     
     let defaults = UserDefaults.standard
     
-    
-    #warning("Fix this")
-    
     func isGithubUser(username: String, completion: @escaping (Bool) -> ()) {
         if let url = URL(string: "https://api.github.com/users/\(username)") {
             URLSession.shared.dataTask(with: url) { (data, response, err) in
@@ -104,7 +101,6 @@ public class GithubDataManager {
                                 }
                                 
                                 let creationYear = Int(DateHelper.shared.stringToYear(myDate: creationDate, IsoFormat: true))!
-                                #warning("Fix setup contributions")
                                 self.getAllContributions(startYear: creationYear, username: myUsername, completion: {
                                     contributions in
                                     if contributions != nil {

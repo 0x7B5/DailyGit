@@ -40,7 +40,6 @@ class OnboardingVC: UIViewController, UITextFieldDelegate {
     
     @objc func goNext() {
         UIApplication.shared.beginIgnoringInteractionEvents()
-        #warning("There's something not working here because of networking or something I think")
         if Reachability.shared.isConnectedToNetwork(){
             let loadingNotification = JGProgressHUD(style: .light)
             

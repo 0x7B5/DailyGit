@@ -44,7 +44,7 @@ public class WeeklySubView: CurvedView {
         var currentCenterXMulitplier = 0.16
         for i in 0..<7 {
             commits[i].snp.makeConstraints {
-                $0.height.equalToSuperview().multipliedBy(0.7)
+                $0.height.equalToSuperview().multipliedBy(0.73)
                 $0.width.equalTo(commits[0].snp.height)
                 $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
                 $0.centerY.equalToSuperview()

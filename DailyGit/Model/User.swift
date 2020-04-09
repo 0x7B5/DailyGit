@@ -19,7 +19,6 @@ struct User: Codable {
     var userUpdateTime: Date
     var lastWeek: ContributionList {
         get {
-            #warning("This has to be fixed")
             var randContList = [Contribution?](repeating: nil, count: 6)
             let offset = currentWeek.contributions.count
             for element in contributions.contributions.reversed()[offset...] {
@@ -28,7 +27,6 @@ struct User: Codable {
                     break
                 }
             }
-            print(randContList)
             return ContributionList(contributions: randContList.compactMap { $0 })
         }
     }
@@ -59,7 +57,6 @@ struct User: Codable {
                 date = DateHelper.shared.getYesterdayDate()
             }
             
-            
             var counter = 0
             var countingYet = false
             
@@ -87,9 +84,7 @@ struct User: Codable {
     
     
     var currentWeek: ContributionList
-    
-    #warning("We'll have to update this.")
-    
+
     init (name: String, username: String, bio: String, photoUrl: String, dateCreated: String, yearCreated: Int, contributions: ContributionList, currentWeek: ContributionList) {
         self.name = name
         self.username = username

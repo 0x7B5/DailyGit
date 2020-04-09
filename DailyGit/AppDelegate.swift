@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (userExist() == true) {
             //LoggedIn
             UserInfoHelper.shared.refreshEverything {
+                
             }
             AutoUpdater.shared.startTimer()
             

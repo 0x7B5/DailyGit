@@ -27,12 +27,13 @@ class RootSettingVC: QuickTableViewController {
         #warning("Add username to subtitle")
         tableContents = [
             Section(title: "Username", rows: [
-                
-                
                 NavigationRow(text: "Change Account", detailText: .subtitle("Current Username: \(UserInfoHelper.shared.readInfo(info: .username) as? String ?? "")"), action: { [weak self] _ in
-                    let navController = OnboardingVC()
-                    navController.modalPresentationStyle = .fullScreen
-                    self!.present(navController, animated: true, completion: nil)
+                    let nextViewController = OnboardingVC()
+//                    navController.modalPresentationStyle = .fullScreen
+//                    self!.present(navController, animated: true, completion: nil)
+                    
+//                    /let nextViewController = RootSettingVC()
+                    self?.navigationController?.pushViewController(nextViewController, animated: true)
                 })
             ]),
             

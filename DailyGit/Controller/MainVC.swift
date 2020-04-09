@@ -26,7 +26,7 @@ class MainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavController()
-        updateInfo()
+        updateUI()
         NotificationCenter.default.addObserver(self, selector: #selector(autoRefresher), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         
     }
@@ -69,7 +69,13 @@ class MainVC: UIViewController {
     func setupNavController() {
         self.title = "Contributions"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: Constants.gitGreenColor]
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refresh))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refresh))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(goToSettings))
+    }
+    
+    @objc func goToSettings() {
+        let nextViewController = RootSettingVC()
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func refresh() {

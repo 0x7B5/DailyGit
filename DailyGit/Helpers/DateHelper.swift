@@ -106,9 +106,9 @@ public class DateHelper {
         let minute = comp.minute ?? 0
         
         if calendar.isDateInToday(myDate) {
-            dayUpdated = "Today"
+            dayUpdated = "today"
         } else if calendar.isDateInYesterday(myDate) {
-            dayUpdated = "Yesterday"
+            dayUpdated = "yesterday"
         } else {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

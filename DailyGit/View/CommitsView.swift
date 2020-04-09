@@ -199,7 +199,6 @@ public class CommitsView: UIView {
     let monthlyAvgView = CurvedView()
     
     //BOTTOM VIEW
-    #warning("Remove filler info")
     let lastUpdatedLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .footnote)

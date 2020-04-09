@@ -64,12 +64,6 @@ public class OnboardingView: UIView {
         bgView2.transform = CGAffineTransform(rotationAngle: 0.331613)
         bgView3.transform = CGAffineTransform(rotationAngle: 0.331613)
         
-        
-        #warning("Fix ME")
-        //Put this in its own view for sizing purposes
-        #warning("BLURRY")
-        
-        
         githubLogoView.snp.makeConstraints{
             $0.top.equalToSuperview()
             $0.width.equalToSuperview()
