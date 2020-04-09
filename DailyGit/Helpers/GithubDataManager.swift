@@ -311,7 +311,7 @@ public class GithubDataManager {
         }
     }
     
-    
+    #warning("We can't always update userInfo, only a couple times an hour")
     func updateInfo(completion: @escaping () -> ()) {
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
             #warning("We could probably run these functions asyncrously instead but idk")
@@ -329,6 +329,7 @@ public class GithubDataManager {
                             // Should probably use setters and getters here but quick fix
                             if let myContributions = contributions {
                                 savedPerson.contributions = myContributions
+                                savedPerson.updateTime = Date()
                                 print("saved person updarted")
                             } else {
                                 completion()

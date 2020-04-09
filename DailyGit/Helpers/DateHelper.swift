@@ -86,6 +86,36 @@ public class DateHelper {
     func printTimestamp() {
         print(Date())
     }
+    
+    func getLastUpdatedText(myDate: Date) -> String {
+//        func isDateInYesterday(_ date: Date) -> Bool
+//        func isDateInToday(_ date: Date) -> Bool
+        var dayUpdated = ""
+        
+        let calendar = Calendar.current
+        let comp = calendar.dateComponents([.day, .weekday, .hour, .minute], from: myDate)
+        let hour = String((comp.hour ?? 0) % 12)
+        let minute = String(comp.minute ?? 0)
+        print(myDate)
+        
+        if calendar.isDateInToday(myDate) {
+            dayUpdated = "Today"
+        } else if calendar.isDateInYesterday(myDate) {
+            dayUpdated = "Yesterday"
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let myString = formatter.string(from: myDate)
+            let yourDate = formatter.date(from: myString)
+            formatter.dateFormat = "dd-MMM"
+            dayUpdated = formatter.string(from: yourDate!)
+        }
+        
+        let timeUpdated = hour + ":" + minute
+        
+        return "Last updated " + dayUpdated + " at " + timeUpdated
+    }
+
 }
 
 extension Date {

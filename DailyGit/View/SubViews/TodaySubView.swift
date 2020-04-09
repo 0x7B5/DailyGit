@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import SnapKit
-
+    
 public class TodaySubView: CurvedView {
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -156,7 +156,6 @@ public class TodaySubView: CurvedView {
     func setNumberLabels() {
         if let todayContribution = UserInfoHelper.shared.readInfo(info: .today) as? Contribution {
             todayCommits.text = String(todayContribution.count)
-            print("todayCommits change \(todayContribution.count)")
             todayCommits.textColor = todayContribution.color.getColor()
         }
         

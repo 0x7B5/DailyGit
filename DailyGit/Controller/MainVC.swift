@@ -45,8 +45,8 @@ class MainVC: UIViewController {
                 
                 self.mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
                 self.mainView.todayView.setNumberLabels()
+                self.mainView.setLastUpdatedLabel()
             }
-            
         })
         
     }

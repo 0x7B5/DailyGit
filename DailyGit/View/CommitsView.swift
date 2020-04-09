@@ -56,6 +56,7 @@ public class CommitsView: UIView {
     
     
     public func createConstraints() {
+        setLastUpdatedLabel()
         var spacingConstant = 20
         var todayViewSpacingConstant = 0.98
         
@@ -178,16 +179,15 @@ public class CommitsView: UIView {
     
     //THIS WEEK VIEW
     lazy var weekLabel: UILabel = createTitleText(text: "This Week")
-    let weekView = CurvedView()
+    let weekView = WeeklySubView()
     
-    var weekCommitGraph = [UIView]()
     
-    public func setupWeekGrass() {
-        for i in 0..<7 {
-            weekCommitGraph.append(createGraphNodeView())
-            addSubview(weekCommitGraph[i])
-        }
-    }
+//    public func setupWeekGrass() {
+//        for i in 0..<7 {
+//            weekCommitGraph.append(createGraphNodeView())
+//            addSubview(weekCommitGraph[i])
+//        }
+//    }
     
     internal func createGraphNodeView() -> UIView {
         let view = UIView()
@@ -197,7 +197,7 @@ public class CommitsView: UIView {
     
     // LAST WEEK VIEW
     lazy var lastWeekLabel: UILabel = createTitleText(text: "Last Week")
-    let lastWeekView = CurvedView()
+    let lastWeekView = WeeklySubView()
     
     // STATISTICS
     lazy var stasticsLabel: UILabel = createTitleText(text: "Statistics")
@@ -214,8 +214,6 @@ public class CommitsView: UIView {
     
     // MONTHLY AVERAGE
     let monthlyAvgView = CurvedView()
-    
-    
     
     //BOTTOM VIEW
     #warning("Remove filler info")
@@ -250,11 +248,11 @@ public class CommitsView: UIView {
             
             let myColor = UIColor(rgb: (Int(mySubstring, radix: 16) ?? 0))
             
-            weekCommitGraph[index].backgroundColor = myColor
-            if element.date == DateHelper.shared.getFormattedDate() {
-                weekCommitGraph[index].layer.borderWidth = 0.5
-                weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            }
+//            weekCommitGraph[index].backgroundColor = myColor
+//            if element.date == DateHelper.shared.getFormattedDate() {
+//                weekCommitGraph[index].layer.borderWidth = 0.5
+//                weekCommitGraph[index].layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//            }
         }
     }
     
@@ -287,4 +285,11 @@ public class CommitsView: UIView {
             }
         }
     }
+    
+    func setLastUpdatedLabel() {
+        if let lastUpdated = UserInfoHelper.shared.readInfo(info: .updateTime) as? Date {
+            lastUpdatedLabel.text = DateHelper.shared.getLastUpdatedText(myDate: lastUpdated)
+        }
+    }
+    
 }
