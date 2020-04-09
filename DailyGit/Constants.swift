@@ -40,7 +40,7 @@ public struct Constants {
         }
     }
     
-    static var refreshRatePerSecond = 1
+    static var refreshRatePerSecond = 15
     
 
     

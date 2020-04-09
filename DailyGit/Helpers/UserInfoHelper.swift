@@ -80,9 +80,10 @@ public class UserInfoHelper {
                     completion()
                 })
             }
+        } else {
+            currentState = .goodToRefresh
+            completion()
         }
-        currentState = .goodToRefresh
-        completion()
     }
     
     func resetDefaults() {

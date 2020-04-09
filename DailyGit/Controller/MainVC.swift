@@ -34,6 +34,7 @@ class MainVC: UIViewController {
     func updateInfo() {
         UserInfoHelper.shared.refreshEverything(completion: {
             DispatchQueue.main.async { () -> Void in
+                print("1")
                 self.updateUI()
             }
         })

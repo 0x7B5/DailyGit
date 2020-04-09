@@ -148,6 +148,8 @@ public class GithubDataManager {
                     completion(nil)
                 }
             }.resume()
+        } else {
+            completion(nil)
         }
     }
     
@@ -226,10 +228,10 @@ public class GithubDataManager {
                                     completion()
                                 }
                                 
-                
+                                
                                 //let name = json["name"] as? String,
                                 if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String, let creationDate = json["created_at"] as? String, let bio = json["bio"] as? String, let name = json["name"] as? String{
-                            
+                                    
                                     var photoChanged = false
                                     
                                     if var savedPerson = UserInfoHelper.shared.readInfo(info: .user) as? User {
@@ -263,17 +265,24 @@ public class GithubDataManager {
                                             
                                             self.saveImage(imageName: "ProfilePic", image: myImage)
                                             print("finished image")
+                                            completion()
                                         }
+                                    } else {
+                                        completion()
                                     }
-                                    completion()
+
                                 } else {
                                     completion()
                                 }
+                            } else {
+                                completion()
                             }
                         } catch _ {
                             completion()
                         }
                     }.resume()
+                } else {
+                    completion()
                 }
             }
         } else {
@@ -325,11 +334,14 @@ public class GithubDataManager {
                             }
                             
                             UserInfoHelper.shared.updateUserInDefaults(userToEncode: savedPerson)
+                            completion()
+                        } else {
+                            completion()
                         }
-                        completion()
                     })
+                } else {
+                    completion()
                 }
-                completion()
             })
             
         } else {
