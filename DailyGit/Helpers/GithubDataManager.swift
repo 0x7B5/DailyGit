@@ -139,7 +139,6 @@ public class GithubDataManager {
     
     func getAllContributions(startYear: Int, username: String, completion: @escaping (ContributionList?) -> ())  {
         //let myGroup = DispatchGroup()
-        print(DateHelper.shared.getFormattedDate())
         if let url = URL(string: "https://vlad-munteanu.appspot.com/contributions/\(username)/\(startYear)/\(DateHelper.shared.getFormattedDate())") {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
@@ -207,81 +206,78 @@ public class GithubDataManager {
     }
     
     func refreshUserInfo(completion: @escaping () -> ()) {
-        if let username = UserInfoHelper.shared.readInfo(info: .username) {
-            if let url = URL(string: "https://api.github.com/users/\(username)") {
-                URLSession.shared.dataTask(with: url) { (data, response, err) in
-                    if err != nil {
-                        print(err ?? "")
-                        completion()
-                    }
-                    
-                    guard let data = data else { return }
-                    
-                    do {
-                        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                            if (json["message"] as? String == "Not Found") {
-                                completion()
-                            }
-                            
-                            if (json["avatar-url"] as? String == "Not Found") {
-                                completion()
-                            }
-                            
-                            var bio = ""
-                            var name = ""
-                            
-                            if let temp = json["bio"] as? String {
-                                bio = temp
-                            }
-                            
-                            //let name = json["name"] as? String,
-                            if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String, let creationDate = json["created_at"] as? String{
-                                
-                                var photoChanged = false
-                                
-                                if var savedPerson = self.defaults.object(forKey: "CurrentUser") as? User {
-                                    // Should probably use setters and getters here but quick fix
-                                    savedPerson.name = name
-                                    savedPerson.username = myUsername
-                                    savedPerson.bio = bio
-                                    
-                                    if (photourl != savedPerson.photoUrl) {
-                                        savedPerson.photoUrl = photourl
-                                        photoChanged = true
-                                    }
-                                    
-                                    savedPerson.dateCreated = creationDate
-                                    UserInfoHelper.shared.updateUserInDefaults(userToEncode: savedPerson)
-                                    
-                                    
-                                } else {
+        if DateHelper.shared.canRefreshUserInfo() {
+            if let username = UserInfoHelper.shared.readInfo(info: .username) {
+                if let url = URL(string: "https://api.github.com/users/\(username)") {
+                    URLSession.shared.dataTask(with: url) { (data, response, err) in
+                        if err != nil {
+                            print(err ?? "")
+                            completion()
+                        }
+                        
+                        guard let data = data else { return }
+                        
+                        do {
+                            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                                if (json["message"] as? String == "Not Found") {
+                                    completion()
+                                }
+                                if (json["avatar-url"] as? String == "Not Found") {
                                     completion()
                                 }
                                 
-                                if photoChanged {
-                                    self.getData(from: URL(string: photourl)!) { data, response, error in
-                                        guard let data = data, error == nil else { return }
-                                        print("Download Finished")
+                
+                                //let name = json["name"] as? String,
+                                if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String, let creationDate = json["created_at"] as? String, let bio = json["bio"] as? String, let name = json["name"] as? String{
+                            
+                                    var photoChanged = false
+                                    
+                                    if var savedPerson = UserInfoHelper.shared.readInfo(info: .user) as? User {
                                         
-                                        let myImage = UIImage(data: data)!
+                                        // Should probably use setters and getters here but quick fix
+                                        savedPerson.name = name
+                                        savedPerson.username = myUsername
+                                        savedPerson.bio = bio
                                         
-                                        self.saveImage(imageName: "ProfilePic", image: myImage)
-                                        print("finished image")
+                                        if (photourl != savedPerson.photoUrl) {
+                                            savedPerson.photoUrl = photourl
+                                            photoChanged = true
+                                        }
                                         
-                                        if let tempName = json["name"] as? String {
-                                            name = tempName
-                                        } else {
-                                            name = myUsername
+                                        savedPerson.dateCreated = creationDate
+                                        print("Updating time")
+                                        savedPerson.userUpdateTime = Date()
+                                        UserInfoHelper.shared.updateUserInDefaults(userToEncode: savedPerson)
+                                        
+                                        
+                                    } else {
+                                        completion()
+                                    }
+                                    
+                                    if photoChanged {
+                                        self.getData(from: URL(string: photourl)!) { data, response, error in
+                                            guard let data = data, error == nil else { return }
+                                            print("Download Finished")
+                                            
+                                            let myImage = UIImage(data: data)!
+                                            
+                                            self.saveImage(imageName: "ProfilePic", image: myImage)
+                                            print("finished image")
                                         }
                                     }
+                                    completion()
+                                } else {
+                                    completion()
                                 }
                             }
+                        } catch _ {
+                            completion()
                         }
-                    } catch _ {
-                        completion()
-                    }
-                }.resume()
+                    }.resume()
+                }
             }
+        } else {
+            completion()
         }
     }
     
@@ -311,30 +307,22 @@ public class GithubDataManager {
         }
     }
     
-    #warning("We can't always update userInfo, only a couple times an hour")
     func updateInfo(completion: @escaping () -> ()) {
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
-            #warning("We could probably run these functions asyncrously instead but idk")
             refreshUserInfo(completion: {
-                
                 if let yearCreated = UserInfoHelper.shared.readInfo(info: .yearCreated) as? Int, let username = UserInfoHelper.shared.readInfo(info: .username) as? String {
                     self.getAllContributions(startYear: yearCreated, username: username, completion: {
                         contributions in
-                        print("We here here")
-                        //print(contributions)
-                        #warning("This is giving us a lot of crashes idk why")
-                        print(contributions!.contributions.last ?? " ")
                         
                         if var savedPerson = UserInfoHelper.shared.readInfo(info: .user) as? User {
                             // Should probably use setters and getters here but quick fix
                             if let myContributions = contributions {
                                 savedPerson.contributions = myContributions
                                 savedPerson.updateTime = Date()
-                                print("saved person updarted")
+                                print("Saved person updated")
                             } else {
                                 completion()
                             }
-                            
                             
                             UserInfoHelper.shared.updateUserInDefaults(userToEncode: savedPerson)
                         }

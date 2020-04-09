@@ -88,15 +88,20 @@ public class DateHelper {
     }
     
     func getLastUpdatedText(myDate: Date) -> String {
-//        func isDateInYesterday(_ date: Date) -> Bool
-//        func isDateInToday(_ date: Date) -> Bool
         var dayUpdated = ""
-        
+        var timeOfDay = "AM"
         let calendar = Calendar.current
         let comp = calendar.dateComponents([.day, .weekday, .hour, .minute], from: myDate)
-        let hour = String((comp.hour ?? 0) % 12)
-        let minute = String(comp.minute ?? 0)
-        print(myDate)
+        var hour = comp.hour ?? 0
+        
+        if hour >= 12 {
+            timeOfDay = "PM"
+        }
+        
+        if hour != 12 {
+            hour = hour % 12
+        }
+        let minute = comp.minute ?? 0
         
         if calendar.isDateInToday(myDate) {
             dayUpdated = "Today"
@@ -111,9 +116,20 @@ public class DateHelper {
             dayUpdated = formatter.string(from: yourDate!)
         }
         
-        let timeUpdated = hour + ":" + minute
+        let timeUpdated = String(format: "%02d:%02d", hour, minute)
         
-        return "Last updated " + dayUpdated + " at " + timeUpdated
+        return "Last updated " + dayUpdated + " at " + timeUpdated + " " + timeOfDay
+    }
+    
+    func canRefreshUserInfo() -> Bool {
+        if let lastUpdated = UserInfoHelper.shared.readInfo(info: .userUpdateTime) as? Date {
+            let rn = Date()
+            let minutes = rn.minutes(from: lastUpdated)
+            if minutes < 2 {
+                return false
+            }
+        }
+        return true
     }
 
 }
@@ -138,4 +154,45 @@ extension Date {
     }
 }
 
+extension Date {
+    /// Returns the amount of years from another date
+    func years(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
+    }
+    /// Returns the amount of months from another date
+    func months(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.month], from: date, to: self).month ?? 0
+    }
+    /// Returns the amount of weeks from another date
+    func weeks(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.weekOfMonth], from: date, to: self).weekOfMonth ?? 0
+    }
+    /// Returns the amount of days from another date
+    func days(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
+    }
+    /// Returns the amount of hours from another date
+    func hours(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.hour], from: date, to: self).hour ?? 0
+    }
+    /// Returns the amount of minutes from another date
+    func minutes(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.minute], from: date, to: self).minute ?? 0
+    }
+    /// Returns the amount of seconds from another date
+    func seconds(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.second], from: date, to: self).second ?? 0
+    }
+    /// Returns the a custom time interval description from another date
+    func offset(from date: Date) -> String {
+        if years(from: date)   > 0 { return "\(years(from: date))y"   }
+        if months(from: date)  > 0 { return "\(months(from: date))M"  }
+        if weeks(from: date)   > 0 { return "\(weeks(from: date))w"   }
+        if days(from: date)    > 0 { return "\(days(from: date))d"    }
+        if hours(from: date)   > 0 { return "\(hours(from: date))h"   }
+        if minutes(from: date) > 0 { return "\(minutes(from: date))m" }
+        if seconds(from: date) > 0 { return "\(seconds(from: date))s" }
+        return ""
+    }
+}
 

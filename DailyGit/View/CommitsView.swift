@@ -63,7 +63,6 @@ public class CommitsView: UIView {
         var weekLabelSpacingConstant = 15
         var weekViewHeightConstant = 0.12
         
-        print(Constants.screenHeight)
         if Constants.screenHeight < 700 {
             spacingConstant = 10
             todayViewSpacingConstant = 0.9

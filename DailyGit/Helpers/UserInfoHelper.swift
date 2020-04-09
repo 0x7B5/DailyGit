@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 enum Userinfo {
-    case user, name, username, bio, photoUrl, contributions, yearCreated, dateCreated, currentWeek, today, yesterday, longestStreak, currentStreak, updateTime
+    case user, name, username, bio, photoUrl, contributions, yearCreated, dateCreated, currentWeek, today, yesterday, longestStreak, currentStreak, updateTime, userUpdateTime
 }
 
 public class UserInfoHelper {
@@ -57,6 +57,8 @@ public class UserInfoHelper {
                     return loadedPerson.currentStreak
                 case .updateTime:
                     return loadedPerson.updateTime
+                case .userUpdateTime:
+                    return loadedPerson.userUpdateTime
                 }
             }
         }

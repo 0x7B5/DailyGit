@@ -16,6 +16,7 @@ struct User: Codable {
     var photoUrl: String
     var contributions: ContributionList
     var updateTime: Date
+    var userUpdateTime: Date
     
     var longestStreak: Int {
         get {
@@ -84,6 +85,7 @@ struct User: Codable {
         self.yearCreated = yearCreated
         self.currentWeek = currentWeek
         self.updateTime = Date()
+        self.userUpdateTime = Date()
     }
     
 }
