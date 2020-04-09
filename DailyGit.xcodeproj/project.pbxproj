@@ -37,6 +37,7 @@
 		CC84117E23B47B9500B655A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC84117D23B47B9500B655A6 /* Assets.xcassets */; };
 		CC84118323B47B9500B655A6 /* WatchDailyGit.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CC84116423B47B9000B655A6 /* WatchDailyGit.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CC9E1DD4242E352D00E7E283 /* Textfield+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E1DD3242E352D00E7E283 /* Textfield+Extensions.swift */; };
+		CCAE52A9243EB1EC009DA4F7 /* AutoUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAE52A8243EB1EC009DA4F7 /* AutoUpdater.swift */; };
 		CCB5242A2317237F004FF84B /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB524292317237F004FF84B /* DateHelper.swift */; };
 		CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81C230B15CB0051C151 /* Contribution.swift */; };
 		CCC3A81F230B16FC0051C151 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81E230B16FC0051C151 /* User.swift */; };
@@ -151,6 +152,7 @@
 		CC84117F23B47B9500B655A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC84118023B47B9500B655A6 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		CC9E1DD3242E352D00E7E283 /* Textfield+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Textfield+Extensions.swift"; sourceTree = "<group>"; };
+		CCAE52A8243EB1EC009DA4F7 /* AutoUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoUpdater.swift; sourceTree = "<group>"; };
 		CCB524292317237F004FF84B /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		CCC3A81B2308C2790051C151 /* DailyGit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyGit.entitlements; sourceTree = "<group>"; };
 		CCC3A81C230B15CB0051C151 /* Contribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contribution.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				CCC3A820230B42050051C151 /* UserInfoHelper.swift */,
 				CCC3A823230B483F0051C151 /* Reachability.swift */,
 				CCB524292317237F004FF84B /* DateHelper.swift */,
+				CCAE52A8243EB1EC009DA4F7 /* AutoUpdater.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				CC7DF5852435B42600D24326 /* CurvedView.swift in Sources */,
 				CCD5132E23158FE700B000AA /* String+Extensions.swift in Sources */,
 				CCC3A821230B42050051C151 /* UserInfoHelper.swift in Sources */,
+				CCAE52A9243EB1EC009DA4F7 /* AutoUpdater.swift in Sources */,
 				CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */,
 				CC5C43D52433E2D300446308 /* UIFont+UILabel+Extensions.swift in Sources */,
 				CCB5242A2317237F004FF84B /* DateHelper.swift in Sources */,

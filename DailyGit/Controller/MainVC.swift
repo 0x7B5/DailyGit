@@ -19,9 +19,6 @@ class MainVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         mainView.checkAllignmentForTitle()
-        if Reachability.shared.isConnectedToNetwork() {
-            updateInfo()
-        }
     }
     override func loadView() {
         self.view = mainView
@@ -29,14 +26,15 @@ class MainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavController()
-        if Constants.isIpad == true {
-            print("iPad")
-        }
+        updateInfo()
+        NotificationCenter.default.addObserver(self, selector: #selector(autoRefresher), name: NSNotification.Name(rawValue: "refresh"), object: nil)
+        
     }
     
     func updateInfo() {
         UserInfoHelper.shared.refreshEverything(completion: {
             DispatchQueue.main.async { () -> Void in
+                print("Updated UI")
                 let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
                 if name.count > 15 {
                     let nameSubString = String(name[...15])
@@ -51,6 +49,10 @@ class MainVC: UIViewController {
             }
         })
         
+    }
+    
+    @objc func autoRefresher(notification: NSNotification) {
+        updateInfo()
     }
     
     

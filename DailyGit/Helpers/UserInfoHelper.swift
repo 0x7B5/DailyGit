@@ -67,9 +67,12 @@ public class UserInfoHelper {
     
     
     func refreshEverything(completion: @escaping () -> ()) {
-        GithubDataManager.shared.updateInfo(completion: {
-            completion()
-        })
+        if Reachability.shared.isConnectedToNetwork() {
+            GithubDataManager.shared.updateInfo(completion: {
+                completion()
+            })
+        }
+        completion()
     }
     
     func resetDefaults() {

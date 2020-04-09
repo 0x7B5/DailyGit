@@ -98,8 +98,10 @@ public class DateHelper {
             timeOfDay = "PM"
         }
         
-        if hour != 12 {
+        if hour != 12 && hour != 0 {
             hour = hour % 12
+        } else if hour == 0 {
+            hour = 12
         }
         let minute = comp.minute ?? 0
         

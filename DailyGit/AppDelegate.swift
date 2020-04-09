@@ -22,26 +22,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         //resetDefaults()
-       
+        
         UINavigationBar.appearance().barTintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         UINavigationBar.appearance().isTranslucent = false
         
         #warning("Remove in Productions")
         do {
-           try FileManager.default.removeItem(atPath: NSHomeDirectory()+"/Library/SplashBoard")
+            try FileManager.default.removeItem(atPath: NSHomeDirectory()+"/Library/SplashBoard")
         } catch {
-           print("Failed to delete launch screen cache: \(error)")
+            print("Failed to delete launch screen cache: \(error)")
         }
         
         UITabBar.appearance().tintColor = Constants.gitGreenColor
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-    
+        
         initializeOneSignal(launchOptions)
         setupNotifications()
         
         if (userExist() == true) {
             //LoggedIn
+            AutoUpdater.shared.startTimer()
+            
             let navigationController = UINavigationController(rootViewController: MainVC())
             self.window?.rootViewController = navigationController
         } else {
@@ -66,6 +68,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func applicationWillTerminate(_ application: UIApplication) {
+        //AutoUpdater.shared.stopTimer()()
+    }
+    
     func resetDefaults() {
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
@@ -81,19 +87,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func initializeOneSignal(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         //START OneSignal initialization code
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
-
+        
         // Replace 'YOUR_APP_ID' with your OneSignal App ID.
         OneSignal.initWithLaunchOptions(launchOptions,
-        appId: "ef557b26-24b4-4e80-b7b3-e27fa31f4d97",
-        handleNotificationAction: nil,
-        settings: onesignalInitSettings)
-
+                                        appId: "ef557b26-24b4-4e80-b7b3-e27fa31f4d97",
+                                        handleNotificationAction: nil,
+                                        settings: onesignalInitSettings)
+        
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
-
+        
         // Recommend moving the below line to prompt for push after informing the user about
         //   how your app will use them.
         OneSignal.promptForPushNotifications(userResponse: { accepted in
-        print("User accepted notifications: \(accepted)")
+            print("User accepted notifications: \(accepted)")
         })
         //END OneSignal initializataion code
     }
@@ -112,14 +118,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         print("Background")
         print(response.notification.request.content.userInfo)
     }
-
+    
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("Foreground")
         print(notification.request.content.userInfo)
     }
     
-   
+    
 }
 
 extension UserDefaults {
