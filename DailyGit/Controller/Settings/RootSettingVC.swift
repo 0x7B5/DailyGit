@@ -39,8 +39,17 @@ class RootSettingVC: QuickTableViewController {
             
             
             Section(title: "Notifications", rows: [
-                SwitchRow(text: "Profane Notifications", switchValue: true, action: { [weak self] _ in
+                SwitchRow(text: "Profane Notifications", switchValue: Constants.profaneNotications, action: { [weak self] _ in
                     self?.changeNotificationsToProfane()
+                }),
+                SwitchRow(text: "Auto Refresh", switchValue: Constants.timerStatus, action: { [weak self] _ in
+                    #warning("Take out in production")
+                    if Constants.timerStatus {
+                        AutoUpdater.shared.stopTimer()
+                    } else {
+                        AutoUpdater.shared.startTimer()
+                    }
+                    
                 }),
             ]),
             

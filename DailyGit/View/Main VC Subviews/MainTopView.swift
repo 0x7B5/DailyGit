@@ -65,8 +65,12 @@ public class MainTopView: UIView {
         view.contentMode = .scaleAspectFit
         //Provide default image
         // view.image = #imageLiteral(resourceName: "sampleIcon")
-        let image = UserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic")!
-        view.image = image
+        if let image = UserInfoHelper.shared.loadImageFromDiskWith(fileName: "ProfilePic") {
+            view.image = image
+        } else {
+            view.image = #imageLiteral(resourceName: "blankProfilePic")
+        }
+        
         view.layer.masksToBounds = false
         view.clipsToBounds = false
         view.tag = 0

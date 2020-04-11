@@ -83,15 +83,20 @@ public class GithubDataManager {
                         }
                         
                         //let name = json["name"] as? String,
-                        if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String, let creationDate = json["created_at"] as? String{
+                        if let myUsername = json["login"] as? String, let photourl = json["avatar_url"] as? String, let creationDate = json["created_at"] as? String, let myUrl = URL(string: photourl) {
                             print("Set up username")
-                            self.getData(from: URL(string: photourl)!) { data, response, error in
+                            self.getData(from: myUrl) { data, response, error in
                                 guard let data = data, error == nil else { return }
                                 print("Download Finished")
                                 
-                                let myImage = UIImage(data: data)!
                                 
-                                self.saveImage(imageName: "ProfilePic", image: myImage)
+                                
+                                if let myImage = UIImage(data: data) {
+                                    self.saveImage(imageName: "ProfilePic", image: myImage)
+                                } else {
+                                    self.saveImage(imageName: "ProfilePic", image: #imageLiteral(resourceName: "blankProfilePic"))
+                                }
+                                
                                 print("finished image")
                                 
                                 if let tempName = json["name"] as? String {
@@ -266,7 +271,7 @@ public class GithubDataManager {
                                     } else {
                                         completion()
                                     }
-
+                                    
                                 } else {
                                     completion()
                                 }
@@ -316,7 +321,7 @@ public class GithubDataManager {
         if(UserDefaults.standard.object(forKey: "CurrentUser") != nil) {
             refreshUserInfo(completion: {
                 if let yearCreated = UserInfoHelper.shared.readInfo(info: .yearCreated) as? Int, let username = UserInfoHelper.shared.readInfo(info: .username) as? String {
-                  
+                    
                     self.getAllContributions(startYear: yearCreated, username: username, completion: {
                         contributions in
                         

@@ -40,10 +40,15 @@ public struct Constants {
         }
     }
     
-    static var refreshRatePerSecond = 15
+    static var refreshRatePerSecond = 10
     
-
-    
-    
+    static var timerStatus: Bool {
+        get {
+            if AutoUpdater.shared.timer == nil {
+                return false
+            }
+            return true
+        }
+    }
 }
 

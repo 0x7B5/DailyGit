@@ -38,6 +38,7 @@
 		CC84118323B47B9500B655A6 /* WatchDailyGit.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CC84116423B47B9000B655A6 /* WatchDailyGit.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CC9E1DD4242E352D00E7E283 /* Textfield+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E1DD3242E352D00E7E283 /* Textfield+Extensions.swift */; };
 		CCAE52A9243EB1EC009DA4F7 /* AutoUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAE52A8243EB1EC009DA4F7 /* AutoUpdater.swift */; };
+		CCAE52AC243FDF1B009DA4F7 /* ContributionInsightVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAE52AB243FDF1B009DA4F7 /* ContributionInsightVC.swift */; };
 		CCB5242A2317237F004FF84B /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB524292317237F004FF84B /* DateHelper.swift */; };
 		CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81C230B15CB0051C151 /* Contribution.swift */; };
 		CCC3A81F230B16FC0051C151 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81E230B16FC0051C151 /* User.swift */; };
@@ -153,6 +154,7 @@
 		CC84118023B47B9500B655A6 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		CC9E1DD3242E352D00E7E283 /* Textfield+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Textfield+Extensions.swift"; sourceTree = "<group>"; };
 		CCAE52A8243EB1EC009DA4F7 /* AutoUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoUpdater.swift; sourceTree = "<group>"; };
+		CCAE52AB243FDF1B009DA4F7 /* ContributionInsightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionInsightVC.swift; sourceTree = "<group>"; };
 		CCB524292317237F004FF84B /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		CCC3A81B2308C2790051C151 /* DailyGit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyGit.entitlements; sourceTree = "<group>"; };
 		CCC3A81C230B15CB0051C151 /* Contribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contribution.swift; sourceTree = "<group>"; };
@@ -270,7 +272,7 @@
 		B87EA66622234EA400CE8114 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B8B41CE222286E45005E304A /* SubViews */,
+				B8B41CE222286E45005E304A /* Main VC Subviews */,
 				B8B41CE022283A34005E304A /* CommitsView.swift */,
 				CCF2E97123011F3500F4E118 /* OnboardingView.swift */,
 				CC7DF5842435B42600D24326 /* CurvedView.swift */,
@@ -290,6 +292,7 @@
 		B87EA66822234EB100CE8114 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CCAE52AA243FDD01009DA4F7 /* Extra VCs */,
 				CCF2E96D2300D5B900F4E118 /* Onboarding */,
 				B8B41CE92228737B005E304A /* MainVC.swift */,
 				CCF2E96A22FFD2F100F4E118 /* Settings */,
@@ -297,7 +300,7 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		B8B41CE222286E45005E304A /* SubViews */ = {
+		B8B41CE222286E45005E304A /* Main VC Subviews */ = {
 			isa = PBXGroup;
 			children = (
 				B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */,
@@ -305,7 +308,7 @@
 				CC84050F2436BF0600BDB9E1 /* WeeklySubView.swift */,
 				CC40FDEB2436C0D50014F43B /* MainTopView.swift */,
 			);
-			path = SubViews;
+			path = "Main VC Subviews";
 			sourceTree = "<group>";
 		};
 		CC17DBAB22FF6F6500E34951 /* Supporting Files */ = {
@@ -339,6 +342,14 @@
 				CC84118023B47B9500B655A6 /* PushNotificationPayload.apns */,
 			);
 			path = "WatchDailyGit Extension";
+			sourceTree = "<group>";
+		};
+		CCAE52AA243FDD01009DA4F7 /* Extra VCs */ = {
+			isa = PBXGroup;
+			children = (
+				CCAE52AB243FDF1B009DA4F7 /* ContributionInsightVC.swift */,
+			);
+			path = "Extra VCs";
 			sourceTree = "<group>";
 		};
 		CCC3A822230B480B0051C151 /* Helpers */ = {
@@ -650,6 +661,7 @@
 				B8B41CE422286E6E005E304A /* ContributionsGraphView.swift in Sources */,
 				B87EA6532221EDC000CE8114 /* AppDelegate.swift in Sources */,
 				B87EA6652221EE0300CE8114 /* Constants.swift in Sources */,
+				CCAE52AC243FDF1B009DA4F7 /* ContributionInsightVC.swift in Sources */,
 				B8B41CEC22287388005E304A /* RootSettingVC.swift in Sources */,
 				CC5C43D72433FB4A00446308 /* UIDevice+Extensions.swift in Sources */,
 			);

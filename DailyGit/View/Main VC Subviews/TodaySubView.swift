@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import SnapKit
-    
+
 public class TodaySubView: CurvedView {
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,7 +55,7 @@ public class TodaySubView: CurvedView {
             $0.width.equalToSuperview().multipliedBy(0.33333)
             $0.left.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.6)
-             $0.centerY.equalToSuperview().multipliedBy(0.8)
+            $0.centerY.equalToSuperview().multipliedBy(0.8)
         }
         
         yesterdayLabel.snp.makeConstraints{
@@ -75,7 +75,7 @@ public class TodaySubView: CurvedView {
             $0.width.equalToSuperview().multipliedBy(0.33333)
             $0.left.equalTo(firstDivider.snp.right)
             $0.height.equalTo(yesterdayCommits.snp.height)
-             $0.centerY.equalToSuperview().multipliedBy(0.8)
+            $0.centerY.equalToSuperview().multipliedBy(0.8)
         }
         todayLabel.snp.makeConstraints{
             $0.width.equalTo(todayCommits.snp.width)
@@ -148,7 +148,7 @@ public class TodaySubView: CurvedView {
         label.text = text
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
-       // label.textColor = Constants.subTitleColor
+        // label.textColor = Constants.subTitleColor
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return label
     }
@@ -170,7 +170,7 @@ public class TodaySubView: CurvedView {
         }
         
     }
-
+    
     
     func createDivider() -> UIView {
         let view = UIView()

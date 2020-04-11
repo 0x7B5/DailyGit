@@ -53,30 +53,36 @@ struct User: Codable {
         get {
             var date = DateHelper.shared.getFormattedDate()
             
-            if contributions.contributions.last!.count == 0 {
-                date = DateHelper.shared.getYesterdayDate()
-            }
-            
-            var counter = 0
-            var countingYet = false
-            
-            for i in contributions.contributions.reversed() {
-                if countingYet {
-                    if i.count > 0 {
-                        counter += 1
-                    } else {
-                        break
-                    }
+            if let myLast = contributions.contributions.last {
+                if myLast.count == 0 {
+                    date = DateHelper.shared.getYesterdayDate()
                 }
                 
-                if i.date == date {
-                    countingYet = true
-                    if i.count > 0 {
-                        counter += 1
+                var counter = 0
+                var countingYet = false
+                
+                for i in contributions.contributions.reversed() {
+                    if countingYet {
+                        if i.count > 0 {
+                            counter += 1
+                        } else {
+                            break
+                        }
+                    }
+                    
+                    if i.date == date {
+                        countingYet = true
+                        if i.count > 0 {
+                            counter += 1
+                        }
                     }
                 }
+                return counter
+            } else {
+                return 0
             }
-            return counter
+            
+            
         }
     }
     var dateCreated: String
@@ -84,7 +90,7 @@ struct User: Codable {
     
     
     var currentWeek: ContributionList
-
+    
     init (name: String, username: String, bio: String, photoUrl: String, dateCreated: String, yearCreated: Int, contributions: ContributionList, currentWeek: ContributionList) {
         self.name = name
         self.username = username
