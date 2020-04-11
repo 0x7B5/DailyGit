@@ -18,6 +18,9 @@
 		B8B41CEC22287388005E304A /* RootSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CEB22287388005E304A /* RootSettingVC.swift */; };
 		CC17DBAD22FF9D1500E34951 /* GithubDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */; };
 		CC40FDEC2436C0D50014F43B /* MainTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC40FDEB2436C0D50014F43B /* MainTopView.swift */; };
+		CC428C0B2441492800517EA8 /* StatisticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0A2441492800517EA8 /* StatisticsHelper.swift */; };
+		CC428C0D2441739500517EA8 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0C2441739500517EA8 /* Double+Extensions.swift */; };
+		CC428C0F2441867700517EA8 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0E2441867700517EA8 /* StatisticsView.swift */; };
 		CC5C43D52433E2D300446308 /* UIFont+UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D42433E2D300446308 /* UIFont+UILabel+Extensions.swift */; };
 		CC5C43D72433FB4A00446308 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D62433FB4A00446308 /* UIDevice+Extensions.swift */; };
 		CC5C43D92434102B00446308 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D82434102B00446308 /* UIButton+Extensions.swift */; };
@@ -130,6 +133,9 @@
 		B8B41CEB22287388005E304A /* RootSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSettingVC.swift; sourceTree = "<group>"; };
 		CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDataManager.swift; sourceTree = "<group>"; };
 		CC40FDEB2436C0D50014F43B /* MainTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTopView.swift; sourceTree = "<group>"; };
+		CC428C0A2441492800517EA8 /* StatisticsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsHelper.swift; sourceTree = "<group>"; };
+		CC428C0C2441739500517EA8 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		CC428C0E2441867700517EA8 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		CC47B82A2408501300C4B312 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CC5C43D42433E2D300446308 /* UIFont+UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		CC5C43D62433FB4A00446308 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
@@ -307,6 +313,7 @@
 				CC84050D2436BEFB00BDB9E1 /* TodaySubView.swift */,
 				CC84050F2436BF0600BDB9E1 /* WeeklySubView.swift */,
 				CC40FDEB2436C0D50014F43B /* MainTopView.swift */,
+				CC428C0E2441867700517EA8 /* StatisticsView.swift */,
 			);
 			path = "Main VC Subviews";
 			sourceTree = "<group>";
@@ -360,6 +367,7 @@
 				CCC3A823230B483F0051C151 /* Reachability.swift */,
 				CCB524292317237F004FF84B /* DateHelper.swift */,
 				CCAE52A8243EB1EC009DA4F7 /* AutoUpdater.swift */,
+				CC428C0A2441492800517EA8 /* StatisticsHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -392,6 +400,7 @@
 				CC5C43D82434102B00446308 /* UIButton+Extensions.swift */,
 				CC7DF5862435B7C800D24326 /* UIImage+Extensions.swift */,
 				CC69B2282437B7E40026FC87 /* UIView+Extensions.swift */,
+				CC428C0C2441739500517EA8 /* Double+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -642,6 +651,7 @@
 				CCD5132E23158FE700B000AA /* String+Extensions.swift in Sources */,
 				CCC3A821230B42050051C151 /* UserInfoHelper.swift in Sources */,
 				CCAE52A9243EB1EC009DA4F7 /* AutoUpdater.swift in Sources */,
+				CC428C0D2441739500517EA8 /* Double+Extensions.swift in Sources */,
 				CCF2E97223011F3500F4E118 /* OnboardingView.swift in Sources */,
 				CC5C43D52433E2D300446308 /* UIFont+UILabel+Extensions.swift in Sources */,
 				CCB5242A2317237F004FF84B /* DateHelper.swift in Sources */,
@@ -653,7 +663,9 @@
 				CCD5132C23158D0C00B000AA /* Date+Extensions.swift in Sources */,
 				CC798C27233A94A300CBD8B0 /* UIColor+Extensions.swift in Sources */,
 				CC40FDEC2436C0D50014F43B /* MainTopView.swift in Sources */,
+				CC428C0B2441492800517EA8 /* StatisticsHelper.swift in Sources */,
 				CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */,
+				CC428C0F2441867700517EA8 /* StatisticsView.swift in Sources */,
 				CC7DF5872435B7C800D24326 /* UIImage+Extensions.swift in Sources */,
 				CCC3A824230B483F0051C151 /* Reachability.swift in Sources */,
 				B8B41CEA2228737B005E304A /* MainVC.swift in Sources */,

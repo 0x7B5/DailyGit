@@ -49,6 +49,39 @@ public class DateHelper {
         return Date()
     }
     
+    func isInMonth(myDate: String) -> Bool {
+        let myMonth = Int(myDate[5...6]) ?? 0
+        let calendar = Calendar.current
+        let month = calendar.component(.month, from: Date())
+        
+        if myMonth == month {
+            return true
+        }
+        return false
+    }
+    
+    func isInLastMonth(myDate: String) -> Bool {
+        var myMonth = Int(myDate[5...6]) ?? 0
+        
+//        if myMonth == 1 {
+//            myMonth = 12
+//        } else {
+//            myMonth = myMonth - 1
+//        }
+//
+        
+        let previousMonth = Calendar.current.date(byAdding: .month, value: -1, to: Date())
+        
+        
+        if myMonth == previousMonth?.month {
+            return true
+        }
+        return false
+    }
+    
+    
+    
+    
     func stringToYear(myDate: String, IsoFormat: Bool) -> String {
         let myDate = stringToDate(myDate: myDate, IsoFormat: IsoFormat)
         let calendar = Calendar.current
@@ -164,6 +197,12 @@ extension Date {
 }
 
 extension Date {
+    var stringMonth: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM"
+        return dateFormatter.string(from: self)
+    }
+    
     /// Returns the amount of years from another date
     func years(from date: Date) -> Int {
         return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0

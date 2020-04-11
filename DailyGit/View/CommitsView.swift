@@ -44,7 +44,6 @@ public class CommitsView: UIView {
         // Statistics
         addSubview(stasticsLabel)
         addSubview(statView)
-        statView.addSubview(dailyAvgView)
         statView.addSubview(weeklyAvgView)
         statView.addSubview(monthlyAvgView)
         
@@ -140,29 +139,21 @@ public class CommitsView: UIView {
         }
         makeStatisticsView()
         
-        // DAILY AVERAGE
-        dailyAvgView.snp.makeConstraints {
-            $0.height.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.width.equalToSuperview().multipliedBy(0.31)
-        }
-        
         // WEEKLY AVERAGE
         weeklyAvgView.snp.makeConstraints {
-            $0.height.equalTo(dailyAvgView.snp.height)
-            $0.width.equalTo(dailyAvgView.snp.width)
-            $0.centerX.equalToSuperview()
+            $0.height.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.48)
+            $0.left.equalToSuperview()
         }
         
         // MONTHLY AVERAGE
         monthlyAvgView.snp.makeConstraints {
-            $0.height.equalTo(dailyAvgView.snp.height)
-            $0.width.equalTo(dailyAvgView.snp.width)
+            $0.height.equalToSuperview()
+            $0.width.equalTo(weeklyAvgView.snp.width)
             $0.right.equalToSuperview()
         }
         
         
-        dailyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         weeklyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         monthlyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
@@ -189,14 +180,12 @@ public class CommitsView: UIView {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         return view
     }()
-    // DAILY AVERAGE
-    let dailyAvgView = CurvedView()
-    
+
     // WEEKLY AVERAGE
-    let weeklyAvgView = CurvedView()
+    let weeklyAvgView = StatisticView()
     
     // MONTHLY AVERAGE
-    let monthlyAvgView = CurvedView()
+    let monthlyAvgView = StatisticView()
     
     //BOTTOM VIEW
     let lastUpdatedLabel: UILabel = {

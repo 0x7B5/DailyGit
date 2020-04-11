@@ -32,6 +32,7 @@ class MainVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        StatisticsHelper.shared.monthlyAverage()
         setupNavController()
         updateUI()
         updateInfo()
@@ -85,22 +86,8 @@ class MainVC: UIViewController {
         let barButton = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItems = [barButton]
         
-        //        let secondButton = UIButton(type: UIButton.ButtonType.custom)
-        //        secondButton.setImage(#imageLiteral(resourceName: "settingsIcon"), for: .normal)
-        //        secondButton.addTarget(self, action:#selector(goToSettings), for: .touchDragInside)
-        //        secondButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        //        let secondBarButton = UIBarButtonItem(customView: secondButton)
-        //        self.navigationItem.rightBarButtonItems = [secondBarButton]
-        //
-        
-        //        let refreshBarItem = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(refresh))
-        ////        refreshBarItem.tintColor = Constants.subTitleColor
-        //        refreshBarItem.setBackgroundImage(#imageLiteral(resourceName: "refreshLogo"), for: .normal, barMetrics: .default)
-        //        navigationItem.leftBarButtonItem = refreshBarItem
-        
         let settingsBarItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(goToSettings))
         settingsBarItem.tintColor = Constants.subTitleColor
-        //        settingsBarItem.setBackgroundImage(#imageLiteral(resourceName: "settingsIcon"), for: .normal, barMetrics: .default)
         navigationItem.rightBarButtonItem = settingsBarItem
     }
     
