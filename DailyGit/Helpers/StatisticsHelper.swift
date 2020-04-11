@@ -133,6 +133,56 @@ public class StatisticsHelper {
         }
     }
     
+    func weeklyPercent() -> Int {
+        if let weeklyConts = UserInfoHelper.shared.readInfo(info: .currentWeek) as? ContributionList {
+            var sum = 0.0
+            let count = weeklyConts.contributions.count
+            for i in weeklyConts.contributions {
+                if i.count > 0 {
+                    sum = sum + 1
+                }
+            }
+            
+            return Int((sum/Double(count)).rounded(toPlaces: 0)) * 100
+        } else {
+            return 0
+        }
+    }
+    
+    func monthlyPercent() -> Int {
+        if contributions != nil {
+            var count = 0
+            var sum = 0.0
+            for i in contributions!.contributions.reversed() {
+                if DateHelper.shared.isInMonth(myDate: i.date) {
+                    if i.count > 0 {
+                        sum = sum + 1
+                    }
+                    count = count + 1
+                } else {
+                    break
+                }
+            }
+            print(Int((sum/Double(count)).rounded(toPlaces: 0)) * 100)
+            return Int((sum/Double(count)).rounded(toPlaces: 0)) * 100
+        } else {
+            return 0
+        }
+    }
+    
+    func getPercentageColor(num: Int) -> UIColor {
+        if num == 0 {
+            return "#ebedf0".getColor()
+        } else if num <= 40 {
+            return "#c6e48b".getColor()
+        } else if num <= 58 {
+            return "#7bc96f".getColor()
+        } else if num <= 100 {
+            return "#239a3b".getColor()
+        }
+        return "#196127".getColor()
+    }
+    
     
     
     

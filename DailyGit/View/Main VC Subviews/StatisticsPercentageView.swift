@@ -94,11 +94,16 @@ public class StatisticsPercentageView: UIView {
     
     
     public func setupLabels() {
+        var percent = 0
         if thisStat == .weekly {
             topLabel.text = "This week, you've had a contribution:"
+            percent = StatisticsHelper.shared.weeklyPercent()
         } else {
             topLabel.text = "This month, you've had a contribution:"
+            percent = StatisticsHelper.shared.monthlyPercent()
         }
+        percentageNumber.text = String(percent) + "%"
+        percentageNumber.textColor = StatisticsHelper.shared.getPercentageColor(num: percent)
     }
     
 }
