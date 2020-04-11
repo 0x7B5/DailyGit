@@ -235,12 +235,12 @@ public class CommitsView: UIView {
     }()
     
     // WEEKLY AVERAGE
-    let weeklyAvgView = StatisticsAverageView()
-    let weeklyPercentageView = StatisticsAverageView()
+    let weeklyAvgView = StatisticsAverageView(averageType: .weekly)
+    let weeklyPercentageView = StatisticsPercentageView(averageType: .weekly)
     
     // MONTHLY AVERAGE
-    let monthlyAvgView = StatisticsAverageView()
-    let monthlyPercentageView = StatisticsAverageView()
+    let monthlyAvgView = StatisticsAverageView(averageType: .monthly)
+    let monthlyPercentageView = StatisticsPercentageView(averageType: .monthly)
     
     //BOTTOM VIEW
     let lastUpdatedLabel: UILabel = {

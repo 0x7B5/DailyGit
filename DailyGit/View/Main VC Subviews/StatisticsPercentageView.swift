@@ -12,16 +12,14 @@ import SnapKit
 
 
 public class StatisticsPercentageView: UIView {
+    var thisStat: AverageType
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+   init(averageType: AverageType) {
+        self.thisStat = averageType
+        super.init(frame: CGRect.zero)
         backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         self.layer.cornerRadius = 15
         setupView()
-    }
-    
-    convenience init() {
-        self.init(frame: CGRect.zero)
     }
     
     required init(coder aDecoder: NSCoder) {

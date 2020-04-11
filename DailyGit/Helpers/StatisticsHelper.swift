@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 public class StatisticsHelper {
     static let shared = StatisticsHelper()
     
@@ -21,19 +22,6 @@ public class StatisticsHelper {
     }
     
     #warning("Not sure what to do here")
-    static var dailyAverage: Double {
-        get {
-            //            if contributions != nil {
-            //                for i in contributions!.contributions {
-            //
-            //                }
-            //
-            //            } else {
-            //                return 1
-            //            }
-            return 1
-        }
-    }
     
     func weeklyAverage() -> (Double, Double) {
         let thisWeeksAverage: Double = {
@@ -126,6 +114,21 @@ public class StatisticsHelper {
         
         return (thisMonthsAverage.rounded(toPlaces: 2), percentageChange)
     }
+    
+    func getColor(commits: Double) -> UIColor {
+        if commits == 0 {
+            return "#ebedf0".getColor()
+        } else if commits <= 5 {
+            return "#c6e48b".getColor()
+        } else if commits <= 10 {
+            return "#7bc96f".getColor()
+        } else if commits <= 15 {
+            return "#239a3b".getColor()
+        }
+        return "#196127".getColor()
+    }
+    
+    
     
     
     
