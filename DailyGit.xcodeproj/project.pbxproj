@@ -20,7 +20,8 @@
 		CC40FDEC2436C0D50014F43B /* MainTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC40FDEB2436C0D50014F43B /* MainTopView.swift */; };
 		CC428C0B2441492800517EA8 /* StatisticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0A2441492800517EA8 /* StatisticsHelper.swift */; };
 		CC428C0D2441739500517EA8 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0C2441739500517EA8 /* Double+Extensions.swift */; };
-		CC428C0F2441867700517EA8 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0E2441867700517EA8 /* StatisticsView.swift */; };
+		CC428C0F2441867700517EA8 /* StatisticsAverageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0E2441867700517EA8 /* StatisticsAverageView.swift */; };
+		CC428C1124418CDD00517EA8 /* StatisticsPercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C1024418CDD00517EA8 /* StatisticsPercentageView.swift */; };
 		CC5C43D52433E2D300446308 /* UIFont+UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D42433E2D300446308 /* UIFont+UILabel+Extensions.swift */; };
 		CC5C43D72433FB4A00446308 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D62433FB4A00446308 /* UIDevice+Extensions.swift */; };
 		CC5C43D92434102B00446308 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D82434102B00446308 /* UIButton+Extensions.swift */; };
@@ -135,7 +136,8 @@
 		CC40FDEB2436C0D50014F43B /* MainTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTopView.swift; sourceTree = "<group>"; };
 		CC428C0A2441492800517EA8 /* StatisticsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsHelper.swift; sourceTree = "<group>"; };
 		CC428C0C2441739500517EA8 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
-		CC428C0E2441867700517EA8 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		CC428C0E2441867700517EA8 /* StatisticsAverageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsAverageView.swift; sourceTree = "<group>"; };
+		CC428C1024418CDD00517EA8 /* StatisticsPercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsPercentageView.swift; sourceTree = "<group>"; };
 		CC47B82A2408501300C4B312 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CC5C43D42433E2D300446308 /* UIFont+UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		CC5C43D62433FB4A00446308 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
@@ -313,7 +315,8 @@
 				CC84050D2436BEFB00BDB9E1 /* TodaySubView.swift */,
 				CC84050F2436BF0600BDB9E1 /* WeeklySubView.swift */,
 				CC40FDEB2436C0D50014F43B /* MainTopView.swift */,
-				CC428C0E2441867700517EA8 /* StatisticsView.swift */,
+				CC428C0E2441867700517EA8 /* StatisticsAverageView.swift */,
+				CC428C1024418CDD00517EA8 /* StatisticsPercentageView.swift */,
 			);
 			path = "Main VC Subviews";
 			sourceTree = "<group>";
@@ -665,8 +668,9 @@
 				CC40FDEC2436C0D50014F43B /* MainTopView.swift in Sources */,
 				CC428C0B2441492800517EA8 /* StatisticsHelper.swift in Sources */,
 				CCC3A81D230B15CB0051C151 /* Contribution.swift in Sources */,
-				CC428C0F2441867700517EA8 /* StatisticsView.swift in Sources */,
+				CC428C0F2441867700517EA8 /* StatisticsAverageView.swift in Sources */,
 				CC7DF5872435B7C800D24326 /* UIImage+Extensions.swift in Sources */,
+				CC428C1124418CDD00517EA8 /* StatisticsPercentageView.swift in Sources */,
 				CCC3A824230B483F0051C151 /* Reachability.swift in Sources */,
 				B8B41CEA2228737B005E304A /* MainVC.swift in Sources */,
 				B8B41CE122283A34005E304A /* CommitsView.swift in Sources */,

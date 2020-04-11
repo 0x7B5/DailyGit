@@ -1,5 +1,5 @@
 //
-//  StatisticsView.swift
+//  StatisticsPercentageView.swift
 //  DailyGit
 //
 //  Created by Vlad Munteanu on 4/11/20.
@@ -10,11 +10,8 @@ import Foundation
 import UIKit
 import SnapKit
 
-enum StatisticsType {
-    case currentWeek, lastWeek
-}
 
-public class StatisticView: UIView {
+public class StatisticsPercentageView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

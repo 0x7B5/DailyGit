@@ -31,6 +31,8 @@ public class CommitsView: UIView {
         // Today
         addSubview(todayView)
         
+        // addSubview(scrollView)
+        
         // This Week
         addSubview(weekLabel)
         addSubview(weekView)
@@ -42,10 +44,15 @@ public class CommitsView: UIView {
         addSubview(lastWeekView)
         
         // Statistics
-        addSubview(stasticsLabel)
-        addSubview(statView)
-        statView.addSubview(weeklyAvgView)
-        statView.addSubview(monthlyAvgView)
+        addSubview(weeklyStatsLabel)
+        addSubview(weeklyStatView)
+        weeklyStatView.addSubview(weeklyAvgView)
+        weeklyStatView.addSubview(weeklyPercentageView)
+        addSubview(monthlyStatsLabel)
+        addSubview(monthlyStatView)
+        monthlyStatView.addSubview(monthlyAvgView)
+        monthlyStatView.addSubview(monthlyPercentageView)
+        //        statView.addSubview(monthlyAvgView)
         
         //Bottom
         addSubview(lastUpdatedLabel)
@@ -91,6 +98,25 @@ public class CommitsView: UIView {
         
         todayView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
+        // LAST UPDATED LABEL
+        lastUpdatedLabel.snp.makeConstraints{
+            $0.width.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            
+            if UIDevice.current.hasNotch {
+                $0.bottom.equalToSuperview().inset(spacingConstant)
+            } else {
+                $0.bottom.equalToSuperview().inset(10)
+            }
+        }
+        
+        //        scrollView.snp.makeConstraints{
+        //            $0.width.equalToSuperview()
+        //            $0.top.equalTo(todayView.snp.bottom).inset(10)
+        //            $0.bottom.equalTo(lastUpdatedLabel.snp.top)
+        //        }
+        
+        
         // CURRENT WEEK
         weekLabel.snp.makeConstraints {
             $0.left.equalTo(topView.nameLabel.snp.left)
@@ -120,20 +146,9 @@ public class CommitsView: UIView {
         }
         lastWeekView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
-        // LAST UPDATED LABEL
-        lastUpdatedLabel.snp.makeConstraints{
-            $0.width.equalToSuperview()
-            $0.centerX.equalToSuperview()
-            
-            if UIDevice.current.hasNotch {
-                $0.bottom.equalToSuperview().inset(spacingConstant)
-            } else {
-                $0.bottom.equalToSuperview().inset(10)
-            }
-        }
         
         // STATISTICS
-        stasticsLabel.snp.makeConstraints {
+        weeklyStatsLabel.snp.makeConstraints {
             $0.left.equalTo(topView.nameLabel.snp.left)
             $0.top.equalTo(lastWeekView.snp.bottom).offset(spacingConstant)
         }
@@ -146,8 +161,32 @@ public class CommitsView: UIView {
             $0.left.equalToSuperview()
         }
         
+        weeklyPercentageView.snp.makeConstraints {
+            $0.height.equalToSuperview()
+            $0.width.equalTo(weeklyAvgView.snp.width)
+            $0.right.equalToSuperview()
+        }
+        
         // MONTHLY AVERAGE
+        monthlyStatsLabel.snp.makeConstraints {
+            $0.left.equalTo(topView.nameLabel.snp.left)
+            $0.top.equalTo(weeklyStatView.snp.bottom).offset(spacingConstant)
+        }
+        
+        monthlyStatView.snp.makeConstraints {
+            $0.width.equalTo(todayView.snp.width)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(monthlyStatsLabel.snp.bottom).offset(3)
+            $0.height.equalTo(weeklyStatView.snp.height)
+        }
+        
         monthlyAvgView.snp.makeConstraints {
+            $0.height.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.48)
+            $0.left.equalToSuperview()
+        }
+        
+        monthlyPercentageView.snp.makeConstraints {
             $0.height.equalToSuperview()
             $0.width.equalTo(weeklyAvgView.snp.width)
             $0.right.equalToSuperview()
@@ -155,7 +194,11 @@ public class CommitsView: UIView {
         
         
         weeklyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
+        weeklyPercentageView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
+        
         monthlyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
+        monthlyPercentageView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
+        
         
     }
     
@@ -164,6 +207,9 @@ public class CommitsView: UIView {
     
     //TODAY VIEW
     let todayView = TodaySubView()
+    
+    // Scroll View
+    let scrollView = UIScrollView()
     
     //THIS WEEK VIEW
     lazy var weekLabel: UILabel = createTitleText(text: "This Week")
@@ -174,18 +220,27 @@ public class CommitsView: UIView {
     let lastWeekView = WeeklySubView(week: .lastWeek)
     
     // STATISTICS
-    lazy var stasticsLabel: UILabel = createTitleText(text: "Statistics")
-    let statView: UIView = {
+    lazy var weeklyStatsLabel: UILabel = createTitleText(text: "Weekly Statistics")
+    lazy var monthlyStatsLabel: UILabel = createTitleText(text: "Monthly Statistics")
+    let weeklyStatView: UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         return view
     }()
-
+    
+    let monthlyStatView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        return view
+    }()
+    
     // WEEKLY AVERAGE
-    let weeklyAvgView = StatisticView()
+    let weeklyAvgView = StatisticsAverageView()
+    let weeklyPercentageView = StatisticsAverageView()
     
     // MONTHLY AVERAGE
-    let monthlyAvgView = StatisticView()
+    let monthlyAvgView = StatisticsAverageView()
+    let monthlyPercentageView = StatisticsAverageView()
     
     //BOTTOM VIEW
     let lastUpdatedLabel: UILabel = {
@@ -213,17 +268,17 @@ public class CommitsView: UIView {
     
     func makeStatisticsView() {
         if Constants.screenHeight < 700 {
-            statView.snp.makeConstraints {
+            weeklyStatView.snp.makeConstraints {
                 $0.width.equalTo(todayView.snp.width)
                 $0.centerX.equalToSuperview()
-                $0.top.equalTo(stasticsLabel.snp.bottom).offset(3)
+                $0.top.equalTo(weeklyStatsLabel.snp.bottom).offset(3)
                 $0.bottom.equalTo(lastUpdatedLabel.snp.top).offset(-6)
             }
         } else {
-            statView.snp.makeConstraints {
+            weeklyStatView.snp.makeConstraints {
                 $0.width.equalTo(todayView.snp.width)
                 $0.centerX.equalToSuperview()
-                $0.top.equalTo(stasticsLabel.snp.bottom).offset(3)
+                $0.top.equalTo(weeklyStatsLabel.snp.bottom).offset(3)
                 $0.height.equalTo(todayView.snp.height).multipliedBy(1.25)
             }
         }
