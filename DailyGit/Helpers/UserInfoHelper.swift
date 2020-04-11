@@ -101,7 +101,6 @@ public class UserInfoHelper {
         
         if let currentContributions = readInfo(info: .contributions) as? ContributionList {
             for i in currentContributions.contributions {
-                print(DateHelper.shared.getYear(myDate: i.date, isIso: true))
                 if (DateHelper.shared.getYear(myDate: i.date, isIso: true) == 2019) {
                     if i.count > 0 {
                         yearCount += 1

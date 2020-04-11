@@ -51,10 +51,7 @@ public class StatisticsHelper {
             }
         }()
         
-        
-        let percentageChange = (100 - ((thisWeeksAverage/lastWeeksAverage) * 100)).rounded(toPlaces: 2) * -1
-        
-        print(percentageChange)
+        let percentageChange = (100 - ((thisWeeksAverage/lastWeeksAverage) * 100)).rounded(toPlaces: 1) * -1
         
         return (thisWeeksAverage.rounded(toPlaces: 2), percentageChange)
     }
@@ -80,7 +77,6 @@ public class StatisticsHelper {
                     }
                 }
                 contributionsCopy = Array(contributionsCopy.prefix(upTo:(contributionsCopy.count-count)))
-                print(contributionsCopy)
                 return sum/Double(count)
                 
             } else {
@@ -96,9 +92,7 @@ public class StatisticsHelper {
                     if DateHelper.shared.isInLastMonth(myDate: i.date) {
                         count = count + 1
                         sum = sum + Double(i.count)
-                        print(i)
                     } else {
-                        print(i)
                         break
                     }
                 }
@@ -110,7 +104,7 @@ public class StatisticsHelper {
         }()
         
         
-        let percentageChange = (100 - ((thisMonthsAverage/lastMonthsAverage) * 100)).rounded(toPlaces: 2) * -1
+        let percentageChange = (100 - ((thisMonthsAverage/lastMonthsAverage) * 100)).rounded(toPlaces: 1) * -1
         
         return (thisMonthsAverage.rounded(toPlaces: 2), percentageChange)
     }
@@ -126,6 +120,17 @@ public class StatisticsHelper {
             return "#239a3b".getColor()
         }
         return "#196127".getColor()
+    }
+    
+    
+    func getPercentColor(num: Double) -> UIColor {
+        if num > 0.0 {
+            return #colorLiteral(red: 0.1137254902, green: 0.6117647059, blue: 0.3529411765, alpha: 1)
+        } else if num < 0.0 {
+            return #colorLiteral(red: 0.9069225192, green: 0.298107028, blue: 0.2358772755, alpha: 1)
+        } else {
+            return "#196127".getColor()
+        }
     }
     
     
