@@ -109,7 +109,7 @@ public class GithubDataManager {
                                 self.getAllContributions(startYear: creationYear, username: myUsername, completion: {
                                     contributions in
                                     if contributions != nil {
-                                        let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, yearCreated: creationYear ,contributions: contributions!, currentWeek: self.setupCurrentWeek(contributions!))
+                                        let user = User(name: name, username: myUsername, bio: bio, photoUrl: photourl,dateCreated: creationDate, yearCreated: creationYear ,contributions: contributions!)
                                         print("Done it again \(user)")
                                         completion(user)
                                     } else {
@@ -330,7 +330,6 @@ public class GithubDataManager {
                             if let myContributions = contributions {
                                 savedPerson.contributions = myContributions
                                 savedPerson.updateTime = Date()
-                                savedPerson.currentWeek = self.setupCurrentWeek(myContributions)
                                 print("Saved person updated")
                             } else {
                                 completion()

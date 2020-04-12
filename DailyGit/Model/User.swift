@@ -89,9 +89,20 @@ struct User: Codable {
     var yearCreated: Int
     
     
-    var currentWeek: ContributionList
+    var currentWeek: ContributionList {
+        get {
+            var randContList = [Contribution?](repeating: nil, count: 6)
+            for element in contributions.contributions.reversed() {
+                randContList.insert(element, at: element.dayOfWeek)
+                if(element.dayOfWeek == 0) {
+                    break
+                }
+            }
+            return ContributionList(contributions: randContList.compactMap { $0 })
+        }
+    }
     
-    init (name: String, username: String, bio: String, photoUrl: String, dateCreated: String, yearCreated: Int, contributions: ContributionList, currentWeek: ContributionList) {
+    init (name: String, username: String, bio: String, photoUrl: String, dateCreated: String, yearCreated: Int, contributions: ContributionList) {
         self.name = name
         self.username = username
         self.bio = bio
@@ -99,7 +110,6 @@ struct User: Codable {
         self.contributions = contributions
         self.dateCreated = dateCreated
         self.yearCreated = yearCreated
-        self.currentWeek = currentWeek
         self.updateTime = Date()
         self.userUpdateTime = Date()
     }

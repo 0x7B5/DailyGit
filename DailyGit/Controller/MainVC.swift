@@ -67,6 +67,7 @@ class MainVC: UIViewController {
         self.mainView.setLastUpdatedLabel()
         self.mainView.lastWeekView.setupColorsForWeek()
         self.mainView.weekView.setupColorsForWeek()
+        #warning("Add Setup labels for stats")
     }
     
     @objc func autoRefresher(notification: NSNotification) {
