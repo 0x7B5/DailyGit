@@ -12,6 +12,7 @@ class MainVC: UIViewController {
     
     lazy var mainView = CommitsView()
     unowned var topView: UIView { return mainView.topView}
+    unowned var todayView: TodaySubView { return mainView.todayView}
     
     override func viewDidLayoutSubviews() {
         mainView.topView.profileImage.makeRounded(frameSize: self.mainView.topView.frame.width)
@@ -23,7 +24,6 @@ class MainVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //        mainView.checkAllignmentForTitle()
         updateUI()
         updateInfo()
     }
@@ -32,6 +32,7 @@ class MainVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        addTapGestures()
         StatisticsHelper.shared.monthlyAverage()
         setupNavController()
         updateUI()
@@ -41,17 +42,39 @@ class MainVC: UIViewController {
     }
     
     func updateInfo() {
-        //        let methodStart = Date()
         UserInfoHelper.shared.refreshEverything(completion: {
             DispatchQueue.main.async { () -> Void in
-                //                let methodFinish = Date()
-                //                let executionTime = methodFinish.timeIntervalSince(methodStart)
-                //  print("Execution time: \(executionTime)")
                 self.updateUI()
             }
         })
         
     }
+    
+    func addTapGestures() {
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(changeStreak))
+//        self.todayView.addGestureRecognizer(tap)
+//        self.todayView.currentStreak.addGestureRecognizer(tap)
+    }
+    
+    @objc func changeStreak() {
+        print("Tapped")
+        mainView.changeStreak()
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let firstTouch = touches.first {
+            let hitView = self.view.hitTest(firstTouch.location(in: self.view), with: event)
+            let position = firstTouch.location(in: view)
+            print(position)
+            if hitView === self.todayView {
+                print("touch is inside")
+//                print(position)
+            } else {
+                
+            }
+        }
+    }
+    
     
     func updateUI() {
         let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")

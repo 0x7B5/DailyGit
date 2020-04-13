@@ -46,7 +46,7 @@ struct User: Codable {
                     counter = 0
                 }
             }
-            return counter
+            return maxStreaks
         }
     }
     var currentStreak: Int {

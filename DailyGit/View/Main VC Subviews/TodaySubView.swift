@@ -10,7 +10,14 @@ import Foundation
 import UIKit
 import SnapKit
 
+
+enum StreakStatus {
+    case longest, current
+}
+
+
 public class TodaySubView: CurvedView {
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -169,6 +176,25 @@ public class TodaySubView: CurvedView {
             currentStreak.textColor = UserInfoHelper.shared.getStreakColor(commits: currentStreakNum)
         }
         
+    }
+    
+    func changeStreak() {
+        if Constants.streakStatus == .current {
+            currentStreakLabel.text = "Current Streak"
+            if let currentStreakNum = UserInfoHelper.shared.readInfo(info: .currentStreak) as? Int {
+                currentStreak.text = String(currentStreakNum)
+                currentStreak.textColor = UserInfoHelper.shared.getStreakColor(commits: currentStreakNum)
+            } else {
+                currentStreak.text = String(0)
+                currentStreak.textColor = UserInfoHelper.shared.getStreakColor(commits: 0)
+            }
+        } else {
+            currentStreakLabel.text = "Longest Streak"
+            if let longestStreakNum = UserInfoHelper.shared.readInfo(info: .longestStreak) as? Int {
+                currentStreak.text = String(longestStreakNum)
+                currentStreak.textColor = UserInfoHelper.shared.getStreakColor(commits: longestStreakNum)
+            }
+        }
     }
     
     

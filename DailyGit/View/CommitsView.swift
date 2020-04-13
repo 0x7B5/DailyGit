@@ -345,4 +345,13 @@ public class CommitsView: UIView {
         
     }
     
+    func changeStreak() {
+        if Constants.streakStatus == .current {
+            Constants.streakStatus = .longest
+        } else {
+            Constants.streakStatus = .current
+        }
+        todayView.changeStreak()
+    }
+    
 }
