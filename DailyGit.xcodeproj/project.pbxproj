@@ -13,7 +13,6 @@
 		B87EA65D2221EDC200CE8114 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B87EA65B2221EDC200CE8114 /* LaunchScreen.storyboard */; };
 		B87EA6652221EE0300CE8114 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87EA6642221EE0300CE8114 /* Constants.swift */; };
 		B8B41CE122283A34005E304A /* CommitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE022283A34005E304A /* CommitsView.swift */; };
-		B8B41CE422286E6E005E304A /* ContributionsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */; };
 		B8B41CEA2228737B005E304A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE92228737B005E304A /* MainVC.swift */; };
 		B8B41CEC22287388005E304A /* RootSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CEB22287388005E304A /* RootSettingVC.swift */; };
 		CC17DBAD22FF9D1500E34951 /* GithubDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */; };
@@ -129,7 +128,6 @@
 		B87EA65E2221EDC200CE8114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B87EA6642221EE0300CE8114 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B8B41CE022283A34005E304A /* CommitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitsView.swift; sourceTree = "<group>"; };
-		B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionsGraphView.swift; sourceTree = "<group>"; };
 		B8B41CE92228737B005E304A /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		B8B41CEB22287388005E304A /* RootSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSettingVC.swift; sourceTree = "<group>"; };
 		CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDataManager.swift; sourceTree = "<group>"; };
@@ -311,7 +309,6 @@
 		B8B41CE222286E45005E304A /* Main VC Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				B8B41CE322286E6E005E304A /* ContributionsGraphView.swift */,
 				CC84050D2436BEFB00BDB9E1 /* TodaySubView.swift */,
 				CC84050F2436BF0600BDB9E1 /* WeeklySubView.swift */,
 				CC40FDEB2436C0D50014F43B /* MainTopView.swift */,
@@ -674,7 +671,6 @@
 				CCC3A824230B483F0051C151 /* Reachability.swift in Sources */,
 				B8B41CEA2228737B005E304A /* MainVC.swift in Sources */,
 				B8B41CE122283A34005E304A /* CommitsView.swift in Sources */,
-				B8B41CE422286E6E005E304A /* ContributionsGraphView.swift in Sources */,
 				B87EA6532221EDC000CE8114 /* AppDelegate.swift in Sources */,
 				B87EA6652221EE0300CE8114 /* Constants.swift in Sources */,
 				CCAE52AC243FDF1B009DA4F7 /* ContributionInsightVC.swift in Sources */,

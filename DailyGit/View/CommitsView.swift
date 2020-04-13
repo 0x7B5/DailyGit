@@ -336,4 +336,13 @@ public class CommitsView: UIView {
         scrollViewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     }
     
+    func updateStatistics() {
+        monthlyPercentageView.setupLabels()
+        weeklyPercentageView.setupLabels()
+        
+        monthlyAvgView.setupLabels()
+        weeklyAvgView.setupLabels()
+        
+    }
+    
 }
