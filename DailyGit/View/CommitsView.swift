@@ -56,7 +56,7 @@ public class CommitsView: UIView {
         monthlyStatView.addSubview(monthlyPercentageView)
         
         //Bottom
-        addSubview(lastUpdatedLabel)
+        scrollViewContainer.addArrangedSubview(lastUpdatedLabel)
         
     }
     
@@ -86,17 +86,6 @@ public class CommitsView: UIView {
             $0.centerX.equalToSuperview()
         }
         
-        // LAST UPDATED LABEL
-        lastUpdatedLabel.snp.makeConstraints{
-            $0.width.equalToSuperview()
-            $0.centerX.equalToSuperview()
-            
-            if UIDevice.current.hasNotch {
-                $0.bottom.equalToSuperview().inset(spacingConstant)
-            } else {
-                $0.bottom.equalToSuperview().inset(10)
-            }
-        }
         
         //TODAY VIEW
         todayView.snp.makeConstraints {
@@ -108,9 +97,9 @@ public class CommitsView: UIView {
         
         
         heightReferenceView.snp.makeConstraints {
-            $0.width.equalToSuperview()
+            $0.left.right.equalToSuperview()
             $0.top.equalTo(todayView.snp.bottom).inset(10)
-            $0.bottom.equalTo(lastUpdatedLabel.snp.top)
+            $0.bottom.equalToSuperview()
         }
         todayView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
@@ -214,6 +203,17 @@ public class CommitsView: UIView {
         monthlyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         monthlyPercentageView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
+        // LAST UPDATED LABEL
+        lastUpdatedLabel.snp.makeConstraints{
+            $0.width.equalTo(heightReferenceView.snp.width)
+            $0.centerX.equalTo(heightReferenceView.snp.centerX)
+            
+            if UIDevice.current.hasNotch {
+                $0.bottom.equalToSuperview().inset(spacingConstant)
+            } else {
+                $0.bottom.equalToSuperview().inset(10)
+            }
+        }
         
     }
     
@@ -325,7 +325,7 @@ public class CommitsView: UIView {
             $0.width.equalToSuperview()
             $0.top.equalTo(todayView.snp.bottom).offset(4)
             $0.left.right.equalToSuperview()
-            $0.bottom.equalTo(lastUpdatedLabel.snp.top)
+            $0.bottom.equalToSuperview()
         }
         
         scrollViewContainer.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
