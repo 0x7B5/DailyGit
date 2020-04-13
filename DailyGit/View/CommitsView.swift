@@ -1,66 +1,66 @@
 //
-//  MainView.swift
+//  CommitsTest.swift
 //  DailyGit
 //
-//  Created by Vlad Munteanu on 2/28/19.
-//  Copyright © 2019 Vlad Munteanu. All rights reserved.
+//  Created by Vlad Munteanu on 4/12/20.
+//  Copyright © 2020 Vlad Munteanu. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import SnapKit
 
 public class CommitsView: UIView {
-    
     init() {
-        //  self.topLayout = topLayout
         super.init(frame: CGRect.zero)
         self.frame = CGRect.zero
         backgroundColor = Constants.whiteColor
         initializeUI()
         createConstraints()
+        setLastUpdatedLabel()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func initializeUI() {
         // Top View
         addSubview(topView)
-        
         // Today
         addSubview(todayView)
-        
-        // addSubview(scrollView)
+        addSubview(heightReferenceView)
+        addSubview(scrollView)
+        scrollView.addSubview(scrollViewContainer)
         
         // This Week
-        addSubview(weekLabel)
-        addSubview(weekView)
-        
-        // setupWeekGrass()
+        scrollViewContainer.addArrangedSubview(currentWeekSuperView)
+        currentWeekSuperView.addSubview(weekView)
+        currentWeekSuperView.addSubview(weekLabel)
         
         // Last Week
-        addSubview(lastWeekLabel)
-        addSubview(lastWeekView)
+        //lastWeekSuperView
+        scrollViewContainer.addArrangedSubview(lastWeekSuperView)
+        lastWeekSuperView.addSubview(lastWeekView)
+        lastWeekSuperView.addSubview(lastWeekLabel)
         
-        // Statistics
-        addSubview(weeklyStatsLabel)
-        addSubview(weeklyStatView)
+        // Weekly Statistics
+        scrollViewContainer.addArrangedSubview(weeklyStatView)
+        weeklyStatView.addSubview(weeklyStatsLabel)
         weeklyStatView.addSubview(weeklyAvgView)
         weeklyStatView.addSubview(weeklyPercentageView)
-        addSubview(monthlyStatsLabel)
-        addSubview(monthlyStatView)
+        
+        // Monthly Statistic
+        scrollViewContainer.addArrangedSubview(monthlyStatView)
+        monthlyStatView.addSubview(monthlyStatsLabel)
         monthlyStatView.addSubview(monthlyAvgView)
         monthlyStatView.addSubview(monthlyPercentageView)
-        //        statView.addSubview(monthlyAvgView)
         
         //Bottom
         addSubview(lastUpdatedLabel)
+        
     }
     
-    
     public func createConstraints() {
-        setLastUpdatedLabel()
         var spacingConstant = 20
         var todayViewSpacingConstant = 0.98
         
@@ -78,7 +78,6 @@ public class CommitsView: UIView {
             }
         }
         
-        #warning("Change offset between views for iPhone 8 and Se")
         // TOP VIEW
         topView.snp.makeConstraints{
             $0.top.equalToSuperview()
@@ -86,17 +85,6 @@ public class CommitsView: UIView {
             $0.height.equalToSuperview().multipliedBy(0.25)
             $0.centerX.equalToSuperview()
         }
-        
-        //TODAY VIEW
-        
-        todayView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.95)
-            $0.height.equalToSuperview().multipliedBy(0.15)
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalTo(topView.snp.bottom).multipliedBy(todayViewSpacingConstant)
-        }
-        
-        todayView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
         // LAST UPDATED LABEL
         lastUpdatedLabel.snp.makeConstraints{
@@ -110,91 +98,118 @@ public class CommitsView: UIView {
             }
         }
         
-        //        scrollView.snp.makeConstraints{
-        //            $0.width.equalToSuperview()
-        //            $0.top.equalTo(todayView.snp.bottom).inset(10)
-        //            $0.bottom.equalTo(lastUpdatedLabel.snp.top)
-        //        }
+        //TODAY VIEW
+        todayView.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(0.95)
+            $0.height.equalToSuperview().multipliedBy(0.15)
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalTo(topView.snp.bottom).multipliedBy(todayViewSpacingConstant)
+        }
         
         
-        // CURRENT WEEK
+        heightReferenceView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.top.equalTo(todayView.snp.bottom).inset(10)
+            $0.bottom.equalTo(lastUpdatedLabel.snp.top)
+        }
+        todayView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
+        
+        setupScrollView()
+        
+        // This Week
+        currentWeekSuperView.snp.makeConstraints{
+            $0.width.equalTo(todayView.snp.width)
+            $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.2)
+        }
         weekLabel.snp.makeConstraints {
+            $0.width.equalTo(todayView.snp.width)
             $0.left.equalTo(topView.nameLabel.snp.left)
-            $0.top.equalTo(todayView.snp.bottom).offset(weekLabelSpacingConstant)
+            $0.top.equalTo(currentWeekSuperView.snp.top)
         }
         
         weekView.snp.makeConstraints {
-            $0.width.equalTo(todayView.snp.width)
-            $0.height.equalToSuperview().multipliedBy(weekViewHeightConstant)
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(weekLabel.snp.bottom).offset(3)
+            $0.width.equalTo(currentWeekSuperView.snp.width)
+            $0.height.equalTo(currentWeekSuperView.snp.height).multipliedBy(0.65)
+            $0.centerX.equalTo(heightReferenceView.snp.centerX)
+            $0.bottom.equalTo(currentWeekSuperView.snp.bottom)
         }
         
         weekView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
-        // LAST WEEK
+        // Last Week
+        lastWeekSuperView.snp.makeConstraints{
+            $0.width.equalTo(todayView.snp.width)
+            $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.2)
+        }
+
         lastWeekLabel.snp.makeConstraints {
+            $0.width.equalTo(todayView.snp.width)
             $0.left.equalTo(topView.nameLabel.snp.left)
-            $0.top.equalTo(weekView.snp.bottom).offset(spacingConstant)
+            $0.top.equalTo(lastWeekSuperView.snp.top)
         }
         
         lastWeekView.snp.makeConstraints {
-            $0.width.equalTo(todayView.snp.width)
-            $0.height.equalTo(weekView.snp.height)
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(lastWeekLabel.snp.bottom).offset(3)
+            $0.width.equalTo(lastWeekSuperView.snp.width)
+            $0.height.equalTo(lastWeekSuperView.snp.height).multipliedBy(0.65)
+            $0.centerX.equalTo(heightReferenceView.snp.centerX)
+            $0.bottom.equalTo(lastWeekSuperView.snp.bottom)
         }
         lastWeekView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
-        
-        // STATISTICS
-        weeklyStatsLabel.snp.makeConstraints {
-            $0.left.equalTo(topView.nameLabel.snp.left)
-            $0.top.equalTo(lastWeekView.snp.bottom).offset(spacingConstant)
+        // Weekly Average
+        weeklyStatView.snp.makeConstraints {
+            $0.width.equalTo(todayView.snp.width)
+            $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.38)
         }
-        makeStatisticsView()
         
-        // WEEKLY AVERAGE
+        weeklyStatsLabel.snp.makeConstraints {
+            $0.width.equalTo(todayView.snp.width)
+            $0.left.equalTo(topView.nameLabel.snp.left)
+            $0.top.equalTo(weeklyStatView.snp.top)
+        }
+        
         weeklyAvgView.snp.makeConstraints {
-            $0.height.equalToSuperview()
-            $0.width.equalToSuperview().multipliedBy(0.48)
-            $0.left.equalToSuperview()
+            $0.left.equalTo(topView.nameLabel.snp.left)
+            $0.width.equalTo(weeklyStatView.snp.width).multipliedBy(0.48)
+            $0.height.equalTo(weeklyStatView.snp.height).multipliedBy(0.8)
+            $0.bottom.equalTo(weeklyStatView.snp.bottom)
         }
         
         weeklyPercentageView.snp.makeConstraints {
-            $0.height.equalToSuperview()
+            $0.right.equalTo(todayView.snp.right)
             $0.width.equalTo(weeklyAvgView.snp.width)
-            $0.right.equalToSuperview()
+            $0.height.equalTo(weeklyAvgView.snp.height)
+            $0.bottom.equalTo(weeklyStatView.snp.bottom)
         }
-        
-        // MONTHLY AVERAGE
-        monthlyStatsLabel.snp.makeConstraints {
-            $0.left.equalTo(topView.nameLabel.snp.left)
-            $0.top.equalTo(weeklyStatView.snp.bottom).offset(spacingConstant)
-        }
-        
-        monthlyStatView.snp.makeConstraints {
-            $0.width.equalTo(todayView.snp.width)
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(monthlyStatsLabel.snp.bottom).offset(3)
-            $0.height.equalTo(weeklyStatView.snp.height)
-        }
-        
-        monthlyAvgView.snp.makeConstraints {
-            $0.height.equalToSuperview()
-            $0.width.equalToSuperview().multipliedBy(0.48)
-            $0.left.equalToSuperview()
-        }
-        
-        monthlyPercentageView.snp.makeConstraints {
-            $0.height.equalToSuperview()
-            $0.width.equalTo(weeklyAvgView.snp.width)
-            $0.right.equalToSuperview()
-        }
-        
         
         weeklyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         weeklyPercentageView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
+        
+        // Monthly Average
+        monthlyStatView.snp.makeConstraints {
+            $0.width.equalTo(weeklyStatView.snp.width)
+            $0.height.equalTo(weeklyStatView.snp.height)
+        }
+
+        monthlyStatsLabel.snp.makeConstraints {
+            $0.width.equalTo(weeklyStatsLabel.snp.width)
+            $0.left.equalTo(weeklyStatsLabel.snp.left)
+            $0.top.equalTo(monthlyStatView.snp.top)
+        }
+
+        monthlyAvgView.snp.makeConstraints {
+            $0.left.equalTo(topView.nameLabel.snp.left)
+            $0.width.equalTo(monthlyStatView.snp.width).multipliedBy(0.48)
+            $0.height.equalTo(monthlyStatView.snp.height).multipliedBy(0.8)
+            $0.bottom.equalTo(monthlyStatView.snp.bottom)
+        }
+
+        monthlyPercentageView.snp.makeConstraints {
+            $0.right.equalTo(todayView.snp.right)
+            $0.width.equalTo(monthlyAvgView.snp.width)
+            $0.height.equalTo(monthlyAvgView.snp.height)
+            $0.bottom.equalTo(monthlyStatView.snp.bottom)
+        }
         
         monthlyAvgView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         monthlyPercentageView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
@@ -209,38 +224,70 @@ public class CommitsView: UIView {
     let todayView = TodaySubView()
     
     // Scroll View
-    let scrollView = UIScrollView()
+    let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    let scrollViewContainer: UIStackView = {
+        let view = UIStackView()
+        
+        view.axis = .vertical
+        view.spacing = 10
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let heightReferenceView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        return view
+    }()
     
     //THIS WEEK VIEW
     lazy var weekLabel: UILabel = createTitleText(text: "This Week")
     let weekView = WeeklySubView(week: .currentWeek)
     
+    let currentWeekSuperView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        return view
+    }()
+    
     // LAST WEEK VIEW
     lazy var lastWeekLabel: UILabel = createTitleText(text: "Last Week")
     let lastWeekView = WeeklySubView(week: .lastWeek)
     
-    // STATISTICS
+    let lastWeekSuperView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        return view
+    }()
+    
+    // Weekly Statistics
     lazy var weeklyStatsLabel: UILabel = createTitleText(text: "Weekly Statistics")
-    lazy var monthlyStatsLabel: UILabel = createTitleText(text: "Monthly Statistics")
+    let weeklyAvgView = StatisticsAverageView(averageType: .weekly)
+    let weeklyPercentageView = StatisticsPercentageView(averageType: .weekly)
+    
     let weeklyStatView: UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         return view
     }()
     
-    let monthlyStatView: UIView = {
-        let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-        return view
-    }()
-    
-    // WEEKLY AVERAGE
-    let weeklyAvgView = StatisticsAverageView(averageType: .weekly)
-    let weeklyPercentageView = StatisticsPercentageView(averageType: .weekly)
-    
-    // MONTHLY AVERAGE
+    // Monthly Statistics
+    lazy var monthlyStatsLabel: UILabel = createTitleText(text: "Monthly Statistics")
     let monthlyAvgView = StatisticsAverageView(averageType: .monthly)
     let monthlyPercentageView = StatisticsPercentageView(averageType: .monthly)
+    
+    let monthlyStatView: UIView = {
+           let view = UIView()
+           view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+           return view
+       }()
     
     //BOTTOM VIEW
     let lastUpdatedLabel: UILabel = {
@@ -254,6 +301,13 @@ public class CommitsView: UIView {
         
     }()
     
+    
+    func setLastUpdatedLabel() {
+        if let lastUpdated = UserInfoHelper.shared.readInfo(info: .updateTime) as? Date {
+            lastUpdatedLabel.text = DateHelper.shared.getLastUpdatedText(myDate: lastUpdated)
+        }
+    }
+    
     internal func createTitleText(text: String) -> UILabel {
         let label = UILabel()
         label.font = UIFont.scaledFont(textStyle: .title3, weight: .medium)
@@ -266,28 +320,20 @@ public class CommitsView: UIView {
         return label
     }
     
-    func makeStatisticsView() {
-        if Constants.screenHeight < 700 {
-            weeklyStatView.snp.makeConstraints {
-                $0.width.equalTo(todayView.snp.width)
-                $0.centerX.equalToSuperview()
-                $0.top.equalTo(weeklyStatsLabel.snp.bottom).offset(3)
-                $0.bottom.equalTo(lastUpdatedLabel.snp.top).offset(-6)
-            }
-        } else {
-            weeklyStatView.snp.makeConstraints {
-                $0.width.equalTo(todayView.snp.width)
-                $0.centerX.equalToSuperview()
-                $0.top.equalTo(weeklyStatsLabel.snp.bottom).offset(3)
-                $0.height.equalTo(todayView.snp.height).multipliedBy(1.25)
-            }
+    func setupScrollView() {
+        scrollView.snp.makeConstraints{
+            $0.width.equalToSuperview()
+            $0.top.equalTo(todayView.snp.bottom).offset(4)
+            $0.left.right.equalToSuperview()
+            $0.bottom.equalTo(lastUpdatedLabel.snp.top)
         }
-    }
-    
-    func setLastUpdatedLabel() {
-        if let lastUpdated = UserInfoHelper.shared.readInfo(info: .updateTime) as? Date {
-            lastUpdatedLabel.text = DateHelper.shared.getLastUpdatedText(myDate: lastUpdated)
-        }
+        
+        scrollViewContainer.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        scrollViewContainer.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        scrollViewContainer.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        scrollViewContainer.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        // this is important for scrolling
+        scrollViewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     }
     
 }
