@@ -127,6 +127,20 @@ public class CommitsView: UIView {
             $0.bottom.equalTo(currentWeekSuperView.snp.bottom)
         }
         
+        if Constants.screenHeight > 1000 {
+            currentWeekSuperView.snp.remakeConstraints{
+                $0.width.equalTo(todayView.snp.width)
+                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.25)
+            }
+            
+            weekView.snp.remakeConstraints {
+                $0.width.equalTo(currentWeekSuperView.snp.width)
+                $0.height.equalTo(currentWeekSuperView.snp.height).multipliedBy(0.8)
+                $0.centerX.equalTo(heightReferenceView.snp.centerX)
+                $0.bottom.equalTo(currentWeekSuperView.snp.bottom)
+            }
+        }
+        
         weekView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
         // Last Week
@@ -141,7 +155,7 @@ public class CommitsView: UIView {
                 $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.23)
             }
         }
-
+        
         lastWeekLabel.snp.makeConstraints {
             $0.width.equalTo(todayView.snp.width)
             $0.left.equalTo(topView.nameLabel.snp.left)
@@ -154,6 +168,21 @@ public class CommitsView: UIView {
             $0.centerX.equalTo(heightReferenceView.snp.centerX)
             $0.bottom.equalTo(lastWeekSuperView.snp.bottom)
         }
+        
+        if Constants.screenHeight > 1000 {
+            lastWeekSuperView.snp.remakeConstraints{
+                $0.width.equalTo(todayView.snp.width)
+                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.25)
+            }
+            
+            lastWeekView.snp.remakeConstraints {
+                $0.width.equalTo(lastWeekSuperView.snp.width)
+                $0.height.equalTo(lastWeekSuperView.snp.height).multipliedBy(0.8)
+                $0.centerX.equalTo(heightReferenceView.snp.centerX)
+                $0.bottom.equalTo(lastWeekSuperView.snp.bottom)
+            }
+        }
+        
         lastWeekView.addShadowToView(shadowOpacity: 0.1, shadowRadius: 2)
         
         // Weekly Average
@@ -190,20 +219,20 @@ public class CommitsView: UIView {
             $0.width.equalTo(weeklyStatView.snp.width)
             $0.height.equalTo(weeklyStatView.snp.height)
         }
-
+        
         monthlyStatsLabel.snp.makeConstraints {
             $0.width.equalTo(weeklyStatsLabel.snp.width)
             $0.left.equalTo(weeklyStatsLabel.snp.left)
             $0.top.equalTo(monthlyStatView.snp.top)
         }
-
+        
         monthlyAvgView.snp.makeConstraints {
             $0.left.equalTo(topView.nameLabel.snp.left)
             $0.width.equalTo(monthlyStatView.snp.width).multipliedBy(0.48)
             $0.height.equalTo(monthlyStatView.snp.height).multipliedBy(0.8)
             $0.bottom.equalTo(monthlyStatView.snp.bottom)
         }
-
+        
         monthlyPercentageView.snp.makeConstraints {
             $0.right.equalTo(todayView.snp.right)
             $0.width.equalTo(monthlyAvgView.snp.width)
@@ -295,10 +324,10 @@ public class CommitsView: UIView {
     let monthlyPercentageView = StatisticsPercentageView(averageType: .monthly)
     
     let monthlyStatView: UIView = {
-           let view = UIView()
-           view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-           return view
-       }()
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        return view
+    }()
     
     //BOTTOM VIEW
     let lastUpdatedLabel: UILabel = {
@@ -379,7 +408,6 @@ public class CommitsView: UIView {
                     $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.23)
                 }
             }
-
             
             weekLabel.snp.remakeConstraints {
                 $0.width.equalTo(todayView.snp.width)
@@ -393,6 +421,21 @@ public class CommitsView: UIView {
                 $0.centerX.equalTo(heightReferenceView.snp.centerX)
                 $0.bottom.equalTo(currentWeekSuperView.snp.bottom)
             }
+            
+            if Constants.screenHeight > 1000 {
+                currentWeekSuperView.snp.remakeConstraints{
+                    $0.width.equalTo(todayView.snp.width)
+                    $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.25)
+                }
+                
+                weekView.snp.remakeConstraints {
+                    $0.width.equalTo(currentWeekSuperView.snp.width)
+                    $0.height.equalTo(currentWeekSuperView.snp.height).multipliedBy(0.8)
+                    $0.centerX.equalTo(heightReferenceView.snp.centerX)
+                    $0.bottom.equalTo(currentWeekSuperView.snp.bottom)
+                }
+            }
+            
         } else {
             weekLabel.text = "This Month"
             currentWeekSuperView.snp.remakeConstraints{
@@ -401,6 +444,13 @@ public class CommitsView: UIView {
             }
             
             if Constants.screenHeight < 700 {
+                currentWeekSuperView.snp.remakeConstraints{
+                    $0.width.equalTo(todayView.snp.width)
+                    $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.7)
+                }
+            }
+            
+            if Constants.screenHeight > 1000 {
                 currentWeekSuperView.snp.remakeConstraints{
                     $0.width.equalTo(todayView.snp.width)
                     $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.7)
@@ -436,7 +486,7 @@ public class CommitsView: UIView {
                     $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.23)
                 }
             }
-
+            
             lastWeekLabel.snp.remakeConstraints {
                 $0.width.equalTo(todayView.snp.width)
                 $0.left.equalTo(topView.nameLabel.snp.left)
@@ -448,6 +498,20 @@ public class CommitsView: UIView {
                 $0.height.equalTo(lastWeekSuperView.snp.height).multipliedBy(0.65)
                 $0.centerX.equalTo(heightReferenceView.snp.centerX)
                 $0.bottom.equalTo(lastWeekSuperView.snp.bottom)
+            }
+            
+            if Constants.screenHeight > 1000 {
+                lastWeekSuperView.snp.remakeConstraints{
+                    $0.width.equalTo(todayView.snp.width)
+                    $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.25)
+                }
+                
+                lastWeekView.snp.remakeConstraints {
+                    $0.width.equalTo(lastWeekSuperView.snp.width)
+                    $0.height.equalTo(lastWeekSuperView.snp.height).multipliedBy(0.8)
+                    $0.centerX.equalTo(heightReferenceView.snp.centerX)
+                    $0.bottom.equalTo(lastWeekSuperView.snp.bottom)
+                }
             }
         } else {
             lastWeekLabel.text = "Last Month"
@@ -462,6 +526,15 @@ public class CommitsView: UIView {
                     $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.7)
                 }
             }
+            
+            if Constants.screenHeight > 1000 {
+                lastWeekSuperView.snp.remakeConstraints{
+                    $0.width.equalTo(todayView.snp.width)
+                    $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.7)
+                }
+            }
+            
+            
             lastWeekLabel.snp.remakeConstraints {
                 $0.width.equalTo(todayView.snp.width)
                 $0.left.equalTo(topView.nameLabel.snp.left)
