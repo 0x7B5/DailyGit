@@ -51,6 +51,12 @@ public class StatisticsHelper {
             }
         }()
         
+        if lastWeeksAverage == 0 && thisWeeksAverage == 0 {
+            return (thisWeeksAverage.rounded(toPlaces: 2), 0)
+        } else if lastWeeksAverage == 0 {
+            return (thisWeeksAverage.rounded(toPlaces: 2), 100)
+        }
+        
         let percentageChange = (100 - ((thisWeeksAverage/lastWeeksAverage) * 100)).rounded(toPlaces: 1) * -1
         
         return (thisWeeksAverage.rounded(toPlaces: 2), percentageChange)
@@ -103,6 +109,13 @@ public class StatisticsHelper {
             }
         }()
         
+        
+        
+        if lastMonthsAverage == 0 && thisMonthsAverage == 0 {
+            return (thisMonthsAverage.rounded(toPlaces: 2), 0)
+        } else if lastMonthsAverage == 0 {
+            return (thisMonthsAverage.rounded(toPlaces: 2), 100)
+        }
         
         let percentageChange = (100 - ((thisMonthsAverage/lastMonthsAverage) * 100)).rounded(toPlaces: 1) * -1
         
@@ -182,6 +195,7 @@ public class StatisticsHelper {
                     sum = sum + 1
                 }
             }
+            
             
             return Int((sum/Double(count)).rounded(toPlaces: 0)) * 100
         } else {

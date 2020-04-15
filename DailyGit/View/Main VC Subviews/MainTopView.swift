@@ -55,7 +55,7 @@ public class MainTopView: UIView {
         
         
         nameLabel.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.5)
+            $0.width.equalToSuperview().multipliedBy(0.7)
             $0.left.equalToSuperview().inset(14)
             $0.centerY.equalToSuperview().multipliedBy(0.4)
         }
@@ -93,18 +93,16 @@ public class MainTopView: UIView {
         label.adjustsFontForContentSizeCategory = true
         
         let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
-        if name.count > 15 {
-            let nameSubString = String(name[...15])
-            label.text = nameSubString
-        } else {
-            label.text = name
-        }
+        
+        label.text = name
+        
+        label.lineBreakMode = .byClipping
         
         label.textAlignment = .left
         label.tag = 1
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.2
+        label.minimumScaleFactor = 0.5
         return label
     }()
     

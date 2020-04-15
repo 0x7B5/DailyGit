@@ -173,12 +173,8 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     
     func updateUI() {
         let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
-        if name.count > 15 {
-            let nameSubString = String(name[...15])
-            self.mainView.topView.nameLabel.text = nameSubString
-        } else {
-            self.mainView.topView.nameLabel.text = name
-        }
+        
+        self.mainView.topView.nameLabel.text = name
         
         self.mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
         self.mainView.topView.checkAllignmentForTitle()
