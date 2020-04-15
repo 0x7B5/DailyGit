@@ -60,6 +60,13 @@ public class StatisticsPercentageView: UIView {
             $0.centerY.equalToSuperview().multipliedBy(0.35)
             $0.left.equalTo(bottomLabel.snp.left)
         }
+        
+        if Constants.screenHeight < 600 {
+            bottomLabel.snp.remakeConstraints{
+                $0.bottom.equalToSuperview().inset(5)
+                $0.left.equalToSuperview().inset(5)
+            }
+        }
     }
     
     public let topLabel: UILabel = {

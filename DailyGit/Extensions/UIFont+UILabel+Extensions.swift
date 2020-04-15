@@ -38,12 +38,26 @@ extension UIFont {
         
         var scaler: CGFloat = 1.0
         if textStyle == .subheadline {
-            scaler = 4.0
+            if Constants.screenHeight < 736 && Constants.screenHeight > 600  {
+                scaler = 3.8
+            } else if Constants.screenHeight < 600 {
+                scaler = 3.0
+            } else {
+                 scaler = 4.0
+            }
         } else if textStyle == .headline {
-            if Constants.screenHeight < 736 {
+            if Constants.screenHeight < 736 && Constants.screenHeight > 600  {
                 scaler = 0.9
+            } else if Constants.screenHeight < 600 {
+                scaler = 0.75
             } else {
                 scaler = 0.95
+            }
+        } else if textStyle == .title3 {
+            if Constants.screenHeight < 736 && Constants.screenHeight > 600  {
+                scaler = 0.95
+            } else if Constants.screenHeight < 600 {
+                scaler = 0.8
             }
         }
         
