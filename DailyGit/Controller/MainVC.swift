@@ -56,22 +56,26 @@ class MainVC: UIViewController {
 //        self.todayView.currentStreak.addGestureRecognizer(tap)
     }
     
-    @objc func changeStreak() {
-        print("Tapped")
-        mainView.changeStreak()
-    }
-    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let firstTouch = touches.first {
             let hitView = self.view.hitTest(firstTouch.location(in: self.view), with: event)
             let position = firstTouch.location(in: view)
-            print(position)
             if hitView === self.todayView {
-                print("touch is inside")
-//                print(position)
+                handleTodayViewTouches(place: position)
             } else {
                 
             }
+        }
+    }
+    
+    func handleTodayViewTouches(place: CGPoint) {
+        let tempWidth = todayView.frame.width - todayView.frame.minX
+        if place.x < tempWidth/3 {
+            print("Yesterday")
+        } else if place.x > tempWidth/3 && place.x < ((tempWidth/3) * 2) {
+            print("Today")
+        } else if place.x > ((tempWidth/3) * 2) {
+            mainView.changeStreak()
         }
     }
     
