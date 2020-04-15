@@ -171,10 +171,21 @@ public class TodaySubView: CurvedView {
             yesterdayCommits.textColor = yesterdayContribution.color.getColor()
         }
         
-        if let currentStreakNum = UserInfoHelper.shared.readInfo(info: .currentStreak) as? Int {
-            currentStreak.text = String(currentStreakNum)
-            currentStreak.textColor = UserInfoHelper.shared.getStreakColor(commits: currentStreakNum)
+        if Constants.streakStatus == .current {
+            currentStreakLabel.text = "Current Streak"
+            if let currentStreakNum = UserInfoHelper.shared.readInfo(info: .currentStreak) as? Int {
+                currentStreak.text = String(currentStreakNum)
+                currentStreak.textColor = UserInfoHelper.shared.getStreakColor(commits: currentStreakNum)
+            }
+        } else {
+            currentStreakLabel.text = "Longest Streak"
+            if let longestStreakNum = UserInfoHelper.shared.readInfo(info: .longestStreak) as? Int {
+                currentStreak.text = String(longestStreakNum)
+                currentStreak.textColor = UserInfoHelper.shared.getStreakColor(commits: longestStreakNum)
+            }
         }
+        
+        
         
     }
     
