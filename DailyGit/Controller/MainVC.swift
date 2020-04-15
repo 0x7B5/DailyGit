@@ -181,6 +181,7 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
         }
         
         self.mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
+        self.mainView.topView.checkAllignmentForTitle()
         self.mainView.todayView.setNumberLabels()
         self.mainView.setLastUpdatedLabel()
         self.mainView.lastWeekView.setupColorsForWeek()

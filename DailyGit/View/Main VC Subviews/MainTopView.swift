@@ -44,6 +44,15 @@ public class MainTopView: UIView {
             $0.centerY.lessThanOrEqualToSuperview().multipliedBy(0.5)
         }
         
+        if Constants.screenWidth < 600 {
+            profileImage.snp.remakeConstraints{
+                $0.width.equalToSuperview().multipliedBy(Constants.profileImageWidth)
+                $0.height.equalTo(profileImage.snp.width)
+                $0.right.equalToSuperview().inset(14)
+                $0.centerY.lessThanOrEqualToSuperview().multipliedBy(0.6)
+            }
+        }
+        
         
         nameLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.5)
@@ -54,7 +63,7 @@ public class MainTopView: UIView {
         bioLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.6)
             $0.left.equalTo(nameLabel.snp.left).inset(3)
-            $0.top.equalTo(nameLabel.snp.bottom).offset(-1)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(-3)
         }
         //  bioLabel.sizeToFit()
         
@@ -107,7 +116,7 @@ public class MainTopView: UIView {
         label.adjustsFontForContentSizeCategory = true
         label.tag = 2
         label.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
-        label.numberOfLines = 4
+        label.numberOfLines = 2
         label.textAlignment = .left
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         label.lineBreakMode = .byTruncatingTail
@@ -116,13 +125,11 @@ public class MainTopView: UIView {
     
     func checkAllignmentForTitle() {
         if UserInfoHelper.shared.readInfo(info: .bio) as? String == "" {
-            //            nameLabel.textAlignment = .center
-            //            nameLabel.snp.makeConstraints{
-            //                $0.width.equalToSuperview().multipliedBy(0.4)
-            //                $0.centerX.equalToSuperview()
-            //                $0.height.equalToSuperview().multipliedBy(0.045)
-            //                $0.centerY.equalToSuperview().multipliedBy(0.34)
-            //            }
+            nameLabel.snp.remakeConstraints{
+                $0.width.equalToSuperview().multipliedBy(0.5)
+                $0.left.equalToSuperview().inset(14)
+                $0.centerY.equalToSuperview().multipliedBy(0.6)
+            }
         }
     }
     
