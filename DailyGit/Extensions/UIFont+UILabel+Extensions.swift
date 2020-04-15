@@ -40,7 +40,11 @@ extension UIFont {
         if textStyle == .subheadline {
             scaler = 4.0
         } else if textStyle == .headline {
-            scaler = 0.95
+            if Constants.screenHeight < 736 {
+                scaler = 0.9
+            } else {
+                scaler = 0.95
+            }
         }
         
         let customFont = UIFont.systemFont(ofSize: fontDescriptor.pointSize * scaler, weight: weight)
