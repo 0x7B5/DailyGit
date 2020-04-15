@@ -211,7 +211,7 @@ public class TodaySubView: CurvedView {
     
     func createDivider() -> UIView {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         return view
     }
 }

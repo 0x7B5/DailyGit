@@ -203,7 +203,6 @@ public class StatisticsHelper {
                     break
                 }
             }
-            print(Int((sum/Double(count)).rounded(toPlaces: 0)) * 100)
             return Int((sum/Double(count)).rounded(toPlaces: 0)) * 100
         } else {
             return 0
