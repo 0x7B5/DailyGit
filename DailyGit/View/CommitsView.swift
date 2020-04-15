@@ -436,8 +436,6 @@ public class CommitsView: UIView {
                     $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.23)
                 }
             }
-            
-            
 
             lastWeekLabel.snp.remakeConstraints {
                 $0.width.equalTo(todayView.snp.width)

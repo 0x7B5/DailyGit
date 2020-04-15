@@ -57,8 +57,13 @@ public class StatisticsPercentageView: UIView {
         
         topLabel.snp.makeConstraints{
             $0.width.equalToSuperview().multipliedBy(0.8)
-            $0.centerY.equalToSuperview().multipliedBy(0.35)
             $0.left.equalTo(bottomLabel.snp.left)
+            
+           if Constants.screenHeight > 1000 {
+             $0.centerY.equalToSuperview().multipliedBy(0.2)
+           } else {
+             $0.centerY.equalToSuperview().multipliedBy(0.35)
+            }
         }
         
         if Constants.screenHeight < 600 {

@@ -49,6 +49,14 @@ public class MainTopView: UIView {
                 $0.width.equalToSuperview().multipliedBy(Constants.profileImageWidth)
                 $0.height.equalTo(profileImage.snp.width)
                 $0.right.equalToSuperview().inset(14)
+                $0.centerY.lessThanOrEqualToSuperview().multipliedBy(0.5)
+            }
+        } else if Constants.screenHeight > 1000 {
+            profileImage.snp.remakeConstraints{
+                Constants.profileImageWidth = 0.15
+                $0.width.equalToSuperview().multipliedBy(Constants.profileImageWidth)
+                $0.height.equalTo(profileImage.snp.width)
+                $0.right.equalToSuperview().inset(14)
                 $0.centerY.lessThanOrEqualToSuperview().multipliedBy(0.6)
             }
         }

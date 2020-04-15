@@ -92,7 +92,13 @@ public class StatisticsAverageView: UIView {
         label.font = UIFont.scaledFont(textStyle: .headline, weight: .regular)
         label.adjustsFontForContentSizeCategory = true
         label.text = "contributions per day, this week"
-        label.numberOfLines = 2
+        
+        if Constants.screenHeight > 1000 {
+            label.numberOfLines = 1
+        } else {
+            label.numberOfLines = 2
+        }
+        
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
@@ -130,10 +136,20 @@ public class StatisticsAverageView: UIView {
         
         if self.viewType == .average {
             topLabel.text = "Average of:"
-            if thisStat == .weekly {
-                bottomLabel.text = "contributions per day,\nthis week"
+            
+            
+            if Constants.screenHeight > 1000 {
+                if thisStat == .weekly {
+                    bottomLabel.text = "contributions per day, this week"
+                } else {
+                    bottomLabel.text = "contributions per day, this month"
+                }
             } else {
-                bottomLabel.text = "contributions per day,\nthis month"
+                if thisStat == .weekly {
+                    bottomLabel.text = "contributions per day,\nthis week"
+                } else {
+                    bottomLabel.text = "contributions per day,\nthis month"
+                }
             }
             averageCommitsNumber.text = String(temp.0)
             averageCommitsNumber.textColor = StatisticsHelper.shared.getColor(commits: temp.0)
