@@ -399,6 +399,14 @@ public class CommitsView: UIView {
                 $0.width.equalTo(todayView.snp.width)
                 $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.58)
             }
+            
+            if Constants.screenHeight < 700 {
+                currentWeekSuperView.snp.remakeConstraints{
+                    $0.width.equalTo(todayView.snp.width)
+                    $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.7)
+                }
+            }
+            
             weekLabel.snp.remakeConstraints {
                 $0.width.equalTo(todayView.snp.width)
                 $0.left.equalTo(topView.nameLabel.snp.left)
@@ -448,6 +456,13 @@ public class CommitsView: UIView {
             lastWeekSuperView.snp.remakeConstraints{
                 $0.width.equalTo(todayView.snp.width)
                 $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.55)
+            }
+            
+            if Constants.screenHeight < 700 {
+                lastWeekSuperView.snp.remakeConstraints{
+                    $0.width.equalTo(todayView.snp.width)
+                    $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.7)
+                }
             }
             lastWeekLabel.snp.remakeConstraints {
                 $0.width.equalTo(todayView.snp.width)
