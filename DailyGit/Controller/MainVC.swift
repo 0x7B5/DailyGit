@@ -8,11 +8,14 @@
 
 import UIKit
 
-class MainVC: UIViewController {
+class MainVC: UIViewController, UIGestureRecognizerDelegate {
     
     lazy var mainView = CommitsView()
     unowned var topView: UIView { return mainView.topView}
     unowned var todayView: TodaySubView { return mainView.todayView}
+    unowned var scrollView: UIScrollView {return mainView.scrollView}
+    unowned var monthlyAvgView: StatisticsAverageView {return mainView.monthlyAvgView}
+    unowned var weeklyAvgView: StatisticsAverageView {return mainView.weeklyAvgView}
     
     override func viewDidLayoutSubviews() {
         mainView.topView.profileImage.makeRounded(frameSize: self.mainView.topView.frame.width)
@@ -32,13 +35,43 @@ class MainVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        addTapGestures()
-        StatisticsHelper.shared.monthlyAverage()
         setupNavController()
         updateUI()
         updateInfo()
         NotificationCenter.default.addObserver(self, selector: #selector(autoRefresher), name: NSNotification.Name(rawValue: "refresh"), object: nil)
+        addTouchRecognizer()
         
+    }
+    
+    func addTouchRecognizer() {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(monthlySwitch))
+        gestureRecognizer.delegate = self
+        monthlyAvgView.addGestureRecognizer(gestureRecognizer)
+        
+        let gestureRecognizerTwo = UITapGestureRecognizer(target: self, action: #selector(weeklySwitch))
+        gestureRecognizerTwo.delegate = self
+        weeklyAvgView.addGestureRecognizer(gestureRecognizerTwo)
+        
+    }
+    
+    @objc func monthlySwitch() {
+        if monthlyAvgView.viewType == .percent {
+            monthlyAvgView.viewType = .average
+        } else {
+            monthlyAvgView.viewType = .percent
+        }
+        
+        monthlyAvgView.changeNum()
+    }
+    
+    @objc func weeklySwitch() {
+        if weeklyAvgView.viewType == .percent {
+            weeklyAvgView.viewType = .average
+        } else {
+            weeklyAvgView.viewType = .percent
+        }
+        
+        weeklyAvgView.changeNum()
     }
     
     func updateInfo() {
@@ -50,11 +83,6 @@ class MainVC: UIViewController {
         
     }
     
-    func addTapGestures() {
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(changeStreak))
-//        self.todayView.addGestureRecognizer(tap)
-//        self.todayView.currentStreak.addGestureRecognizer(tap)
-    }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let firstTouch = touches.first {

@@ -14,8 +14,13 @@ enum AverageType {
     case monthly, weekly
 }
 
+enum StatAvgViewType {
+    case average, percent
+}
+
 public class StatisticsAverageView: UIView {
     var thisStat: AverageType
+    var viewType: StatAvgViewType = .average
     
     init(averageType: AverageType) {
         self.thisStat = averageType
@@ -37,29 +42,25 @@ public class StatisticsAverageView: UIView {
     
     private func initializeUI() {
         addSubview(averageCommitsNumber)
-        addSubview(contributionsLabel)
-        addSubview(percentLabel)
-        addSubview(fromLabel)
+        addSubview(topLabel)
+        addSubview(bottomLabel)
     }
     
     public func createConstraints() {
         averageCommitsNumber.snp.makeConstraints{
-            $0.width.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.6)
-            $0.centerX.equalToSuperview().multipliedBy(1.13)
+            $0.centerY.equalToSuperview().multipliedBy(0.9)
+            $0.centerX.equalToSuperview()
         }
-        contributionsLabel.snp.makeConstraints{
-            $0.width.equalToSuperview()
-            $0.top.equalTo(averageCommitsNumber.snp.bottom).inset(10)
-            $0.left.equalTo(averageCommitsNumber.snp.left)
+        
+        bottomLabel.snp.makeConstraints{
+            $0.bottom.equalToSuperview().inset(10)
+            $0.left.equalToSuperview().inset(10)
         }
-        percentLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(20)
-            $0.left.equalTo(contributionsLabel)
-        }
-        fromLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(20)
-            $0.left.equalTo(percentLabel.snp.right).offset(5)
+        
+        topLabel.snp.makeConstraints{
+            $0.width.equalToSuperview().multipliedBy(0.8)
+            $0.centerY.equalToSuperview().multipliedBy(0.2)
+            $0.left.equalTo(bottomLabel.snp.left)
         }
     }
     
@@ -78,33 +79,23 @@ public class StatisticsAverageView: UIView {
     }()
     
     #warning("Make this smaller and bolder")
-    public let contributionsLabel: UILabel = {
+    public let bottomLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.scaledFont(textStyle: .headline, weight: .regular)
         label.adjustsFontForContentSizeCategory = true
-        label.text = "contributions per day"
+        label.text = "contributions per day, this week"
+        label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return label
     }()
     
-    public let percentLabel: UILabel = {
+    public let topLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.scaledFont(textStyle: .headline, weight: .regular)
         label.adjustsFontForContentSizeCategory = true
-        label.text = "0%"
-        label.adjustsFontSizeToFitWidth = true
-        label.textAlignment = .left
-        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        return label
-    }()
-    
-    public let fromLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.scaledFont(textStyle: .headline, weight: .regular)
-        label.adjustsFontForContentSizeCategory = true
-        label.text = ""
+        label.text = "Average of:"
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
@@ -118,18 +109,41 @@ public class StatisticsAverageView: UIView {
     
     
     public func setupLabels() {
+        changeNum()
+    }
+    
+    func changeNum() {
         var temp: (Double, Double)
         if thisStat == .weekly {
             temp = StatisticsHelper.shared.weeklyAverage()
-            fromLabel.text = "from last week"
         } else {
             temp = StatisticsHelper.shared.monthlyAverage()
-            fromLabel.text = "from last month"
         }
-        averageCommitsNumber.text = String(temp.0)
-        averageCommitsNumber.textColor = StatisticsHelper.shared.getColor(commits: temp.0)
         
-        percentLabel.text = String(temp.1) + "%"
-        percentLabel.textColor = StatisticsHelper.shared.getPercentColor(num: temp.1)
+        if self.viewType == .average {
+            topLabel.text = "Average of:"
+            if thisStat == .weekly {
+                bottomLabel.text = "contributions per day,\nthis week"
+            } else {
+                bottomLabel.text = "contributions per day,\nthis month"
+            }
+            averageCommitsNumber.text = String(temp.0)
+            averageCommitsNumber.textColor = StatisticsHelper.shared.getColor(commits: temp.0)
+        } else {
+            averageCommitsNumber.text = String(temp.1) + "%"
+            averageCommitsNumber.textColor = StatisticsHelper.shared.getPercentColor(num: temp.1)
+            if temp.1 > 0.0 {
+                topLabel.text = "Up:"
+            } else {
+                topLabel.text = "Down:"
+            }
+            
+            if thisStat == .weekly {
+                bottomLabel.text = "from last week"
+            } else {
+                bottomLabel.text = "from last month"
+            }
+            
+        }
     }
 }

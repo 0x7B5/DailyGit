@@ -52,5 +52,6 @@ public struct Constants {
     }
     
     static var streakStatus: StreakStatus = .current
+    
 }
 

@@ -14,7 +14,7 @@ import SnapKit
 public class StatisticsPercentageView: UIView {
     var thisStat: AverageType
     
-   init(averageType: AverageType) {
+    init(averageType: AverageType) {
         self.thisStat = averageType
         super.init(frame: CGRect.zero)
         backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -45,9 +45,8 @@ public class StatisticsPercentageView: UIView {
         }
         
         bottomLabel.snp.makeConstraints{
-//            $0.top.equalTo(percentageNumber.snp.bottom)
             $0.bottom.equalToSuperview().inset(10)
-            $0.centerX.equalToSuperview().multipliedBy(0.65)
+            $0.left.equalToSuperview().inset(10)
         }
         
         topLabel.snp.makeConstraints{
@@ -63,6 +62,7 @@ public class StatisticsPercentageView: UIView {
         label.adjustsFontForContentSizeCategory = true
         label.text = ""
         label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .left
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return label
