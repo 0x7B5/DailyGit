@@ -131,9 +131,9 @@ public class WeeklySubView: CurvedView {
             for i in 0..<7 {
                 commits[i].snp.remakeConstraints {
                     $0.height.equalToSuperview().multipliedBy(0.18)
-                    $0.width.equalTo(commits[0].snp.height).multipliedBy(1.1)
+                    $0.width.equalTo(commits[0].snp.height)
                     $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
-                    $0.top.equalToSuperview().offset(5)
+                    $0.top.equalToSuperview().offset(7)
                     currentCenterXMulitplier += 0.28
                 }
             }
@@ -142,9 +142,9 @@ public class WeeklySubView: CurvedView {
             for i in 7..<14 {
                 commits[i].snp.remakeConstraints {
                     $0.height.equalToSuperview().multipliedBy(0.18)
-                    $0.width.equalTo(commits[0].snp.height).multipliedBy(1.1)
+                    $0.width.equalTo(commits[0].snp.height)
                     $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
-                    $0.top.equalTo(commits[0].snp.bottom).multipliedBy(1.05)
+                    $0.top.equalTo(commits[0].snp.bottom).multipliedBy(1.045)
                     currentCenterXMulitplier += 0.28
                 }
             }
@@ -154,9 +154,9 @@ public class WeeklySubView: CurvedView {
             for i in 14..<21 {
                 commits[i].snp.remakeConstraints {
                     $0.height.equalToSuperview().multipliedBy(0.18)
-                    $0.width.equalTo(commits[0].snp.height).multipliedBy(1.1)
+                    $0.width.equalTo(commits[0].snp.height)
                     $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
-                    $0.top.equalTo(commits[7].snp.bottom).multipliedBy(1.025)
+                    $0.top.equalTo(commits[7].snp.bottom).multipliedBy(1.015)
                     currentCenterXMulitplier += 0.28
                 }
             }
@@ -166,9 +166,9 @@ public class WeeklySubView: CurvedView {
             for i in 21..<28 {
                 commits[i].snp.remakeConstraints {
                     $0.height.equalToSuperview().multipliedBy(0.18)
-                    $0.width.equalTo(commits[0].snp.height).multipliedBy(1.1)
+                    $0.width.equalTo(commits[0].snp.height)
                     $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
-                    $0.top.equalTo(commits[15].snp.bottom).multipliedBy(1.025)
+                    $0.top.equalTo(commits[15].snp.bottom).multipliedBy(1.015)
                     currentCenterXMulitplier += 0.28
                 }
             }
@@ -179,9 +179,9 @@ public class WeeklySubView: CurvedView {
                 for i in 28..<commits.count {
                     commits[i].snp.remakeConstraints {
                         $0.height.equalToSuperview().multipliedBy(0.18)
-                        $0.width.equalTo(commits[0].snp.height).multipliedBy(1.1)
+                        $0.width.equalTo(commits[0].snp.height)
                         $0.centerX.equalToSuperview().multipliedBy(currentCenterXMulitplier)
-                        $0.top.equalTo(commits[23].snp.bottom).multipliedBy(1.025)
+                        $0.top.equalTo(commits[22].snp.bottom).multipliedBy(1.015)
                         currentCenterXMulitplier += 0.28
                     }
                 }

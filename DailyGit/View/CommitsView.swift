@@ -397,7 +397,7 @@ public class CommitsView: UIView {
             weekLabel.text = "This Month"
             currentWeekSuperView.snp.remakeConstraints{
                 $0.width.equalTo(todayView.snp.width)
-                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.5)
+                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.58)
             }
             weekLabel.snp.remakeConstraints {
                 $0.width.equalTo(todayView.snp.width)
@@ -447,7 +447,7 @@ public class CommitsView: UIView {
             lastWeekLabel.text = "Last Month"
             lastWeekSuperView.snp.remakeConstraints{
                 $0.width.equalTo(todayView.snp.width)
-                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.5)
+                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.55)
             }
             lastWeekLabel.snp.remakeConstraints {
                 $0.width.equalTo(todayView.snp.width)
