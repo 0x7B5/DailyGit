@@ -142,7 +142,7 @@ public class StatisticsHelper {
         } else if num < 0.0 {
             return #colorLiteral(red: 0.9069225192, green: 0.298107028, blue: 0.2358772755, alpha: 1)
         } else {
-            return "#196127".getColor()
+            return "#ebedf0".getColor()
         }
     }
     
@@ -233,7 +233,7 @@ public class StatisticsHelper {
         } else if num <= 100 {
             return "#239a3b".getColor()
         }
-        return "#196127".getColor()
+        return "#ebedf0".getColor()
     }
     
     

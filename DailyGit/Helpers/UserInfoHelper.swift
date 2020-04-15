@@ -156,7 +156,7 @@ public class UserInfoHelper {
         } else if commits <= 100 {
             return "#239a3b".getColor()
         }
-        return "#196127".getColor()
+        return "#ebedf0".getColor()
     }
     
     

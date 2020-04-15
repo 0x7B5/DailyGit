@@ -106,6 +106,14 @@ public class CommitsView: UIView {
             $0.width.equalTo(todayView.snp.width)
             $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.2)
         }
+        
+        if Constants.screenHeight < 700 {
+            currentWeekSuperView.snp.remakeConstraints{
+                $0.width.equalTo(todayView.snp.width)
+                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.23)
+            }
+        }
+        
         weekLabel.snp.makeConstraints {
             $0.width.equalTo(todayView.snp.width)
             $0.left.equalTo(topView.nameLabel.snp.left)
@@ -125,6 +133,13 @@ public class CommitsView: UIView {
         lastWeekSuperView.snp.makeConstraints{
             $0.width.equalTo(todayView.snp.width)
             $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.2)
+        }
+        
+        if Constants.screenHeight < 700 {
+            lastWeekSuperView.snp.remakeConstraints{
+                $0.width.equalTo(todayView.snp.width)
+                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.23)
+            }
         }
 
         lastWeekLabel.snp.makeConstraints {
@@ -357,6 +372,15 @@ public class CommitsView: UIView {
                 $0.width.equalTo(todayView.snp.width)
                 $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.2)
             }
+            
+            if Constants.screenHeight < 700 {
+                currentWeekSuperView.snp.remakeConstraints{
+                    $0.width.equalTo(todayView.snp.width)
+                    $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.23)
+                }
+            }
+
+            
             weekLabel.snp.remakeConstraints {
                 $0.width.equalTo(todayView.snp.width)
                 $0.left.equalTo(topView.nameLabel.snp.left)
@@ -397,6 +421,15 @@ public class CommitsView: UIView {
                 $0.width.equalTo(todayView.snp.width)
                 $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.2)
             }
+            
+            if Constants.screenHeight < 700 {
+                lastWeekSuperView.snp.remakeConstraints{
+                    $0.width.equalTo(todayView.snp.width)
+                    $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.23)
+                }
+            }
+            
+            
 
             lastWeekLabel.snp.remakeConstraints {
                 $0.width.equalTo(todayView.snp.width)
