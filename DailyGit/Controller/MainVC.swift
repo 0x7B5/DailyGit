@@ -20,6 +20,9 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     unowned var monthlyPercentView: StatisticsPercentageView {return mainView.monthlyPercentageView}
     unowned var weeklyPercentView: StatisticsPercentageView {return mainView.weeklyPercentageView}
     
+    unowned var thisWeekView: WeeklySubView {return mainView.weekView}
+    unowned var lastWeekView: WeeklySubView {return mainView.lastWeekView}
+    
     override func viewDidLayoutSubviews() {
         mainView.topView.profileImage.makeRounded(frameSize: self.mainView.topView.frame.width)
     }
@@ -65,8 +68,35 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
         gestureRecognizerFour.delegate = self
         weeklyPercentView.addGestureRecognizer(gestureRecognizerFour)
         
+        let gestureRecognizerFive = UITapGestureRecognizer(target: self, action: #selector(weekSwitch))
+        gestureRecognizerFive.delegate = self
+        thisWeekView.addGestureRecognizer(gestureRecognizerFive)
+        
+        let gestureRecognizerSix = UITapGestureRecognizer(target: self, action: #selector(lastWeekSwitch))
+        gestureRecognizerSix.delegate = self
+        lastWeekView.addGestureRecognizer(gestureRecognizerSix)
+        
         
     }
+    
+    @objc func lastWeekSwitch() {
+        if lastWeekView.viewType == .week {
+            lastWeekView.viewType = .month
+        } else {
+            lastWeekView.viewType = .week
+        }
+        mainView.switchLastWeek()
+    }
+    
+    @objc func weekSwitch() {
+        if thisWeekView.viewType == .week {
+            thisWeekView.viewType = .month
+        } else {
+            thisWeekView.viewType = .week
+        }
+        mainView.switchThisWeek()
+    }
+    
     @objc func monthlyPercentSwitch() {
         if monthlyPercentView.viewType == .percent {
             monthlyPercentView.viewType = .number

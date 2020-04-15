@@ -49,6 +49,7 @@ public class StatisticsAverageView: UIView {
     public func createConstraints() {
         averageCommitsNumber.snp.makeConstraints{
             $0.centerY.equalToSuperview().multipliedBy(0.9)
+            $0.width.equalToSuperview()
             $0.centerX.equalToSuperview()
         }
         
@@ -71,7 +72,7 @@ public class StatisticsAverageView: UIView {
         print(label.font ?? "Font can't be found")
         label.adjustsFontForContentSizeCategory = true
         label.text = "16"
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
         label.textColor = UserInfoHelper.shared.getStreakColor(commits: 0)

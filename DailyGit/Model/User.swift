@@ -102,6 +102,67 @@ struct User: Codable {
         }
     }
     
+    var currentMonth: ContributionList {
+        get {
+            var randContList = [Contribution]()
+            for element in contributions.contributions.reversed() {
+                if DateHelper.shared.isInMonth(myDate: element.date) {
+                    randContList.append(element)
+                } else {
+                    break
+                }
+            }
+            
+            var temp = [Contribution]()
+            for i in randContList.reversed() {
+                temp.append(i)
+            }
+            
+            return ContributionList(contributions: temp.compactMap { $0 })
+        }
+    }
+    
+    var lastMonth: ContributionList {
+        get {
+            var randContList = [Contribution]()
+            var contributionsCopy = contributions.contributions
+           let thisMonthsAverage: Double = {
+                if contributions != nil {
+                    var count = 0
+                    var sum = 0.0
+                    for i in contributionsCopy.reversed() {
+                        if DateHelper.shared.isInMonth(myDate: i.date) {
+                            count = count + 1
+                            sum = sum + Double(i.count)
+                        } else {
+                            break
+                        }
+                    }
+                    contributionsCopy = Array(contributionsCopy.prefix(upTo:(contributionsCopy.count-count)))
+                    return sum/Double(count)
+                    
+                } else {
+                    return 1
+                }
+            }()
+            
+            for i in contributionsCopy.reversed() {
+                if DateHelper.shared.isInLastMonth(myDate: i.date) {
+                    randContList.append(i)
+                } else {
+                    break
+                }
+            }
+            
+            var temp = [Contribution]()
+            for i in randContList.reversed() {
+                temp.append(i)
+            }
+            
+            return ContributionList(contributions: temp.compactMap { $0 })
+        }
+    }
+    
     init (name: String, username: String, bio: String, photoUrl: String, dateCreated: String, yearCreated: Int, contributions: ContributionList) {
         self.name = name
         self.username = username

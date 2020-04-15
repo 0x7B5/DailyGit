@@ -47,6 +47,7 @@ public class StatisticsPercentageView: UIView {
         percentageNumber.snp.makeConstraints{
             $0.centerY.equalToSuperview().multipliedBy(1.1)
             $0.centerX.equalToSuperview()
+            $0.width.equalToSuperview()
         }
         
         bottomLabel.snp.makeConstraints{

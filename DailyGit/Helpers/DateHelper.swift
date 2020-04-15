@@ -120,6 +120,25 @@ public class DateHelper {
         print(Date())
     }
     
+    
+    func getNumberOfDaysInCurrentMonth() -> Int {
+        let calendar = Calendar.current
+
+        let range = calendar.range(of: .day, in: .month, for: Date())!
+        let numDays = range.count
+        
+        return numDays
+    }
+    
+    func getNumberOfDaysInLastMonth() -> Int {
+        let calendar = Calendar.current
+
+        let range = calendar.range(of: .day, in: .month, for: Date())!
+        let numDays = range.count
+        
+        return numDays
+    }
+    
     func getLastUpdatedText(myDate: Date) -> String {
         var dayUpdated = ""
         var timeOfDay = "AM"

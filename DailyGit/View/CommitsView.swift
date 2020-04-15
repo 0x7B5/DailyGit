@@ -354,4 +354,85 @@ public class CommitsView: UIView {
         todayView.changeStreak()
     }
     
+    func switchThisWeek() {
+        if weekView.viewType == .week {
+            weekLabel.text = "This Week"
+            currentWeekSuperView.snp.remakeConstraints{
+                $0.width.equalTo(todayView.snp.width)
+                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.2)
+            }
+            weekLabel.snp.remakeConstraints {
+                $0.width.equalTo(todayView.snp.width)
+                $0.left.equalTo(topView.nameLabel.snp.left)
+                $0.top.equalTo(currentWeekSuperView.snp.top)
+            }
+            
+            weekView.snp.remakeConstraints {
+                $0.width.equalTo(currentWeekSuperView.snp.width)
+                $0.height.equalTo(currentWeekSuperView.snp.height).multipliedBy(0.65)
+                $0.centerX.equalTo(heightReferenceView.snp.centerX)
+                $0.bottom.equalTo(currentWeekSuperView.snp.bottom)
+            }
+        } else {
+            weekLabel.text = "This Month"
+            currentWeekSuperView.snp.remakeConstraints{
+                $0.width.equalTo(todayView.snp.width)
+                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.5)
+            }
+            weekLabel.snp.remakeConstraints {
+                $0.width.equalTo(todayView.snp.width)
+                $0.left.equalTo(topView.nameLabel.snp.left)
+                $0.top.equalTo(currentWeekSuperView.snp.top)
+            }
+            
+            weekView.snp.remakeConstraints {
+                $0.width.equalTo(currentWeekSuperView.snp.width)
+                $0.height.equalTo(currentWeekSuperView.snp.height).multipliedBy(0.9)
+                $0.centerX.equalTo(heightReferenceView.snp.centerX)
+                $0.bottom.equalTo(currentWeekSuperView.snp.bottom)
+            }
+        }
+        weekView.setupColorsForWeek()
+    }
+    func switchLastWeek() {
+        if lastWeekView.viewType == .week {
+            lastWeekLabel.text = "Last Week"
+            lastWeekSuperView.snp.remakeConstraints{
+                $0.width.equalTo(todayView.snp.width)
+                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.2)
+            }
+
+            lastWeekLabel.snp.remakeConstraints {
+                $0.width.equalTo(todayView.snp.width)
+                $0.left.equalTo(topView.nameLabel.snp.left)
+                $0.top.equalTo(lastWeekSuperView.snp.top)
+            }
+            
+            lastWeekView.snp.remakeConstraints {
+                $0.width.equalTo(lastWeekSuperView.snp.width)
+                $0.height.equalTo(lastWeekSuperView.snp.height).multipliedBy(0.65)
+                $0.centerX.equalTo(heightReferenceView.snp.centerX)
+                $0.bottom.equalTo(lastWeekSuperView.snp.bottom)
+            }
+        } else {
+            lastWeekLabel.text = "Last Month"
+            lastWeekSuperView.snp.remakeConstraints{
+                $0.width.equalTo(todayView.snp.width)
+                $0.height.equalTo(heightReferenceView.snp.height).multipliedBy(0.5)
+            }
+            lastWeekLabel.snp.remakeConstraints {
+                $0.width.equalTo(todayView.snp.width)
+                $0.left.equalTo(topView.nameLabel.snp.left)
+                $0.top.equalTo(lastWeekSuperView.snp.top)
+            }
+            
+            lastWeekView.snp.remakeConstraints {
+                $0.width.equalTo(lastWeekSuperView.snp.width)
+                $0.height.equalTo(lastWeekSuperView.snp.height).multipliedBy(0.9)
+                $0.centerX.equalTo(heightReferenceView.snp.centerX)
+                $0.bottom.equalTo(lastWeekSuperView.snp.bottom)
+            }
+        }
+        lastWeekView.setupColorsForWeek()
+    }
 }
