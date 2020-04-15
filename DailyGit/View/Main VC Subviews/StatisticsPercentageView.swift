@@ -11,8 +11,13 @@ import UIKit
 import SnapKit
 
 
+enum StatPercentType {
+    case percent, number
+}
+
 public class StatisticsPercentageView: UIView {
     var thisStat: AverageType
+    var viewType: StatPercentType = .percent
     
     init(averageType: AverageType) {
         self.thisStat = averageType
@@ -94,6 +99,10 @@ public class StatisticsPercentageView: UIView {
     
     
     public func setupLabels() {
+        changeNum()
+    }
+    
+    func changeNum() {
         var percent = 0
         if thisStat == .weekly {
             topLabel.text = "This week, you've had a contribution:"
@@ -102,8 +111,19 @@ public class StatisticsPercentageView: UIView {
             topLabel.text = "This month, you've had a contribution:"
             percent = StatisticsHelper.shared.monthlyPercent()
         }
-        percentageNumber.text = String(percent) + "%"
-        percentageNumber.textColor = StatisticsHelper.shared.getPercentageColor(num: percent)
+        
+        if viewType == .number {
+            var stats = (0,0)
+            if thisStat == .weekly {
+                stats = StatisticsHelper.shared.weeklyDays()
+            } else {
+                stats = StatisticsHelper.shared.monthlyDays()
+            }
+            percentageNumber.text = String(stats.0) + "/" + String(stats.1)
+            percentageNumber.textColor = StatisticsHelper.shared.getPercentageColor(num: percent)
+        } else {
+            percentageNumber.text = String(percent) + "%"
+            percentageNumber.textColor = StatisticsHelper.shared.getPercentageColor(num: percent)
+        }
     }
-    
 }

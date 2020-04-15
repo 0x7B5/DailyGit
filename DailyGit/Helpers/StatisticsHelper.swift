@@ -133,6 +133,46 @@ public class StatisticsHelper {
         }
     }
     
+    func monthlyDays() -> (Int, Int) {
+        if contributions != nil {
+            var sum = 0
+            for i in contributions!.contributions.reversed() {
+                if DateHelper.shared.isInMonth(myDate: i.date) {
+                    if i.count > 0 {
+                        sum = sum + 1
+                    }
+                } else {
+                    break
+                }
+            }
+            let calendar = Calendar.current
+
+            let range = calendar.range(of: .day, in: .month, for: Date())!
+            let numDays = range.count
+            
+            return (sum, numDays)
+        } else {
+            return (0, 30)
+        }
+        
+    }
+    
+    func weeklyDays() -> (Int, Int) {
+        if let weeklyConts = UserInfoHelper.shared.readInfo(info: .currentWeek) as? ContributionList {
+            var sum = 0
+            for i in weeklyConts.contributions {
+                if i.count > 0 {
+                    sum = sum + 1
+                }
+            }
+            
+            return (sum, 7)
+        } else {
+            return (0,7)
+        }
+        
+    }
+    
     func weeklyPercent() -> Int {
         if let weeklyConts = UserInfoHelper.shared.readInfo(info: .currentWeek) as? ContributionList {
             var sum = 0.0
