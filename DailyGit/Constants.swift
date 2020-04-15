@@ -53,5 +53,15 @@ public struct Constants {
     
     static var streakStatus: StreakStatus = .current
     
+    static var fullName: String {
+        get {
+            let defaults = UserDefaults.standard
+            if let val = defaults.object(forKey: "HeaderName") as? String {
+                return val
+            }
+            return "full"
+        }
+    }
+    
 }
 

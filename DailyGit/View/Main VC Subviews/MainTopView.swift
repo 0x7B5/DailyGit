@@ -92,7 +92,14 @@ public class MainTopView: UIView {
         label.font = UIFont.scaledFont(textStyle: .largeTitle, weight: .bold)
         label.adjustsFontForContentSizeCategory = true
         
-        let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
+        var name = ""
+        
+        if Constants.fullName == "full" {
+            name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
+        } else {
+            name = (UserInfoHelper.shared.readInfo(info: .username) as? String ?? "")
+        }
+        
         
         label.text = name
         

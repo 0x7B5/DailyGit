@@ -172,7 +172,13 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     
     
     func updateUI() {
-        let name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
+        var name = ""
+        
+        if Constants.fullName == "full" {
+            name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
+        } else {
+            name = (UserInfoHelper.shared.readInfo(info: .username) as? String ?? "")
+        }
         
         self.mainView.topView.nameLabel.text = name
         

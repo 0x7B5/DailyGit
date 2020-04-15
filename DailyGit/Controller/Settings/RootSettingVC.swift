@@ -29,10 +29,6 @@ class RootSettingVC: QuickTableViewController {
             Section(title: "Username", rows: [
                 NavigationRow(text: "Change Account", detailText: .subtitle("Current Username: \(UserInfoHelper.shared.readInfo(info: .username) as? String ?? "")"), action: { [weak self] _ in
                     let nextViewController = OnboardingVC()
-//                    navController.modalPresentationStyle = .fullScreen
-//                    self!.present(navController, animated: true, completion: nil)
-                    
-//                    /let nextViewController = RootSettingVC()
                     self?.navigationController?.pushViewController(nextViewController, animated: true)
                 })
             ]),
@@ -42,7 +38,7 @@ class RootSettingVC: QuickTableViewController {
                 SwitchRow(text: "Profane Notifications", switchValue: Constants.profaneNotications, action: { [weak self] _ in
                     self?.changeNotificationsToProfane()
                 }),
-                SwitchRow(text: "Auto Refresh", switchValue: Constants.timerStatus, action: { [weak self] _ in
+                SwitchRow(text: "Low Power Mode", switchValue: !(Constants.timerStatus), action: { [weak self] _ in
                     #warning("Take out in production")
                     if Constants.timerStatus {
                         AutoUpdater.shared.stopTimer()
@@ -54,12 +50,25 @@ class RootSettingVC: QuickTableViewController {
             ]),
             
             
-                        Section(title: "RESET DEFAULTS", rows: [
+            Section(title: "RESET DEFAULTS", rows: [
+                
+                TapActionRow(text: "DEBUG DEBUG", action: { [weak self] _ in
+                    self?.resetDefaults()
+                })
+            ], footer: ""),
             
-                            TapActionRow(text: "DEBUG DEBUG", action: { [weak self] _ in
-                                self?.resetDefaults()
-                            })
-                        ], footer: ""),
+            RadioSection(title: "Header Appearance", options: [
+                OptionRow(text: "Full Name", isSelected: Constants.fullName == "full", action: { [weak self] _ in
+                    let defaults = UserDefaults.standard
+                    defaults.set("full", forKey: "HeaderName")
+                    defaults.synchronize()
+                }),
+                OptionRow(text: "Username", isSelected: Constants.fullName == "username", action: { [weak self] _ in
+                    let defaults = UserDefaults.standard
+                    defaults.set("username", forKey: "HeaderName")
+                    defaults.synchronize()
+                }),
+            ], footer: ""),
             
         ]
     }
