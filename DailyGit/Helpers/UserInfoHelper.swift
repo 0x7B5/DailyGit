@@ -78,6 +78,18 @@ public class UserInfoHelper {
     
     
     func refreshEverything(completion: @escaping () -> ()) {
+        #if os(watchOS)
+        if currentState == .goodToRefresh {
+            currentState = .alreadyRefreshing
+            GithubDataManager.shared.updateInfo(completion: {
+                self.currentState = .goodToRefresh
+                completion()
+            })
+        } else {
+            currentState = .goodToRefresh
+            completion()
+        }
+        #else
         if Reachability.shared.isConnectedToNetwork() {
             if currentState == .goodToRefresh {
                 currentState = .alreadyRefreshing
@@ -90,6 +102,7 @@ public class UserInfoHelper {
             currentState = .goodToRefresh
             completion()
         }
+        #endif
     }
     
     func resetDefaults() {

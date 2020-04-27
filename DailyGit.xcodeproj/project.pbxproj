@@ -21,6 +21,14 @@
 		CC428C0D2441739500517EA8 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0C2441739500517EA8 /* Double+Extensions.swift */; };
 		CC428C0F2441867700517EA8 /* StatisticsAverageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0E2441867700517EA8 /* StatisticsAverageView.swift */; };
 		CC428C1124418CDD00517EA8 /* StatisticsPercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C1024418CDD00517EA8 /* StatisticsPercentageView.swift */; };
+		CC524B1424569E3A0078314D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD5132B23158D0C00B000AA /* Date+Extensions.swift */; };
+		CC524B1524569E3A0078314D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD5132D23158FE700B000AA /* String+Extensions.swift */; };
+		CC524B1624569E3A0078314D /* Contribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81C230B15CB0051C151 /* Contribution.swift */; };
+		CC524B1724569E3A0078314D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81E230B16FC0051C151 /* User.swift */; };
+		CC524B1824569E3A0078314D /* GithubDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */; };
+		CC524B1924569E3A0078314D /* UserInfoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A820230B42050051C151 /* UserInfoHelper.swift */; };
+		CC524B1A24569E3A0078314D /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB524292317237F004FF84B /* DateHelper.swift */; };
+		CC524B1B24569E540078314D /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC798C26233A94A300CBD8B0 /* UIColor+Extensions.swift */; };
 		CC5C43D52433E2D300446308 /* UIFont+UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D42433E2D300446308 /* UIFont+UILabel+Extensions.swift */; };
 		CC5C43D72433FB4A00446308 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D62433FB4A00446308 /* UIDevice+Extensions.swift */; };
 		CC5C43D92434102B00446308 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D82434102B00446308 /* UIButton+Extensions.swift */; };
@@ -683,9 +691,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC524B1924569E3A0078314D /* UserInfoHelper.swift in Sources */,
+				CC524B1824569E3A0078314D /* GithubDataManager.swift in Sources */,
 				CC84117A23B47B9400B655A6 /* NotificationController.swift in Sources */,
 				CC84117C23B47B9400B655A6 /* ComplicationController.swift in Sources */,
 				CC84117823B47B9400B655A6 /* ExtensionDelegate.swift in Sources */,
+				CC524B1624569E3A0078314D /* Contribution.swift in Sources */,
+				CC524B1724569E3A0078314D /* User.swift in Sources */,
+				CC524B1B24569E540078314D /* UIColor+Extensions.swift in Sources */,
+				CC524B1424569E3A0078314D /* Date+Extensions.swift in Sources */,
+				CC524B1524569E3A0078314D /* String+Extensions.swift in Sources */,
+				CC524B1A24569E3A0078314D /* DateHelper.swift in Sources */,
 				CC84117623B47B9400B655A6 /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
