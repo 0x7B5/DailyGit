@@ -91,13 +91,18 @@ public class UserInfoHelper {
         }
         #else
         if Reachability.shared.isConnectedToNetwork() {
-            if currentState == .goodToRefresh {
-                currentState = .alreadyRefreshing
-                GithubDataManager.shared.updateInfo(completion: {
-                    self.currentState = .goodToRefresh
-                    completion()
-                })
-            }
+//            if currentState == .goodToRefresh {
+//                currentState = .alreadyRefreshing
+//                GithubDataManager.shared.updateInfo(completion: {
+//                    self.currentState = .goodToRefresh
+//                    completion()
+//                })
+//            }
+            currentState = .alreadyRefreshing
+            GithubDataManager.shared.updateInfo(completion: {
+                self.currentState = .goodToRefresh
+                completion()
+            })
         } else {
             currentState = .goodToRefresh
             completion()

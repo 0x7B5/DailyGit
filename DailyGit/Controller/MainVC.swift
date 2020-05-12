@@ -139,6 +139,7 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     
     func updateInfo() {
         UserInfoHelper.shared.refreshEverything(completion: {
+            print("Finished refreshing.")
             DispatchQueue.main.async { () -> Void in
                 self.updateUI()
             }
@@ -162,9 +163,9 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     func handleTodayViewTouches(place: CGPoint) {
         let tempWidth = todayView.frame.width - todayView.frame.minX
         if place.x < tempWidth/3 {
-            print("Yesterday")
+            // Yesterday
         } else if place.x > tempWidth/3 && place.x < ((tempWidth/3) * 2) {
-            print("Today")
+            // Today
         } else if place.x > ((tempWidth/3) * 2) {
             mainView.changeStreak()
         }
@@ -225,9 +226,9 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
             if let button = self.navigationItem.leftBarButtonItems?[0] {
                 button.customView?.rotate360Degrees()
             }
-            if UserInfoHelper.shared.currentState == .goodToRefresh {
-                updateInfo()
-            }
+            
+            updateInfo()
+            
             print("")
         } else {
             let alert = UIAlertController(title: "No Internet Connection", message: "Please try again.", preferredStyle: .alert)
