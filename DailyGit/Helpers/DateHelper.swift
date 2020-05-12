@@ -61,14 +61,7 @@ public class DateHelper {
     }
     
     func isInLastMonth(myDate: String) -> Bool {
-        var myMonth = Int(myDate[5...6]) ?? 0
-        
-//        if myMonth == 1 {
-//            myMonth = 12
-//        } else {
-//            myMonth = myMonth - 1
-//        }
-//
+        let myMonth = Int(myDate[5...6]) ?? 0
         
         let previousMonth = Calendar.current.date(byAdding: .month, value: -1, to: Date())
         
