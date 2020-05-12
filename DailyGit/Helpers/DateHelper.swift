@@ -159,9 +159,10 @@ public class DateHelper {
             formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let myString = formatter.string(from: myDate)
             let yourDate = formatter.date(from: myString)
-            formatter.dateFormat = "dd-MMM"
+            formatter.dateFormat = "MMM dd"
             dayUpdated = formatter.string(from: yourDate!)
         }
+        
         
         let timeUpdated = String(format: "%02d:%02d", hour, minute)
         
