@@ -46,6 +46,9 @@ struct User: Codable {
                     counter = 0
                 }
             }
+            if counter > maxStreaks {
+                maxStreaks = counter
+            }
             return maxStreaks
         }
     }
