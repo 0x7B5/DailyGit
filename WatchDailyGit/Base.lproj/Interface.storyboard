@@ -12,17 +12,24 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="WatchDailyGit" customModuleProvider="target">
                     <items>
-                        <table alignment="left" id="nD8-9a-Bt3"/>
-                        <label width="136" height="201" alignment="left" text="12" textAlignment="center" id="P3x-Kh-bAc">
-                            <fontDescription key="font" style="UICTFontTextStyleTitle0"/>
+                        <label width="110" height="66" alignment="center" text="12" textAlignment="center" minimumScaleFactor="0.59999999999999998" id="P3x-Kh-bAc">
+                            <fontDescription key="font" type="system" weight="semibold" pointSize="90"/>
                         </label>
+                        <label alignment="center" text="Contributions Today" minimumScaleFactor="0.59999999999999998" id="eTn-lL-ed3"/>
+                        <separator alignment="left" id="zFG-Wb-a8A">
+                            <color key="color" red="0.21960784310000001" green="0.85882352939999995" blue="0.38823529410000002" alpha="0.93265732020000003" colorSpace="custom" customColorSpace="sRGB"/>
+                        </separator>
+                        <label height="72" alignment="center" text="49" textAlignment="center" minimumScaleFactor="0.59999999999999998" id="M5C-lh-1sd">
+                            <fontDescription key="font" type="system" weight="semibold" pointSize="90"/>
+                        </label>
+                        <label alignment="center" text="Current Streak" minimumScaleFactor="0.59999999999999998" id="ZbT-2g-1M3"/>
                     </items>
                     <connections>
                         <outlet property="commitsLabel" destination="P3x-Kh-bAc" id="cON-L5-40r"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="219.52173913043478" y="344.55357142857144"/>
+            <point key="canvasLocation" x="219.52173913043478" y="345.3125"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

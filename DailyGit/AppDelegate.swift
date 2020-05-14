@@ -26,12 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         UINavigationBar.appearance().isTranslucent = false
         
-        #warning("Remove in Productions")
-        do {
-            try FileManager.default.removeItem(atPath: NSHomeDirectory()+"/Library/SplashBoard")
-        } catch {
-            print("Failed to delete launch screen cache: \(error)")
-        }
+//        Launchscreen Jaunt
+//        do {
+//            try FileManager.default.removeItem(atPath: NSHomeDirectory()+"/Library/SplashBoard")
+//        } catch {
+//            print("Failed to delete launch screen cache: \(error)")
+//        }
         
         UITabBar.appearance().tintColor = Constants.gitGreenColor
         window = UIWindow(frame: UIScreen.main.bounds)
