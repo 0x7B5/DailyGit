@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WatchConnectivity
 
 class MainVC: UIViewController, UIGestureRecognizerDelegate {
     
@@ -48,6 +49,12 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
         updateInfo()
         NotificationCenter.default.addObserver(self, selector: #selector(autoRefresher), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         addTouchRecognizer()
+        
+        if (WCSession.isSupported()) {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
         
     }
     
@@ -190,6 +197,7 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
         self.mainView.lastWeekView.setupColorsForWeek()
         self.mainView.weekView.setupColorsForWeek()
         self.mainView.updateStatistics()
+        sendDataToWatch()
     }
     
     @objc func autoRefresher(notification: NSNotification) {
@@ -239,4 +247,31 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     
 }
 
+extension MainVC: WCSessionDelegate {
+    func sendDataToWatch() {
+        // send a message to the watch if it's reachable
+        if (WCSession.default.isReachable) {
+            
+            if let username = UserInfoHelper.shared.readInfo(info: .username) as? String {
+                let message = ["username": username]
+                WCSession.default.sendMessage(message, replyHandler: nil)
+            }
+        }
+        
+    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
+    
+}
 

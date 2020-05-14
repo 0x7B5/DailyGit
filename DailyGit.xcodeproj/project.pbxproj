@@ -16,19 +16,14 @@
 		B8B41CEA2228737B005E304A /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CE92228737B005E304A /* MainVC.swift */; };
 		B8B41CEC22287388005E304A /* RootSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B41CEB22287388005E304A /* RootSettingVC.swift */; };
 		CC17DBAD22FF9D1500E34951 /* GithubDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */; };
+		CC205DD9246CE83000B9F6F3 /* AWConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC205DD8246CE83000B9F6F3 /* AWConstants.swift */; };
+		CC205DDF246CEE9F00B9F6F3 /* DataGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC205DDE246CEE9F00B9F6F3 /* DataGetter.swift */; };
+		CC205DE3246CEF6600B9F6F3 /* GenericData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC205DE2246CEF6600B9F6F3 /* GenericData.swift */; };
 		CC40FDEC2436C0D50014F43B /* MainTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC40FDEB2436C0D50014F43B /* MainTopView.swift */; };
 		CC428C0B2441492800517EA8 /* StatisticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0A2441492800517EA8 /* StatisticsHelper.swift */; };
 		CC428C0D2441739500517EA8 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0C2441739500517EA8 /* Double+Extensions.swift */; };
 		CC428C0F2441867700517EA8 /* StatisticsAverageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C0E2441867700517EA8 /* StatisticsAverageView.swift */; };
 		CC428C1124418CDD00517EA8 /* StatisticsPercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC428C1024418CDD00517EA8 /* StatisticsPercentageView.swift */; };
-		CC524B1424569E3A0078314D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD5132B23158D0C00B000AA /* Date+Extensions.swift */; };
-		CC524B1524569E3A0078314D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD5132D23158FE700B000AA /* String+Extensions.swift */; };
-		CC524B1624569E3A0078314D /* Contribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81C230B15CB0051C151 /* Contribution.swift */; };
-		CC524B1724569E3A0078314D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A81E230B16FC0051C151 /* User.swift */; };
-		CC524B1824569E3A0078314D /* GithubDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */; };
-		CC524B1924569E3A0078314D /* UserInfoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC3A820230B42050051C151 /* UserInfoHelper.swift */; };
-		CC524B1A24569E3A0078314D /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB524292317237F004FF84B /* DateHelper.swift */; };
-		CC524B1B24569E540078314D /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC798C26233A94A300CBD8B0 /* UIColor+Extensions.swift */; };
 		CC5C43D52433E2D300446308 /* UIFont+UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D42433E2D300446308 /* UIFont+UILabel+Extensions.swift */; };
 		CC5C43D72433FB4A00446308 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D62433FB4A00446308 /* UIDevice+Extensions.swift */; };
 		CC5C43D92434102B00446308 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5C43D82434102B00446308 /* UIButton+Extensions.swift */; };
@@ -139,6 +134,10 @@
 		B8B41CE92228737B005E304A /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		B8B41CEB22287388005E304A /* RootSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSettingVC.swift; sourceTree = "<group>"; };
 		CC17DBAC22FF9D1500E34951 /* GithubDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDataManager.swift; sourceTree = "<group>"; };
+		CC205DD8246CE83000B9F6F3 /* AWConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWConstants.swift; sourceTree = "<group>"; };
+		CC205DDA246CE97500B9F6F3 /* WatchDailyGit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchDailyGit Extension.entitlements"; sourceTree = "<group>"; };
+		CC205DDE246CEE9F00B9F6F3 /* DataGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGetter.swift; sourceTree = "<group>"; };
+		CC205DE2246CEF6600B9F6F3 /* GenericData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericData.swift; sourceTree = "<group>"; };
 		CC40FDEB2436C0D50014F43B /* MainTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTopView.swift; sourceTree = "<group>"; };
 		CC428C0A2441492800517EA8 /* StatisticsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsHelper.swift; sourceTree = "<group>"; };
 		CC428C0C2441739500517EA8 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
@@ -335,6 +334,41 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CC205DDB246CEE5600B9F6F3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CC84117523B47B9400B655A6 /* InterfaceController.swift */,
+				CC84117923B47B9400B655A6 /* NotificationController.swift */,
+				CC84117B23B47B9400B655A6 /* ComplicationController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CC205DDC246CEE5F00B9F6F3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CC205DDE246CEE9F00B9F6F3 /* DataGetter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CC205DDD246CEE7900B9F6F3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CC84117723B47B9400B655A6 /* ExtensionDelegate.swift */,
+				CC84117D23B47B9500B655A6 /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CC205DE1246CEF5600B9F6F3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CC205DE2246CEF6600B9F6F3 /* GenericData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		CC84116523B47B9000B655A6 /* WatchDailyGit */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,12 +382,13 @@
 		CC84117423B47B9400B655A6 /* WatchDailyGit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				CC84117523B47B9400B655A6 /* InterfaceController.swift */,
-				CC84117723B47B9400B655A6 /* ExtensionDelegate.swift */,
-				CC84117923B47B9400B655A6 /* NotificationController.swift */,
-				CC84117B23B47B9400B655A6 /* ComplicationController.swift */,
-				CC84117D23B47B9500B655A6 /* Assets.xcassets */,
+				CC205DDC246CEE5F00B9F6F3 /* Helpers */,
+				CC205DDB246CEE5600B9F6F3 /* Controller */,
+				CC205DE1246CEF5600B9F6F3 /* Model */,
+				CC205DDD246CEE7900B9F6F3 /* Supporting Files */,
+				CC205DD8246CE83000B9F6F3 /* AWConstants.swift */,
 				CC84117F23B47B9500B655A6 /* Info.plist */,
+				CC205DDA246CE97500B9F6F3 /* WatchDailyGit Extension.entitlements */,
 				CC84118023B47B9500B655A6 /* PushNotificationPayload.apns */,
 			);
 			path = "WatchDailyGit Extension";
@@ -691,18 +726,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC524B1924569E3A0078314D /* UserInfoHelper.swift in Sources */,
-				CC524B1824569E3A0078314D /* GithubDataManager.swift in Sources */,
+				CC205DDF246CEE9F00B9F6F3 /* DataGetter.swift in Sources */,
 				CC84117A23B47B9400B655A6 /* NotificationController.swift in Sources */,
+				CC205DE3246CEF6600B9F6F3 /* GenericData.swift in Sources */,
 				CC84117C23B47B9400B655A6 /* ComplicationController.swift in Sources */,
 				CC84117823B47B9400B655A6 /* ExtensionDelegate.swift in Sources */,
-				CC524B1624569E3A0078314D /* Contribution.swift in Sources */,
-				CC524B1724569E3A0078314D /* User.swift in Sources */,
-				CC524B1B24569E540078314D /* UIColor+Extensions.swift in Sources */,
-				CC524B1424569E3A0078314D /* Date+Extensions.swift in Sources */,
-				CC524B1524569E3A0078314D /* String+Extensions.swift in Sources */,
-				CC524B1A24569E3A0078314D /* DateHelper.swift in Sources */,
 				CC84117623B47B9400B655A6 /* InterfaceController.swift in Sources */,
+				CC205DD9246CE83000B9F6F3 /* AWConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,6 +988,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "WatchDailyGit Extension/WatchDailyGit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B8C8RXSHKT;
 				INFOPLIST_FILE = "WatchDailyGit Extension/Info.plist";
@@ -980,6 +1011,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "WatchDailyGit Extension/WatchDailyGit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B8C8RXSHKT;
 				INFOPLIST_FILE = "WatchDailyGit Extension/Info.plist";

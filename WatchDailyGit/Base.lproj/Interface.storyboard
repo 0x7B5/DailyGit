@@ -12,6 +12,9 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="WatchDailyGit" customModuleProvider="target">
                     <items>
+                        <label alignment="center" hidden="YES" text="Label" textAlignment="left" numberOfLines="0" id="zcy-oT-Ylo">
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
                         <label width="110" height="66" alignment="center" text="12" textAlignment="center" minimumScaleFactor="0.59999999999999998" id="P3x-Kh-bAc">
                             <fontDescription key="font" type="system" weight="semibold" pointSize="90"/>
                         </label>
@@ -26,10 +29,15 @@
                     </items>
                     <connections>
                         <outlet property="commitsLabel" destination="P3x-Kh-bAc" id="cON-L5-40r"/>
+                        <outlet property="contributionsTodayLabel" destination="eTn-lL-ed3" id="KeH-Vc-iby"/>
+                        <outlet property="currentStreakLabel" destination="ZbT-2g-1M3" id="cxe-wT-uxa"/>
+                        <outlet property="divider" destination="zFG-Wb-a8A" id="6O3-HU-3u0"/>
+                        <outlet property="streakLabel" destination="M5C-lh-1sd" id="hBU-94-4TU"/>
+                        <outlet property="warningLabel" destination="zcy-oT-Ylo" id="8Vy-OM-8nG"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="219.52173913043478" y="345.3125"/>
+            <point key="canvasLocation" x="219.52173913043478" y="338.48214285714289"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
