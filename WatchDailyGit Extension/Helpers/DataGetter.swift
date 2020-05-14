@@ -90,6 +90,7 @@ public class DataGetter {
                         myData in
                         if myData != nil {
                             DataGetter.shared.updateUserInDefaults(dataToEncode: myData!)
+                            completion()
                         } else {
                             completion()
                         }

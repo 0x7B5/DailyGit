@@ -39,6 +39,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                     setupUser(username: username, creationYear: creationYear)
                 }
                 DataGetter.shared.updateInfo(completion: {
+                    print("finished")
                     print("Done")
                     self.refreshUI()
                 })
@@ -67,6 +68,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             }
             
             DataGetter.shared.updateInfo(completion: {
+                print("finished")
                 self.refreshUI()
             })
             
