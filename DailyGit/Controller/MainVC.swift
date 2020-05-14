@@ -252,8 +252,8 @@ extension MainVC: WCSessionDelegate {
         // send a message to the watch if it's reachable
         if (WCSession.default.isReachable) {
             
-            if let username = UserInfoHelper.shared.readInfo(info: .username) as? String {
-                let message = ["username": username]
+            if let username = UserInfoHelper.shared.readInfo(info: .username) as? String, let creationYear = UserInfoHelper.shared.readInfo(info: .yearCreated) as? Int{
+                let message = ["username": username, "creationYear": String(creationYear)]
                 WCSession.default.sendMessage(message, replyHandler: nil)
             }
         }

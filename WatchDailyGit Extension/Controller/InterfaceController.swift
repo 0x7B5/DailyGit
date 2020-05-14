@@ -32,37 +32,33 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        if let username = message["username"] as? String {
+        print("hey ifone")
+        if let username = message["username"] as? String, let creationYear = message["creationYear"] as? String {
             if let defUsername = DataGetter.shared.readInfo(info: .username) as? String {
                 if defUsername != username {
-                    setupUser()
+                    setupUser(username: username, creationYear: creationYear)
+                }
+                DataGetter.shared.updateInfo {
+                    print("Done")
                 }
             } else {
-                setupUser()
+                setupUser(username: username, creationYear: creationYear)
             }
         }
     }
     
-    func setupUser() {
-        // Apple Watch Jaunt
-        /*
-         {
-         username: "username",
-         commitsToday: 0,
-         commitsYesterday: 0,
-         currentStreak: 0
-         }
-         
-         
-         */
+    func setupUser(username: String, creationYear:String) {
+        let newUser = GenericData(username: username, commitsToday: 0, commitsYesterday: 0, currentStreak: 0, creationYear: Int(creationYear) ?? 2018)
+        DataGetter.shared.updateUserInDefaults(dataToEncode: newUser)
     }
     
-
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         if DataGetter.shared.isThereData() {
-            // deal with setup user
-            print("woah")
+            DataGetter.shared.updateInfo {
+                print("Done")
+            }
         } else {
             hideShit()
         }

@@ -9,7 +9,7 @@
 import Foundation
 
 enum DataInfo {
-    case username, commitsToday, commitsYesterday, currentStreak
+    case allData, username, commitsToday, commitsYesterday, currentStreak, creationYear
 }
 
 public class DataGetter {
@@ -21,6 +21,8 @@ public class DataGetter {
             let decoder = JSONDecoder()
             if let loadedData = try? decoder.decode(GenericData.self, from: savedData) {
                 switch info {
+                case .allData:
+                    return loadedData
                 case .username:
                     return loadedData.username
                 case .commitsToday:
@@ -29,11 +31,77 @@ public class DataGetter {
                     return loadedData.commitsYesterday
                 case .currentStreak:
                     return loadedData.currentStreak
+                case .creationYear:
+                    return loadedData.creationYear
                 }
             }
         }
         return ""
         
+    }
+    func getWeeklyCommits(username: String, creationYear: String, completion: @escaping (GenericData?) -> ()) {
+        if let url = URL(string: "https://vlad-munteanu.appspot.com/aw/\(username)/\(creationYear)/\(DataGetter.shared.getFormattedDate())") {
+            print(url)
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if error != nil {
+                    print(error ?? "")
+                    completion(nil)
+                }
+                
+                guard let data = data else { return }
+                
+                do {
+                    if var json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        json = json["data"] as! [String : Any]
+                        if let username = json["username"] as? String, let commitsToday = json["commitsToday"] as? Int, let commitsYesterday = json["commitsYesterday"] as? Int, let creationYear = json["creationYear"] as? String, let currentStreak = json["currentStreak"] as? Int {
+                            let newUser = GenericData(username: username, commitsToday: commitsToday, commitsYesterday: commitsYesterday, currentStreak: currentStreak, creationYear: Int(creationYear) ?? 2018)
+                            print(newUser)
+                            completion(newUser)
+                        } else {
+                            print("fuck1")
+                            print(json)
+                            completion(nil)
+                        }
+                    } else {
+                        print("fuck2")
+                        completion(nil)
+                    }
+                } catch _ {
+                    print("fuck3")
+                    completion(nil)
+                }
+            }.resume()
+        }
+    }
+    
+    func getFormattedDate() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let result = formatter.string(from: date)
+        
+        return result
+    }
+    
+    func updateInfo(completion: @escaping () -> ()) {
+        if isThereData() {
+            if let username = DataGetter.shared.readInfo(info: .username) as? String, let creationYear = DataGetter.shared.readInfo(info: .creationYear) as? Int {
+                    getWeeklyCommits(username: username, creationYear: String(creationYear), completion: {
+                        myData in
+                        if myData != nil {
+                            DataGetter.shared.updateUserInDefaults(dataToEncode: myData!)
+                        } else {
+                            completion()
+                        }
+                        
+                    })
+                    
+            } else {
+                completion()
+            }
+        } else {
+            completion()
+        }
     }
     
     
@@ -43,6 +111,7 @@ public class DataGetter {
             let defaults = UserDefaults.standard
             defaults.set(encoded, forKey: "CurrentData")
             defaults.synchronize()
+            print(dataToEncode)
             print("Data encoded and synced")
             print("")
         }

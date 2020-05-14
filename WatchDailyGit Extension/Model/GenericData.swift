@@ -13,11 +13,13 @@ struct GenericData: Codable {
     var commitsToday: Int
     var commitsYesterday: Int
     var currentStreak: Int
+    var creationYear: Int
     
-    init(username: String, commitsToday: Int, commitsYesterday: Int, currentStreak: Int) {
+    init(username: String, commitsToday: Int, commitsYesterday: Int, currentStreak: Int, creationYear: Int) {
         self.username = username
         self.commitsToday = commitsToday
         self.commitsYesterday = commitsYesterday
         self.currentStreak = currentStreak
+        self.creationYear = creationYear
     }
 }
