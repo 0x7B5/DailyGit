@@ -35,14 +35,21 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         switch complication.family {
         case .modularLarge:
             let template = CLKComplicationTemplateModularLargeColumns()
+            // Today
+            template.row1Column1TextProvider = CLKSimpleTextProvider(text: "Today")
+            template.row1Column1TextProvider.tintColor = Constants.compColor
+            template.row1Column2TextProvider = CLKSimpleTextProvider(text: "--")
             
-            //GPA
-            template.row1Column1TextProvider = CLKSimpleTextProvider(text: "GPA")
-            template.row1Column2TextProvider = CLKSimpleTextProvider(text: "4.0")
-            //Absences
-            template.row2Column1TextProvider = CLKSimpleTextProvider(text: "Absences")
-            template.row2Column2TextProvider = CLKSimpleTextProvider(text: "0")
+            // Current Streak
+            template.row2Column1TextProvider = CLKSimpleTextProvider(text: "Yesterday")
+            template.row2Column1TextProvider.tintColor = Constants.compColor
+            template.row2Column2TextProvider = CLKSimpleTextProvider(text: "--")
             
+            
+            // Current Streak
+            template.row3Column1TextProvider = CLKSimpleTextProvider(text: "Streak")
+            template.row3Column1TextProvider.tintColor = Constants.compColor
+            template.row3Column2TextProvider = CLKSimpleTextProvider(text: "--")
             
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
             handler(timelineEntry)
@@ -52,6 +59,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
             handler(timelineEntry)
+        
         default:
             handler(nil)
         }
@@ -82,10 +90,19 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             
             // Today
             largeTemplate.row1Column1TextProvider = CLKSimpleTextProvider(text: "Today")
+            largeTemplate.row1Column1TextProvider.tintColor = Constants.compColor
             largeTemplate.row1Column2TextProvider = CLKSimpleTextProvider(text: "--")
+            
             // Current Streak
-            largeTemplate.row2Column1TextProvider = CLKSimpleTextProvider(text: "Current Streak")
+            largeTemplate.row2Column1TextProvider = CLKSimpleTextProvider(text: "Yesterday")
+            largeTemplate.row2Column1TextProvider.tintColor = Constants.compColor
             largeTemplate.row2Column2TextProvider = CLKSimpleTextProvider(text: "--")
+            
+            
+            // Current Streak
+            largeTemplate.row3Column1TextProvider = CLKSimpleTextProvider(text: "Streak")
+            largeTemplate.row3Column1TextProvider.tintColor = Constants.compColor
+            largeTemplate.row3Column2TextProvider = CLKSimpleTextProvider(text: "--")
             
             template = largeTemplate
             
