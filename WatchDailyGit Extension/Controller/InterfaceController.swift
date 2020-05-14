@@ -38,11 +38,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 if defUsername != username {
                     setupUser(username: username, creationYear: creationYear)
                 }
-                DataGetter.shared.updateInfo {
+                DataGetter.shared.updateInfo(completion: {
                     print("Done")
-                }
+                    self.refreshUI()
+                })
             } else {
                 setupUser(username: username, creationYear: creationYear)
+                refreshUI()
             }
         }
     }
@@ -56,13 +58,44 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         if DataGetter.shared.isThereData() {
-            DataGetter.shared.updateInfo {
-                print("Done")
+            if let commitsToday = DataGetter.shared.readInfo(info: .commitsToday) as? Int, let currentStreak = DataGetter.shared.readInfo(info: .currentStreak) as? Int {
+                commitsLabel.setText(String(commitsToday))
+                streakLabel.setText(String(currentStreak))
+            } else {
+                commitsLabel.setText(String(0))
+                streakLabel.setText(String(0))
             }
+            
+            DataGetter.shared.updateInfo(completion: {
+                self.refreshUI()
+            })
+            
         } else {
             hideShit()
         }
         
+    }
+    
+    func refreshUI() {
+        print("refresh")
+        if DataGetter.shared.isThereData() {
+            warningLabel.setHidden(true)
+            contributionsTodayLabel.setHidden(false)
+            divider.setHidden(false)
+            streakLabel.setHidden(false)
+            currentStreakLabel.setHidden(false)
+            commitsLabel.setHidden(false)
+
+            if let commitsToday = DataGetter.shared.readInfo(info: .commitsToday) as? Int, let currentStreak = DataGetter.shared.readInfo(info: .currentStreak) as? Int {
+                commitsLabel.setText(String(commitsToday))
+                streakLabel.setText(String(currentStreak))
+            } else {
+                commitsLabel.setText(String(0))
+                streakLabel.setText(String(0))
+            }
+            
+            
+        }
     }
     
     func hideShit() {
@@ -76,16 +109,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         warningLabel.setText("Setup user on iPhone to use the Apple Watch app.")
     }
     
-    func dontHideShit() {
-        warningLabel.setHidden(true)
-        
-        contributionsTodayLabel.setHidden(false)
-        divider.setHidden(false)
-        streakLabel.setHidden(false)
-        currentStreakLabel.setHidden(false)
-        commitsLabel.setHidden(false)
-        
-    }
+    
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
