@@ -119,6 +119,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             session.delegate = self
             session.activate()
         }
+        refreshUI()
     }
     
     override func didDeactivate() {
