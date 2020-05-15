@@ -57,25 +57,65 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let template = CLKComplicationTemplateModularSmallColumnsText()
             
             // Today
-            template.row1Column1TextProvider = CLKSimpleTextProvider(text: "Today")
+            template.row1Column1TextProvider = CLKSimpleTextProvider(text: "T:")
             template.row1Column1TextProvider.tintColor = Constants.compColor
             template.row1Column2TextProvider = CLKSimpleTextProvider(text: "--")
             
             // Current Streak
-            template.row2Column1TextProvider = CLKSimpleTextProvider(text: "Yesterday")
+            template.row2Column1TextProvider = CLKSimpleTextProvider(text: "Y:")
             template.row2Column1TextProvider.tintColor = Constants.compColor
             template.row2Column2TextProvider = CLKSimpleTextProvider(text: "--")
             
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
             handler(timelineEntry)
         case .utilitarianLarge:
-            let template = CLKComplicationTemplateUtilitarianLargeFlat()
+            let largeTemplate = CLKComplicationTemplateUtilitarianLargeFlat()
+            largeTemplate.textProvider = CLKSimpleTextProvider(text: "-- Contributions Today")
+            largeTemplate.textProvider.tintColor = Constants.compColor
+            let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: largeTemplate)
+            handler(timelineEntry)
+            
         case .utilitarianSmall:
-            let template = CLKComplicationTemplateUtilitarianSmallFlat()
+            let smallTemplate = CLKComplicationTemplateUtilitarianSmallFlat()
+            smallTemplate.textProvider = CLKSimpleTextProvider(text: "-- Commits")
+            smallTemplate.textProvider.tintColor = Constants.compColor
+            let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: smallTemplate)
+            handler(timelineEntry)
         case .circularSmall:
-            let template = CLKComplicationTemplateModularSmallSimpleText()
+            let smallTemplate = CLKComplicationTemplateCircularSmallSimpleText()
+            smallTemplate.textProvider = CLKSimpleTextProvider(text: "--")
+            smallTemplate.textProvider.tintColor = Constants.compColor
+            let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: smallTemplate)
+            handler(timelineEntry)
         case .extraLarge:
-            let template = CLKComplicationTemplateExtraLargeSimpleText()
+            let largeTemplate = CLKComplicationTemplateExtraLargeSimpleText()
+            largeTemplate.textProvider = CLKSimpleTextProvider(text: "--")
+            largeTemplate.textProvider.tintColor = Constants.compColor
+            let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: largeTemplate)
+            handler(timelineEntry)
+            
+        case .graphicCircular:
+            let myTemp = CLKComplicationTemplateGraphicCircularOpenGaugeSimpleText()
+            myTemp.centerTextProvider = CLKSimpleTextProvider(text:"--")
+            myTemp.bottomTextProvider = CLKSimpleTextProvider(text: "")
+            myTemp.gaugeProvider = CLKSimpleGaugeProvider(style: .fill, gaugeColor: Constants.compColor, fillFraction: 1)
+            
+            let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: myTemp)
+            handler(timelineEntry)
+        case .graphicRectangular:
+            let rectTemplate = CLKComplicationTemplateGraphicRectangularStandardBody()
+            
+            // Today
+            rectTemplate.headerTextProvider = CLKSimpleTextProvider(text: "Today: --")
+            rectTemplate.headerTextProvider.tintColor = Constants.compColor
+            
+            rectTemplate.body1TextProvider = CLKSimpleTextProvider(text:"Yesterday: --")
+            rectTemplate.body1TextProvider.tintColor = Constants.compColor
+            rectTemplate.body2TextProvider = CLKSimpleTextProvider(text:"-- day streak!")
+            rectTemplate.body2TextProvider!.tintColor = Constants.compColor
+            
+            let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: rectTemplate)
+            handler(timelineEntry)
         default:
             handler(nil)
         }
@@ -126,34 +166,57 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let smallTemplate = CLKComplicationTemplateModularSmallColumnsText()
             
             // Today
-            smallTemplate.row1Column1TextProvider = CLKSimpleTextProvider(text: "Today")
+            smallTemplate.row1Column1TextProvider = CLKSimpleTextProvider(text: "T:")
             smallTemplate.row1Column1TextProvider.tintColor = Constants.compColor
-            smallTemplate.row1Column2TextProvider = CLKSimpleTextProvider(text: "--")
+            smallTemplate.row1Column2TextProvider = CLKSimpleTextProvider(text: "00")
             
             // Current Streak
-            smallTemplate.row2Column1TextProvider = CLKSimpleTextProvider(text: "Yesterday")
+            smallTemplate.row2Column1TextProvider = CLKSimpleTextProvider(text: "Y:")
             smallTemplate.row2Column1TextProvider.tintColor = Constants.compColor
-            smallTemplate.row2Column2TextProvider = CLKSimpleTextProvider(text: "--")
+            smallTemplate.row2Column2TextProvider = CLKSimpleTextProvider(text: "00")
             template = smallTemplate
-        
+            
         case .utilitarianLarge:
             let largeTemplate = CLKComplicationTemplateUtilitarianLargeFlat()
             largeTemplate.textProvider = CLKSimpleTextProvider(text: "-- Contributions Today")
+            largeTemplate.textProvider.tintColor = Constants.compColor
             template = largeTemplate
         case .utilitarianSmall:
             let smallTemplate = CLKComplicationTemplateUtilitarianSmallFlat()
             smallTemplate.textProvider = CLKSimpleTextProvider(text: "-- Commits")
+            smallTemplate.textProvider.tintColor = Constants.compColor
             template = smallTemplate
         case .circularSmall:
-            let smallTemplate = CLKComplicationTemplateModularSmallSimpleText()
+            let smallTemplate = CLKComplicationTemplateCircularSmallSimpleText()
             smallTemplate.textProvider = CLKSimpleTextProvider(text: "--")
-            
+            smallTemplate.textProvider.tintColor = Constants.compColor
             template = smallTemplate
         case .extraLarge:
             let largeTemplate = CLKComplicationTemplateExtraLargeSimpleText()
             largeTemplate.textProvider = CLKSimpleTextProvider(text: "--")
+            largeTemplate.textProvider.tintColor = Constants.compColor
             
             template = largeTemplate
+        case .graphicCircular:
+            let myTemp = CLKComplicationTemplateGraphicCircularOpenGaugeSimpleText()
+            myTemp.centerTextProvider = CLKSimpleTextProvider(text:"--")
+            myTemp.bottomTextProvider = CLKSimpleTextProvider(text: "")
+            myTemp.gaugeProvider = CLKSimpleGaugeProvider(style: .fill, gaugeColor: Constants.compColor, fillFraction: 1)
+            
+            template = myTemp
+        case .graphicRectangular:
+            let rectTemplate = CLKComplicationTemplateGraphicRectangularStandardBody()
+            
+            // Today
+            rectTemplate.headerTextProvider = CLKSimpleTextProvider(text: "Today: --")
+            rectTemplate.headerTextProvider.tintColor = Constants.compColor
+            
+            rectTemplate.body1TextProvider = CLKSimpleTextProvider(text:"Yesterday: --")
+            rectTemplate.body1TextProvider.tintColor = Constants.compColor
+            rectTemplate.body2TextProvider = CLKSimpleTextProvider(text:"-- day streak!")
+            rectTemplate.body2TextProvider!.tintColor = Constants.compColor
+            
+            template = rectTemplate
         default: break
             
         }
