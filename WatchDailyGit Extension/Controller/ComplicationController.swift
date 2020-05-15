@@ -130,9 +130,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             rectTemplate.headerTextProvider.tintColor = Constants.compColor
             
             rectTemplate.body1TextProvider = CLKSimpleTextProvider(text:"Yesterday: \(commitsYesterday)")
-            rectTemplate.body1TextProvider.tintColor = Constants.compColor
+            rectTemplate.body1TextProvider.tintColor = Constants.subColor
             rectTemplate.body2TextProvider = CLKSimpleTextProvider(text:"\(currentStreak) day streak!")
-            rectTemplate.body2TextProvider!.tintColor = Constants.compColor
+            rectTemplate.body2TextProvider!.tintColor = Constants.subColor
             
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: rectTemplate)
             handler(timelineEntry)
@@ -232,9 +232,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             rectTemplate.headerTextProvider.tintColor = Constants.compColor
             
             rectTemplate.body1TextProvider = CLKSimpleTextProvider(text:"Yesterday: 1")
-            rectTemplate.body1TextProvider.tintColor = Constants.compColor
+            rectTemplate.body1TextProvider.tintColor = Constants.subColor
             rectTemplate.body2TextProvider = CLKSimpleTextProvider(text:"10 day streak!")
-            rectTemplate.body2TextProvider!.tintColor = Constants.compColor
+            rectTemplate.body2TextProvider!.tintColor = Constants.subColor
             
             template = rectTemplate
         default: break
