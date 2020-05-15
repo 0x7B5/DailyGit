@@ -54,12 +54,28 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
             handler(timelineEntry)
         case .modularSmall:
-            let template = CLKComplicationTemplateModularSmallSimpleText()
-            template.textProvider = CLKSimpleTextProvider(text: "0")
+            let template = CLKComplicationTemplateModularSmallColumnsText()
+            
+            // Today
+            template.row1Column1TextProvider = CLKSimpleTextProvider(text: "Today")
+            template.row1Column1TextProvider.tintColor = Constants.compColor
+            template.row1Column2TextProvider = CLKSimpleTextProvider(text: "--")
+            
+            // Current Streak
+            template.row2Column1TextProvider = CLKSimpleTextProvider(text: "Yesterday")
+            template.row2Column1TextProvider.tintColor = Constants.compColor
+            template.row2Column2TextProvider = CLKSimpleTextProvider(text: "--")
             
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
             handler(timelineEntry)
-        
+        case .utilitarianLarge:
+            let template = CLKComplicationTemplateUtilitarianLargeFlat()
+        case .utilitarianSmall:
+            let template = CLKComplicationTemplateUtilitarianSmallFlat()
+        case .circularSmall:
+            let template = CLKComplicationTemplateModularSmallSimpleText()
+        case .extraLarge:
+            let template = CLKComplicationTemplateExtraLargeSimpleText()
         default:
             handler(nil)
         }
@@ -107,9 +123,37 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             template = largeTemplate
             
         case .modularSmall:
+            let smallTemplate = CLKComplicationTemplateModularSmallColumnsText()
+            
+            // Today
+            smallTemplate.row1Column1TextProvider = CLKSimpleTextProvider(text: "Today")
+            smallTemplate.row1Column1TextProvider.tintColor = Constants.compColor
+            smallTemplate.row1Column2TextProvider = CLKSimpleTextProvider(text: "--")
+            
+            // Current Streak
+            smallTemplate.row2Column1TextProvider = CLKSimpleTextProvider(text: "Yesterday")
+            smallTemplate.row2Column1TextProvider.tintColor = Constants.compColor
+            smallTemplate.row2Column2TextProvider = CLKSimpleTextProvider(text: "--")
+            template = smallTemplate
+        
+        case .utilitarianLarge:
+            let largeTemplate = CLKComplicationTemplateUtilitarianLargeFlat()
+            largeTemplate.textProvider = CLKSimpleTextProvider(text: "-- Contributions Today")
+            template = largeTemplate
+        case .utilitarianSmall:
+            let smallTemplate = CLKComplicationTemplateUtilitarianSmallFlat()
+            smallTemplate.textProvider = CLKSimpleTextProvider(text: "-- Commits")
+            template = smallTemplate
+        case .circularSmall:
             let smallTemplate = CLKComplicationTemplateModularSmallSimpleText()
             smallTemplate.textProvider = CLKSimpleTextProvider(text: "--")
+            
             template = smallTemplate
+        case .extraLarge:
+            let largeTemplate = CLKComplicationTemplateExtraLargeSimpleText()
+            largeTemplate.textProvider = CLKSimpleTextProvider(text: "--")
+            
+            template = largeTemplate
         default: break
             
         }
