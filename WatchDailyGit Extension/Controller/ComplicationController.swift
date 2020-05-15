@@ -82,6 +82,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let largeTemplate = CLKComplicationTemplateUtilitarianLargeFlat()
             if commitsToday == 1 {
                 largeTemplate.textProvider = CLKSimpleTextProvider(text: "\(commitsToday) Contribution Today")
+            } else if commitsToday == 1 {
+                 largeTemplate.textProvider = CLKSimpleTextProvider(text: "No Contributions Today!")
             } else {
                 largeTemplate.textProvider = CLKSimpleTextProvider(text: "\(commitsToday) Contributions Today")
             }
@@ -94,6 +96,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let smallTemplate = CLKComplicationTemplateUtilitarianSmallFlat()
             if commitsToday == 1 {
                 smallTemplate.textProvider = CLKSimpleTextProvider(text: "\(commitsToday) Commit")
+            } else if commitsToday == 0 {
+                smallTemplate.textProvider = CLKSimpleTextProvider(text: "No commits today!")
             } else {
                 smallTemplate.textProvider = CLKSimpleTextProvider(text: "\(commitsToday) Commits")
             }
@@ -126,7 +130,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let rectTemplate = CLKComplicationTemplateGraphicRectangularStandardBody()
             
             // Today
-            rectTemplate.headerTextProvider = CLKSimpleTextProvider(text: "Today: \(commitsToday)")
+            if commitsToday == 0 {
+                rectTemplate.headerTextProvider = CLKSimpleTextProvider(text: "No commits today!")
+            } else {
+                rectTemplate.headerTextProvider = CLKSimpleTextProvider(text: "Today: \(commitsToday)")
+            }
             rectTemplate.headerTextProvider.tintColor = Constants.compColor
             
             rectTemplate.body1TextProvider = CLKSimpleTextProvider(text:"Yesterday: \(commitsYesterday)")
