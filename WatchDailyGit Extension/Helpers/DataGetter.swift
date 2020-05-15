@@ -16,6 +16,23 @@ public class DataGetter {
     static let shared = DataGetter()
     let defaults = UserDefaults.standard
     
+    static let dateFormatter: DateFormatter = {
+        let d = DateFormatter()
+        
+        // not sure if this is needed, but just to be safe
+        // see https://developer.apple.com/library/archive/qa/qa1480/
+        d.locale = Locale(identifier: "en_US_POSIX")
+        
+        d.dateFormat = "dd.MM.yyyy"
+        
+        // make sure we use CET timezone - if you're e.g. in Moscow
+        // and you ask for '19.02.2019' on 19 Feb after midnight
+        // (still 18 Feb in Poland), you'll get no data
+        d.timeZone = TimeZone(identifier: "Europe/Warsaw")!
+        
+        return d
+    }()
+    
     func readInfo(info: DataInfo) -> Any? {
         if let savedData = defaults.object(forKey: "CurrentData") as? Data {
             let decoder = JSONDecoder()
@@ -86,17 +103,17 @@ public class DataGetter {
     func updateInfo(completion: @escaping () -> ()) {
         if isThereData() {
             if let username = DataGetter.shared.readInfo(info: .username) as? String, let creationYear = DataGetter.shared.readInfo(info: .creationYear) as? Int {
-                    getWeeklyCommits(username: username, creationYear: String(creationYear), completion: {
-                        myData in
-                        if myData != nil {
-                            DataGetter.shared.updateUserInDefaults(dataToEncode: myData!)
-                            completion()
-                        } else {
-                            completion()
-                        }
-                        
-                    })
+                getWeeklyCommits(username: username, creationYear: String(creationYear), completion: {
+                    myData in
+                    if myData != nil {
+                        DataGetter.shared.updateUserInDefaults(dataToEncode: myData!)
+                        completion()
+                    } else {
+                        completion()
+                    }
                     
+                })
+                
             } else {
                 completion()
             }
