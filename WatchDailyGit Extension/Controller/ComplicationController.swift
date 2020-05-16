@@ -96,13 +96,16 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             let smallTemplate = CLKComplicationTemplateUtilitarianSmallFlat()
             if commitsToday == 1 {
                 smallTemplate.textProvider = CLKSimpleTextProvider(text: "\(commitsToday) Commit")
+                smallTemplate.textProvider.tintColor = Constants.compColor
             } else if commitsToday == 0 {
                 smallTemplate.textProvider = CLKSimpleTextProvider(text: "No commits today!")
+                smallTemplate.textProvider.tintColor = Constants.fuckColor
             } else {
                 smallTemplate.textProvider = CLKSimpleTextProvider(text: "\(commitsToday) Commits")
+                smallTemplate.textProvider.tintColor = Constants.compColor
             }
            
-            smallTemplate.textProvider.tintColor = Constants.compColor
+            
             let timelineEntry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: smallTemplate)
             handler(timelineEntry)
         case .circularSmall:
@@ -132,10 +135,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             // Today
             if commitsToday == 0 {
                 rectTemplate.headerTextProvider = CLKSimpleTextProvider(text: "No commits today!")
+                rectTemplate.headerTextProvider.tintColor = Constants.fuckColor
             } else {
                 rectTemplate.headerTextProvider = CLKSimpleTextProvider(text: "Today: \(commitsToday)")
+                rectTemplate.headerTextProvider.tintColor = Constants.compColor
             }
-            rectTemplate.headerTextProvider.tintColor = Constants.compColor
             
             rectTemplate.body1TextProvider = CLKSimpleTextProvider(text:"Yesterday: \(commitsYesterday)")
             rectTemplate.body1TextProvider.tintColor = Constants.subColor

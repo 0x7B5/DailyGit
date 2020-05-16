@@ -75,16 +75,13 @@ public class DataGetter {
                             print(newUser)
                             completion(newUser)
                         } else {
-                            print("fuck1")
                             print(json)
                             completion(nil)
                         }
                     } else {
-                        print("fuck2")
                         completion(nil)
                     }
                 } catch _ {
-                    print("fuck3")
                     completion(nil)
                 }
             }.resume()
