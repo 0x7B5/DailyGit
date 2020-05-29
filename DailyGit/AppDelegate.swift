@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import OneSignal
 import UserNotifications
 
 @UIApplicationMain
@@ -37,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        initializeOneSignal(launchOptions)
         setupNotifications()
         
         if (userExist() == true) {
@@ -90,26 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func userExist() -> Bool {
         return (UserInfoHelper.shared.readInfo(info: .username) as? String != "")
-    }
-    
-    func initializeOneSignal(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        //START OneSignal initialization code
-        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
-        
-        // Replace 'YOUR_APP_ID' with your OneSignal App ID.
-        OneSignal.initWithLaunchOptions(launchOptions,
-                                        appId: "ef557b26-24b4-4e80-b7b3-e27fa31f4d97",
-                                        handleNotificationAction: nil,
-                                        settings: onesignalInitSettings)
-        
-        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
-        
-        // Recommend moving the below line to prompt for push after informing the user about
-        //   how your app will use them.
-        OneSignal.promptForPushNotifications(userResponse: { accepted in
-            print("User accepted notifications: \(accepted)")
-        })
-        //END OneSignal initializataion code
     }
 }
 
