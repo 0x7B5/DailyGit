@@ -199,7 +199,8 @@ public class StatisticsHelper {
             if sum == 0 || count == 0 {
                 return 0
             }
-            return Int((sum/Double(count)).rounded(toPlaces: 0)) * 100
+           
+            return Int((sum/Double(count)).rounded(toPlaces: 2) * 100)
         } else {
             return 0
         }
@@ -222,7 +223,8 @@ public class StatisticsHelper {
             if sum == 0 || count == 0 {
                 return 0
             }
-            return Int((sum/Double(count)).rounded(toPlaces: 0)) * 100
+            
+            return Int((sum/Double(count)).rounded(toPlaces: 2) * 100)
         } else {
             return 0
         }
