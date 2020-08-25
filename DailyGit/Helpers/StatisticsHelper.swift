@@ -158,12 +158,10 @@ public class StatisticsHelper {
                     break
                 }
             }
-            let calendar = Calendar.current
-
-            let range = calendar.range(of: .day, in: .month, for: Date())!
-            let numDays = range.count
+            let calanderDate = Calendar.current.dateComponents([.day, .year, .month], from: Date())
             
-            return (sum, numDays)
+            
+            return (sum, Int(calanderDate.day ?? 30))
         } else {
             return (0, 30)
         }
@@ -173,13 +171,15 @@ public class StatisticsHelper {
     func weeklyDays() -> (Int, Int) {
         if let weeklyConts = UserInfoHelper.shared.readInfo(info: .currentWeek) as? ContributionList {
             var sum = 0
+            var daysSoFar = 0
             for i in weeklyConts.contributions {
                 if i.count > 0 {
                     sum = sum + 1
                 }
+                daysSoFar += 1
             }
             
-            return (sum, 7)
+            return (sum, daysSoFar)
         } else {
             return (0,7)
         }
