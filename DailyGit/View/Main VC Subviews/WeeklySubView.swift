@@ -221,7 +221,8 @@ public class WeeklySubView: CurvedView {
     
     internal func createGraphNodeView() -> UIView {
         let view = UIView()
-        view.backgroundColor = UIColor(rgb: Int("ebedf0", radix: 16)!)
+        // UIColor(rgb: Int("ebedf0", radix: 16)!)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return view
     }
     
