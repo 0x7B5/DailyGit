@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 import Firebase
+import SwiftTrace
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
@@ -18,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     let gcmMessageIDKey = "gcm.message_id"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//        SwiftTrace.traceBundle(containing: type(of: self))
+//        SwiftTrace.trace(aClass: MainVC.self)
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         
@@ -42,10 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         
         
         if (userExist() == true) {
-            //LoggedIn
-            UserInfoHelper.shared.refreshEverything {
-                
-            }
             AutoUpdater.shared.startTimer()
             
             let navigationController = UINavigationController(rootViewController: MainVC())

@@ -136,8 +136,8 @@ public class MainTopView: UIView {
         return label
     }()
     
-    func checkAllignmentForTitle() {
-        if UserInfoHelper.shared.readInfo(info: .bio) as? String == "" {
+    func checkAllignmentForTitle(user: User) {
+        if user.bio == "" {
             nameLabel.snp.remakeConstraints{
                 $0.width.equalToSuperview().multipliedBy(0.5)
                 $0.left.equalToSuperview().inset(14)

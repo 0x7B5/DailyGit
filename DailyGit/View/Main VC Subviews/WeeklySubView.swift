@@ -37,7 +37,7 @@ public class WeeklySubView: CurvedView {
     func setupView() {
         initializeUI()
         createConstraints()
-        setupColorsForWeek()
+        setupColorsForWeek(user: UserInfoHelper.shared.readInfo(info: .user) as? User ?? User(name: "", username: "", bio: "", photoUrl: "", dateCreated: "", yearCreated: 2020, contributions: ContributionList(contributions: [])))
     }
     
     private func initializeUI() {
@@ -94,7 +94,7 @@ public class WeeklySubView: CurvedView {
     
     var commits = [UIView]()
     
-    func setupColorsForWeek() {
+    func setupColorsForWeek(user: User) {
         addViews()
         if viewType == .month {
             var infoToGet: Userinfo

@@ -37,7 +37,7 @@ public class TodaySubView: CurvedView {
     
     func setupView() {
         initializeUI()
-        setNumberLabels()
+        setNumberLabels(user: UserInfoHelper.shared.readInfo(info: .user) as? User ?? User(name: "", username: "", bio: "", photoUrl: "", dateCreated: "", yearCreated: 2020, contributions: ContributionList(contributions: [])))
         createConstraints()
     }
     
@@ -160,29 +160,34 @@ public class TodaySubView: CurvedView {
         return label
     }
     
-    func setNumberLabels() {
-        if let todayContribution = UserInfoHelper.shared.readInfo(info: .today) as? Contribution {
+    func setNumberLabels(user: User) {
+        
+        
+        if let todayContribution = user.contributions.contributions.last {
             todayCommits.text = String(todayContribution.count)
             todayCommits.textColor = todayContribution.color.getColor()
         }
         
-        if let yesterdayContribution = UserInfoHelper.shared.readInfo(info: .yesterday) as? Contribution {
-            yesterdayCommits.text = String(yesterdayContribution.count)
-            yesterdayCommits.textColor = yesterdayContribution.color.getColor()
+        let count = user.contributions.contributions.count
+        if count > 3 {
+            
+            let cont = user.contributions.contributions[count-2]
+            yesterdayCommits.text = String(cont.count)
+            yesterdayCommits.textColor = cont.color.getColor()
         }
+        
+        
         
         if Constants.streakStatus == .current {
             currentStreakLabel.text = "Current Streak"
-            if let currentStreakNum = UserInfoHelper.shared.readInfo(info: .currentStreak) as? Int {
-                currentStreak.text = String(currentStreakNum)
-                currentStreak.textColor = UserInfoHelper.shared.getStreakColor(commits: currentStreakNum)
-            }
+            
+            currentStreak.text = String(user.currentStreak)
+            currentStreak.textColor = UserInfoHelper.shared.getStreakColor(commits: user.currentStreak)
+            
         } else {
             currentStreakLabel.text = "Longest Streak"
-            if let longestStreakNum = UserInfoHelper.shared.readInfo(info: .longestStreak) as? Int {
-                currentStreak.text = String(longestStreakNum)
-                currentStreak.textColor = UserInfoHelper.shared.getStreakColor(commits: longestStreakNum)
-            }
+            currentStreak.text = String(user.longestStreak)
+            currentStreak.textColor = UserInfoHelper.shared.getStreakColor(commits: user.longestStreak)
         }
         
         

@@ -27,52 +27,89 @@ public class UserInfoHelper {
     let defaults = UserDefaults.standard
     
     func readInfo(info: Userinfo) -> Any? {
+        let start = NSDate()
         if let savedPerson = defaults.object(forKey: "CurrentUser") as? Data {
             let decoder = JSONDecoder()
             if let loadedPerson = try? decoder.decode(User.self, from: savedPerson) {
                 switch info {
                 case .user:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson
                 case .name:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.name
                 case .username:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.username
                 case .bio:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.bio
                 case .photoUrl:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.photoUrl
                 case .contributions:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.contributions
                 case .yearCreated:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.yearCreated
                 case .dateCreated:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.dateCreated
                 case .currentWeek:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.currentWeek
                 case .lastWeek:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.lastWeek
                 case .today:
                     if let today = loadedPerson.contributions.contributions.last {
+                        let elapsed = start.timeIntervalSinceNow
+                        print("It took \(elapsed)")
                         return today
                     }
                     return nil
                 case .yesterday:
                     let count = loadedPerson.contributions.contributions.count
                     if count > 3 {
+                        let elapsed = start.timeIntervalSinceNow
+                        print("It took \(elapsed)")
                         return loadedPerson.contributions.contributions[count-2]
                     }
                     return nil
                 case .longestStreak:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.longestStreak
                 case .currentStreak:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.currentStreak
                 case .updateTime:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.updateTime
                 case .userUpdateTime:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.userUpdateTime
                 case .currentMonth:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.currentMonth
                 case .lastMonth:
+                    let elapsed = start.timeIntervalSinceNow
+                    print("It took \(elapsed)")
                     return loadedPerson.lastMonth
                 }
             }

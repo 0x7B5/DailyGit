@@ -16,7 +16,7 @@ public class CommitsView: UIView {
         backgroundColor = Constants.whiteColor
         initializeUI()
         createConstraints()
-        setLastUpdatedLabel()
+        setLastUpdatedLabel(user: UserInfoHelper.shared.readInfo(info: .user) as? User ?? User(name: "", username: "", bio: "", photoUrl: "", dateCreated: "", yearCreated: 2020, contributions: ContributionList(contributions: [])))
     }
     
     required init?(coder: NSCoder) {
@@ -342,10 +342,10 @@ public class CommitsView: UIView {
     }()
     
     
-    func setLastUpdatedLabel() {
-        if let lastUpdated = UserInfoHelper.shared.readInfo(info: .updateTime) as? Date {
-            lastUpdatedLabel.text = DateHelper.shared.getLastUpdatedText(myDate: lastUpdated)
-        }
+    func setLastUpdatedLabel(user: User) {
+        
+        lastUpdatedLabel.text = DateHelper.shared.getLastUpdatedText(myDate: user.updateTime)
+        
     }
     
     internal func createTitleText(text: String) -> UILabel {
@@ -470,7 +470,7 @@ public class CommitsView: UIView {
                 $0.bottom.equalTo(currentWeekSuperView.snp.bottom)
             }
         }
-        weekView.setupColorsForWeek()
+        weekView.setupColorsForWeek(user: UserInfoHelper.shared.readInfo(info: .user) as? User ?? User(name: "", username: "", bio: "", photoUrl: "", dateCreated: "", yearCreated: 2020, contributions: ContributionList(contributions: [])))
     }
     func switchLastWeek() {
         if lastWeekView.viewType == .week {
@@ -548,6 +548,6 @@ public class CommitsView: UIView {
                 $0.bottom.equalTo(lastWeekSuperView.snp.bottom)
             }
         }
-        lastWeekView.setupColorsForWeek()
+        lastWeekView.setupColorsForWeek(user: UserInfoHelper.shared.readInfo(info: .user) as? User ?? User(name: "", username: "", bio: "", photoUrl: "", dateCreated: "", yearCreated: 2020, contributions: ContributionList(contributions: [])))
     }
 }

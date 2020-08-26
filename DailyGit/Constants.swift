@@ -40,7 +40,7 @@ public struct Constants {
         }
     }
     
-    static var refreshRatePerSecond = 10
+    static var refreshRatePerSecond = 30
     
     static var timerStatus: Bool {
         get {

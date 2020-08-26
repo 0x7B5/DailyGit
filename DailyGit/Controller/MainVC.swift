@@ -33,12 +33,9 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         updateUI()
-        updateInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        updateUI()
-        updateInfo()
     }
     override func loadView() {
         self.view = mainView
@@ -49,8 +46,6 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
 //         
         
         setupNavController()
-        updateUI()
-        updateInfo()
         NotificationCenter.default.addObserver(self, selector: #selector(autoRefresher), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         addTouchRecognizer()
         
@@ -204,12 +199,16 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func updateInfo() {
+        let start = NSDate()
         UserInfoHelper.shared.refreshEverything(completion: {
             print("Finished refreshing.")
             DispatchQueue.main.async { () -> Void in
                 self.updateUI()
+                let elapsed = start.timeIntervalSinceNow
+                print("Update Info took \(abs(elapsed)) seconds")
             }
         })
+        
         
     }
     
@@ -239,24 +238,31 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     
     
     func updateUI() {
+        let start = NSDate()
         var name = ""
         
-        if Constants.fullName == "full" {
-            name = (UserInfoHelper.shared.readInfo(info: .name) as? String ?? "")
-        } else {
-            name = (UserInfoHelper.shared.readInfo(info: .username) as? String ?? "")
+        if let tempuser = UserInfoHelper.shared.readInfo(info: .user) as? User {
+            if Constants.fullName == "full" {
+                name = tempuser.name
+                   } else {
+                       name = tempuser.username
+                   }
+            self.mainView.topView.nameLabel.text = name
+            self.mainView.topView.bioLabel.text = tempuser.bio
+            self.mainView.topView.checkAllignmentForTitle(user: tempuser)
+            self.mainView.todayView.setNumberLabels(user: tempuser)
+            self.mainView.setLastUpdatedLabel(user: tempuser)
+            
+            // Try updating this
+            self.mainView.lastWeekView.setupColorsForWeek(user: tempuser)
+            self.mainView.updateStatistics()
+            
+            
         }
         
-        self.mainView.topView.nameLabel.text = name
-        
-        self.mainView.topView.bioLabel.text = (UserInfoHelper.shared.readInfo(info: .bio) as? String ?? "")
-        self.mainView.topView.checkAllignmentForTitle()
-        self.mainView.todayView.setNumberLabels()
-        self.mainView.setLastUpdatedLabel()
-        self.mainView.lastWeekView.setupColorsForWeek()
-        self.mainView.weekView.setupColorsForWeek()
-        self.mainView.updateStatistics()
         sendDataToWatch()
+        let elapsed = start.timeIntervalSinceNow
+        print("It took \(abs(elapsed)) seconds wtf")
     }
     
     @objc func autoRefresher(notification: NSNotification) {
