@@ -9,6 +9,8 @@ target 'DailyGit' do
     pod 'SnapKit', '~> 5.0.0'
     pod 'QuickTableViewController'
     pod 'JGProgressHUD'
+    pod 'Firebase/Analytics'
+    pod 'Firebase/Messaging'
 end
 
 post_install do |installer|

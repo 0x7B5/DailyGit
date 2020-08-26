@@ -17,6 +17,10 @@ enum refreshState {
     case alreadyRefreshing, goodToRefresh
 }
 
+enum NotificationInfo {
+    case full, enabled, date, times
+}
+
 public class UserInfoHelper {
     var currentState: refreshState = .goodToRefresh
     static let shared = UserInfoHelper()
@@ -91,13 +95,13 @@ public class UserInfoHelper {
         }
         #else
         if Reachability.shared.isConnectedToNetwork() {
-//            if currentState == .goodToRefresh {
-//                currentState = .alreadyRefreshing
-//                GithubDataManager.shared.updateInfo(completion: {
-//                    self.currentState = .goodToRefresh
-//                    completion()
-//                })
-//            }
+            //            if currentState == .goodToRefresh {
+            //                currentState = .alreadyRefreshing
+            //                GithubDataManager.shared.updateInfo(completion: {
+            //                    self.currentState = .goodToRefresh
+            //                    completion()
+            //                })
+            //            }
             currentState = .alreadyRefreshing
             GithubDataManager.shared.updateInfo(completion: {
                 self.currentState = .goodToRefresh
@@ -161,6 +165,55 @@ public class UserInfoHelper {
             print("User encoded and synced")
             print("")
         }
+    }
+    
+    func readNotificationData(info: NotificationInfo) -> Any? {
+        
+        if let savedStatus = defaults.object(forKey: "NotificationStatus") as? Data {
+            let decoder = JSONDecoder()
+            if let status = try? decoder.decode(NotificationStatus.self, from: savedStatus) {
+                switch info {
+                case .full:
+                    return status
+                case .enabled:
+                    return status.notificationsEnabled
+                case .date:
+                    return status.date
+                case .times:
+                    return status.times
+                }
+            }
+        }
+        return NotificationStatus(notificationsEnabled: nil, date: nil, times: nil)
+    }
+    
+    func setNotificationStatus(status: NotificationStatus) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(status) {
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: "NotificationStatus")
+            defaults.synchronize()
+        }
+        
+    }
+    
+    
+    func canIAskAgain(date: Date, times: Int) -> Bool {
+        
+        if times > 3 {
+            return false
+        }
+        
+        let diffInDays = Calendar.current.dateComponents([.day], from: date, to: Date()).day
+        
+        if let diff = diffInDays {
+            if diff > 30 {
+                return true
+            }
+        }
+        
+        return false
+        
     }
     
     

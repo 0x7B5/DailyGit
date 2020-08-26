@@ -41,6 +41,8 @@
 		CC84117C23B47B9400B655A6 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84117B23B47B9400B655A6 /* ComplicationController.swift */; };
 		CC84117E23B47B9500B655A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC84117D23B47B9500B655A6 /* Assets.xcassets */; };
 		CC84118323B47B9500B655A6 /* WatchDailyGit.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CC84116423B47B9000B655A6 /* WatchDailyGit.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CC88486024F5E286007BA423 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC88485F24F5E286007BA423 /* GoogleService-Info.plist */; };
+		CC88486224F5FD82007BA423 /* NotificationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC88486124F5FD82007BA423 /* NotificationStatus.swift */; };
 		CC9E1DD4242E352D00E7E283 /* Textfield+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E1DD3242E352D00E7E283 /* Textfield+Extensions.swift */; };
 		CCAE52A9243EB1EC009DA4F7 /* AutoUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAE52A8243EB1EC009DA4F7 /* AutoUpdater.swift */; };
 		CCAE52AC243FDF1B009DA4F7 /* ContributionInsightVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAE52AB243FDF1B009DA4F7 /* ContributionInsightVC.swift */; };
@@ -152,6 +154,8 @@
 		CC84117D23B47B9500B655A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC84117F23B47B9500B655A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC84118023B47B9500B655A6 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		CC88485F24F5E286007BA423 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CC88486124F5FD82007BA423 /* NotificationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatus.swift; sourceTree = "<group>"; };
 		CC9E1DD3242E352D00E7E283 /* Textfield+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Textfield+Extensions.swift"; sourceTree = "<group>"; };
 		CCAE52A8243EB1EC009DA4F7 /* AutoUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoUpdater.swift; sourceTree = "<group>"; };
 		CCAE52AB243FDF1B009DA4F7 /* ContributionInsightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionInsightVC.swift; sourceTree = "<group>"; };
@@ -247,6 +251,7 @@
 				CC17DBAB22FF6F6500E34951 /* Supporting Files */,
 				B87EA65E2221EDC200CE8114 /* Info.plist */,
 				B87EA6642221EE0300CE8114 /* Constants.swift */,
+				CC88485F24F5E286007BA423 /* GoogleService-Info.plist */,
 			);
 			path = DailyGit;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 			children = (
 				CCC3A81C230B15CB0051C151 /* Contribution.swift */,
 				CCC3A81E230B16FC0051C151 /* User.swift */,
+				CC88486124F5FD82007BA423 /* NotificationStatus.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -525,6 +531,7 @@
 			files = (
 				B87EA65D2221EDC200CE8114 /* LaunchScreen.storyboard in Resources */,
 				B87EA65A2221EDC200CE8114 /* Assets.xcassets in Resources */,
+				CC88486024F5E286007BA423 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +625,7 @@
 				CC428C0F2441867700517EA8 /* StatisticsAverageView.swift in Sources */,
 				CC7DF5872435B7C800D24326 /* UIImage+Extensions.swift in Sources */,
 				CC428C1124418CDD00517EA8 /* StatisticsPercentageView.swift in Sources */,
+				CC88486224F5FD82007BA423 /* NotificationStatus.swift in Sources */,
 				CCC3A824230B483F0051C151 /* Reachability.swift in Sources */,
 				B8B41CEA2228737B005E304A /* MainVC.swift in Sources */,
 				B8B41CE122283A34005E304A /* CommitsView.swift in Sources */,

@@ -8,6 +8,7 @@
 
 import UIKit
 import WatchConnectivity
+import UserNotifications
 
 class MainVC: UIViewController, UIGestureRecognizerDelegate {
     
@@ -44,6 +45,7 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNotifications()
         setupNavController()
         updateUI()
         updateInfo()
@@ -56,6 +58,61 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
             session.activate()
         }
         
+    }
+    
+    func setupNotifications() {
+        
+        let notificationStatus = UserInfoHelper.shared.readNotificationData(info: .full) as? NotificationStatus
+        print(notificationStatus)
+        
+        if let status = notificationStatus?.notificationsEnabled {
+            if (!status)  {
+                if (notificationStatus?.date == nil) || (UserInfoHelper.shared.canIAskAgain(date: (notificationStatus?.date!)!, times: (notificationStatus?.times) ?? 0)) {
+                    promptForNotifications()
+                }
+            }
+            
+            // bool is set to nil
+        } else if notificationStatus?.notificationsEnabled == nil {
+            promptForNotifications()
+        }
+        
+    }
+    
+    func promptForNotifications() {
+        let alertController = UIAlertController(title: "Do you want to recieve alerts reminding you to code?", message: "Great! We can notify you.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) {
+            UIAlertAction in
+            NSLog("OK Pressed")
+            
+            
+            if #available(iOS 10.0, *) {
+                
+                let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+                UNUserNotificationCenter.current().requestAuthorization(
+                    options: authOptions,
+                    completionHandler: {_, _ in })
+            } else {
+                let settings: UIUserNotificationSettings =
+                    UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+                UIApplication.shared.registerUserNotificationSettings(settings)
+            }
+            
+            UIApplication.shared.registerForRemoteNotifications()
+            let newStatus = NotificationStatus(notificationsEnabled: true, date: nil, times: nil)
+            UserInfoHelper.shared.setNotificationStatus(status: newStatus)
+            
+        }
+        let cancelAction = UIAlertAction(title: "No", style: UIAlertAction.Style.cancel) {
+            UIAlertAction in
+            NSLog("Cancel Pressed")
+            let times = UserInfoHelper.shared.readNotificationData(info: .times) as? Int ?? 0  + 1
+            let newStatus = NotificationStatus(notificationsEnabled: false, date: Date(), times: times)
+            UserInfoHelper.shared.setNotificationStatus(status: newStatus)
+        }
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func addTouchRecognizer() {

@@ -76,6 +76,8 @@ class RootSettingVC: QuickTableViewController {
     #warning("Check if this automatically updates notifaction")
     func changeNotificationsToProfane() {
         Constants.profaneNotications.toggle()
+        
+        
     }
     
     #warning("Debug purposes")
