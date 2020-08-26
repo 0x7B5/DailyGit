@@ -45,7 +45,9 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNotifications()
+        
+//         
+        
         setupNavController()
         updateUI()
         updateInfo()

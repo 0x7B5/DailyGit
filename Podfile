@@ -10,6 +10,7 @@ target 'DailyGit' do
     pod 'QuickTableViewController'
     pod 'JGProgressHUD'
     pod 'Firebase/Analytics'
+#    pod 'Firebase/Performance'
     pod 'Firebase/Messaging'
 end
 
