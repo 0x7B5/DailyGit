@@ -120,6 +120,7 @@ public class StatisticsPercentageView: UIView {
         if thisStat == .weekly {
             topLabel.text = "This week, you've had a contribution:"
             percent = StatisticsHelper.shared.weeklyPercent()
+            
         } else {
             topLabel.text = "This month, you've had a contribution:"
             percent = StatisticsHelper.shared.monthlyPercent()

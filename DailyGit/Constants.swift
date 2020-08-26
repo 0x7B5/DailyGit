@@ -40,7 +40,7 @@ public struct Constants {
         }
     }
     
-    static var refreshRatePerSecond = 30
+    static var refreshRatePerSecond = 60
     
     static var timerStatus: Bool {
         get {
@@ -60,6 +60,16 @@ public struct Constants {
                 return val
             }
             return "full"
+        }
+    }
+    
+    static var notificationTimes: Int {
+        get {
+            let defaults = UserDefaults.standard
+            if let val = defaults.object(forKey: "NotificationTime") as? Int {
+                return val
+            }
+            return 2
         }
     }
     

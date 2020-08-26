@@ -32,7 +32,7 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     
     
     override func viewDidAppear(_ animated: Bool) {
-        updateUI()
+        updateInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +98,10 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
             UIApplication.shared.registerForRemoteNotifications()
             let newStatus = NotificationStatus(notificationsEnabled: true, date: nil, times: nil)
             UserInfoHelper.shared.setNotificationStatus(status: newStatus)
+            
+            let defaults = UserDefaults.standard
+            defaults.set(1, forKey: "NotificationTime")
+            defaults.synchronize()
             
         }
         let cancelAction = UIAlertAction(title: "No", style: UIAlertAction.Style.cancel) {
