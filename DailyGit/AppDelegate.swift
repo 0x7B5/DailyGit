@@ -9,7 +9,6 @@
 import UIKit
 import UserNotifications
 import Firebase
-import SwiftTrace
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {

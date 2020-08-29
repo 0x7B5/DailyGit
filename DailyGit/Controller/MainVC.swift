@@ -60,7 +60,6 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     func setupNotifications() {
         
         let notificationStatus = UserInfoHelper.shared.readNotificationData(info: .full) as? NotificationStatus
-        print(notificationStatus)
         
         if let status = notificationStatus?.notificationsEnabled {
             if (!status)  {

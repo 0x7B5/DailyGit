@@ -11,7 +11,7 @@ target 'DailyGit' do
     pod 'JGProgressHUD'
     pod 'Firebase/Analytics'
 #    pod 'Firebase/Performance'
-    pod 'SwiftTrace'
+#    pod 'SwiftTrace'
     pod 'Firebase/Messaging'
 end
 
