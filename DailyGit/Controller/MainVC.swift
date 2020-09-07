@@ -42,6 +42,8 @@ class MainVC: UIViewController, UIGestureRecognizerDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        #warning("DEBUG")
+        print(StatisticsHelper.shared.daysThisYear())
         
 //         
         

@@ -21,6 +21,26 @@ public class StatisticsHelper {
         }
     }
     
+    func daysThisYear() {
+        if let conts = UserInfoHelper.shared.readInfo(info: .contributions) as? ContributionList {
+            let year = DateHelper.shared.getYear(myDate: Date())
+            print("Woah")
+            var sum = 1
+            var total = 1
+            
+            for i in conts.contributions {
+                print(i)
+                if DateHelper.shared.getYear(myDate: i.date, isIso: false) == year {
+                    if i.count != 0 {
+                        sum += 1
+                    }
+                    total += 1
+                }
+            }
+            print("You had a GitHub contribution \(sum) days of \(total) days this year.")
+        }
+    }
+    
     #warning("Not sure what to do here")
     
     func weeklyAverage() -> (Double, Double) {
